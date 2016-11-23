@@ -1,0 +1,19 @@
+{% for comment in commentData %}
+    <div class="commentBlock">
+        <div class="firstLine">
+            <span class="name">{{ comment.name }}</span>
+            <span class="date">{{ comment.createDate }}</span>
+        </div>
+        <div class="comment">
+
+            <p class="title">{{ comment.title }}</p>
+            <p>
+                {{ comment.text }}
+            </p>
+
+        </div>
+
+    </div>
+{% else %}
+    <div class="noResult">Bisher sind noch keine Kommentare vorhanden.</div>
+{% endfor %}

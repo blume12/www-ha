@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <h1>Programm kommentieren</h1>
+    <p><strong>Titel:</strong> {{ data.title }}</p>
+    <p><strong>Intro:</strong> {{ data.intro }}</p>
+
+    {% if errorData %}
+        <div class="errorBox">
+            <ul>
+                {% for error in errorData %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form action="/programm/{{ data.id }}/kommentieren" method="post" name="formComment">
+        <label for="name" {% if errorData.name %} class="error"{% endif %}>Name: </label>
+        <input id="name" type="text" size="20" name="name" value="{{ formData.name }}"
+               class="width65{% if errorData.name %} error{% endif %}"/>
+
+        <label for="title" class="{% if errorData.title %}error{% endif %}">Überschrift:</label>
+        <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
+               class="width65{% if errorData.title %} error{% endif %}"/>
+
+        <label for="text" class="{% if errorData.text %}error{% endif %}">Text: </label>
+        <textarea id="text" name="text" rows="10"
+                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+        <input name="abschicken" type="submit">
+    </form>
+{% endblock %}

@@ -1,0 +1,180 @@
+body, html {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+div.content {
+
+    margin: auto 25%;
+}
+
+h1 {
+    color: #09597b;
+}
+
+a {
+    color: #09597b;
+}
+
+a:hover {
+    color: #09354c;
+    text-decoration: underline;
+}
+
+/* Buttons */
+a.button {
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.button.blue {
+    background-color: #0974a1;
+}
+
+.button.blue:hover {
+    background-color: #09354c;
+
+    color: #fff;
+}
+
+/* Menu */
+
+ul.menu {
+    background-color: #09597b;
+    padding-left: 25%;
+}
+
+ul.menu li {
+    border: 2px solid #09354c;
+    display: inline-block;
+    padding: 10px;
+}
+
+ul.menu li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+ul li a {
+    color: #09354c;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+ul.menu li:hover {
+    background-color: #0974a1;
+    cursor: pointer;
+}
+
+/* Kontaktformular */
+form {
+    padding: 10px 0;
+}
+
+label {
+    display: block;
+}
+
+input, textarea {
+    margin-bottom: 15px;
+    border: 2px solid #09597b;
+    background-color: #effcff;
+    padding: 8px;
+    width: 95%;
+    font-family: normal-font, serif;
+}
+
+input[type=submit] {
+    padding: 5px 20px;
+    color: #fff;
+    background-color: #09597b;
+    font-size: 1.1em;
+    width: 120px;
+    border: 0;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #09354c;
+}
+
+/* Allgemein */
+.width65 {
+    width: 55%;
+}
+
+.width50 {
+    width: 50%;
+}
+
+/* Fehlermeldungen */
+
+.errorBox {
+    border: 3px solid #a10d08;
+    padding: 10px;
+    color: #a10d08;
+    font-weight: bold;
+    background-color: #ffe7e5;
+}
+
+input.error, textarea.error {
+    border: 2px solid #a10d08;
+    color: #a10d08;
+    background-color: #ffe7e5;
+}
+
+label.error {
+    color: #a10d08;
+    font-weight: bold;
+}
+
+/* Comments */
+
+.commentBlock {
+
+    margin: 10px 0;
+}
+
+.commentBlock .comment {
+    background-color: #c0e1ef;
+    padding: 10px;
+    color: #09354c;
+}
+
+.commentBlock .firstLine {
+    background-color: #09354c;
+    padding: 10px;
+    color: #fff;
+    font-size: 0.8em;
+}
+
+.commentBlock .firstLine .name, .commentBlock .firstLine .date {
+    display: inline-block;
+}
+
+.commentBlock .firstLine .name {
+    text-align: left;
+    width: 70%;
+}
+
+.commentBlock .firstLine .date {
+    text-align: right;
+    width: 28%;
+}
+
+.commentBlock .title {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 3px auto;
+}
+
+/*** no resilt */
+
+.noResult {
+    padding: 30px 0;
+}

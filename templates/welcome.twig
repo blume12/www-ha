@@ -1,0 +1,11 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <h1>Hallo {{ welcomeName }}</h1>
+    <p>Schön dich hier zu treffen!</p>
+
+    <form action="/hallo" method="post">
+        <input type="hidden" name="formSend" value="true"/>
+        <label>Neuer Name: <input type="text" size="20" name="name"/></label>
+        <input name="abschicken" type="submit">
+    </form>
+{% endblock %}

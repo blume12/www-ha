@@ -1,0 +1,13 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <h1>Programme</h1>
+    <ul>
+        {% for blog in data %}
+            <li>
+                <a href="programm/{{ blog.id }}">{{ blog.date }} - {{ blog.title }}</a>
+            </li>
+        {% else %}
+            <li>Keine Einträge vorhanden.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
