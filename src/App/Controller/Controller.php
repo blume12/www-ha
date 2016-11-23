@@ -20,7 +20,7 @@ abstract class Controller
      *
      * @var string
      */
-    private $path = '/../../../templates/';
+    protected $path = '/../../../templates/';
 
     /**
      * The template name.

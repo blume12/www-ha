@@ -6,11 +6,11 @@
  * Time: 11:32
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use \Symfony\Component\HttpFoundation\Response;
 
-class SiteNoticeController extends Controller
+class SiteNoticeController extends FrontendController
 {
     /**
      * Loads the site-notice action.

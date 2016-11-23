@@ -7,14 +7,14 @@
  * Time: 11:19
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Model\Blog\Blog;
 use App\Model\Blog\BlogComment;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class BlogController extends Controller
+class BlogController extends FrontendController
 {
 
     /**

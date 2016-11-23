@@ -1,0 +1,27 @@
+{% extends "layout.twig" %}
+{% block content %}
+    <h1>Login</h1>
+
+    {% if formError %}
+        <div class="errorBox">
+            <ul>
+                {% for error in formError %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form action="/admin" method="post">
+        <label for="username" {% if formError.username %}class="error"{% endif %}>Benutzername:</label>
+        <input type="text" id="username" class="width50{% if formError.username %} error{% endif %}" name="username"
+               value="{{ formData.username }}"/>
+        <label for="password" {% if formError.password %}class="error"{% endif %}>Passwort:</label>
+        <input type="password" id="password" class="width50{% if formError.password %} error{% endif %}" name="password"
+               value="{{ formData.password }}"/>
+        <p><input type="submit" value="Login"/></p>
+    </form>
+
+
+{% endblock %}

@@ -6,11 +6,11 @@
  * Time: 11:32
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use \Symfony\Component\HttpFoundation\Response;
 
-class NotFoundController extends Controller
+class NotFoundController extends FrontendController
 {
 
     /**

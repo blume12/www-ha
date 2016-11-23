@@ -6,8 +6,9 @@
  * Time: 14:02
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
+use App\Controller\Controller;
 use App\Model\Blog\Blog;
 use App\Model\Blog\BlogComment;
 use Symfony\Component\HttpFoundation\RedirectResponse;

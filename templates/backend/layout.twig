@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>{% block title %}{{ pageTitle }}{% endblock %} | Ticketsystem</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+<ul class="menu">
+    <li><a href="/">Startseite</a></li>
+</ul>
+
+<div class="content">
+    {% block content %}
+    {% endblock %}
+</div>
+</body>
+</html>

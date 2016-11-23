@@ -20,6 +20,13 @@ $dbConnection = $db->connect();
 /* @var $config array */
 $dbqObject = new DbQuery($config);
 
+$sql = "CREATE TABLE IF NOT EXISTS backendUser (BUId INTEGER PRIMARY KEY, username VARCHAR(255),
+        password BLOB, createDate TEXT, changeDate TEXT, loginDate TEXT, privilege TEXT ) ";
+$dbqObject->query($sql);
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS backendUser_BUId_uindex ON backendUser(BUId) ";
+$dbqObject->query($sql);
+
+
 $sql = "CREATE TABLE IF NOT EXISTS blogComment (BCId INTEGER PRIMARY KEY, BId INTEGER, title VARCHAR(255),
         name VARCHAR(255), text TEXT, createDate TEXT, changeDate TEXT ) ";
 $dbqObject->query($sql);

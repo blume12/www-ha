@@ -6,13 +6,13 @@
  * Time: 11:32
  */
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Helper\Helper;
 use Symfony\Component\HttpFoundation\Request;
 use \Symfony\Component\HttpFoundation\Response;
 
-class WelcomeController extends Controller
+class WelcomeController extends FrontendController
 {
     /**
      * Loads the welcome Action.
