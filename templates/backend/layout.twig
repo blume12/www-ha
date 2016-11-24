@@ -7,6 +7,10 @@
 <body>
 <ul class="menu">
     <li><a href="/">Startseite</a></li>
+    {% if loggedIn %}
+        <li><a href="/">Logout</a></li>
+    {% endif %}
+
 </ul>
 
 <div class="content">

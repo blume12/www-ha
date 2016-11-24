@@ -39,7 +39,7 @@ abstract class Controller
      *
      * @var array
      */
-    private $contentData = array();
+    protected $contentData = array();
     /**
      * @var Twig_Environment $twig
      */
@@ -142,11 +142,21 @@ abstract class Controller
      * @param array $data
      * @return Response
      */
-    protected function getResponse($data = array())
+    protected function getResponse($data = [])
     {
-        $this->contentData = array_merge(['pageTitle' => $this->pageTitle], $data);
+        $this->setContentData($data);
         $html = $this->renderTemplate();
 
         return new Response($html);
+    }
+
+    /**
+     * Set the content data for the request.
+     *
+     * @param array $data
+     */
+    protected function setContentData($data = [])
+    {
+        $this->contentData = array_merge(['pageTitle' => $this->pageTitle], $data);
     }
 }
