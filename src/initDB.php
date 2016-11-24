@@ -12,6 +12,7 @@ require_once(dirname(__FILE__) . '/App/config.php');
 
 use App\Model\Database\SQLiteConnection;
 use App\Model\Database\DbQuery;
+use App\Model\BackendUser\BackendUser;
 
 /* @var $dbConnection PDO */
 $db = new SQLiteConnection();
@@ -26,6 +27,14 @@ $dbqObject->query($sql);
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS backendUser_BUId_uindex ON backendUser(BUId) ";
 $dbqObject->query($sql);
 
+$userData = [
+    'username' => 'admin',
+    'password' => 'admin',
+    'privilege' => 'admin'
+];
+
+$backendUser = new BackendUser($config);
+$backendUser->saveData($userData);
 
 $sql = "CREATE TABLE IF NOT EXISTS blogComment (BCId INTEGER PRIMARY KEY, BId INTEGER, title VARCHAR(255),
         name VARCHAR(255), text TEXT, createDate TEXT, changeDate TEXT ) ";

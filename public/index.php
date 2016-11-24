@@ -16,6 +16,9 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use App\Model\Routing\Routing;
+use App\Helper\Session;
+
+Session::startSession();
 
 date_default_timezone_set("Europe/Berlin");
 
@@ -34,6 +37,7 @@ $routes->add('not-found', new Route('/not-found', ['_controller' => 'App\Control
 // admin Routes:
 $routes->add('admin', new Route('/admin', ['_controller' => 'App\Controller\Backend\LoginController::indexAction']));
 $routes->add('admin-programme', new Route('/admin/programme/{hash}', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction'], ['hash' => '\w+']));
+$routes->add('admin-logout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\LogoutController::indexAction'], ['hash' => '\w+']));
 $request = Request::createFromGlobals();
 $context = new RequestContext('/');
 $context->fromRequest($request);
