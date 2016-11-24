@@ -6,5 +6,6 @@ composer.phar
 composer.lock
 
 /data/*
+!data/.gitkeep
 
 /.idea/*

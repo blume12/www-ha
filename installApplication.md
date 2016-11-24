@@ -24,5 +24,8 @@
     1. public
     
 3. Configure PHP Build-in-Server
+4. Choose the SQL Dialect
+    1. File -> Settings -> Languages & Frameworks -> SQL Dialects
+    2. Choose for all in the Project sqlite.
 
     
