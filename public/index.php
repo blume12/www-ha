@@ -11,8 +11,6 @@ require_once(dirname(__FILE__) . '/../src/App/config.php');
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\RouteCollection;
-use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
 use App\Model\Routing\Routing;
@@ -25,9 +23,6 @@ Session::startSession();
 date_default_timezone_set("Europe/Berlin");
 
 $response = new Response();
-
-// TODO: outsource the routes to the config-file
-
 $routes = $config['routes'];
 
 $request = Request::createFromGlobals();

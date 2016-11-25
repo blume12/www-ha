@@ -15,6 +15,7 @@ $config = array();
 $sqlLite = new SQLiteConnection();
 $config['dbConnection'] = $sqlLite->connect();
 
+// TODO: mabye refactor the routes to arrays/classes
 //NOTE: Do NOT use the directly route in the program. Only the key name should be use.
 $routes = new RouteCollection();
 $routes->add('startPage', new Route('/', ['_controller' => 'App\Controller\Frontend\StartPageController::indexAction']));

@@ -8,7 +8,6 @@
 
 namespace App\Controller\Frontend;
 
-use App\Controller\Controller;
 use App\Model\Blog\Blog;
 use App\Model\Blog\BlogComment;
 use Symfony\Component\HttpFoundation\RedirectResponse;

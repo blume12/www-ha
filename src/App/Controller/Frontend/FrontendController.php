@@ -20,6 +20,10 @@ abstract class FrontendController extends Controller
      */
     protected $path = '/../../../templates/frontend/';
 
+    /**
+     * FrontendController constructor.
+     * @param $config
+     */
     public function __construct($config)
     {
         parent::__construct($config);

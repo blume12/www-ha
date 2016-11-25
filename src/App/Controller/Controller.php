@@ -67,6 +67,11 @@ abstract class Controller
         $this->initTwig();
     }
 
+    /**
+     * Return the config data array.
+     *
+     * @return array
+     */
     protected function getConfig()
     {
         return $this->config;
@@ -164,6 +169,11 @@ abstract class Controller
     }
 
 
+    /**
+     * Return the menu data array.
+     *
+     * @return array
+     */
     private function getMenu()
     {
         return $this->menuArray;
@@ -173,7 +183,8 @@ abstract class Controller
     /**
      * @return RouteCollection
      */
-    private function getRouteCollection() {
+    private function getRouteCollection()
+    {
         return $this->getConfig()['routes'];
     }
 
@@ -181,7 +192,8 @@ abstract class Controller
      * @param $routeName
      * @return string
      */
-    protected function getRoutePath($routeName) {
+    protected function getRoutePath($routeName)
+    {
         // TODO: parameter for the routes must be handled here
         return $this->getRouteCollection()->get($routeName)->getPath();
     }

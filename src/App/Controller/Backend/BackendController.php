@@ -23,6 +23,10 @@ abstract class BackendController extends Controller
      */
     protected $path = '/../../../templates/backend/';
 
+    /**
+     * BackendController constructor.
+     * @param $config
+     */
     public function __construct($config)
     {
         parent::__construct($config);
