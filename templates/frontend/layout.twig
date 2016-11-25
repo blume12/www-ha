@@ -6,10 +6,11 @@
 </head>
 <body>
 <ul class="menu">
-    <li><a href="/">Startseite</a></li>
-    <li><a href="/programme">Programme</a></li>
-    <li><a href="/impressum">Impressum</a></li>
-    <li><a href="/admin">Login</a></li>
+    {% for menu in menuData %}
+        {% if loggedIn or menu.showAlways %}
+            <li><a href="{{ menu.route }}">{{ menu.name }}</a></li>
+        {% endif %}
+    {% endfor %}
 </ul>
 
 <div class="content">

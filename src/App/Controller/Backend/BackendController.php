@@ -11,6 +11,7 @@ namespace App\Controller\Backend;
 use App\Controller\Controller;
 use App\Helper\Session;
 use App\Model\BackendUser\BackendUser;
+use App\Model\Menu\Menu;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class BackendController extends Controller
@@ -22,6 +23,18 @@ abstract class BackendController extends Controller
      */
     protected $path = '/../../../templates/backend/';
 
+    public function __construct($config)
+    {
+        parent::__construct($config);
+        $menu = new Menu();
+        $menu->addMenu('Startseite', $this->getRoutePath('adminStart'));
+        $menu->addMenu('Programme', $this->getRoutePath('adminProgramList'), false);
+        $menu->addMenu('Zeiträume', $this->getRoutePath('adminTimescaleList'), false);
+        $menu->addMenu('Textvorlagen', $this->getRoutePath('adminTextSourceList'), false);
+        $menu->addMenu('Nutzer', $this->getRoutePath('adminBackendUserList'), false);
+        $menu->addMenu('Logout', $this->getRoutePath('adminLogout'), false);
+        $this->menuArray = $menu->getMenuArray();
+    }
 
     /**
      * @var null |integer
@@ -82,7 +95,7 @@ abstract class BackendController extends Controller
         if ($this->getUserId() == false) {
             $this->setLoggedOut();
             Session::removeSession();
-            return new RedirectResponse('/admin');
+            return new RedirectResponse($this->getRoutePath('adminLogin'));
         }
         $this->setLoggedIn();
         return true;

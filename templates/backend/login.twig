@@ -13,7 +13,7 @@
             </ul>
         </div>
     {% endif %}
-    <form action="/admin" method="post">
+    <form action="{{ formAction }}" method="post">
         <label for="username" {% if formError.username %}class="error"{% endif %}>Benutzername:</label>
         <input type="text" id="username" class="width50{% if formError.username %} error{% endif %}" name="username"
                value="{{ formData.username }}"/>

@@ -22,6 +22,6 @@ class LogoutController extends BackendController
     {
         $this->setLoggedOut();
         Session::removeSession();
-        return new RedirectResponse('/admin');
+        return new RedirectResponse($this->getRoutePath('adminLogin'));
     }
 }

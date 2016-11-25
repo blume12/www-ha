@@ -27,8 +27,6 @@ class LoginController extends BackendController
 
         $this->setRequest($request);
 
-        $this->setPageTitle('Login');
-
         $backendUser = new BackendUser($this->getConfig());
         $formError = [];
         $formData = [];
@@ -48,9 +46,9 @@ class LoginController extends BackendController
 
             // TODO: use real hashes!
             $this->setLoggedIn();
-            return new RedirectResponse('/admin/start');
+            return new RedirectResponse($this->getRoutePath('adminStart'));
         }
-        return $this->getResponse(['formData' => $formData, 'formError' => $formError]);
+        return $this->getResponse(['formData' => $formData, 'formError' => $formError, 'formAction' => $this->getRoutePath('adminLogin')]);
 
     }
 }

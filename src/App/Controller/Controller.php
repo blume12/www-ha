@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouteCollection;
 use Twig_Loader_Filesystem;
 use Twig_Environment;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,8 @@ abstract class Controller
      * @var string
      */
     protected $path = '/../../../templates/';
+
+    protected $menuArray = [];
 
     /**
      * The template name.
@@ -157,6 +160,29 @@ abstract class Controller
      */
     protected function setContentData($data = [])
     {
-        $this->contentData = array_merge(['pageTitle' => $this->pageTitle], $data);
+        $this->contentData = array_merge(['pageTitle' => $this->pageTitle, 'menuData' => $this->getMenu()], $data);
+    }
+
+
+    private function getMenu()
+    {
+        return $this->menuArray;
+    }
+
+
+    /**
+     * @return RouteCollection
+     */
+    private function getRouteCollection() {
+        return $this->getConfig()['routes'];
+    }
+
+    /**
+     * @param $routeName
+     * @return string
+     */
+    protected function getRoutePath($routeName) {
+        // TODO: parameter for the routes must be handled here
+        return $this->getRouteCollection()->get($routeName)->getPath();
     }
 }

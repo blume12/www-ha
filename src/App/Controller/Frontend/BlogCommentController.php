@@ -14,7 +14,7 @@ use App\Model\Blog\BlogComment;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class BlogCommentController extends Controller
+class BlogCommentController extends FrontendController
 {
     /**
      * Loads the form for the comments.
