@@ -5,4 +5,30 @@
     <p>
         Hier finden Sie alle Programme.
     </p>
+
+    {% if programData %}
+        <table width="100%">
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Titel</td>
+                <td colspan="2">Optionen</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for program in programData %}
+                <tr>
+                    <td>{{ program.PId }}</td>
+                    <td>{{ program.title }}</td>
+                    <td><a href="{{ program.editRoute }}">bearbeiten</a></td>
+                    <td><a href="{{ program.deleteRoute }}">löschen</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            Es liegen keine Programme vor.
+        </p>
+    {% endif %}
 {% endblock %}

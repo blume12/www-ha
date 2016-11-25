@@ -36,6 +36,16 @@ $userData = [
 $backendUser = new BackendUser($config);
 $backendUser->saveData($userData);
 
+
+$sql = "CREATE TABLE IF NOT EXISTS program (PId INTEGER PRIMARY KEY, uuid VARCHAR, author VARCHAR(255), 
+        'date' TEXT, title VARCHAR(255), intro VARCHAR(255), text TEXT) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_id_uindex ON program(PId) ";
+$dbqObject->query($sql);
+
+
+// Todo: remove the blogComment and blog table
 $sql = "CREATE TABLE IF NOT EXISTS blogComment (BCId INTEGER PRIMARY KEY, BId INTEGER, title VARCHAR(255),
         name VARCHAR(255), text TEXT, createDate TEXT, changeDate TEXT ) ";
 $dbqObject->query($sql);
