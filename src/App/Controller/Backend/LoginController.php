@@ -48,11 +48,9 @@ class LoginController extends BackendController
 
             // TODO: use real hashes!
             $this->setLoggedIn();
-            return new RedirectResponse('/admin/programme/45fgdfsgui');
+            return new RedirectResponse('/admin/start');
         }
         return $this->getResponse(['formData' => $formData, 'formError' => $formError]);
 
     }
-
-
 }
