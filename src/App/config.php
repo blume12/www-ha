@@ -39,4 +39,7 @@ $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controll
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
 $routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\LogoutController::indexAction'], ['hash' => '\w+']));
 
+// documenation Routes:
+$routes->add('documentation', new Route('/dokumentation', ['_controller' => 'App\Controller\Documentation\DocumentationController::indexAction']));
+
 $config['routes'] = $routes;

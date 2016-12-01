@@ -32,6 +32,8 @@ abstract class FrontendController extends Controller
         $menu->addMenu('Startseite', $this->getRoutePath('startPage'));
         $menu->addMenu('Programme', $this->getRoutePath('programs'));
         $menu->addMenu('Impressum', $this->getRoutePath('siteNotice'));
+        // TODO: Set the documentation link to footer
+        $menu->addMenu('Dokumentation', $this->getRoutePath('documentation'));
         $menu->addMenu('Login', $this->getRoutePath('adminLogin'));
         $this->menuArray = $menu->getMenuArray();
     }
