@@ -139,7 +139,7 @@ abstract class Controller
      */
     private function renderTemplate()
     {
-        $html = $this->getTwig()->render($this->templateName . '.twig', $this->contentData);
+        $html = $this->getTwig()->render($this->templateName . '.html.twig', $this->contentData);
 
         return $html;
     }

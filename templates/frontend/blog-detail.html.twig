@@ -1,4 +1,4 @@
-{% extends "layout.twig" %}
+{% extends "layout.html.twig" %}
 {% block content %}
     <h1>Programmdetails</h1>
     {% if data.id %}
@@ -11,7 +11,7 @@
         </div>
         <a href="/programm/{{ data.id }}/kommentieren" class="button blue">Programm kommentieren</a>
 
-        {% include "post-comment.twig" %}
+        {% include "post-comment.html.twig" %}
     {% else %}
         <div>Nichts vorhanden.</div>
     {% endif %}
