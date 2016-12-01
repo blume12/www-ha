@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\Exception\ResourceNotFoundException;
-use App\Model\Routing\Routing;
+use App\Helper\Routing\Routing;
 use App\Helper\Session;
 
 Session::startSession();

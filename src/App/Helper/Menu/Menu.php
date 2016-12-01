@@ -5,7 +5,7 @@
  * Date: 25.11.2016
  */
 
-namespace App\Model\Menu;
+namespace App\Helper\Menu;
 
 class Menu
 {

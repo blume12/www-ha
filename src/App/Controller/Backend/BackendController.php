@@ -11,7 +11,7 @@ namespace App\Controller\Backend;
 use App\Controller\Controller;
 use App\Helper\Session;
 use App\Model\BackendUser\BackendUser;
-use App\Model\Menu\Menu;
+use App\Helper\Menu\Menu;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class BackendController extends Controller

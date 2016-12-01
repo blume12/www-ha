@@ -9,7 +9,7 @@ namespace App\Controller\Frontend;
 
 
 use App\Controller\Controller;
-use App\Model\Menu\Menu;
+use App\Helper\Menu\Menu;
 
 abstract class FrontendController extends Controller
 {

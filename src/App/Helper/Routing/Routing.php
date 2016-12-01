@@ -6,7 +6,7 @@
  * Date: 07.11.2016
  * Time: 13:44
  */
-namespace App\Model\Routing;
+namespace App\Helper\Routing;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
