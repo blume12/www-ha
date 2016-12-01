@@ -1,26 +1,27 @@
 <?php
-
 /**
- * Author: Jasmin Stern
- * Date: 23.11.2016
- * Time: 13:11
+ * User: Jasmin
+ * Date: 01.12.2016
  */
+
 namespace App\Controller\Backend;
 
+
+use App\Helper\Session;
 use App\Model\BackendUser\BackendUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LoginController extends BackendController
+class SessionController extends BackendController
 {
     /**
-     * The index Action to login a user to the backend.
+     * The Action to login a user to the backend.
      *
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function indexAction(Request $request)
+    public function loginAction(Request $request)
     {
         $this->setTemplateName('login');
         $this->setPageTitle('Login');
@@ -50,5 +51,18 @@ class LoginController extends BackendController
         }
         return $this->getResponse(['formData' => $formData, 'formError' => $formError, 'formAction' => $this->getRoutePath('adminLogin')]);
 
+    }
+
+
+    /**
+     * The action to logout a user to the backend.
+     *
+     * @return RedirectResponse|Response
+     */
+    public function logoutAction()
+    {
+        $this->setLoggedOut();
+        Session::removeSession();
+        return new RedirectResponse($this->getRoutePath('adminLogin'));
     }
 }

@@ -16,7 +16,7 @@
     <form action="{{ formAction }}" method="post">
         <label for="username" {% if formError.username %}class="error"{% endif %}>Benutzername:</label>
         <input type="text" id="username" class="width50{% if formError.username %} error{% endif %}" name="username"
-               value="{{ formData.username }}"/>
+               value="{{ formData.username }}" autofocus="autofocus"/>
         <label for="password" {% if formError.password %}class="error"{% endif %}>Passwort:</label>
         <input type="password" id="password" class="width50{% if formError.password %} error{% endif %}" name="password"
                value="{{ formData.password }}"/>

@@ -28,7 +28,7 @@ $routes->add('not-found', new Route('/not-found', ['_controller' => 'App\Control
 
 
 // admin Routes:
-$routes->add('adminLogin', new Route('/admin', ['_controller' => 'App\Controller\Backend\LoginController::indexAction']));
+$routes->add('adminLogin', new Route('/admin', ['_controller' => 'App\Controller\Backend\SessionController::loginAction']));
 //$routes->add('admin-programme', new Route('/admin/programme/{hash}', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction'], ['hash' => '\w+']));
 $routes->add('adminStart', new Route('/admin/start', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction']));
 $routes->add('adminProgramList', new Route('/admin/programme', ['_controller' => 'App\Controller\Backend\ProgramController::indexAction']));
@@ -37,7 +37,7 @@ $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
 $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controller' => 'App\Controller\Backend\TextSourceController::indexAction']));
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
-$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\LogoutController::indexAction'], ['hash' => '\w+']));
+$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction'], ['hash' => '\w+']));
 
 // documenation Routes:
 $routes->add('documentation', new Route('/dokumentation', ['_controller' => 'App\Controller\Documentation\DocumentationController::indexAction']));
