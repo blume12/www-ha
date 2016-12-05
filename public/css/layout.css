@@ -178,3 +178,35 @@ label.error {
 .noResult {
     padding: 30px 0;
 }
+
+ul.backendList {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.backendList li {
+    padding: 3px 2px;
+}
+
+ul.backendList li .row.options {
+    width: 20%;
+    float: right;
+}
+
+ul.backendList li.head {
+    background-color: #09597b;
+    color: #fff;
+}
+
+ul.backendList li.firstLine {
+    background-color: #c5d5ee;
+}
+
+ul.backendList li.secondLine {
+    background-color: #e5ecf3;
+}
+
+ul.backendList li:hover {
+    background-color: #64a7d6;
+    cursor: pointer;
+}
