@@ -53,6 +53,7 @@ class Program extends DbBasis
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
+            $data[$i]['index'] = $i;
             // TODO: Change links to really routes
             $data[$i]['editRoute'] = '/admin/programm-bearbeiten/' . $row['PId']; // later: adminProgramEdit -> id
             $data[$i]['deleteRoute'] = '/admin/programm-loeschen/' . $row['PId']; // later: adminProgramDelete -> id
