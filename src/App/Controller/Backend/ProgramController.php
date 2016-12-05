@@ -7,6 +7,7 @@
 namespace App\Controller\Backend;
 
 
+use App\Helper\Helper;
 use App\Model\Program\Program;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,6 +86,54 @@ class ProgramController extends BackendController
 
         return $this->getResponse([
             'formAction' => $this->getRoutePath('adminProgramEdit', ['id' => $id]),
+            'formData' => $formData,
+            'errorData' => $formError,
+        ]);
+    }
+
+    /**
+     * The action to delete a program.
+     *
+     * @param Request $request
+     * @return bool|RedirectResponse|Response
+     */
+    public function deleteAction(Request $request)
+    {
+        $login = $this->checkLogin();
+        if ($login instanceof RedirectResponse) {
+            return $login;
+        }
+        $this->setRequest($request);
+        $id = $this->getRequest()->attributes->get('id');
+
+        $this->setTemplateName('program-delete');
+        $this->setPageTitle('Programm bearbeiten');
+
+        $program = new Program($this->getConfig());
+
+        $formError = [];
+        if ($request->getMethod() !== 'POST') {
+            // Set default values
+            $formData = $program->loadSpecificEntry($id);
+            if ($formData == null) {
+
+                return new RedirectResponse($this->getRoutePath('adminNotFound'));
+            }
+        } else {
+            /* Check for errors */
+            $formData = $this->getRequest()->request->all();
+            $formError = Helper::checkErrorForDelete($formData);
+        }
+        // Handle valid post
+        if ($request->getMethod() == 'POST' && count($formError) <= 0) {
+            /* Save data */
+            $program->deleteData($id);
+
+            return new RedirectResponse($this->getRoutePath('adminProgramList'));
+        }
+
+        return $this->getResponse([
+            'formAction' => $this->getRoutePath('adminProgramDelete', ['id' => $id]),
             'formData' => $formData,
             'errorData' => $formError,
         ]);

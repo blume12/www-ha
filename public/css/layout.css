@@ -112,6 +112,16 @@ input[type=submit]:hover {
     width: 50%;
 }
 
+.left {
+    float: left;
+    display: inline;
+    width: 18px;
+}
+
+.clear {
+    clear: both;
+}
+
 /* Fehlermeldungen */
 
 .errorBox {

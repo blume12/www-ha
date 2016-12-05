@@ -108,6 +108,23 @@ class Program extends DbBasis
         $dbqObject->query($sql, $dataSql);
     }
 
+
+    /**
+     * Delete a data by the id
+     *
+     * @param $id integer
+     */
+    public function deleteData($id)
+    {
+        $dbqObject = $this->getDbqObject();
+        $dataSql = [];
+
+        $sql = "DELETE FROM program WHERE PId=:PId ";
+
+        $dataSql['PId'] = $id;
+        $dbqObject->query($sql, $dataSql);
+    }
+
     /**
      * Check Errors for the form data of a program.
      *

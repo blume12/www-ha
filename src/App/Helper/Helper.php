@@ -19,4 +19,20 @@ class Helper
     {
         return htmlspecialchars($string);
     }
+
+    /**
+     * Return a array with the error messages for a delete action.
+     *
+     * @param $data
+     * @return array
+     */
+    public static function checkErrorForDelete($data)
+    {
+        $formError = [];
+        if (!isset($data['safetyDelete']) || $data['safetyDelete'] == null || $data['safetyDelete'] != 'sure') {
+            $formError['safetyDelete'] = "Sie müssen das Löschen bestätigen.";
+        }
+        return $formError;
+    }
+
 }
