@@ -64,6 +64,7 @@ class ProgramController extends BackendController
         $programData = $program->loadSpecificEntry($id);
 
         return $this->getResponse([
+            'formAction' => $this->getRoutePath('adminProgramEdit'),
             'formData' => $programData
         ]);
     }

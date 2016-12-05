@@ -190,11 +190,23 @@ abstract class Controller
 
     /**
      * @param $routeName
+     * @param array $parameterData
      * @return string
      */
-    protected function getRoutePath($routeName)
+    protected function getRoutePath($routeName, $parameterData = ['id' => 3])
     {
         // TODO: parameter for the routes must be handled here
-        return $this->getRouteCollection()->get($routeName)->getPath();
+        $path = $this->getRouteCollection()->get($routeName)->getPath();
+        $parameters = $this->getRouteCollection()->get($routeName)->getRequirements();
+
+        foreach ($parameters as $name => $regex) {
+            if (!preg_match('/' . str_replace('\\', '', $regex) . '/', $parameters[$name])) {
+                var_dump('Blöse');
+            }
+            $path = str_replace('{' . $name . '}', $parameterData[$name], $path);
+        }
+
+
+        return $path;
     }
 }

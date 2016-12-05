@@ -43,3 +43,4 @@ $routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Co
 $routes->add('documentation', new Route('/dokumentation', ['_controller' => 'App\Controller\Documentation\DocumentationController::indexAction']));
 
 $config['routes'] = $routes;
+$config['post'] = $_POST;

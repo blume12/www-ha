@@ -15,7 +15,7 @@
     {% endif %}
 
     {# TODO: complete the formular with correct data #}
-    <form action="" method="post" name="formComment">
+    <form action="{{ formAction }}" method="post" name="formComment">
         <label for="title" {% if errorData.title %} class="error"{% endif %}>Titel: </label>
         <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
                class="width65{% if errorData.title %} error{% endif %}"/>
