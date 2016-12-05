@@ -6,6 +6,7 @@
  */
 namespace App\Model\Program;
 
+use App\Helper\Validator;
 use App\Model\Database\DbBasis;
 
 class Program extends DbBasis
@@ -105,5 +106,28 @@ class Program extends DbBasis
         $dataSql['intro'] = $data['intro'];
         $dataSql['text'] = $data['text'];
         $dbqObject->query($sql, $dataSql);
+    }
+
+    /**
+     * Check Errors for the form data of a program.
+     *
+     * @param $formData
+     * @return array
+     */
+    public function checkErrors($formData)
+    {
+        // TODO: check all the data of a program
+        $formError = [];
+
+        if (Validator::isAlpha($formData['title'], true)) {
+            $formError['title'] = 'Bitte geben Sie einen Titel an.';
+        }
+        if (Validator::isAlpha($formData['intro'], true)) {
+            $formError['intro'] = 'Bitte geben Sie einen Intro an.';
+        }
+        if (Validator::isAlpha($formData['text'], true)) {
+            $formError['text'] = 'Bitte geben Sie einen Text an.';
+        }
+        return $formError;
     }
 }

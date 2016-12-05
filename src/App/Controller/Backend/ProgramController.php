@@ -52,25 +52,41 @@ class ProgramController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
-
-        $id = $request->attributes->get('id');
+        $this->setRequest($request);
+        $id = $this->getRequest()->attributes->get('id');
 
         $this->setTemplateName('program-edit');
         $this->setPageTitle('Programm bearbeiten');
 
-        // TODO: create the form request
-
         $program = new Program($this->getConfig());
-        $programData = $program->loadSpecificEntry($id);
 
-        if ($programData == null) {
+        $formError = [];
+        if ($request->getMethod() !== 'POST') {
+            // Set default values
+            $formData = $program->loadSpecificEntry($id);
+            if ($formData == null) {
 
-            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+                return new RedirectResponse($this->getRoutePath('adminNotFound'));
+            }
+        } else {
+            /* Check for errors */
+            $formData = $this->getRequest()->request->all();
+            $formError = $program->checkErrors($formData);
         }
+        // Handle valid post
+        if ($request->getMethod() == 'POST' && count($formError) <= 0) {
+            /* Save data */
+            $formData['id'] = $id;
+            $program->saveData($formData);
+
+            return new RedirectResponse($this->getRoutePath('adminProgramList'));
+        }
+
 
         return $this->getResponse([
             'formAction' => $this->getRoutePath('adminProgramEdit', ['id' => $id]),
-            'formData' => $programData
+            'formData' => $formData,
+            'errorData' => $formError,
         ]);
     }
 
