@@ -24,6 +24,11 @@ abstract class BackendController extends Controller
     protected $path = '/../../../templates/backend/';
 
     /**
+     * @var string
+     */
+    protected $notFoundRoute = 'adminNotFound';
+
+    /**
      * BackendController constructor.
      * @param $config
      */

@@ -24,7 +24,7 @@ $routes->add('programDetail', new Route('/programm/{id}', ['_controller' => 'App
 $routes->add('siteNotice', new Route('/impressum', ['_controller' => 'App\Controller\Frontend\SiteNoticeController::siteNoticeAction']));
 $routes->add('welcome', new Route('/hallo', ['_controller' => 'App\Controller\Frontend\WelcomeController::welcomeAction']));
 $routes->add('programm-comment', new Route('/programm/{id}/kommentieren', ['_controller' => 'App\Controller\Frontend\BlogCommentController::showCommentFormAction'], ['id' => '\d+']));
-$routes->add('not-found', new Route('/not-found', ['_controller' => 'App\Controller\Frontend\NotFoundController::notFoundAction']));
+$routes->add('notFound', new Route('/not-found', ['_controller' => 'App\Controller\Frontend\NotFoundController::notFoundAction']));
 
 
 // admin Routes:
@@ -38,6 +38,7 @@ $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' =
 $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controller' => 'App\Controller\Backend\TextSourceController::indexAction']));
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
 $routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction'], ['hash' => '\w+']));
+$routes->add('adminNotFound', new Route('/admin/not-found', ['_controller' => 'App\Controller\Backend\NotFoundController::notFoundAction']));
 
 // documenation Routes:
 $routes->add('documentation', new Route('/dokumentation', ['_controller' => 'App\Controller\Documentation\DocumentationController::indexAction']));

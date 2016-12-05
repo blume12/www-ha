@@ -63,8 +63,13 @@ class ProgramController extends BackendController
         $program = new Program($this->getConfig());
         $programData = $program->loadSpecificEntry($id);
 
+        if ($programData == null) {
+
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         return $this->getResponse([
-            'formAction' => $this->getRoutePath('adminProgramEdit'),
+            'formAction' => $this->getRoutePath('adminProgramEdit', ['id' => $id]),
             'formData' => $programData
         ]);
     }

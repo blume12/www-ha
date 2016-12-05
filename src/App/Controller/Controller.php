@@ -23,7 +23,15 @@ abstract class Controller
      */
     protected $path = '/../../../templates/';
 
+    /**
+     * @var array
+     */
     protected $menuArray = [];
+
+    /**
+     * @var string
+     */
+    protected $notFoundRoute = 'notFound';
 
     /**
      * The template name.
@@ -193,20 +201,22 @@ abstract class Controller
      * @param array $parameterData
      * @return string
      */
-    protected function getRoutePath($routeName, $parameterData = ['id' => 3])
+    protected function getRoutePath($routeName, $parameterData = [])
     {
         // TODO: parameter for the routes must be handled here
         $path = $this->getRouteCollection()->get($routeName)->getPath();
         $parameters = $this->getRouteCollection()->get($routeName)->getRequirements();
-
         foreach ($parameters as $name => $regex) {
             if (!preg_match('/' . str_replace('\\', '', $regex) . '/', $parameters[$name])) {
                 var_dump('Blöse');
             }
-            $path = str_replace('{' . $name . '}', $parameterData[$name], $path);
+            if (isset($parameterData[$name])) {
+                $path = str_replace('{' . $name . '}', $parameterData[$name], $path);
+            } else {
+                // the path is wrong. so route to the notFound page.
+                return $this->getRouteCollection()->get($this->notFoundRoute)->getPath();
+            }
         }
-
-
         return $path;
     }
 }
