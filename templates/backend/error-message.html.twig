@@ -1,0 +1,11 @@
+{% if errorData %}
+    <div class="errorBox">
+        <ul>
+            {% for error in errorData %}
+                {% if error %}
+                    <li>{{ error }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

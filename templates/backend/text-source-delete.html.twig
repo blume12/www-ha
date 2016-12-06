@@ -2,17 +2,7 @@
 {% block content %}
     <h1>Textvorlage löschen</h1>
 
-    {% if errorData %}
-        <div class="errorBox">
-            <ul>
-                {% for error in errorData %}
-                    {% if error %}
-                        <li>{{ error }}</li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+    {% include "error-message.html.twig" %}
 
     <form action="{{ formAction }}" method="post" name="formComment">
         <p>
