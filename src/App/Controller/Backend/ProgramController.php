@@ -34,8 +34,6 @@ class ProgramController extends BackendController
         $program = new Program($this->getConfig());
         $programData = $program->loadData();
 
-
-        // TODO: Change links to really routes
         return $this->getResponse([
             'programData' => $programData,
             'newEntryRoute' => $this->getRoutePath('adminProgramNew')

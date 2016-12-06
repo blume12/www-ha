@@ -37,6 +37,9 @@ $routes->add('adminProgramEdit', new Route('/admin/programm-bearbeiten/{id}', ['
 $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::deleteAction'], ['id' => '\d+']));
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
 $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controller' => 'App\Controller\Backend\TextSourceController::indexAction']));
+$routes->add('adminTextSourceNew', new Route('/admin/textvorlage-anlegen', ['_controller' => 'App\Controller\Backend\TextSourceController::newEntryAction']));
+$routes->add('adminTextSourceEdit', new Route('/admin/textvorlage-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\TextSourceController::editAction'], ['id' => '\d+']));
+$routes->add('adminTextSourceDelete', new Route('/admin/textvorlage-loeschen/{id}', ['_controller' => 'App\Controller\Backend\TextSourceController::deleteAction'], ['id' => '\d+']));
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
 $routes->add('adminBackendUserNew', new Route('/admin/nutzer-anlegen', ['_controller' => 'App\Controller\Backend\BackendUserController::newEntryAction']));
 $routes->add('adminBackendUserEdit', new Route('/admin/nutzer-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::editAction'], ['id' => '\d+']));

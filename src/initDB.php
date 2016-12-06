@@ -44,6 +44,11 @@ $dbqObject->query($sql);
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_id_uindex ON program(PId) ";
 $dbqObject->query($sql);
 
+$sql = "CREATE TABLE IF NOT EXISTS textSource (TSId INTEGER PRIMARY KEY, title VARCHAR(255), text TEXT) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS textSource_id_uindex ON textSource(TSId) ";
+$dbqObject->query($sql);
 
 // Todo: remove the blogComment and blog table
 $sql = "CREATE TABLE IF NOT EXISTS blogComment (BCId INTEGER PRIMARY KEY, BId INTEGER, title VARCHAR(255),

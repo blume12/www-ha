@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Textvorlage {% if  newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+
+    {% if errorData %}
+        <div class="errorBox">
+            <ul>
+                {% for error in errorData %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {# TODO: complete the formular with correct data #}
+    <form action="{{ formAction }}" method="post" name="formComment">
+        <label for="title" {% if errorData.title %} class="error"{% endif %}>Titel: </label>
+        <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
+               class="width65{% if errorData.title %} error{% endif %}"/>
+
+        <label for="text" class="{% if errorData.text %}error{% endif %}">Textvorlage:</label>
+        <textarea id="text" name="text" rows="10"
+                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Speichern">
+    </form>
+{% endblock %}
