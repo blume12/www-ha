@@ -31,6 +31,10 @@ class BackendUserController extends BackendController
 
         $backendUser = new BackendUser($this->getConfig());
         $backendUserData = $backendUser->loadData();
+        foreach ($backendUserData as $key => $data) {
+            $backendUserData[$key]['editRoute'] = $this->getRoutePath('adminBackendUserEdit', ['id' => $data['BUId']]);
+            $backendUserData[$key]['deleteRoute'] = $this->getRoutePath('adminBackendUserDelete', ['id' => $data['BUId']]);
+        }
 
         return $this->getResponse([
             'backendUserData' => $backendUserData,

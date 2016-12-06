@@ -67,9 +67,6 @@ class BackendUser extends DbBasis
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
             $data[$i]['index'] = $i;
-            // TODO: Change links to really routes
-            $data[$i]['editRoute'] = '/admin/nutzer-bearbeiten/' . $row['BUId']; // later: adminProgramEdit -> id
-            $data[$i]['deleteRoute'] = '/admin/nutzer-loeschen/' . $row['BUId']; // later: adminProgramDelete -> id
             $i++;
         }
 

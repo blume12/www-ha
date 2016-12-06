@@ -30,9 +30,6 @@ class Timescale extends DbBasis
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
             $data[$i]['index'] = $i;
-            // TODO: Change links to really routes
-            $data[$i]['editRoute'] = '/admin/zeitraum-bearbeiten/' . $row['TId']; // later: adminProgramEdit -> id
-            $data[$i]['deleteRoute'] = '/admin/zeitraum-loeschen/' . $row['TId']; // later: adminProgramDelete -> id
             $i++;
         }
 

@@ -40,6 +40,11 @@ class TextSourceController extends BackendController
         $textSource = new TextSource($this->getConfig());
         $textSourceData = $textSource->loadData();
 
+        foreach ($textSourceData as $key => $data) {
+            $textSourceData[$key]['editRoute'] = $this->getRoutePath(self::$routeNameEdit, ['id' => $data['TSId']]);
+            $textSourceData[$key]['deleteRoute'] = $this->getRoutePath(self::$routeNameDelete, ['id' => $data['TSId']]);
+        }
+
         return $this->getResponse([
             'textSourceData' => $textSourceData,
             'newEntryRoute' => $this->getRoutePath(self::$routeNameNewEntry)

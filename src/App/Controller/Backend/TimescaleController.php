@@ -41,6 +41,11 @@ class TimescaleController extends BackendController
         $timescale = new Timescale($this->getConfig());
         $timescaleData = $timescale->loadData();
 
+        foreach ($timescaleData as $key => $data) {
+            $timescaleData[$key]['editRoute'] = $this->getRoutePath(self::$routeNameEdit, ['id' => $data['TId']]);
+            $timescaleData[$key]['deleteRoute'] = $this->getRoutePath(self::$routeNameDelete, ['id' => $data['TId']]);
+        }
+
         return $this->getResponse([
             'timescaleData' => $timescaleData,
             'newEntryRoute' => $this->getRoutePath(self::$routeNameNewEntry)

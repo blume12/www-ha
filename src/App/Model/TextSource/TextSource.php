@@ -30,9 +30,6 @@ class TextSource extends DbBasis
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
             $data[$i]['index'] = $i;
-            // TODO: Change links to really routes
-            $data[$i]['editRoute'] = '/admin/textvorlage-bearbeiten/' . $row['TSId']; // later: adminProgramEdit -> id
-            $data[$i]['deleteRoute'] = '/admin/textvorlage-loeschen/' . $row['TSId']; // later: adminProgramDelete -> id
             $i++;
         }
 
