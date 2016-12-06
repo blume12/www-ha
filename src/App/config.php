@@ -19,11 +19,8 @@ $config['dbConnection'] = $sqlLite->connect();
 //NOTE: Do NOT use the directly route in the program. Only the key name should be use.
 $routes = new RouteCollection();
 $routes->add('startPage', new Route('/', ['_controller' => 'App\Controller\Frontend\StartPageController::indexAction']));
-$routes->add('programs', new Route('/programme', ['_controller' => 'App\Controller\Frontend\BlogController::listAction']));
-$routes->add('programDetail', new Route('/programm/{id}', ['_controller' => 'App\Controller\Frontend\BlogController::detailAction'], ['id' => '\d+']));
+$routes->add('programs', new Route('/programme', ['_controller' => 'App\Controller\Frontend\ProgramController::indexAction']));
 $routes->add('siteNotice', new Route('/impressum', ['_controller' => 'App\Controller\Frontend\SiteNoticeController::siteNoticeAction']));
-$routes->add('welcome', new Route('/hallo', ['_controller' => 'App\Controller\Frontend\WelcomeController::welcomeAction']));
-$routes->add('programm-comment', new Route('/programm/{id}/kommentieren', ['_controller' => 'App\Controller\Frontend\BlogCommentController::showCommentFormAction'], ['id' => '\d+']));
 $routes->add('notFound', new Route('/not-found', ['_controller' => 'App\Controller\Frontend\NotFoundController::notFoundAction']));
 
 

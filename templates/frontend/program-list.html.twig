@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Programme</h1>
+    {% if programData %}
+
+        <ul>
+            <li class="head">Titel<span class="row options">Optionen</span></li>
+            {% for program in programData %}
+                <li>
+                    {{ program.title }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>
+            Es liegen keine Programme vor.
+        </p>
+    {% endif %}
+{% endblock %}
