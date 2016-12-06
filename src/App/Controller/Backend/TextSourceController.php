@@ -62,7 +62,7 @@ class TextSourceController extends BackendController
         $id = $this->getRequest()->attributes->get('id');
 
         $this->setTemplateName(self::$mainTemplateName . '-edit');
-        $this->setPageTitle(self::$mainTemplateName . ' bearbeiten');
+        $this->setPageTitle(self::$mainPageTitle . ' bearbeiten');
 
         $textSource = new TextSource($this->getConfig());
 
