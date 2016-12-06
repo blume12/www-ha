@@ -21,7 +21,7 @@ class Validator
     public static function isAlpha($text, $required = false)
     {
         $result = true;
-        if ($required && $text != '' && $text != null) {
+        if ($required && ($text == '' || $text == null)) {
             $result = false;
         }
         return $result;
@@ -37,7 +37,7 @@ class Validator
     public static function isYear($date, $required = false)
     {
         $result = true;
-        if ($required && Date::isYear($date)) {
+        if ($required && !Date::isYear($date)) {
             $result = false;
         }
         return $result;
@@ -53,8 +53,8 @@ class Validator
     public static function isDate($date, $required = false)
     {
         $result = true;
-        if ($required && (Date::isDate($date, 'd.m.y') || Date::isDate($date, 'j.n.Y')
-                || Date::isDate($date, 'd.n.Y') || Date::isDate($date, 'j.m.Y'))
+        if ($required && (!Date::isDate($date, 'd.m.y') && !Date::isDate($date, 'j.n.Y')
+                && !Date::isDate($date, 'd.n.Y') && !Date::isDate($date, 'j.m.Y'))
         ) {
             $result = false;
         }

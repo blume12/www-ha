@@ -101,14 +101,14 @@ class Timescale extends DbBasis
     public function checkErrors($formData)
     {
         $formError = [];
-        if (Validator::isYear($formData['year'], true)) {
-            $formError['year'] = 'Bitte geben Sie ein Jahr an. Format: JJJJ';
+        if (!Validator::isYear($formData['year'], true)) {
+            $formError['year'] = 'Bitte geben Sie ein Jahr an. (z.B. 2016)';
         }
-        if (Validator::isDate($formData['fromDate'], true)) {
-            $formError['fromDate'] = 'Bitte geben Sie ein Datum (ab) an. Format: tt.mm.JJJJ';
+        if (!Validator::isDate($formData['fromDate'], true)) {
+            $formError['fromDate'] = 'Bitte geben Sie ein Datum (ab) an. (z.B. 15.4.2016)';
         }
-        if (Validator::isDate($formData['untilDate'], true)) {
-            $formError['untilDate'] = 'Bitte geben Sie ein Datum (bis) an.';
+        if (!Validator::isDate($formData['untilDate'], true)) {
+            $formError['untilDate'] = 'Bitte geben Sie ein Datum (bis) an. (z.B. 15.8.2016)';
         }
         return $formError;
     }

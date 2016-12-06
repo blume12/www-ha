@@ -91,13 +91,13 @@ class BlogComment extends DbBasis
     {
         $formError = [];
 
-        if (Validator::isAlpha($formData['name'], true)) {
+        if (!Validator::isAlpha($formData['name'], true)) {
             $formError['name'] = 'Bitte geben Sie einen Namen an.';
         }
-        if (Validator::isAlpha($formData['title'], true)) {
+        if (!Validator::isAlpha($formData['title'], true)) {
             $formError['title'] = 'Bitte geben Sie einen Titel an.';
         }
-        if (Validator::isAlpha($formData['text'], true)) {
+        if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
         }
         return $formError;

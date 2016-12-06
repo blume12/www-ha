@@ -9,6 +9,7 @@
 namespace App\Model\BackendUser;
 
 use App\Helper\Session;
+use App\Helper\Validator;
 use App\Model\Database\DbBasis;
 
 class BackendUser extends DbBasis
@@ -118,12 +119,21 @@ class BackendUser extends DbBasis
     {
         $formError = [];
 
-        //Check the password
-        // TODO: use a safer hash procedur
-        //if ($user !== false && password_verify($formData['password'], $user['password'])) {
-        //    Session::setSession(self::getSessionName(), $user['BUId']);
+        if (!Validator::isAlpha($formData['username'], true)) {
+            $formError['username'] = 'Bitte geben Sie einen Nutzernamen an.';
+        }
+
+        if ((!isset($formData['id']) || $formData['id'] == '') && $formData['password'] == '') {
+            $formError['password'] = 'Bitte geben Sie ein Passwort an.';
+        }
+
+        // The confirm password must be the same
         if ($formData['password'] != $formData['passwordConfirm']) {
-            $formError['usernamePassword'] = 'Die Passwörter stimmen nicht überein.';
+            $formError['passwordConfirm'] = 'Die Passwörter stimmen nicht überein.';
+        }
+
+        if (!Validator::isAlpha($formData['privilege'], true)) {
+            $formError['privilege'] = 'Bitte geben Sie Nutzerrecht an.';
         }
 
         return $formError;

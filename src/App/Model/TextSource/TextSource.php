@@ -102,10 +102,10 @@ class TextSource extends DbBasis
         // TODO: check all the data of a program
         $formError = [];
 
-        if (Validator::isAlpha($formData['title'], true)) {
+        if (!Validator::isAlpha($formData['title'], true)) {
             $formError['title'] = 'Bitte geben Sie einen Titel an.';
         }
-        if (Validator::isAlpha($formData['text'], true)) {
+        if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
         }
         return $formError;

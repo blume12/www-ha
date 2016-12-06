@@ -19,7 +19,7 @@
         <input id="passwordConfirm" type="password" size="20" name="passwordConfirm"
                value="{{ formData.passwordConfirm }}"
                class="width65{% if errorData.passwordConfirm %} error{% endif %}"/>
-        <label for="privilege">Nutzerecht:</label>
+        <label for="privilege">Nutzerrecht:</label>
         <select id="privilege" name="privilege">
             <option value="admin" {% if formData.privilege == "admin" %} selected="selected" {% endif %}>Adminnutzer
                 (alle Rechte)

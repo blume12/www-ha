@@ -15,9 +15,8 @@
                class="width65{% if errorData.intro %} error{% endif %}"/>
 
         <label for="text" class="{% if errorData.text %}error{% endif %}">Text: </label>
-        <textarea id="text" name="text" rows="10" class="{% if errorData.text %}error{% endif %}">
-            {{ formData.text }}
-        </textarea>
+        <textarea id="text" name="text" rows="10"
+                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
         <input name="send" type="submit" value="Speichern">
     </form>
 {% endblock %}
