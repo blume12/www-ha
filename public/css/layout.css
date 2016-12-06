@@ -80,13 +80,17 @@ label {
     display: block;
 }
 
-input, textarea {
+input, textarea, select {
     margin-bottom: 15px;
     border: 2px solid #09597b;
     background-color: #effcff;
     padding: 8px;
     width: 95%;
     font-family: normal-font, serif;
+}
+
+select {
+    width: auto;
 }
 
 input[type=submit] {
@@ -218,5 +222,4 @@ ul.backendList li.secondLine {
 
 ul.backendList li:hover {
     background-color: #64a7d6;
-    cursor: pointer;
 }

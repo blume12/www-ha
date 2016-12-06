@@ -1,0 +1,43 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Nutzer {% if  newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+
+    {% if errorData %}
+        <div class="errorBox">
+            <ul>
+                {% for error in errorData %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {# TODO: complete the formular with correct data #}
+    <form action="{{ formAction }}" method="post" name="formComment">
+        <label for="username" {% if errorData.username %} class="error"{% endif %}>Nutzername: </label>
+        <input id="username" type="text" size="20" name="username" value="{{ formData.username }}"
+               class="width65{% if errorData.username %} error{% endif %}"/>
+
+        <label for="password" class="{% if errorData.password %}error{% endif %}">Passwort:</label>
+        <input id="password" type="password" size="20" name="password" value="{{ formData.password }}"
+               class="width65{% if errorData.password %} error{% endif %}"/>
+
+        <label for="passwordConfirm" class="{% if errorData.passwordConfirm %}error{% endif %}">Passwort
+            bestätigen:</label>
+        <input id="passwordConfirm" type="password" size="20" name="passwordConfirm"
+               value="{{ formData.passwordConfirm }}"
+               class="width65{% if errorData.passwordConfirm %} error{% endif %}"/>
+        <label for="privilege">Nutzerecht:</label>
+        <select id="privilege" name="privilege">
+            <option value="admin" {% if formData.privilege == "admin" %} selected="selected" {% endif %}>Adminnutzer
+                (alle Rechte)
+            </option>
+            <option value="user" {% if formData.privilege == "user" %} selected="selected" {% endif %}>Normaler Nutzer
+            </option>
+        </select>
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Speichern">
+    </form>
+{% endblock %}

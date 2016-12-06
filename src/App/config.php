@@ -38,6 +38,9 @@ $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
 $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controller' => 'App\Controller\Backend\TextSourceController::indexAction']));
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
+$routes->add('adminBackendUserNew', new Route('/admin/nutzer-anlegen', ['_controller' => 'App\Controller\Backend\BackendUserController::newEntryAction']));
+$routes->add('adminBackendUserEdit', new Route('/admin/nutzer-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::editAction'], ['id' => '\d+']));
+$routes->add('adminBackendUserDelete', new Route('/admin/nutzer-loeschen/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::deleteAction'], ['id' => '\d+']));
 $routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction'], ['hash' => '\w+']));
 $routes->add('adminNotFound', new Route('/admin/not-found', ['_controller' => 'App\Controller\Backend\NotFoundController::notFoundAction']));
 

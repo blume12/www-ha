@@ -156,7 +156,7 @@ class ProgramController extends BackendController
         $id = $this->getRequest()->attributes->get('id');
 
         $this->setTemplateName('program-delete');
-        $this->setPageTitle('Programm bearbeiten');
+        $this->setPageTitle('Programm löschen');
 
         $program = new Program($this->getConfig());
 

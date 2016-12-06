@@ -37,7 +37,7 @@ class SessionController extends BackendController
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
-            $formError = $backendUser->checkErrors($formData);
+            $formError = $backendUser->checkErrorsByLogin($formData);
         }
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {

@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Nutzer löschen</h1>
+
+    {% if errorData %}
+        <div class="errorBox">
+            <ul>
+                {% for error in errorData %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form action="{{ formAction }}" method="post" name="formComment">
+        <p>
+            Sind Sie sich sicher, dass Sie das <strong>wirklich löschen</strong> möchten? Diese Aktion kann nicht
+            rückgängig gemacht werden.
+        </p>
+        <p>
+            Nutzername: <strong>{{ formData.username }}</strong>
+        </p>
+
+        <input id="safetyDelete" type="checkbox" size="20" name="safetyDelete" value="sure"
+               class="left {% if errorData.safetyDelete %} error{% endif %}"/>
+        <label for="safetyDelete" class="{% if errorData.safetyDelete %}error{% endif %}">Ja, wirklich löschen.</label>
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Abschicken">
+    </form>
+{% endblock %}

@@ -51,6 +51,32 @@ class BackendUser extends DbBasis
     }
 
     /**
+     * Return the data array of all backend users.
+     *
+     * @return array
+     */
+    public function loadData()
+    {
+        $dbqObject = $this->getDbqObject();
+
+        $data = [];
+        $sql = "SELECT * FROM backendUser ";
+        $dbqObject->query($sql);
+        $i = 0;
+        while ($row = $dbqObject->nextRow()) {
+            $data[$i] = $row;
+            $data[$i]['index'] = $i;
+            // TODO: Change links to really routes
+            $data[$i]['editRoute'] = '/admin/nutzer-bearbeiten/' . $row['BUId']; // later: adminProgramEdit -> id
+            $data[$i]['deleteRoute'] = '/admin/nutzer-loeschen/' . $row['BUId']; // later: adminProgramDelete -> id
+            $i++;
+        }
+
+        return $data;
+    }
+
+
+    /**
      * Return the session name for the backend user.
      *
      * @return string
@@ -61,12 +87,12 @@ class BackendUser extends DbBasis
     }
 
     /**
-     * Error Handling for the backend user.
+     * Error Handling for the backend user at the login.
      *
      * @param $formData
      * @return array
      */
-    public function checkErrors($formData)
+    public function checkErrorsByLogin($formData)
     {
         $formError = [];
         $user = $this->getUserByName($formData['username']);
@@ -77,6 +103,27 @@ class BackendUser extends DbBasis
             Session::setSession(self::getSessionName(), $user['BUId']);
         } else {
             $formError['usernamePassword'] = 'Der Username oder das Passwort ist ungültg.';
+        }
+
+        return $formError;
+    }
+
+    /**
+     * Check Errors before save Data.
+     *
+     * @param $formData
+     * @return array
+     */
+    public function checkErrors($formData)
+    {
+        $formError = [];
+
+        //Check the password
+        // TODO: use a safer hash procedur
+        //if ($user !== false && password_verify($formData['password'], $user['password'])) {
+        //    Session::setSession(self::getSessionName(), $user['BUId']);
+        if ($formData['password'] != $formData['passwordConfirm']) {
+            $formError['usernamePassword'] = 'Die Passwörter stimmen nicht überein.';
         }
 
         return $formError;
@@ -101,20 +148,52 @@ class BackendUser extends DbBasis
      */
     public function saveData($data)
     {
-        $dbqObject = $this->getDbqObject();
         $currentDate = new \DateTime();
         $createDate = $currentDate->format('Y-m-d H:i:s');
 
         $sqlData = [
             'username' => $data['username'],
             'password' => BackendUser::generateHashPassword($data['password']),
-            'createDate' => $createDate,
             'changeDate' => null,
             'loginDate' => null,
             'privilege' => $data['privilege']
         ];
-        $insert = "INSERT INTO backendUser ( 'username', 'password','createDate','changeDate','loginDate','privilege') 
+
+        $dbqObject = $this->getDbqObject();
+        $entry = $this->getUserById($data['id']);
+        if ($entry == false || count($entry) <= 0) {
+            $sql = "INSERT INTO backendUser ( 'username', 'password','createDate','changeDate','loginDate','privilege') 
                    VALUES (:username, :password, :createDate, :changeDate, :loginDate, :privilege)";
-        $dbqObject->query($insert, $sqlData);
+            $sqlData['createDate'] = $createDate;
+        } else {
+            if ($data['password'] == '') {
+                unset($sqlData['password']);
+                $sql = "UPDATE backendUser SET 'username' = :username, 
+                    'changeDate' = :changeDate, 'loginDate' = :loginDate, 'privilege' = :privilege WHERE BUId = :BUId ";
+            } else {
+                $sql = "UPDATE backendUser SET 'username' = :username, 'password' = :password, 
+                    'changeDate' = :changeDate, 'loginDate' = :loginDate, 'privilege' = :privilege WHERE BUId = :BUId ";
+            }
+            $sqlData['changeDate'] = $createDate;
+            $sqlData['BUId'] = $data['id'];
+        }
+
+        $dbqObject->query($sql, $sqlData);
+    }
+
+    /**
+     * Delete a data by the id
+     *
+     * @param $id integer
+     */
+    public function deleteData($id)
+    {
+        $dbqObject = $this->getDbqObject();
+        $dataSql = [];
+
+        $sql = "DELETE FROM backendUser WHERE BUId=:BUId ";
+
+        $dataSql['BUId'] = $id;
+        $dbqObject->query($sql, $dataSql);
     }
 }
