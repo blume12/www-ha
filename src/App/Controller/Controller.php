@@ -203,12 +203,11 @@ abstract class Controller
      */
     protected function getRoutePath($routeName, $parameterData = [])
     {
-        // TODO: parameter for the routes must be handled here
         $path = $this->getRouteCollection()->get($routeName)->getPath();
         $parameters = $this->getRouteCollection()->get($routeName)->getRequirements();
         foreach ($parameters as $name => $regex) {
             if (!preg_match('/' . str_replace('\\', '', $regex) . '/', $parameters[$name])) {
-                var_dump('Blöse');
+                return $this->getRouteCollection()->get($this->notFoundRoute)->getPath();
             }
             if (isset($parameterData[$name])) {
                 $path = str_replace('{' . $name . '}', $parameterData[$name], $path);

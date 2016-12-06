@@ -41,7 +41,7 @@ $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' =
 $routes->add('adminBackendUserNew', new Route('/admin/nutzer-anlegen', ['_controller' => 'App\Controller\Backend\BackendUserController::newEntryAction']));
 $routes->add('adminBackendUserEdit', new Route('/admin/nutzer-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::editAction'], ['id' => '\d+']));
 $routes->add('adminBackendUserDelete', new Route('/admin/nutzer-loeschen/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::deleteAction'], ['id' => '\d+']));
-$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction'], ['hash' => '\w+']));
+$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction']));
 $routes->add('adminNotFound', new Route('/admin/not-found', ['_controller' => 'App\Controller\Backend\NotFoundController::notFoundAction']));
 
 // documenation Routes:
