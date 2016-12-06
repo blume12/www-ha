@@ -1,6 +1,6 @@
 {% extends "layout.html.twig" %}
 {% block content %}
-    <h1>Programm bearbeiten</h1>
+    <h1>Programm {% if  newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
 
     {% if errorData %}
         <div class="errorBox">

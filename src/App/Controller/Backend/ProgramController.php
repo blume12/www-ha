@@ -37,7 +37,8 @@ class ProgramController extends BackendController
 
         // TODO: Change links to really routes
         return $this->getResponse([
-            'programData' => $programData
+            'programData' => $programData,
+            'newEntryRoute' => $this->getRoutePath('adminProgramNew')
         ]);
     }
 
@@ -90,6 +91,54 @@ class ProgramController extends BackendController
             'errorData' => $formError,
         ]);
     }
+
+
+    /**
+     * Loads the action for the program new form.
+     *
+     * @param Request $request
+     * @return bool|RedirectResponse|Response
+     */
+    public function newEntryAction(Request $request)
+    {
+        $login = $this->checkLogin();
+        if ($login instanceof RedirectResponse) {
+            return $login;
+        }
+        $this->setRequest($request);
+        $id = $this->getRequest()->attributes->get('id');
+
+        $this->setTemplateName('program-edit');
+        $this->setPageTitle('Programm anlegen');
+
+        $program = new Program($this->getConfig());
+
+        $formError = [];
+        if ($request->getMethod() !== 'POST') {
+            // Set default values
+            $formData = $program->loadSpecificEntry($id);
+        } else {
+            /* Check for errors */
+            $formData = $this->getRequest()->request->all();
+            $formError = $program->checkErrors($formData);
+        }
+        // Handle valid post
+        if ($request->getMethod() == 'POST' && count($formError) <= 0) {
+            /* Save data */
+            $program->saveData($formData);
+
+            return new RedirectResponse($this->getRoutePath('adminProgramList'));
+        }
+
+
+        return $this->getResponse([
+            'formAction' => $this->getRoutePath('adminProgramNew'),
+            'formData' => $formData,
+            'errorData' => $formError,
+            'newEntry' => true
+        ]);
+    }
+
 
     /**
      * The action to delete a program.

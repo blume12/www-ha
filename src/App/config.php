@@ -32,6 +32,7 @@ $routes->add('adminLogin', new Route('/admin', ['_controller' => 'App\Controller
 //$routes->add('admin-programme', new Route('/admin/programme/{hash}', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction'], ['hash' => '\w+']));
 $routes->add('adminStart', new Route('/admin/start', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction']));
 $routes->add('adminProgramList', new Route('/admin/programme', ['_controller' => 'App\Controller\Backend\ProgramController::indexAction']));
+$routes->add('adminProgramNew', new Route('/admin/programm-anlegen', ['_controller' => 'App\Controller\Backend\ProgramController::newEntryAction']));
 $routes->add('adminProgramEdit', new Route('/admin/programm-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::editAction'], ['id' => '\d+']));
 $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::deleteAction'], ['id' => '\d+']));
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
