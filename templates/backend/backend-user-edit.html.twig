@@ -6,6 +6,21 @@
 
     {# TODO: complete the formular with correct data #}
     <form action="{{ formAction }}" method="post" name="formComment">
+        <label for="appellation">Anrede:</label>
+        <select id="appellation" name="appellation">
+            {% for key, appellation in appellationData %}
+                <option value="{{ key }}" {% if formData.appellation == key %} selected="selected" {% endif %}>{{ appellation }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
+        <input id="firstname" type="text" size="20" name="firstname" value="{{ formData.firstname }}"
+               class="width65{% if errorData.firstname %} error{% endif %}"/>
+
+        <label for="lastname" {% if errorData.lastname %} class="error"{% endif %}>Nachname: </label>
+        <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
+               class="width65{% if errorData.lastname %} error{% endif %}"/>
+
         <label for="username" {% if errorData.username %} class="error"{% endif %}>Nutzername: </label>
         <input id="username" type="text" size="20" name="username" value="{{ formData.username }}"
                class="width65{% if errorData.username %} error{% endif %}"/>
@@ -21,11 +36,9 @@
                class="width65{% if errorData.passwordConfirm %} error{% endif %}"/>
         <label for="privilege">Nutzerrecht:</label>
         <select id="privilege" name="privilege">
-            <option value="admin" {% if formData.privilege == "admin" %} selected="selected" {% endif %}>Adminnutzer
-                (alle Rechte)
-            </option>
-            <option value="user" {% if formData.privilege == "user" %} selected="selected" {% endif %}>Normaler Nutzer
-            </option>
+            {% for key, privilege in privilegeData %}
+                <option value="{{ key }}" {% if formData.privilege == key %} selected="selected" {% endif %}>{{ privilege }}</option>
+            {% endfor %}
         </select>
         <div class="clear"></div>
         <input name="send" type="submit" value="Speichern">

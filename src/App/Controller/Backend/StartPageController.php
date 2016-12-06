@@ -7,6 +7,7 @@
 
 namespace App\Controller\Backend;
 
+use App\Helper\StandardStock;
 use App\Model\BackendUser\BackendUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +28,7 @@ class StartPageController extends BackendController
 
         $user = new BackendUser($this->getConfig());
         $userData = $user->getUserById($this->getUserId());
+        $userData['appellation'] = StandardStock::getAppellation($userData['appellation']);
 
         $this->setTemplateName('start-page');
         $this->setPageTitle('Übersicht');

@@ -8,6 +8,7 @@ namespace App\Controller\Backend;
 
 
 use App\Helper\Helper;
+use App\Helper\StandardStock;
 use App\Model\BackendUser\BackendUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +35,7 @@ class BackendUserController extends BackendController
         foreach ($backendUserData as $key => $data) {
             $backendUserData[$key]['editRoute'] = $this->getRoutePath('adminBackendUserEdit', ['id' => $data['BUId']]);
             $backendUserData[$key]['deleteRoute'] = $this->getRoutePath('adminBackendUserDelete', ['id' => $data['BUId']]);
+            $backendUserData[$key]['appellation'] = StandardStock::getAppellation($data['appellation']);
         }
 
         return $this->getResponse([
@@ -90,6 +92,8 @@ class BackendUserController extends BackendController
             'formAction' => $this->getRoutePath('adminBackendUserEdit', ['id' => $id]),
             'formData' => $formData,
             'errorData' => $formError,
+            'appellationData' => StandardStock::getAppellation(),
+            'privilegeData' => BackendUser::getPrivilege(),
         ]);
     }
 
@@ -135,7 +139,9 @@ class BackendUserController extends BackendController
             'formAction' => $this->getRoutePath('adminBackendUserNew'),
             'formData' => $formData,
             'errorData' => $formError,
-            'newEntry' => true
+            'newEntry' => true,
+            'appellationData' => StandardStock::getAppellation(),
+            'privilegeData' => BackendUser::getPrivilege(),
         ]);
     }
 

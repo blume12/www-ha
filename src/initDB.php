@@ -21,16 +21,19 @@ $dbConnection = $db->connect();
 /* @var $config array */
 $dbqObject = new DbQuery($config);
 
-$sql = "CREATE TABLE IF NOT EXISTS backendUser (BUId INTEGER PRIMARY KEY, username VARCHAR(255),
-        password BLOB, createDate TEXT, changeDate TEXT, loginDate TEXT, privilege TEXT ) ";
+$sql = "CREATE TABLE IF NOT EXISTS backendUser (BUId INTEGER PRIMARY KEY, appellation VARCHAR(255), firstname VARCHAR(255),
+        lastname VARCHAR(255), username VARCHAR(255), password BLOB, createDate TEXT, changeDate TEXT, loginDate TEXT, privilege TEXT ) ";
 $dbqObject->query($sql);
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS backendUser_BUId_uindex ON backendUser(BUId) ";
 $dbqObject->query($sql);
 
 $userData = [
+    'appellation' => 'mr',
+    'firstname' => '',
+    'lastname' => 'Master',
     'username' => 'admin',
     'password' => 'admin',
-    'privilege' => 'admin'
+    'privilege' => 'superAdmin'
 ];
 
 $backendUser = new BackendUser($config);

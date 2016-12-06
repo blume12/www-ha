@@ -14,7 +14,8 @@
             <li class="head">Name<span class="row options">Optionen</span></li>
             {% for backendUser in backendUserData %}
                 <li class="{% if backendUser.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
-                    {{ backendUser.username }}
+                    {{ backendUser.appellation }}  {{ backendUser.firstname }} {{ backendUser.lastname }}
+                    ({{ backendUser.username }})
                     <span class="row options">
                         <a href="{{ backendUser.editRoute }}">bearbeiten</a>&nbsp;
                         <a href="{{ backendUser.deleteRoute }}">löschen</a>

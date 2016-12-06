@@ -16,9 +16,32 @@ class BackendUser extends DbBasis
 {
 
     /**
+     * @var array
+     */
+    private static $privilegeValues = [
+        'admin' => 'Adminnutzer (Alle Rechte)',
+        'user' => 'Normaler Nutzer'
+    ];
+
+    /**
      * @var string
      */
     private static $sessionName = 'userid';
+
+
+    /**
+     * Return the array if the parameter is null. Otherwise it return the privilege value to a key.
+     *
+     * @param null $privilege
+     * @return array|mixed
+     */
+    public static function getPrivilege($privilege = null)
+    {
+        if ($privilege == null) {
+            return self::$privilegeValues;
+        }
+        return self::$privilegeValues[$privilege];
+    }
 
     /**
      * Return the user data filtered by the username.
@@ -61,7 +84,7 @@ class BackendUser extends DbBasis
         $dbqObject = $this->getDbqObject();
 
         $data = [];
-        $sql = "SELECT * FROM backendUser ";
+        $sql = "SELECT * FROM backendUser WHERE privilege IS NOT 'superAdmin' ORDER BY lastname ASC,firstname ASC ";
         $dbqObject->query($sql);
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
@@ -116,6 +139,18 @@ class BackendUser extends DbBasis
     {
         $formError = [];
 
+        if (!Validator::isAlpha($formData['appellation'], true)) {
+            $formError['appellation'] = 'Bitte geben Sie eine Anrede an.';
+        }
+
+        if (!Validator::isAlpha($formData['firstname'], true)) {
+            $formError['firstname'] = 'Bitte geben Sie einen Vornamen an.';
+        }
+
+        if (!Validator::isAlpha($formData['lastname'], true)) {
+            $formError['lastname'] = 'Bitte geben Sie einen Nachnamen an.';
+        }
+
         if (!Validator::isAlpha($formData['username'], true)) {
             $formError['username'] = 'Bitte geben Sie einen Nutzernamen an.';
         }
@@ -159,6 +194,9 @@ class BackendUser extends DbBasis
         $createDate = $currentDate->format('Y-m-d H:i:s');
 
         $sqlData = [
+            'appellation' => $data['appellation'],
+            'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'username' => $data['username'],
             'password' => BackendUser::generateHashPassword($data['password']),
             'changeDate' => null,
@@ -169,16 +207,18 @@ class BackendUser extends DbBasis
         $dbqObject = $this->getDbqObject();
         $entry = $this->getUserById($data['id']);
         if ($entry == false || count($entry) <= 0) {
-            $sql = "INSERT INTO backendUser ( 'username', 'password','createDate','changeDate','loginDate','privilege') 
-                   VALUES (:username, :password, :createDate, :changeDate, :loginDate, :privilege)";
+            $sql = "INSERT INTO backendUser ('appellation', 'firstname', 'lastname', 'username', 'password','createDate',
+                    'changeDate','loginDate','privilege') 
+                   VALUES (:appellation, :firstname, :lastname, :username, :password, :createDate, :changeDate, :loginDate, :privilege)";
             $sqlData['createDate'] = $createDate;
         } else {
             if ($data['password'] == '') {
                 unset($sqlData['password']);
-                $sql = "UPDATE backendUser SET 'username' = :username, 
+                $sql = "UPDATE backendUser SET 'username' = :username, 'appellation' = :appellation,'firstname' = :firstname,lastname = :lastname,
                     'changeDate' = :changeDate, 'loginDate' = :loginDate, 'privilege' = :privilege WHERE BUId = :BUId ";
             } else {
-                $sql = "UPDATE backendUser SET 'username' = :username, 'password' = :password, 
+                $sql = "UPDATE backendUser SET 'username' = :username, 'password' = :password,  'appellation' = :appellation,
+                      'firstname' = :firstname,lastname = :lastname,
                     'changeDate' = :changeDate, 'loginDate' = :loginDate, 'privilege' = :privilege WHERE BUId = :BUId ";
             }
             $sqlData['changeDate'] = $createDate;
