@@ -5,4 +5,27 @@
     <p>
         Hier können Sie die Zeiträume festlegen.
     </p>
+
+    <a href="{{ newEntryRoute }}">Neuen Eintrag anlegen</a>
+
+    {% if timescaleData %}
+
+        <ul class="backendList">
+            <li class="head">Jahr<span class="row options">Optionen</span></li>
+            {% for timescale in timescaleData %}
+                <li class="{% if timescale.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
+                    {{ timescale.year }}
+                    <span class="row options">
+                        <a href="{{ timescale.editRoute }}">bearbeiten</a>&nbsp;
+                        <a href="{{ timescale.deleteRoute }}">löschen</a>
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>
+            Es liegen keine Textvorlagen vor.
+        </p>
+    {% endif %}
+
 {% endblock %}

@@ -29,22 +29,29 @@ $routes->add('notFound', new Route('/not-found', ['_controller' => 'App\Controll
 
 // admin Routes:
 $routes->add('adminLogin', new Route('/admin', ['_controller' => 'App\Controller\Backend\SessionController::loginAction']));
-//$routes->add('admin-programme', new Route('/admin/programme/{hash}', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction'], ['hash' => '\w+']));
+$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction']));
 $routes->add('adminStart', new Route('/admin/start', ['_controller' => 'App\Controller\Backend\StartPageController::indexAction']));
+//Programs:
 $routes->add('adminProgramList', new Route('/admin/programme', ['_controller' => 'App\Controller\Backend\ProgramController::indexAction']));
 $routes->add('adminProgramNew', new Route('/admin/programm-anlegen', ['_controller' => 'App\Controller\Backend\ProgramController::newEntryAction']));
 $routes->add('adminProgramEdit', new Route('/admin/programm-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::editAction'], ['id' => '\d+']));
 $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::deleteAction'], ['id' => '\d+']));
+//Timescale:
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
+$routes->add('adminTimescaleNew', new Route('/admin/zeitraum-anlegen', ['_controller' => 'App\Controller\Backend\TimescaleController::newEntryAction']));
+$routes->add('adminTimescaleEdit', new Route('/admin/zeitraum-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\TimescaleController::editAction'], ['id' => '\d+']));
+$routes->add('adminTimescaleDelete', new Route('/admin/zeitraum-loeschen/{id}', ['_controller' => 'App\Controller\Backend\TimescaleController::deleteAction'], ['id' => '\d+']));
+//TextSource:
 $routes->add('adminTextSourceList', new Route('/admin/textvorlagen', ['_controller' => 'App\Controller\Backend\TextSourceController::indexAction']));
 $routes->add('adminTextSourceNew', new Route('/admin/textvorlage-anlegen', ['_controller' => 'App\Controller\Backend\TextSourceController::newEntryAction']));
 $routes->add('adminTextSourceEdit', new Route('/admin/textvorlage-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\TextSourceController::editAction'], ['id' => '\d+']));
 $routes->add('adminTextSourceDelete', new Route('/admin/textvorlage-loeschen/{id}', ['_controller' => 'App\Controller\Backend\TextSourceController::deleteAction'], ['id' => '\d+']));
+//BackendUser:
 $routes->add('adminBackendUserList', new Route('/admin/nutzer', ['_controller' => 'App\Controller\Backend\BackendUserController::indexAction']));
 $routes->add('adminBackendUserNew', new Route('/admin/nutzer-anlegen', ['_controller' => 'App\Controller\Backend\BackendUserController::newEntryAction']));
 $routes->add('adminBackendUserEdit', new Route('/admin/nutzer-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::editAction'], ['id' => '\d+']));
 $routes->add('adminBackendUserDelete', new Route('/admin/nutzer-loeschen/{id}', ['_controller' => 'App\Controller\Backend\BackendUserController::deleteAction'], ['id' => '\d+']));
-$routes->add('adminLogout', new Route('/admin/logout', ['_controller' => 'App\Controller\Backend\SessionController::logoutAction']));
+//not found:
 $routes->add('adminNotFound', new Route('/admin/not-found', ['_controller' => 'App\Controller\Backend\NotFoundController::notFoundAction']));
 
 // documenation Routes:

@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Zeitraum {% if newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+
+    {% if errorData %}
+        <div class="errorBox">
+            <ul>
+                {% for error in errorData %}
+                    {% if error %}
+                        <li>{{ error }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    <form action="{{ formAction }}" method="post" name="formComment">
+        <label for="year" {% if errorData.year %} class="error"{% endif %}>Jahr: </label>
+        <input id="year" type="text" size="20" name="year" value="{{ formData.year }}"
+               class="width65{% if errorData.year %} error{% endif %}"/>
+
+        <label for="fromDate" {% if errorData.fromDate %} class="error"{% endif %}>Datum (ab): </label>
+        <input id="fromDate" type="text" size="20" name="fromDate" value="{{ formData.fromDate }}"
+               class="width65{% if errorData.fromDate %} error{% endif %}"/>
+
+        <label for="untilDate" {% if errorData.untilDate %} class="error"{% endif %}>Datum (bis): </label>
+        <input id="untilDate" type="text" size="20" name="untilDate" value="{{ formData.untilDate }}"
+               class="width65{% if errorData.untilDate %} error{% endif %}"/>
+
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Speichern">
+    </form>
+{% endblock %}

@@ -27,4 +27,37 @@ class Validator
         return $result;
     }
 
+    /**
+     * Return if it's a year. If required is true, the year could not be empty.
+     *
+     * @param $date
+     * @param bool $required
+     * @return bool
+     */
+    public static function isYear($date, $required = false)
+    {
+        $result = true;
+        if ($required && Date::isYear($date)) {
+            $result = false;
+        }
+        return $result;
+    }
+
+    /**
+     * Return if it's a date. If required is true, the date could not be empty.
+     *
+     * @param $date
+     * @param bool $required
+     * @return bool
+     */
+    public static function isDate($date, $required = false)
+    {
+        $result = true;
+        if ($required && (Date::isDate($date, 'd.m.y') || Date::isDate($date, 'j.n.Y')
+                || Date::isDate($date, 'd.n.Y') || Date::isDate($date, 'j.m.Y'))
+        ) {
+            $result = false;
+        }
+        return $result;
+    }
 }

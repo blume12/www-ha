@@ -50,6 +50,14 @@ $dbqObject->query($sql);
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS textSource_id_uindex ON textSource(TSId) ";
 $dbqObject->query($sql);
 
+// Timescale:
+$sql = "CREATE TABLE IF NOT EXISTS timescale (TId INTEGER PRIMARY KEY, year VARCHAR(255), fromDate TEXT, untilDate TEXT) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS timescale_id_uindex ON timescale(TId) ";
+$dbqObject->query($sql);
+
+
 // Todo: remove the blogComment and blog table
 $sql = "CREATE TABLE IF NOT EXISTS blogComment (BCId INTEGER PRIMARY KEY, BId INTEGER, title VARCHAR(255),
         name VARCHAR(255), text TEXT, createDate TEXT, changeDate TEXT ) ";
