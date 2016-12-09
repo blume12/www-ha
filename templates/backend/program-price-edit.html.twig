@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+{% block content %}
+    <h1>Preis {% if newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+
+    {% include "error-message.html.twig" %}
+
+    <form action="{{ formAction }}" method="post" name="formComment">
+        <label for="name" {% if errorData.name %} class="error"{% endif %}>Name: </label>
+        <input id="name" type="text" size="20" name="name" value="{{ formData.name }}"
+               class="width65{% if errorData.name %} error{% endif %}"/>
+
+        <label for="price" {% if errorData.price %} class="error"{% endif %}>Normaler Preis: </label>
+        <input id="price" type="text" size="20" name="price" value="{{ formData.price }}"
+               class="width65{% if errorData.price %} error{% endif %}"/>
+
+        <label for="priceReduce" {% if errorData.priceReduce %} class="error"{% endif %}>Reduzierter Preis: </label>
+        <input id="priceReduce" type="text" size="20" name="priceReduce" value="{{ formData.priceReduce }}"
+               class="width65{% if errorData.priceReduce %} error{% endif %}"/>
+
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Speichern">
+    </form>
+{% endblock %}

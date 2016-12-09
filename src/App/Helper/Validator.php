@@ -60,4 +60,16 @@ class Validator
         }
         return $result;
     }
+
+    public static function isPrice($price, $required = false)
+    {
+        // TODO: do it in english format
+        $pattern = '/^\d+(?:\,\d{2})?$/';
+
+        $result = true;
+        if ($required && !preg_match($pattern, $price)) {
+            $result = false;
+        }
+        return $result;
+    }
 }

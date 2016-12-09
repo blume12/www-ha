@@ -33,6 +33,11 @@ $routes->add('adminProgramList', new Route('/admin/programme', ['_controller' =>
 $routes->add('adminProgramNew', new Route('/admin/programm-anlegen', ['_controller' => 'App\Controller\Backend\ProgramController::newEntryAction']));
 $routes->add('adminProgramEdit', new Route('/admin/programm-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::editAction'], ['id' => '\d+']));
 $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::deleteAction'], ['id' => '\d+']));
+// Programs prices:
+$routes->add('adminProgramPriceList', new Route('/admin/programm-preise', ['_controller' => 'App\Controller\Backend\ProgramPriceController::indexAction']));
+$routes->add('adminProgramPriceNew', new Route('/admin/programm-preis-anlegen', ['_controller' => 'App\Controller\Backend\ProgramPriceController::newEntryAction']));
+$routes->add('adminProgramPriceEdit', new Route('/admin/programm-preis-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ProgramPriceController::editAction'], ['id' => '\d+']));
+$routes->add('adminProgramPriceDelete', new Route('/admin/programm-preis-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramPriceController::deleteAction'], ['id' => '\d+']));
 //Timescale:
 $routes->add('adminTimescaleList', new Route('/admin/zeitraum', ['_controller' => 'App\Controller\Backend\TimescaleController::indexAction']));
 $routes->add('adminTimescaleNew', new Route('/admin/zeitraum-anlegen', ['_controller' => 'App\Controller\Backend\TimescaleController::newEntryAction']));

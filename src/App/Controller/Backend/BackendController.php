@@ -38,6 +38,7 @@ abstract class BackendController extends Controller
         $menu = new Menu();
         $menu->addMenu('Startseite', $this->getRoutePath('adminStart'));
         $menu->addMenu('Programme', $this->getRoutePath('adminProgramList'), false);
+        $menu->addMenu('Preise', $this->getRoutePath('adminProgramPriceList'), false);
         $menu->addMenu('Zeiträume', $this->getRoutePath('adminTimescaleList'), false);
         $menu->addMenu('Textvorlagen', $this->getRoutePath('adminTextSourceList'), false);
         $menu->addMenu('Nutzer', $this->getRoutePath('adminBackendUserList'), false);

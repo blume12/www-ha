@@ -47,6 +47,14 @@ $dbqObject->query($sql);
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_id_uindex ON program(PId) ";
 $dbqObject->query($sql);
 
+// Program Price:
+$sql = "CREATE TABLE IF NOT EXISTS programPrice (PPId INTEGER PRIMARY KEY, name VARCHAR(255), price DECIMAL(4,2), priceReduce DECIMAL(4,2)) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS programPrice_id_uindex ON programPrice(PPId) ";
+$dbqObject->query($sql);
+
+// Text source:
 $sql = "CREATE TABLE IF NOT EXISTS textSource (TSId INTEGER PRIMARY KEY, title VARCHAR(255), text TEXT) ";
 $dbqObject->query($sql);
 
