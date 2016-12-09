@@ -49,7 +49,7 @@ class SessionController extends BackendController
             $this->setLoggedIn();
             return new RedirectResponse($this->getRoutePath('adminStart'));
         }
-        return $this->getResponse(['formData' => $formData, 'formError' => $formError, 'formAction' => $this->getRoutePath('adminLogin')]);
+        return $this->getResponse(['formData' => $formData, 'errorData' => $formError, 'formAction' => $this->getRoutePath('adminLogin')]);
 
     }
 
