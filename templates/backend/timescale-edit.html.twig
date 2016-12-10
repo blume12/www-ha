@@ -1,6 +1,9 @@
 {% extends "layout.html.twig" %}
-{% block content %}
+{% block headline %}
     <h1>Zeitraum {% if newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+{% endblock %}
+
+{% block content %}
 
     {% include "error-message.html.twig" %}
 

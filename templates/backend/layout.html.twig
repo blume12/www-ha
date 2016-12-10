@@ -3,15 +3,28 @@
     <title>{% block title %}{{ pageTitle }}{% endblock %} | Ticketsystem</title>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="/css/layout.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700" rel="stylesheet">
 </head>
 <body>
-<ul class="menu">
-    {% for menu in menuData %}
-        {% if loggedIn or menu.showAlways %}
-            <li><a href="{{ menu.route }}">{{ menu.name }}</a></li>
-        {% endif %}
-    {% endfor %}
-</ul>
+<nav>
+    <span class="mobile">Menü</span>
+    <ul class="menu">
+        {% for menu in menuData %}
+            {% if loggedIn or menu.showAlways %}
+                <li><a href="{{ menu.route }}">{{ menu.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+<div class="filmStripeTop">
+    <img src="images/Filmstreifen.png" alt="Filmstreifen Dekoelement"/>
+    <div class = "headline">
+        {% block headline %}
+        {% endblock %}
+    </div>
+</div>
+
 
 <div class="content">
     {% block content %}
