@@ -6,9 +6,12 @@
 /* Space */
 body,
 html {
-  font-family: 'Lato', sans-serif;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
+div.container {
+  font-family: 'Lato', sans-serif;
   position: relative;
   min-height: 100%;
 }
@@ -16,21 +19,33 @@ div.content {
   padding-left: 10px;
   margin: 0;
   padding-top: 50px;
-  background: #c41af9;
+  padding-bottom: 7em;
+  background: #fcf0e1;
+  min-height: 72%;
 }
 /* Footer*/
 footer {
-  padding: 1rem;
+  text-align: center;
+  padding: 0 0 0 0;
   margin: 0;
   background: #686d73;
+  color: #feffff;
   position: absolute;
   height: 2em;
   bottom: 0;
   width: 100%;
 }
+footer span {
+  margin: 10px 30px 0 0;
+  font-size: 11px;
+}
 /* Headlines */
 h1 {
   color: #2c2c2c;
+}
+h2 {
+  color: #0aa1d2;
+  font-size: 1.2em;
 }
 /* Links */
 a {
@@ -57,8 +72,8 @@ a.button {
 }
 /* Menu */
 nav {
-  background: #e58523;
-  padding: 5px 0;
+  background: #c41af9;
+  padding: 0;
 }
 nav ul.menu {
   background-color: #e58523;
@@ -67,7 +82,19 @@ nav ul.menu {
 }
 nav .mobile {
   color: #feffff;
-  padding: 10px;
+  position: absolute;
+  right: 10px;
+  padding: 12px 0 0 0;
+}
+nav .logoText {
+  margin: 0;
+  padding: 0 0 0 10px;
+  height: 2.7em;
+  width: auto;
+  display: inline-block;
+}
+nav .LogoNoText {
+  display: none;
 }
 nav ul.menu li {
   border: 2px solid #feffff;
@@ -92,10 +119,10 @@ nav:hover {
   background-color: #ad6116;
   cursor: pointer;
 }
-/* Filmstripe */
+/* Filmstripe Top */
 .filmStripeTop img {
   position: absolute;
-  width: auto;
+  width: 100%;
   height: 50px;
   display: block;
 }
@@ -107,6 +134,14 @@ nav:hover {
   padding-top: 5px;
   padding-left: 10px;
   margin: 0;
+}
+/* Filmstripe Down */
+.filmStripeDown img {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  display: block;
+  bottom: 2em;
 }
 /* Kontaktformular */
 form {
@@ -237,14 +272,14 @@ ul.backendList li:hover {
 @media (min-width: 320px) {
   /* smartphones, iPhone, portrait 480x320 phones */
   /* debugging Media Queries */
-  div.content {
+  nav {
     background: #2311f9;
   }
 }
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   /* debugging Media Queries */
-  div.content {
+  nav {
     background: #35f90b;
   }
 }
@@ -259,6 +294,20 @@ ul.backendList li:hover {
     padding: 0 5%;
     text-align: center;
   }
+  nav .logoText {
+    padding: 0 0 0 10px;
+    position: absolute;
+    height: 2.7em;
+    left: 0;
+    display: none;
+  }
+  nav .LogoNoText {
+    padding: 0 0 0 10px;
+    position: absolute;
+    height: 2.7em;
+    left: 0;
+    display: block;
+  }
   nav .mobile {
     display: none;
   }
@@ -270,11 +319,15 @@ ul.backendList li:hover {
   }
   nav:hover {
     background-color: #e58523;
-    cursor: pointer;
+    cursor: auto;
   }
   /* Filmstripe */
   .filmStripeTop img {
     height: 80px;
+  }
+  /* Filmstripe Down */
+  .filmStripeDown img {
+    width: 100%;
   }
   .headline {
     font-size: 1.2em;
@@ -284,7 +337,7 @@ ul.backendList li:hover {
     padding-top: 16px;
   }
   /* debugging Media Queries */
-  div.content {
+  nav {
     background: #f91221;
   }
 }
@@ -292,11 +345,16 @@ ul.backendList li:hover {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   div.content {
     margin: auto 15%;
-    padding-top: 80px;
   }
   /* Menu */
   nav {
     padding: 0 15%;
+  }
+  nav .logoText {
+    display: block;
+  }
+  nav .LogoNoText {
+    display: none;
   }
   /* Filmstripe */
   .filmStripeTop img {
@@ -306,33 +364,29 @@ ul.backendList li:hover {
     padding-left: 15%;
   }
   /* debugging Media Queries */
-  div.content {
+  nav {
     background: #0cf9cb;
   }
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
-  div.content {
-    margin: auto 25%;
-    padding-top: 80px;
-  }
   /* Menu */
   nav {
     padding: 0 25%;
   }
-  /* Filmstripe */
-  .headline {
-    padding-left: 25%;
-  }
   /* debugging Media Queries */
-  div.content {
+  nav {
     background: #e8f913;
   }
 }
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */
+  /* Filmstripe Down */
+  .filmStripeDown img {
+    height: 65px;
+  }
   /* debugging Media Queries */
-  div.content {
-    background: #f99118;
+  nav {
+    background: #f900a1;
   }
 }
