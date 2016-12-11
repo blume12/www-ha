@@ -6,14 +6,22 @@
 {% block content %}
     {% if programData %}
 
-        <ul>
-            <li class="head">Titel<span class="row options">Optionen</span></li>
-            {% for program in programData %}
-                <li>
+
+        {% for program in programData %}
+            <div class="veranstaltung">
+                <h2>
                     {{ program.title }}
-                </li>
-            {% endfor %}
-        </ul>
+                </h2>
+                <p>
+                    <i>{{ program.intro }}</i>
+                </p>
+                <p>
+                    {{ program.text }}
+                </p>
+            </div>
+
+        {% endfor %}
+
     {% else %}
         <p>
             Es liegen keine Programme vor.

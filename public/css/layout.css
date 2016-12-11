@@ -19,8 +19,12 @@ div.container {
 div.content {
   padding: 50px 10px 7em 10px;
   margin: 0;
-  background: #fcf0e1;
+  background: #fafcf1;
   min-height: 72%;
+}
+div.content p {
+  font-family: 'PT Serif', serif;
+  font-size: 0.8em;
 }
 /* Footer*/
 footer {
@@ -44,11 +48,11 @@ h1 {
 }
 h2 {
   color: #0aa1d2;
-  font-size: 1.2em;
+  font-size: 1.4em;
 }
 /* Links */
 a {
-  color: #ad6116;
+  color: #dd6527;
 }
 a:hover {
   color: #68390f;
@@ -115,7 +119,7 @@ nav ul.menu li:hover {
   cursor: pointer;
 }
 nav:hover {
-  background-color: #ad6116;
+  background-color: #dd6527;
   cursor: pointer;
 }
 /* Filmstripe Top */
@@ -127,10 +131,10 @@ nav:hover {
 }
 .headline {
   position: absolute;
-  font-size: 1.0em;
+  font-size: 0.8em;
 }
 .headline h1 {
-  padding-top: 5px;
+  padding-top: 9px;
   padding-left: 10px;
   margin: 0;
 }
@@ -141,6 +145,10 @@ nav:hover {
   height: 50px;
   display: block;
   bottom: 2em;
+}
+/* Veranstaltungs Block*/
+.veranstaltung h2 {
+  border-bottom: 2px solid rgba(104, 109, 115, 0.3);
 }
 /* Kontaktformular */
 form {
@@ -256,14 +264,14 @@ ul.backendList li .row.options {
   float: right;
 }
 ul.backendList li.head {
-  background-color: #09597b;
+  background-color: #0aa1d2;
   color: #fff;
 }
 ul.backendList li.firstLine {
-  background-color: #c5d5ee;
+  background-color: #feffff;
 }
 ul.backendList li.secondLine {
-  background-color: #e5ecf3;
+  background-color: #d5d3c8;
 }
 ul.backendList li:hover {
   background-color: #64a7d6;
@@ -283,7 +291,7 @@ ul.backendList li:hover {
     background: #35f90b;
   }
 }
-@media (min-width: 641px) {
+@media (min-width: 680px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   div.content {
     margin: auto 5%;
@@ -336,6 +344,14 @@ ul.backendList li:hover {
   .headline h1 {
     padding-top: 16px;
   }
+  /* Veranstaltungs Block*/
+  .veranstaltung {
+    width: 47%;
+    min-height: 250px;
+    max-height: 250px;
+    margin-left: 10px;
+    float: left;
+  }
   /* debugging Media Queries */
   nav {
     background: #f91221;
@@ -370,10 +386,6 @@ ul.backendList li:hover {
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
-  /* Menu */
-  nav {
-    padding: 0 25%;
-  }
   /* debugging Media Queries */
   nav {
     background: #e8f913;
@@ -381,9 +393,26 @@ ul.backendList li:hover {
 }
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */
+  div.content {
+    margin: auto 20%;
+  }
+  /* Menu */
+  nav {
+    padding: 0 20%;
+  }
+  /* Filmstripe */
+  .headline {
+    padding-left: 20%;
+  }
   /* Filmstripe Down */
   .filmStripeDown img {
     height: 65px;
+  }
+  /* Veranstaltungs Block*/
+  .veranstaltung {
+    width: 32%;
+    margin-left: 10px;
+    float: left;
   }
   /* debugging Media Queries */
   nav {
