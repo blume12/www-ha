@@ -22,6 +22,13 @@
 @aNormal: #ad6116;
 @aHover: #68390f;
 
+/* Color Textarea, Button*/
+@button: #0aa1d2;
+@buttonHover: #1a75d2;
+
+@textAreaBorder: #686d73;
+@textArea: #feffff;
+
 /* Percent Items */
 
 @content: 25%;
@@ -50,10 +57,8 @@ div.container{
 }
 
 div.content {
-  padding-left: @contentSmallSpace;
+  padding: @heightSmall @contentSmallSpace 7em @contentSmallSpace;
   margin: 0;
-  padding-top: @heightSmall;
-  padding-bottom: 7em;
   background: @backgroundContent;
   min-height: 72%;
 }
@@ -109,11 +114,11 @@ a.button {
 }
 
 .button.blue {
-  background-color: #0974a1;
+  background-color: #32a12a;
 }
 
 .button.blue:hover {
-  background-color: #09354c;
+  background-color: #4c2d1f;
   color: #fff;
 }
 
@@ -217,8 +222,8 @@ label {
 
 input, textarea, select {
   margin-bottom: 15px;
-  border: 2px solid #09597b;
-  background-color: #effcff;
+  border: 2px solid @textAreaBorder;
+  background-color: @textArea;
   padding: 8px;
   width: 95%;
   font-family: normal-font, serif;
@@ -230,8 +235,8 @@ select {
 
 input[type=submit] {
   padding: 5px 20px;
-  color: #fff;
-  background-color: #09597b;
+  color: @textWhite;
+  background-color: @button;
   font-size: 1.1em;
   width: 120px;
   border: 0;
@@ -239,7 +244,7 @@ input[type=submit] {
 
 input[type=submit]:hover {
   cursor: pointer;
-  background-color: #09354c;
+  background-color: @buttonHover;
 }
 
 /* Allgemein */
@@ -266,6 +271,7 @@ input[type=submit]:hover {
 .errorBox {
   border: 3px solid #a10d08;
   padding: 10px;
+  margin-top: 10px;
   color: #a10d08;
   font-weight: bold;
   background-color: #ffe7e5;

@@ -1,6 +1,7 @@
 /* TODO: this should be less :) */
 /* debugging Media Queries Colors*/
 /* Colors */
+/* Color Textarea, Button*/
 /* Percent Items */
 /* Filmstripe */
 /* Space */
@@ -16,10 +17,8 @@ div.container {
   min-height: 100%;
 }
 div.content {
-  padding-left: 10px;
+  padding: 50px 10px 7em 10px;
   margin: 0;
-  padding-top: 50px;
-  padding-bottom: 7em;
   background: #fcf0e1;
   min-height: 72%;
 }
@@ -64,10 +63,10 @@ a.button {
   display: inline-block;
 }
 .button.blue {
-  background-color: #0974a1;
+  background-color: #32a12a;
 }
 .button.blue:hover {
-  background-color: #09354c;
+  background-color: #4c2d1f;
   color: #fff;
 }
 /* Menu */
@@ -154,8 +153,8 @@ input,
 textarea,
 select {
   margin-bottom: 15px;
-  border: 2px solid #09597b;
-  background-color: #effcff;
+  border: 2px solid #686d73;
+  background-color: #feffff;
   padding: 8px;
   width: 95%;
   font-family: normal-font, serif;
@@ -165,15 +164,15 @@ select {
 }
 input[type=submit] {
   padding: 5px 20px;
-  color: #fff;
-  background-color: #09597b;
+  color: #feffff;
+  background-color: #0aa1d2;
   font-size: 1.1em;
   width: 120px;
   border: 0;
 }
 input[type=submit]:hover {
   cursor: pointer;
-  background-color: #09354c;
+  background-color: #1a75d2;
 }
 /* Allgemein */
 .width65 {
@@ -194,6 +193,7 @@ input[type=submit]:hover {
 .errorBox {
   border: 3px solid #a10d08;
   padding: 10px;
+  margin-top: 10px;
   color: #a10d08;
   font-weight: bold;
   background-color: #ffe7e5;
