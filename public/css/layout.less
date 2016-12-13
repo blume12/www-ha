@@ -1,27 +1,111 @@
 /* TODO: this should be less :) */
 
+/* debugging Media Queries Colors*/
+@debugMedia0: #c41af9;
+@debugMedia1: #2311f9;
+@debugMedia2: #35f90b;
+@debugMedia3: #f91221;
+@debugMedia4: #0cf9cb;
+@debugMedia5: #e8f913;
+@debugMedia6: #f900a1;
+
+/* Colors */
+@textWhite: #feffff;
+@textBlack: #2c2c2c;
+
+@orange: #e58523;
+@blue: #0aa1d2;
+@grayLight: #686d73;
+@white: #feffff;
+@backgroundContent: #fafcf1;
+
+@aNormal: #dd6527;
+@aHover: #68390f;
+
+/* Color Textarea, Button*/
+@button: #0aa1d2;
+@buttonHover: #1a75d2;
+
+@textAreaBorder: #686d73;
+@textArea: #feffff;
+
+/* Percent Items */
+
+@content: 20%;
+@contentSmallScreen: 5%;
+@contentMiddleScreen: 15%;
+
+/* Filmstripe */
+@heightSmall: 50px;
+@heightMiddle: 65px;
+@heightNormal: 80px;
+
+/* Space */
+@contentSmallSpace: 10px;
+@footerHeight: 2em;
+
 body, html {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
+  height: 100%;
+}
 
+div.container{
+  font-family: 'Lato', sans-serif;
+  position:relative;
+  min-height:100%;
 }
 
 div.content {
-
-  margin: auto 25%;
+  padding: @heightSmall @contentSmallSpace 7em @contentSmallSpace;
+  margin: 0;
+  background: @backgroundContent;
+  min-height: 72%;
 }
+
+div.content p{
+  font-family: 'PT Serif', serif;
+  font-size: 0.8em;
+}
+
+/* Footer*/
+
+footer{
+  text-align: center;
+  padding: 0 0 0 0;
+  margin: 0;
+  background: @grayLight;
+  color: @white;
+  position:absolute;
+  height: @footerHeight;
+  bottom: 0;
+  width: 100%;
+}
+
+footer span {
+  margin: 10px 30px 0 0;
+  font-size: 11px;
+}
+
+/* Headlines */
 
 h1 {
-  color: #09597b;
+  color: @textBlack;
 }
 
+h2{
+  color: @blue;
+  font-size: 1.4em;
+}
+
+/* Links */
+
 a {
-  color: #09597b;
+  color: @aNormal;
 }
 
 a:hover {
-  color: #09354c;
+  color: @aHover;
   text-decoration: underline;
 }
 
@@ -35,43 +119,108 @@ a.button {
 }
 
 .button.blue {
-  background-color: #0974a1;
+  background-color: #32a12a;
 }
 
 .button.blue:hover {
-  background-color: #09354c;
-
+  background-color: #4c2d1f;
   color: #fff;
 }
 
 /* Menu */
 
-ul.menu {
-  background-color: #09597b;
-  padding-left: 25%;
+nav {
+  background: @debugMedia0;
+  padding: 0;
 }
 
-ul.menu li {
-  border: 2px solid #09354c;
-  display: inline-block;
+nav ul.menu {
+  background-color: @orange;
+  padding: 0;
+  margin: 0;
+}
+
+nav .mobile{
+  color: @white;
+  position: absolute;
+  right: @contentSmallSpace;
+  padding: 12px 0 0 0;
+}
+
+nav .logoText{
+    margin: 0;
+    padding: 0 0 0 @contentSmallSpace;
+    height: 2.7em;
+    width: auto;
+    display: inline-block;
+}
+nav .LogoNoText{
+  display: none;
+}
+
+nav ul.menu li {
+  border: 2px solid @white;
+  display: none;
   padding: 10px;
+  text-align: center;
+  margin: 0;
 }
 
-ul.menu li a {
+nav ul.menu li a {
   color: #fff;
-  text-decoration: none;
-}
-
-ul li a {
-  color: #09354c;
   text-decoration: none;
   font-weight: normal;
 }
 
-ul.menu li:hover {
-  background-color: #0974a1;
+nav:hover ul.menu li {
+  display: block;
+}
+
+nav ul.menu li:hover {
+  background-color: fade(@white, 20%);
   cursor: pointer;
 }
+
+nav:hover {
+  background-color: @aNormal;
+  cursor: pointer;
+}
+
+/* Filmstripe Top */
+
+.filmStripeTop img{
+  position: absolute;
+  width: 100%;
+  height: @heightSmall;
+  display: block;
+}
+
+.headline{
+  position: absolute;
+  font-size: 0.8em;
+}
+
+.headline h1{
+  padding-top: 9px;
+  padding-left: @contentSmallSpace;
+  margin: 0;
+}
+
+/* Filmstripe Down */
+
+.filmStripeDown img{
+  position: absolute;
+  width: 100%;
+  height: @heightSmall;
+  display: block;
+  bottom: @footerHeight;
+}
+
+/* Veranstaltungs Block*/
+.veranstaltung h2{
+  border-bottom: 2px solid fade(@grayLight, 30%);
+}
+
 
 /* Kontaktformular */
 form {
@@ -84,8 +233,8 @@ label {
 
 input, textarea, select {
   margin-bottom: 15px;
-  border: 2px solid #09597b;
-  background-color: #effcff;
+  border: 2px solid @textAreaBorder;
+  background-color: @textArea;
   padding: 8px;
   width: 95%;
   font-family: normal-font, serif;
@@ -97,8 +246,8 @@ select {
 
 input[type=submit] {
   padding: 5px 20px;
-  color: #fff;
-  background-color: #09597b;
+  color: @textWhite;
+  background-color: @button;
   font-size: 1.1em;
   width: 120px;
   border: 0;
@@ -106,7 +255,7 @@ input[type=submit] {
 
 input[type=submit]:hover {
   cursor: pointer;
-  background-color: #09354c;
+  background-color: @buttonHover;
 }
 
 /* Allgemein */
@@ -133,6 +282,7 @@ input[type=submit]:hover {
 .errorBox {
   border: 3px solid #a10d08;
   padding: 10px;
+  margin-top: 10px;
   color: #a10d08;
   font-weight: bold;
   background-color: #ffe7e5;
@@ -210,18 +360,198 @@ ul.backendList li .row.options {
 }
 
 ul.backendList li.head {
-  background-color: #09597b;
+  background-color: @blue;
   color: #fff;
 }
 
 ul.backendList li.firstLine {
-  background-color: #c5d5ee;
+  background-color: @textArea;
 }
 
 ul.backendList li.secondLine {
-  background-color: #e5ecf3;
+  background-color: #d5d3c8;
 }
 
 ul.backendList li:hover {
   background-color: #64a7d6;
+}
+
+/* Media Queries */
+
+@media (min-width: 320px) {
+  /* smartphones, iPhone, portrait 480x320 phones */
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia1;
+  }
+}
+
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia2;
+  }
+}
+
+@media (min-width: 680px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+
+  div.content {
+    margin: auto @contentSmallScreen;
+    padding-top: @heightNormal;
+  }
+
+  /* Menu */
+  nav {
+    padding: 0 @contentSmallScreen;
+    text-align: center;
+  }
+
+  nav .logoText{
+    padding: 0 0 0 @contentSmallSpace;
+    position: absolute;
+    height: 2.7em;
+    left: 0;
+    display: none;
+  }
+  nav .LogoNoText{
+    padding: 0 0 0 @contentSmallSpace;
+    position: absolute;
+    height: 2.7em;
+    left: 0;
+    display: block;
+  }
+
+  nav .mobile {
+    display: none;
+  }
+
+  nav ul.menu li  {
+    display: inline-block;
+  }
+
+  nav:hover ul.menu li {
+    display: inline-block;
+  }
+
+  nav:hover {
+    background-color: @orange;
+    cursor: auto;
+  }
+
+  /* Filmstripe */
+  .filmStripeTop img{
+    height: @heightNormal;
+  }
+
+  /* Filmstripe Down */
+  .filmStripeDown img{
+    width: 100%;
+  }
+
+  .headline{
+    font-size: 1.2em;
+    padding-left: @contentSmallScreen;
+  }
+
+  .headline h1{
+    padding-top: 16px;
+  }
+
+  /* Veranstaltungs Block*/
+  .veranstaltung{
+
+    width: 47%;
+    min-height: 250px;
+    max-height: 250px;
+    margin-left: 10px;
+    float: left;
+  }
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia3;
+  }
+}
+
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+
+  div.content {
+    margin: auto @contentMiddleScreen;
+  }
+
+  /* Menu */
+  nav {
+    padding: 0 @contentMiddleScreen;
+  }
+
+  nav .logoText{
+    display: block;
+  }
+  nav .LogoNoText{
+    display: none;
+  }
+
+  /* Filmstripe */
+  .filmStripeTop img{
+    width: 100%;
+  }
+
+  .headline{
+    padding-left: @contentMiddleScreen;
+  }
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia4;
+  }
+}
+
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia5;
+  }
+}
+
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
+  div.content {
+    margin: auto @content;
+  }
+
+  /* Menu */
+  nav {
+    padding: 0 @content;
+  }
+
+  /* Filmstripe */
+  .headline{
+    padding-left: @content;
+  }
+
+
+  /* Filmstripe Down */
+  .filmStripeDown img{
+    height: @heightMiddle;
+  }
+
+  /* Veranstaltungs Block*/
+  .veranstaltung{
+
+    width: 32%;
+    margin-left: 10px;
+    float: left;
+  }
+
+  /* debugging Media Queries */
+  nav {
+    background: @debugMedia6;
+  }
 }

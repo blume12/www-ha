@@ -1,15 +1,27 @@
 {% extends "layout.html.twig" %}
-{% block content %}
+{% block headline %}
     <h1>Impressum</h1>
-    <p>Vertretungsberechtigter Vorstand: Thomas Dethleffsen,
+{% endblock %}
+
+{% block content %}
+    <p><b>Vertretungsberechtigter Vorstand:</b> Thomas Dethleffsen,
         Joachim Freitag,
         Thorsten Kehl, Hans Herbert Tölke</p>
+
+    <h2>Registergericht</h2>
     <p>
-        <span>Registergericht:</span>
         Amtsgericht Flensburg
     </p>
+
+    <h2>Registernummer</h2>
     <p>
-        <span>Registernummer:</span>
         2VR 1775
+    </p>
+
+    <h2>Haftungshinweis</h2>
+    <p>
+        Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir
+        keine Haftung für die Inhalte externer Links.
+        Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
     </p>
 {% endblock %}
