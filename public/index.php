@@ -33,13 +33,12 @@ try {
     $uri = $request->getPathInfo();
     Routing::loadPage($routes, $context, $uri, $request, $config);
 } catch (ResourceNotFoundException $e) {
-    Routing::loadPage($routes, $context, '/not-found', $request, $config);
+    $uriTest = $request->getPathInfo();
+    if (preg_match('/admin/', $uriTest)) { // TODO: Check really by the string "admin"?
+        $uri = 'adminNotFound';
+    } else {
+        $uri = 'notFound';
+    }
+    $uri = Routing::getRoutePath($routes, $uri, $uri);
+    Routing::loadPage($routes, $context, $uri, $request, $config);
 }
-
-
-
-
-
-
-
-

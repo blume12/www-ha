@@ -8,6 +8,7 @@
  */
 namespace App\Controller;
 
+use App\Helper\Routing\Routing;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouteCollection;
 use Twig_Loader_Filesystem;
@@ -203,19 +204,6 @@ abstract class Controller
      */
     protected function getRoutePath($routeName, $parameterData = [])
     {
-        $path = $this->getRouteCollection()->get($routeName)->getPath();
-        $parameters = $this->getRouteCollection()->get($routeName)->getRequirements();
-        foreach ($parameters as $name => $regex) {
-            if (!preg_match('/' . str_replace('\\', '', $regex) . '/', $parameters[$name])) {
-                return $this->getRouteCollection()->get($this->notFoundRoute)->getPath();
-            }
-            if (isset($parameterData[$name])) {
-                $path = str_replace('{' . $name . '}', $parameterData[$name], $path);
-            } else {
-                // the path is wrong. so route to the notFound page.
-                return $this->getRouteCollection()->get($this->notFoundRoute)->getPath();
-            }
-        }
-        return $path;
+        return Routing::getRoutePath($this->getRouteCollection(), $this->notFoundRoute, $routeName, $parameterData);
     }
 }
