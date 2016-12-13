@@ -61,6 +61,13 @@ class Validator
         return $result;
     }
 
+    /**
+     * Return if it's a price. If required is true, the price could not be empty.
+     *
+     * @param $price
+     * @param bool $required
+     * @return bool
+     */
     public static function isPrice($price, $required = false)
     {
         // TODO: do it in english format
@@ -68,6 +75,22 @@ class Validator
 
         $result = true;
         if ($required && !preg_match($pattern, $price)) {
+            $result = false;
+        }
+        return $result;
+    }
+
+    /**
+     * Return if it's correct selected item. If required is true, the select could not be empty.
+     *
+     * @param $value
+     * @param bool $required
+     * @return bool
+     */
+    public static function isCorrectSelectValue($value, $required = false)
+    {
+        $result = true;
+        if ($required && $value == 'notset') {
             $result = false;
         }
         return $result;

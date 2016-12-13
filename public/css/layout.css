@@ -112,7 +112,8 @@ input[type=submit]:hover {
   background-color: #ffe7e5;
 }
 input.error,
-textarea.error {
+textarea.error,
+select.error {
   border: 2px solid #a10d08;
   color: #a10d08;
   background-color: #ffe7e5;

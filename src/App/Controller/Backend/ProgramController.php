@@ -9,6 +9,7 @@ namespace App\Controller\Backend;
 
 use App\Helper\Helper;
 use App\Model\Program\Program;
+use App\Model\Program\ProgramPrice;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,11 +64,13 @@ class ProgramController extends BackendController
         $this->setPageTitle('Programm bearbeiten');
 
         $program = new Program($this->getConfig());
+        $programPrice = new ProgramPrice($this->getConfig());
 
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
             $formData = $program->loadSpecificEntry($id);
+            $formData['priceData'] = $programPrice->loadData();
             if ($formData == null) {
 
                 return new RedirectResponse($this->getRoutePath('adminNotFound'));
@@ -75,6 +78,7 @@ class ProgramController extends BackendController
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
+            $formData['priceData'] = $programPrice->loadData();
             $formError = $program->checkErrors($formData);
         }
         // Handle valid post
@@ -114,14 +118,17 @@ class ProgramController extends BackendController
         $this->setPageTitle('Programm anlegen');
 
         $program = new Program($this->getConfig());
+        $programPrice = new ProgramPrice($this->getConfig());
 
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
             $formData = $program->loadSpecificEntry($id);
+            $formData['priceData'] = $programPrice->loadData();
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
+            $formData['priceData'] = $programPrice->loadData();
             $formError = $program->checkErrors($formData);
         }
         // Handle valid post

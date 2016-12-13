@@ -71,7 +71,9 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT PId, uuid, author, date, title, intro, text FROM program WHERE PId = :PId LIMIT 1 ";
+        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, intro, text FROM program 
+                LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
+                WHERE program.PId = :PId LIMIT 1 ";
         $dbqObject->query($sql, ['PId' => $id]);
         return $dbqObject->nextRow();
     }
@@ -103,8 +105,27 @@ class Program extends DbBasis
         $dataSql['intro'] = $data['intro'];
         $dataSql['text'] = $data['text'];
         $dbqObject->query($sql, $dataSql);
+        if (!isset($dataSql['PId']) || $dataSql['PId'] == '') {
+            $sql = "SELECT last_insert_rowid()";
+            $dbqObject->query($sql);
+            $dataSql['PId'] = $dbqObject->nextRow()['last_insert_rowid()'];
+        }
+        $this->savePriceToProgram($dataSql['PId'], $data['price']);
     }
 
+
+    public function savePriceToProgram($pid, $ppid)
+    {
+        $dbqObject = $this->getDbqObject();
+        $dataSql = [];
+        $dataSql['PId'] = intval($pid, 10);
+        $sql = "DELETE FROM  program_programPrice WHERE PId = :PId ";
+        $dbqObject->query($sql, $dataSql);
+
+        $sql = "INSERT INTO program_programPrice ( PId,PPId) VALUES (:PId, :PPId)";
+        $dataSql['PPId'] = intval($ppid, 10);
+        $dbqObject->query($sql, $dataSql);
+    }
 
     /**
      * Delete a data by the id
@@ -138,6 +159,9 @@ class Program extends DbBasis
         }
         if (!Validator::isAlpha($formData['intro'], true)) {
             $formError['intro'] = 'Bitte geben Sie einen Intro an.';
+        }
+        if (!Validator::isCorrectSelectValue($formData['price'], true)) {
+            $formError['price'] = 'Bitte geben Sie einen Preis an.';
         }
         if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';

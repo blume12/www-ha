@@ -14,9 +14,23 @@
         <input id="intro" type="text" size="20" name="intro" value="{{ formData.intro }}"
                class="width65{% if errorData.intro %} error{% endif %}"/>
 
+        <label for="price" class="{% if errorData.price %}error{% endif %}">Preis:</label>
+        <select id="price" name="price" class="{% if errorData.price %}error{% endif %}">
+            <option value="notset" {% if formData.price == "notset" %} selected="selected" {% endif %}>
+                -- Bitte wählen Sie einen Preis aus --
+            </option>
+            {% for key, price in formData.priceData %}
+                <option value="{{ key }}" {% if formData.price == key %} selected="selected" {% endif %}>
+                    {{ price.name }}
+                    : {{ price.price }} ({{ price.priceReduce }})
+                </option>
+            {% endfor %}
+        </select>
+
         <label for="text" class="{% if errorData.text %}error{% endif %}">Text: </label>
         <textarea id="text" name="text" rows="10"
                   class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+        <div class="clear"></div>
         <input name="send" type="submit" value="Speichern">
     </form>
 {% endblock %}

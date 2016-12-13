@@ -26,8 +26,8 @@ class ProgramPrice extends DbBasis
         $dbqObject->query($sql);
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
-            $data[$i] = $row;
-            $data[$i]['index'] = $i;
+            $data[$row['PPId']] = $row;
+            $data[$row['PPId']]['index'] = $i;
             $i++;
         }
 
