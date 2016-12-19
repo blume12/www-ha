@@ -8,6 +8,7 @@
 namespace App\Controller\Frontend;
 
 
+use App\Helper\Helper;
 use App\Model\Program\Program;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,6 +26,11 @@ class ProgramController extends FrontendController
 
         $program = new Program($this->getConfig());
         $programData = $program->loadData();
+
+        foreach ($programData as $key => $value) {
+            $programData[$key] = $value;
+            $programData[$key]['text'] = Helper::maxWords($value['text'], 50);
+        }
 
         return $this->getResponse([
             'programData' => $programData
