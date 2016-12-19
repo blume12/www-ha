@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1> {{ programData.title }}</h1>
+{% endblock %}
+
+{% block content %}
+    <p>
+        {{ programData.intro }}
+    </p>
+    <p>
+        {{ programData.text }}
+    </p>
+
+    <form action="{{ formAction }}">
+        <label for="countTickets">Anzahl der Tickets:</label>
+        <select name="countTickets" id="countTickets">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <label for="countSaleTickets">Davon ermäßigt*:</label>
+        <select name="countSaleTickets" id="countSaleTickets">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+        <input type="submit" value="In den Warenkorb"/>
+    </form>
+    <small>*Ermäßigungen gibt es für Studenten und Kinder.</small>
+{% endblock %}

@@ -10,6 +10,7 @@ namespace App\Controller\Frontend;
 
 use App\Helper\Helper;
 use App\Model\Program\Program;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ProgramController extends FrontendController
@@ -36,4 +37,24 @@ class ProgramController extends FrontendController
             'programData' => $programData
         ]);
     }
+
+    /**
+     * Loads the program detail action for the frontend.
+     *
+     * @return Response
+     */
+    public function detailAction(Request $request)
+    {
+        $this->setRequest($request);
+        $this->setTemplateName('program-detail');
+        $this->setPageTitle('Programmblock');
+
+        $program = new Program($this->getConfig());
+        $programData = $program->loadSpecificEntry($this->getRequest()->attributes->get('id'));
+
+        return $this->getResponse([
+            'programData' => $programData
+        ]);
+    }
+
 }
