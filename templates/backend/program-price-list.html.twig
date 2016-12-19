@@ -1,6 +1,8 @@
 {% extends "layout.html.twig" %}
-{% block content %}
+{% block headline %}
     <h1>Preise</h1>
+{% endblock %}
+{% block content %}
 
     <p>
         Hier können Sie die Preise festlegen.
@@ -14,8 +16,10 @@
             <li class="head">Jahr<span class="row options">Optionen</span></li>
             {% for programPrice in programPriceData %}
                 <li class="{% if programPrice.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
+                    <span class="titleText">
                     <strong>{{ programPrice.name }}</strong>: {{ programPrice.price }} (Reduzierter
                     Preis: {{ programPrice.priceReduce }})
+                    </span>
                     <span class="row options">
                         <a href="{{ programPrice.editRoute }}">bearbeiten</a>&nbsp;
                         <a href="{{ programPrice.deleteRoute }}">löschen</a>

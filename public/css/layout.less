@@ -70,25 +70,6 @@ div.content p{
   font-size: 0.8em;
 }
 
-/* Footer*/
-
-footer{
-  text-align: center;
-  padding: 0 0 0 0;
-  margin: 0;
-  background: @grayLight;
-  color: @white;
-  position:absolute;
-  height: @footerHeight;
-  bottom: 0;
-  width: 100%;
-}
-
-footer span {
-  margin: 10px 30px 0 0;
-  font-size: 11px;
-}
-
 /* Headlines */
 
 h1 {
@@ -108,6 +89,30 @@ a {
 
 a:hover {
   color: @aHover;
+  text-decoration: underline;
+}
+
+/* Footer*/
+
+footer{
+  text-align: center;
+  margin: 0;
+  background: @grayLight;
+  position:absolute;
+  height: @footerHeight;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  margin: 0 30px 0 0;
+  color: @white;
+  font-size: 9px;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: @orange;
   text-decoration: underline;
 }
 
@@ -133,7 +138,7 @@ a.button {
 
 nav {
   background: @debugMedia0;
-  padding: 0;
+  padding-top: 5px;
 }
 
 nav ul.menu {
@@ -144,20 +149,26 @@ nav ul.menu {
 
 nav .mobile{
   color: @white;
-  position: absolute;
   right: @contentSmallSpace;
-  padding: 12px 0 0 0;
+  padding-top: 11px;
+  padding-right: @contentSmallSpace;
+  float: right;
 }
 
-nav .logoText{
-    margin: 0;
-    padding: 0 0 0 @contentSmallSpace;
-    height: 2.7em;
-    width: auto;
-    display: inline-block;
+
+nav .logo img {
+  margin: 0;
+  padding: 0 0 0 @contentSmallSpace;
+  height: 2.7em;
+  width: auto;
+  float: left;
 }
-nav .LogoNoText{
-  display: none;
+
+nav .schriftLogo{
+  color: @white;
+  font-family: 'PT Serif', serif;
+  display: inline-block;
+  top: 0;
 }
 
 nav ul.menu li {
@@ -258,6 +269,57 @@ input[type=submit]:hover {
   background-color: @buttonHover;
 }
 
+input[type=submit].longButton{
+  width: 200px;
+  display: block;
+}
+
+/* Warenkorb */
+.shopSelection{
+  width: 100%;
+  height: 50px;
+  background: @blue;
+  color: @white;
+}
+
+.shopSelection.secondSelection{
+  background: @grayLight;
+}
+
+.shopSelection input{
+  display: inline-block;
+  margin: 2px;
+  width: 5%;
+}
+.shopSelection label{
+  width: 91%;
+  display: inline-block;
+  padding: 15px 0;
+  margin-left: 5px;
+}
+.shopInfo{
+  width: 100%;
+  background: @white;
+  padding: 10px 0;
+}
+
+.shopInfo ul{
+  list-style-type: none;
+}
+.shopInfo .price{
+  padding-left: 10px;
+}
+
+.grayBackground{
+  width: 100%;
+  background: @grayLight;
+  padding: 10px 0;
+}
+
+.grayBackground input{
+  margin: 0 10px;
+}
+
 /* Allgemein */
 .width65 {
   width: 55%;
@@ -351,12 +413,18 @@ ul.backendList {
 }
 
 ul.backendList li {
-  padding: 3px 2px;
+  padding: 5px 2px;
+  height: 40px;
 }
 
 ul.backendList li .row.options {
-  width: 20%;
+  width: 30%;
   float: right;
+}
+
+ul.backendList li .titleText {
+  width: 65%;
+  float: left;
 }
 
 ul.backendList li.head {
@@ -406,23 +474,8 @@ ul.backendList li:hover {
 
   /* Menu */
   nav {
-
+    padding-bottom: 0;
     text-align: left;
-  }
-
-  nav .logoText{
-    padding: 0 0 0 @contentSmallSpace;
-    position: absolute;
-    height: 2.7em;
-    left: 0;
-    display: none;
-  }
-  nav .LogoNoText{
-    padding: 0 0 0 @contentSmallSpace;
-    position: absolute;
-    height: 2.7em;
-    left: 0;
-    display: block;
   }
 
   nav .mobile {
@@ -459,12 +512,12 @@ ul.backendList li:hover {
   }
 
   .headline{
-    font-size: 1.2em;
+    font-size: 1em;
     max-width: @maxWidthContent;
   }
 
   .headline h1{
-    padding-top: 16px;
+    padding-top: 20px;
   }
 
   /* Veranstaltungs Block*/
@@ -477,6 +530,19 @@ ul.backendList li:hover {
     float: left;
   }
 
+  /* Table */
+  ul.backendList li {
+    height: 20px;
+  }
+
+  ul.backendList li .row.options {
+    width: 20%;
+  }
+
+  ul.backendList li .titleText {
+    width: 75%;
+  }
+
   /* debugging Media Queries */
   nav {
     background: @debugMedia3;
@@ -485,23 +551,6 @@ ul.backendList li:hover {
 
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
-
-
-  /* Menu */
-
-
-  nav .logoText{
-    display: block;
-  }
-  nav .LogoNoText{
-    display: none;
-  }
-
-  /* Filmstripe */
-  .filmStripeTop img{
-    width: 100%;
-  }
-
 
   /* debugging Media Queries */
   nav {
@@ -525,13 +574,6 @@ ul.backendList li:hover {
     max-width: @maxWidthContent;
 
   }
-
-  /* Menu */
-  nav {
-    margin: auto;
-    padding: 0 @content;
-  }
-
 
   /* Filmstripe Down */
   .filmStripeDown img{
