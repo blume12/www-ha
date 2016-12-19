@@ -21,6 +21,7 @@ $routes = new RouteCollection();
 $routes->add('startPage', new Route('/', ['_controller' => 'App\Controller\Frontend\StartPageController::indexAction']));
 $routes->add('programs', new Route('/programme', ['_controller' => 'App\Controller\Frontend\ProgramController::indexAction']));
 $routes->add('siteNotice', new Route('/impressum', ['_controller' => 'App\Controller\Frontend\SiteNoticeController::siteNoticeAction']));
+$routes->add('contact', new Route('/kontakt', ['_controller' => 'App\Controller\Frontend\ContactController::indexAction']));
 $routes->add('notFound', new Route('/not-found', ['_controller' => 'App\Controller\Frontend\NotFoundController::notFoundAction']));
 
 

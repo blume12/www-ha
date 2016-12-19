@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1>Kontakt</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "error-message.html.twig" %}
+
+    <p>
+        Sie haben Fragen an uns? Dann schicken Sie uns die bitte an uns.
+    </p>
+    <form action="{{ formAction }}" method="post">
+        <label for="name" {% if errorData.name %} class="error"{% endif %}>Name: </label>
+        <input id="name" type="text" size="20" name="name" value="{{ formData.name }}"
+               class="width65{% if errorData.name %} error{% endif %}"/>
+        <label for="text" class="{% if errorData.text %}error{% endif %}">Text: </label>
+        <textarea id="text" name="text" rows="10"
+                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Abschicken">
+    </form>
+{% endblock %}
