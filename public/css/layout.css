@@ -17,7 +17,7 @@ div.container {
   min-height: 100%;
 }
 div.content {
-  padding: 50px 10px 7em 10px;
+  padding: 0 10px 7em 10px;
   margin: 0;
   background: #fafcf1;
   min-height: 72%;
@@ -100,7 +100,6 @@ nav .LogoNoText {
   display: none;
 }
 nav ul.menu li {
-  border: 2px solid #feffff;
   display: none;
   padding: 10px;
   text-align: center;
@@ -130,12 +129,11 @@ nav:hover {
   display: block;
 }
 .headline {
-  position: absolute;
+  margin-bottom: 2em;
   font-size: 0.8em;
 }
 .headline h1 {
   padding-top: 9px;
-  padding-left: 10px;
   margin: 0;
 }
 /* Filmstripe Down */
@@ -295,13 +293,12 @@ ul.backendList li:hover {
 @media (min-width: 680px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
   div.content {
-    margin: auto 5%;
-    padding-top: 80px;
+    margin: auto ;
+    max-width: 700px;
   }
   /* Menu */
   nav {
-    padding: 0 5%;
-    text-align: center;
+    text-align: left;
   }
   nav .logoText {
     padding: 0 0 0 10px;
@@ -323,6 +320,11 @@ ul.backendList li:hover {
   nav ul.menu li {
     display: inline-block;
   }
+  nav ul.menu {
+    margin: auto ;
+    padding: 0 10px;
+    max-width: 700px;
+  }
   nav:hover ul.menu li {
     display: inline-block;
   }
@@ -340,7 +342,7 @@ ul.backendList li:hover {
   }
   .headline {
     font-size: 1.2em;
-    padding-left: 5%;
+    max-width: 700px;
   }
   .headline h1 {
     padding-top: 16px;
@@ -348,8 +350,8 @@ ul.backendList li:hover {
   /* Veranstaltungs Block*/
   .veranstaltung {
     width: 47%;
-    min-height: 250px;
-    max-height: 250px;
+    min-height: 300px;
+    max-height: 300px;
     margin-left: 10px;
     float: left;
   }
@@ -360,13 +362,7 @@ ul.backendList li:hover {
 }
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
-  div.content {
-    margin: auto 15%;
-  }
   /* Menu */
-  nav {
-    padding: 0 15%;
-  }
   nav .logoText {
     display: block;
   }
@@ -376,9 +372,6 @@ ul.backendList li:hover {
   /* Filmstripe */
   .filmStripeTop img {
     width: 100%;
-  }
-  .headline {
-    padding-left: 15%;
   }
   /* debugging Media Queries */
   nav {
@@ -395,15 +388,13 @@ ul.backendList li:hover {
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */
   div.content {
-    margin: auto 20%;
+    margin: auto;
+    max-width: 700px;
   }
   /* Menu */
   nav {
+    margin: auto;
     padding: 0 20%;
-  }
-  /* Filmstripe */
-  .headline {
-    padding-left: 20%;
   }
   /* Filmstripe Down */
   .filmStripeDown img {
@@ -411,7 +402,7 @@ ul.backendList li:hover {
   }
   /* Veranstaltungs Block*/
   .veranstaltung {
-    width: 32%;
+    width: 31%;
     margin-left: 10px;
     float: left;
   }

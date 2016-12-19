@@ -44,6 +44,8 @@
 @contentSmallSpace: 10px;
 @footerHeight: 2em;
 
+@maxWidthContent: 700px;
+
 body, html {
   margin: 0;
   padding: 0;
@@ -57,7 +59,7 @@ div.container{
 }
 
 div.content {
-  padding: @heightSmall @contentSmallSpace 7em @contentSmallSpace;
+  padding: 0 @contentSmallSpace 7em @contentSmallSpace;
   margin: 0;
   background: @backgroundContent;
   min-height: 72%;
@@ -159,7 +161,6 @@ nav .LogoNoText{
 }
 
 nav ul.menu li {
-  border: 2px solid @white;
   display: none;
   padding: 10px;
   text-align: center;
@@ -196,13 +197,12 @@ nav:hover {
 }
 
 .headline{
-  position: absolute;
+  margin-bottom: 2em;
   font-size: 0.8em;
 }
 
 .headline h1{
   padding-top: 9px;
-  padding-left: @contentSmallSpace;
   margin: 0;
 }
 
@@ -400,14 +400,14 @@ ul.backendList li:hover {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
 
   div.content {
-    margin: auto @contentSmallScreen;
-    padding-top: @heightNormal;
+    margin: auto ;
+    max-width: @maxWidthContent;
   }
 
   /* Menu */
   nav {
-    padding: 0 @contentSmallScreen;
-    text-align: center;
+
+    text-align: left;
   }
 
   nav .logoText{
@@ -433,6 +433,12 @@ ul.backendList li:hover {
     display: inline-block;
   }
 
+  nav ul.menu {
+    margin: auto ;
+    padding: 0 @contentSmallSpace;
+    max-width: @maxWidthContent;
+  }
+
   nav:hover ul.menu li {
     display: inline-block;
   }
@@ -454,7 +460,7 @@ ul.backendList li:hover {
 
   .headline{
     font-size: 1.2em;
-    padding-left: @contentSmallScreen;
+    max-width: @maxWidthContent;
   }
 
   .headline h1{
@@ -465,8 +471,8 @@ ul.backendList li:hover {
   .veranstaltung{
 
     width: 47%;
-    min-height: 250px;
-    max-height: 250px;
+    min-height: 300px;
+    max-height: 300px;
     margin-left: 10px;
     float: left;
   }
@@ -480,14 +486,9 @@ ul.backendList li:hover {
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
 
-  div.content {
-    margin: auto @contentMiddleScreen;
-  }
 
   /* Menu */
-  nav {
-    padding: 0 @contentMiddleScreen;
-  }
+
 
   nav .logoText{
     display: block;
@@ -501,9 +502,6 @@ ul.backendList li:hover {
     width: 100%;
   }
 
-  .headline{
-    padding-left: @contentMiddleScreen;
-  }
 
   /* debugging Media Queries */
   nav {
@@ -523,17 +521,15 @@ ul.backendList li:hover {
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */
   div.content {
-    margin: auto @content;
+    margin: auto;
+    max-width: @maxWidthContent;
+
   }
 
   /* Menu */
   nav {
+    margin: auto;
     padding: 0 @content;
-  }
-
-  /* Filmstripe */
-  .headline{
-    padding-left: @content;
   }
 
 
@@ -545,7 +541,7 @@ ul.backendList li:hover {
   /* Veranstaltungs Block*/
   .veranstaltung{
 
-    width: 32%;
+    width: 31%;
     margin-left: 10px;
     float: left;
   }
