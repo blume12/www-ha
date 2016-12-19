@@ -39,10 +39,11 @@
         <img src="images/FilmstreifenGrau.png" alt="Filmstreifen Dekoelement"/>
     </div>
     <footer>
-        <span>Impressum</span>
-        <span>Kontakt</span>
-        <span>Dokumentation</span>
-        <span>Login</span>
+        {% for menu in menuFooterData %}
+            {% if loggedIn or menu.showAlways %}
+                <span><a href="{{ menu.route }}">{{ menu.name }}</a></span>
+            {% endif %}
+        {% endfor %}
     </footer>
 </div>
 </body>

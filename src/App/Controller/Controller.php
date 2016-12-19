@@ -8,6 +8,7 @@
  */
 namespace App\Controller;
 
+use App\Helper\Menu\Menu;
 use App\Helper\Routing\Routing;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouteCollection;
@@ -28,6 +29,11 @@ abstract class Controller
      * @var array
      */
     protected $menuArray = [];
+
+    /**
+     * @var array
+     */
+    private $menuFooterArray = [];
 
     /**
      * @var string
@@ -74,6 +80,13 @@ abstract class Controller
     {
         $this->config = $config;
         $this->initTwig();
+
+        $menuFooter = new Menu();
+        $menuFooter->addMenu('Impressum', $this->getRoutePath('siteNotice'));
+        //$menuFooter->addMenu('Kontakt', $this->getRoutePath('contact'));
+        $menuFooter->addMenu('Dokumentation', $this->getRoutePath('documentation'));
+        $menuFooter->addMenu('Login', $this->getRoutePath('adminLogin'));
+        $this->menuFooterArray = $menuFooter->getMenuArray();
     }
 
     /**
@@ -174,7 +187,11 @@ abstract class Controller
      */
     protected function setContentData($data = [])
     {
-        $this->contentData = array_merge(['pageTitle' => $this->pageTitle, 'menuData' => $this->getMenu()], $data);
+        $this->contentData = array_merge([
+            'pageTitle' => $this->pageTitle,
+            'menuData' => $this->getMenu(),
+            'menuFooterData' => $this->getFooterMenu()
+        ], $data);
     }
 
 
@@ -186,6 +203,16 @@ abstract class Controller
     private function getMenu()
     {
         return $this->menuArray;
+    }
+
+    /**
+     * Return the footer menu data array.
+     *
+     * @return array
+     */
+    private function getFooterMenu()
+    {
+        return $this->menuFooterArray;
     }
 
 
