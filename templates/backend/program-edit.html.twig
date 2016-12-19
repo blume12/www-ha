@@ -35,6 +35,10 @@
         <textarea id="text" name="text" rows="10"
                   class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
         <div class="clear"></div>
+        {# Todo: FileUpload #}
+        <label for="fileToUpload">Bild:</label>
+
+        <input type="file" name="fileToUpload" id="fileToUpload">
         <input name="send" type="submit" value="Speichern">
     </form>
 {% endblock %}

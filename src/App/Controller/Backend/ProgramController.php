@@ -7,6 +7,7 @@
 namespace App\Controller\Backend;
 
 
+use App\Helper\FileDirectory\FileUpload;
 use App\Helper\Helper;
 use App\Model\Program\Program;
 use App\Model\Program\ProgramPrice;
@@ -66,6 +67,10 @@ class ProgramController extends BackendController
         $program = new Program($this->getConfig());
         $programPrice = new ProgramPrice($this->getConfig());
 
+        // Todo: FileUpload
+        $fileUpload = new FileUpload();
+        $fileUpload->upload($this->getRequest()->request->get("fileToUpload"), $request->getMethod() === 'POST');
+
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
@@ -87,7 +92,8 @@ class ProgramController extends BackendController
             $formData['id'] = $id;
             $program->saveData($formData);
 
-            return new RedirectResponse($this->getRoutePath('adminProgramList'));
+            // Todo: FileUpload
+            //  return new RedirectResponse($this->getRoutePath('adminProgramList'));
         }
 
 

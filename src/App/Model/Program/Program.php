@@ -98,9 +98,11 @@ class Program extends DbBasis
             $dataSql['PId'] = intval($data['id'], 10);
         }
 
-        $dataSql['uuid'] = $data['uuid'];
-        $dataSql['author'] = $data['author'];
-        $dataSql['date'] = $data['date'];
+        // Todo: FileUpload
+        // TODO: fix the data uuid, author, date
+        $dataSql['uuid'] = "123";//$data['uuid'];
+        $dataSql['author'] = "123";//$data['author'];
+        $dataSql['date'] = "123";//$data['date'];
         $dataSql['title'] = $data['title'];
         $dataSql['intro'] = $data['intro'];
         $dataSql['text'] = $data['text'];
