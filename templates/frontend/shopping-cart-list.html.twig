@@ -1,0 +1,30 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1>Warenkorb</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ formAction }}" method="post">
+        <input type="radio" name="mode" value="booking" id="modeBooking"/><label for="modeBooking"> Buchung</label>
+        <input type="radio" name="mode" value="reservation" id="modeReservation"/><label for="modeReservation">
+            Reservierung</label>
+        <ul>
+            <li>
+                <span>Anzahl</span><span>Blocktitel</span><span>Einzelpreis</span><span>Gesamtpreis</span><span>Entfernen</span>
+            </li>
+            <li>
+                <span><input type="text" value="2" size="3"/></span>
+                <span>Toller Film </span>
+                <span>5,00 €</span>
+                <span>10,00 €</span>
+                <span><a href="">Löschen</a></span>
+            </li>
+        </ul>
+        <div>
+            <span>Gesamtpreis: 10,00 €</span>
+        </div>
+        <input type="submit" value="Jetzt verbindlich buchen"/>
+    </form
+
+    <div class="clear"></div>
+{% endblock %}
