@@ -9,3 +9,5 @@ composer.lock
 !data/.gitkeep
 
 /.idea/*
+
+/public/data/

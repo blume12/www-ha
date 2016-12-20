@@ -6,7 +6,6 @@
 
 namespace App\Controller\Backend;
 
-
 use App\Helper\Helper;
 use App\Model\Program\Program;
 use App\Model\Program\ProgramPrice;
@@ -65,6 +64,8 @@ class ProgramController extends BackendController
 
         $program = new Program($this->getConfig());
         $programPrice = new ProgramPrice($this->getConfig());
+
+        $program->initImageUpload($this->getRequest()->files->get("fileToUpload"));
 
         $formError = [];
         if ($request->getMethod() !== 'POST') {
