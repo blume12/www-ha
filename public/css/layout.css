@@ -179,6 +179,7 @@ select {
 input[type=submit] {
   padding: 5px 20px;
   color: #feffff;
+  font-family: 'Lato', sans-serif;
   background-color: #0aa1d2;
   font-size: 1.1em;
   width: 120px;
@@ -189,7 +190,7 @@ input[type=submit]:hover {
   background-color: #1a75d2;
 }
 input[type=submit].longButton {
-  width: 200px;
+  width: 220px;
   display: block;
 }
 /* Warenkorb */
