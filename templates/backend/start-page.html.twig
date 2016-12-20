@@ -11,4 +11,46 @@
     <p>
         Hier gibts irgendwann mal ein bisschen mehr zu sehen.
     </p>
+    <div class="width50">
+        <h2>Reservierungen suchen</h2>
+        <form action="{{ formAction }}" method="post">
+            <label for="reservationNumber">Reservierungsnummer:</label>
+            <input type="text" name="reservationNumber" id="reservationNumber"/>
+            <input type="submit" value="Suchen"/>
+        </form>
+    </div>
+    <div class="width50 right">
+        <h2>Offene Reservierungen/Buchungen</h2>
+        <p>
+            Offene Reservierungen: 10
+        </p>
+        <p>
+            Offene Buchungen: 3
+        </p>
+    </div>
+    <div>
+        <h2>Statistiken</h2>
+        <ul>
+            <li>Programme online: {{ countProgram }}</li>
+            <li>Plätze insgesamt: {{ countMaxPlaces }}</li>
+            <li>Frei verfügbare Plätze: {{ countFreePlaces }}</li>
+            <li>
+                Plätze reserviert: {{ countReservation }}
+
+                <ul>
+                    {% for mode in countsPrices.reservation %}
+                        <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>Plätze verbindlich gebucht: {{ countBooking }}
+                <ul>
+                    {% for mode in countsPrices.booking %}
+                        <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        </ul>
+
+    </div>
 {% endblock %}
