@@ -1,8 +1,29 @@
 .width50 {
-  width: 45%;
-  display: inline-block;
   vertical-align: top;
+  width: 100%;
 }
-.right {
-  float: right;
+@media (min-width: 481px) {
+  /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+  .width50 {
+    width: 80%;
+  }
+}
+@media (min-width: 680px) {
+  /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+  .width50 {
+    width: 45%;
+    display: inline-block;
+  }
+  .right {
+    float: right;
+  }
+}
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+}
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+}
+@media (min-width: 1281px) {
+  /* hi-res laptops and desktops */
 }
