@@ -31,4 +31,13 @@ class StandardStock
         }
         return self::$appellation[$appellation];
     }
+
+    public static function getCountOfTickets()
+    {
+        $countOfTickets = [];
+        for ($i = 0; $i <= 10; $i++) {
+            $countOfTickets[$i] = $i;
+        }
+        return $countOfTickets;
+    }
 }

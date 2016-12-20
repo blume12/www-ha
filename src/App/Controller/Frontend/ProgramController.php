@@ -9,6 +9,7 @@ namespace App\Controller\Frontend;
 
 
 use App\Helper\Helper;
+use App\Helper\StandardStock;
 use App\Model\Program\Program;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,15 +46,23 @@ class ProgramController extends FrontendController
      */
     public function detailAction(Request $request)
     {
+
         $this->setRequest($request);
+        $programId = $this->getRequest()->attributes->get('id');
+
         $this->setTemplateName('program-detail');
         $this->setPageTitle('Programmblock');
 
         $program = new Program($this->getConfig());
-        $programData = $program->loadSpecificEntry($this->getRequest()->attributes->get('id'));
+        $programData = $program->loadSpecificEntry($programId);
+
+        $countOfTickets = StandardStock::getCountOfTickets();
 
         return $this->getResponse([
-            'programData' => $programData
+            'formAction' => $this->getRoutePath('programDetail', ['id' => $programId]),
+            'programData' => $programData,
+            'countsNormal' => $countOfTickets,
+            'countsSale' => $countOfTickets
         ]);
     }
 

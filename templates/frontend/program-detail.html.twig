@@ -11,20 +11,22 @@
         {{ programData.text }}
     </p>
 
-    <form action="{{ formAction }}">
+    <form action="{{ formAction }}" method="post">
         <label for="countTickets">Anzahl der Tickets:</label>
         <select name="countTickets" id="countTickets">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            {% for key, value in countsNormal %}
+                <option value="{{ key }}" {% if formData.countsTickets == key %} selected="selected" {% endif %}>
+                    {{ value }}
+                </option>
+            {% endfor %}
         </select>
         <label for="countSaleTickets">Davon ermäßigt*:</label>
         <select name="countSaleTickets" id="countSaleTickets">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
+            {% for key, value in countsSale %}
+                <option value="{{ key }}" {% if formData.countsTickets == key %} selected="selected" {% endif %}>
+                    {{ value }}
+                </option>
+            {% endfor %}
         </select>
         <input class="longButton" type="submit" value="In den Warenkorb"/>
     </form>
