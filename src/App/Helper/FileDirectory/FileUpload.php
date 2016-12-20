@@ -8,39 +8,76 @@
 
 namespace App\Helper\FileDirectory;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 class FileUpload
 {
+    /**
+     * @var string
+     */
     private $mainPath;
 
-    public function __construct()
+    /**
+     * @var string
+     */
+    private static $mainUploadPath = '/../../../../public/data';
+
+    /**
+     * @var UploadedFile | null
+     */
+    protected $fileData = null;
+
+    /**
+     * FileUpload constructor.
+     * @param $fileData
+     */
+    public function __construct($fileData)
     {
-        $this->mainPath = realpath(dirname(__FILE__).'/../../../../data/');
+        if ($fileData != null) {
+            $this->fileData = $fileData;
+        }
+        $this->mainPath = realpath(dirname(__FILE__) . self::$mainUploadPath);
+        if (!is_dir($this->mainPath)) {
+            mkdir(dirname(__FILE__) . self::$mainUploadPath);
+            $this->mainPath = realpath(dirname(__FILE__) . self::$mainUploadPath);
+        }
     }
 
+    /**
+     * Check the upload.
+     *
+     * @return bool
+     */
+    public function checkUpload()
+    {
+        // TODO: check specifics cases. eg: images size, image type, etc.
+        $check = getimagesize($this->fileData);
+        if ($check !== false) {
+            return true;
+        }
+        return false;
+    }
 
-    public function upload($fileData, $submit) {
-
-        $target_dir = $this->mainPath;
-        $target_file = $target_dir . basename($fileData);
-        var_dump($target_dir);
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-// Check if image file is a actual image or fake image
-        if($submit) {
-
-            $test = tempnam(sys_get_temp_dir(), $fileData);
-            var_dump($test);
-            $check = getimagesize($test);
-            if($check !== false) {
-                var_dump( "File is an image - " . $check["mime"] . ".");
-                $uploadOk = 1;
-            } else {
-               var_dump("File is not an image.");
-                $uploadOk = 0;
+    /**
+     * Save the file into a directory.
+     *
+     * @param $path
+     * @param $filename
+     * @param int $size
+     * @param string $fileType
+     */
+    public function saveFile($path, $filename, $size = 600, $fileType = 'jpg')
+    {
+        //TODO: use size to copy the image in the right size
+        $tmpPath = explode('/', $path);
+        $newPath = $this->mainPath;
+        foreach ($tmpPath as $partOfPath) {
+            $newPath .= '/' . $partOfPath;
+            if (!is_dir($newPath)) {
+                mkdir($newPath);
             }
         }
-        var_dump("no submit");
-        return $uploadOk;
+        copy($this->fileData->getRealPath(), $newPath . '/' . $filename . '.' . $fileType);
     }
 
 }

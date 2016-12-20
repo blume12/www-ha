@@ -6,11 +6,23 @@
  */
 namespace App\Model\Program;
 
+use App\Helper\FileDirectory\FileUpload;
 use App\Helper\Validator;
 use App\Model\Database\DbBasis;
 
 class Program extends DbBasis
 {
+
+    /**
+     * @var null | FileUpload
+     */
+    private $fileUpload = null;
+
+    /**
+     * The path to the image folder for the programs.
+     * @var string
+     */
+    private $imagePath = 'program';
 
     /**
      * Api to the programs from the existing ticket system.
@@ -40,6 +52,17 @@ class Program extends DbBasis
     }
 
     /**
+     * Init the image upload.
+     *
+     * @param $fileData
+     */
+    public function initImageUpload($fileData)
+    {
+        $this->fileUpload = new FileUpload($fileData);
+    }
+
+
+    /**
      * Return the data array of all programs.
      *
      * @return array
@@ -55,6 +78,7 @@ class Program extends DbBasis
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
             $data[$i]['index'] = $i;
+            $data[$i]['image'] = $this->getImageForOutput($row['PId'] . '_program');
             $i++;
         }
 
@@ -75,7 +99,10 @@ class Program extends DbBasis
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
                 WHERE program.PId = :PId LIMIT 1 ";
         $dbqObject->query($sql, ['PId' => $id]);
-        return $dbqObject->nextRow();
+
+        $row = $dbqObject->nextRow();
+        $row['image'] = $this->getImageForOutput($row['PId'] . '_program');
+        return $row;
     }
 
 
@@ -98,7 +125,6 @@ class Program extends DbBasis
             $dataSql['PId'] = intval($data['id'], 10);
         }
 
-        // Todo: FileUpload
         // TODO: fix the data uuid, author, date
         $dataSql['uuid'] = "123";//$data['uuid'];
         $dataSql['author'] = "123";//$data['author'];
@@ -113,9 +139,27 @@ class Program extends DbBasis
             $dataSql['PId'] = $dbqObject->nextRow()['last_insert_rowid()'];
         }
         $this->savePriceToProgram($dataSql['PId'], $data['price']);
+
+        $this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
     }
 
+    /**
+     * Get the path for the image for the output.
+     *
+     * @param $fileName
+     * @return string
+     */
+    public function getImageForOutput($fileName)
+    {
+        return '/data/' . $this->imagePath . '/' . $fileName . '.jpg';
+    }
 
+    /**
+     * Save the prices in a specific table for the program.
+     *
+     * @param $pid
+     * @param $ppid
+     */
     public function savePriceToProgram($pid, $ppid)
     {
         $dbqObject = $this->getDbqObject();
@@ -167,6 +211,9 @@ class Program extends DbBasis
         }
         if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
+        }
+        if (!$this->fileUpload->checkUpload()) {
+            $formError['fileToUpload'] = 'Bitte geben Sie eine Datei an.';
         }
         return $formError;
     }

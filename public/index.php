@@ -20,15 +20,7 @@ Session::startSession();
 
 /* @var $config array */
 
-// Todo: FileUpload
 date_default_timezone_set("Europe/Berlin");
-ini_set('post_max_size', '6M');
-ini_set('upload_max_filesize ', '6M');
-//ini_set('upload_tmp_dir', '/tmp');
-if(!is_dir(dirname(__FILE__).'/../tmp')) {
-    mkdir(dirname(__FILE__).'/../tmp');
-
-}
 
 $response = new Response();
 $routes = $config['routes'];
