@@ -1,0 +1,11 @@
+{% if successData %}
+    <div class="successBox">
+        <ul>
+            {% for success in successData %}
+                {% if success %}
+                    <li>{{ success }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

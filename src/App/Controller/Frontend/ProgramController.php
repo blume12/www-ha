@@ -33,6 +33,7 @@ class ProgramController extends FrontendController
         foreach ($programData as $key => $value) {
             $programData[$key] = $value;
             $programData[$key]['text'] = Helper::maxWords($value['text'], 50);
+            $programData[$key]['detailLink'] = $this->getRoutePath('programDetail', ['id' => $value['PId']]);
         }
 
         return $this->getResponse([
@@ -48,7 +49,6 @@ class ProgramController extends FrontendController
      */
     public function detailAction(Request $request)
     {
-
         $this->setRequest($request);
         $programId = $this->getRequest()->attributes->get('id');
 
@@ -60,7 +60,10 @@ class ProgramController extends FrontendController
 
         $countOfTickets = StandardStock::getCountOfTickets();
 
+        //TODO: give the session an own class ;)
+        $session = new Session();
         $formError = [];
+        $formSuccess = [];
         $formData = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
@@ -69,12 +72,21 @@ class ProgramController extends FrontendController
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
         }
+
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
-            $session = new Session();
+
             $shoppingCartData = $session->getSessionByKey('shoppingCart');
+            if (!$shoppingCartData) {
+                $shoppingCartData = [$programId . "_1" => $formData['countTickets'], $programId . "_2" => $formData['countSaleTickets']];
+            } else {
+                // TODO: Use real Price id
+                $shoppingCartData[$programId . "_1"] = $formData['countTickets'];
+                $shoppingCartData[$programId . "_2"] = $formData['countSaleTickets'];
+            }
             $session->setSession('shoppingCart', $shoppingCartData);
+            $formSuccess[] = 'Das Programm wurde erfolgreich dem Warenkorb hinzugefügt.';
             //return new RedirectResponse($this->getRoutePath('adminProgramList'));
         }
 
@@ -83,7 +95,8 @@ class ProgramController extends FrontendController
             'programData' => $programData,
             'countsNormal' => $countOfTickets,
             'countsSale' => $countOfTickets,
-            'formData' => $formData
+            'formData' => $formData,
+            'successData' => $formSuccess
         ]);
     }
 

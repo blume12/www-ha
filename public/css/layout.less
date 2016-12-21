@@ -15,6 +15,8 @@
 
 @orange: #e58523;
 @blue: #0aa1d2;
+
+@blueLighter: #eff2f9;
 @grayLight: #686d73;
 @white: #feffff;
 @backgroundContent: #fafcf1;
@@ -228,6 +230,10 @@ nav:hover {
 }
 
 /* Veranstaltungs Block*/
+.veranstaltung {
+  margin-bottom: 25px;
+}
+
 .veranstaltung h2{
   border-bottom: 2px solid fade(@grayLight, 30%);
 }
@@ -277,14 +283,7 @@ input[type=submit].longButton{
 
 /* Warenkorb */
 .shopSelection{
-  width: 100%;
-  height: 50px;
-  background: @blue;
-  color: @white;
-}
-
-.shopSelection.secondSelection{
-  background: @grayLight;
+  margin-bottom: 10px;
 }
 
 .shopSelection input{
@@ -293,20 +292,33 @@ input[type=submit].longButton{
   width: 5%;
 }
 .shopSelection label{
-  width: 91%;
   display: inline-block;
-  padding: 15px 0;
+  padding: 5px 0;
   margin-left: 5px;
 }
 .shopInfo{
   width: 100%;
   background: @white;
   padding: 10px 0;
+  ul{
+    list-style-type: none;
+
+    li {
+      span {
+        width: 100%;
+        display: inline-block;
+      }
+    }
+
+    li.header{
+      display: none;
+    }
+  }
+  input {
+    width: 40px;
+  }
 }
 
-.shopInfo ul{
-  list-style-type: none;
-}
 .shopInfo .price{
   padding-left: 10px;
 }
@@ -360,6 +372,22 @@ input.error, textarea.error, select.error {
 label.error {
   color: #a10d08;
   font-weight: bold;
+}
+
+/* Success Messages */
+
+.successBox {
+  border: 3px solid @blue;
+  padding: 10px;
+  margin-top: 10px;
+  color: @blue;
+  font-weight: bold;
+  background-color: @blueLighter;
+
+  ul {
+    padding-left: 15px;
+    list-style: none;
+  }
 }
 
 /* Comments */
@@ -463,6 +491,46 @@ ul.backendList li:hover {
   nav {
     background: @debugMedia2;
   }
+
+  /* Shopping Cart */
+
+  .shopInfo {
+    ul {
+
+      padding: 0 10px;
+      li {
+
+        padding: 10px;
+        span{
+          width: auto;
+        }
+        span.count {
+          width: 12%;
+          label {
+            display: none;
+          }
+        }
+        span.title {
+          width: 23%;
+        }
+        span.price, span.priceTotal {
+          width: 22%
+        }
+
+        span.delete {
+          width: 12%;
+        }
+
+      }
+
+      li.header {
+        display: block;
+        background-color: @blue;
+        color: @white;
+      }
+    }
+  }
+
 }
 
 @media (min-width: 680px) {
@@ -523,10 +591,6 @@ ul.backendList li:hover {
 
   /* Veranstaltungs Block*/
   .veranstaltung{
-
-    width: 47%;
-    min-height: 300px;
-    max-height: 300px;
     margin-left: 10px;
     float: left;
   }
@@ -583,8 +647,7 @@ ul.backendList li:hover {
 
   /* Veranstaltungs Block*/
   .veranstaltung{
-
-    width: 31%;
+    width: 97%;
     margin-left: 10px;
     float: left;
   }

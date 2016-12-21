@@ -4,36 +4,53 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ formAction }}" method="post">
-        <div class="shopSelection">
-            <input type="radio" name="mode" value="booking" id="modeBooking"/><label for="modeBooking"> Buchung</label>
-        </div>
-        <div class="shopSelection secondSelection">
-            <input type="radio" name="mode" value="reservation" id="modeReservation"/><label for="modeReservation">
-                Reservierung</label>
-        </div>
-        <div class="clear"></div>
-        <div class="shopInfo">
-            <ul>
-                <li>
-                    <span>Anzahl</span><span>Blocktitel</span><span>Einzelpreis</span><span>Gesamtpreis</span><span>Entfernen</span>
-                </li>
-                <li>
-                    <span><input type="text" value="2" size="3"/></span>
-                    <span>Toller Film </span>
-                    <span>5,00 €</span>
-                    <span>10,00 €</span>
-                    <span><a href="">Löschen</a></span>
-                </li>
-            </ul>
-            <div>
-                <span class="price">Gesamtpreis: 10,00 €</span>
+
+    {% if shoppingCartData %}
+        <form action="{{ formAction }}" method="post">
+            <div class="shopSelection">
+                <input type="radio" name="mode" value="booking" id="modeBooking"/>
+                <label for="modeBooking">Buchung</label>
             </div>
-        </div>
-        <div class="grayBackground">
-            <input class="longButton" type="submit" value="Jetzt verbindlich buchen"/>
-        </div>
-    </form>
+            <div class="shopSelection secondSelection">
+                <input type="radio" name="mode" value="reservation" id="modeReservation"/>
+                <label for="modeReservation">Reservierung</label>
+            </div>
+            <div class="clear"></div>
+            <div class="shopInfo">
+                <ul>
+                    <li class="header">
+                        <span class="count">Anzahl</span>
+                        <span class="title">Blocktitel</span>
+                        <span class="price">Einzelpreis</span>
+                        <span class="priceTotal">Gesamtpreis</span>
+                        <span class="delete">Entfernen</span>
+                    </li>
+
+                    {% for shoppingCart in shoppingCartData.list %}
+                        <li>
+                    <span class="count">
+                        <label for="count_1">Anzahl: </label>
+                        <input name="count_1" id="count_1" type="text" value="{{ shoppingCart.count }}" size="3"/>
+                    </span>
+                            <span class="title">{{ shoppingCart.title }} </span>
+                            <span class="price">{{ shoppingCart.price }}</span>
+                            <span class="priceTotal">{{ shoppingCart.priceTotal }}</span>
+                            <span class="delete"><a href="">Löschen</a></span>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+                <div>
+                    <span class="price">Gesamtpreis: {{ shoppingCartData.priceTotal }}</span>
+                </div>
+            </div>
+            <div class="grayBackground">
+                <input class="longButton" type="submit" value="Jetzt verbindlich buchen"/>
+            </div>
+        </form>
+    {% else %}
+        <p>Es ist nichts im Warenkorb vorhanden.</p>
+    {% endif %}
 
     <div class="clear"></div>
 {% endblock %}

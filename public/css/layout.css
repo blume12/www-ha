@@ -153,6 +153,9 @@ nav:hover {
   bottom: 2em;
 }
 /* Veranstaltungs Block*/
+.veranstaltung {
+  margin-bottom: 25px;
+}
 .veranstaltung h2 {
   border-bottom: 2px solid rgba(104, 109, 115, 0.3);
 }
@@ -195,13 +198,7 @@ input[type=submit].longButton {
 }
 /* Warenkorb */
 .shopSelection {
-  width: 100%;
-  height: 50px;
-  background: #0aa1d2;
-  color: #feffff;
-}
-.shopSelection.secondSelection {
-  background: #686d73;
+  margin-bottom: 10px;
 }
 .shopSelection input {
   display: inline-block;
@@ -209,9 +206,8 @@ input[type=submit].longButton {
   width: 5%;
 }
 .shopSelection label {
-  width: 91%;
   display: inline-block;
-  padding: 15px 0;
+  padding: 5px 0;
   margin-left: 5px;
 }
 .shopInfo {
@@ -221,6 +217,16 @@ input[type=submit].longButton {
 }
 .shopInfo ul {
   list-style-type: none;
+}
+.shopInfo ul li span {
+  width: 100%;
+  display: inline-block;
+}
+.shopInfo ul li.header {
+  display: none;
+}
+.shopInfo input {
+  width: 40px;
 }
 .shopInfo .price {
   padding-left: 10px;
@@ -267,6 +273,19 @@ select.error {
 label.error {
   color: #a10d08;
   font-weight: bold;
+}
+/* Success Messages */
+.successBox {
+  border: 3px solid #0aa1d2;
+  padding: 10px;
+  margin-top: 10px;
+  color: #0aa1d2;
+  font-weight: bold;
+  background-color: #eff2f9;
+}
+.successBox ul {
+  padding-left: 15px;
+  list-style: none;
 }
 /* Comments */
 .commentBlock {
@@ -347,6 +366,37 @@ ul.backendList li:hover {
   nav {
     background: #35f90b;
   }
+  /* Shopping Cart */
+  .shopInfo ul {
+    padding: 0 10px;
+  }
+  .shopInfo ul li {
+    padding: 10px;
+  }
+  .shopInfo ul li span {
+    width: auto;
+  }
+  .shopInfo ul li span.count {
+    width: 12%;
+  }
+  .shopInfo ul li span.count label {
+    display: none;
+  }
+  .shopInfo ul li span.title {
+    width: 23%;
+  }
+  .shopInfo ul li span.price,
+  .shopInfo ul li span.priceTotal {
+    width: 22%;
+  }
+  .shopInfo ul li span.delete {
+    width: 12%;
+  }
+  .shopInfo ul li.header {
+    display: block;
+    background-color: #0aa1d2;
+    color: #feffff;
+  }
 }
 @media (min-width: 680px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
@@ -394,9 +444,6 @@ ul.backendList li:hover {
   }
   /* Veranstaltungs Block*/
   .veranstaltung {
-    width: 47%;
-    min-height: 300px;
-    max-height: 300px;
     margin-left: 10px;
     float: left;
   }
@@ -441,7 +488,7 @@ ul.backendList li:hover {
   }
   /* Veranstaltungs Block*/
   .veranstaltung {
-    width: 31%;
+    width: 97%;
     margin-left: 10px;
     float: left;
   }

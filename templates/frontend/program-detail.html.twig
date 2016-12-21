@@ -11,6 +11,7 @@
         {{ programData.text }}
     </p>
 
+    {% include "success-message.html.twig" %}
     <form action="{{ formAction }}" method="post">
         <label for="countTickets">Anzahl der Tickets:</label>
         <select name="countTickets" id="countTickets">
