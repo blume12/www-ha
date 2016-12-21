@@ -15,7 +15,7 @@
         <label for="countTickets">Anzahl der Tickets:</label>
         <select name="countTickets" id="countTickets">
             {% for key, value in countsNormal %}
-                <option value="{{ key }}" {% if formData.countsTickets == key %} selected="selected" {% endif %}>
+                <option value="{{ key }}" {% if formData.countTickets == key %} selected="selected" {% endif %}>
                     {{ value }}
                 </option>
             {% endfor %}
@@ -23,7 +23,7 @@
         <label for="countSaleTickets">Davon ermäßigt*:</label>
         <select name="countSaleTickets" id="countSaleTickets">
             {% for key, value in countsSale %}
-                <option value="{{ key }}" {% if formData.countsTickets == key %} selected="selected" {% endif %}>
+                <option value="{{ key }}" {% if formData.countSaleTickets == key %} selected="selected" {% endif %}>
                     {{ value }}
                 </option>
             {% endfor %}

@@ -9,6 +9,7 @@ namespace App\Controller\Frontend;
 
 
 use App\Helper\Helper;
+use App\Helper\Session;
 use App\Helper\StandardStock;
 use App\Model\Program\Program;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,6 +43,7 @@ class ProgramController extends FrontendController
     /**
      * Loads the program detail action for the frontend.
      *
+     * @param Request $request
      * @return Response
      */
     public function detailAction(Request $request)
@@ -58,11 +60,30 @@ class ProgramController extends FrontendController
 
         $countOfTickets = StandardStock::getCountOfTickets();
 
+        $formError = [];
+        $formData = [];
+        if ($request->getMethod() !== 'POST') {
+            // Set default values
+
+        } else {
+            /* Check for errors */
+            $formData = $this->getRequest()->request->all();
+        }
+        // Handle valid post
+        if ($request->getMethod() == 'POST' && count($formError) <= 0) {
+            /* Save data */
+            $session = new Session();
+            $shoppingCartData = $session->getSessionByKey('shoppingCart');
+            $session->setSession('shoppingCart', $shoppingCartData);
+            //return new RedirectResponse($this->getRoutePath('adminProgramList'));
+        }
+
         return $this->getResponse([
             'formAction' => $this->getRoutePath('programDetail', ['id' => $programId]),
             'programData' => $programData,
             'countsNormal' => $countOfTickets,
-            'countsSale' => $countOfTickets
+            'countsSale' => $countOfTickets,
+            'formData' => $formData
         ]);
     }
 
