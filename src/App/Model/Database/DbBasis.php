@@ -42,4 +42,14 @@ abstract class DbBasis
         return $this->dbqObject;
     }
 
+    /**
+     * Return the config data array.
+     *
+     * @return array
+     */
+    protected function getConfig()
+    {
+        return $this->config;
+    }
+
 }

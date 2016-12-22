@@ -107,4 +107,30 @@ class ProgramPrice extends DbBasis
         }
         return $formError;
     }
+
+    /**
+     * Get the price by a mode.
+     *
+     * @param $mode
+     * @param $priceId
+     * @return int
+     */
+    public function getPriceByMode($mode, $priceId)
+    {
+        // TODO: the mode should be a string mode
+        $programPriceData = $this->loadSpecificEntry($priceId);
+        switch ($mode) {
+            case 0:
+                $simplePrice = $programPriceData['price'];
+                break;
+            case 1:
+                $simplePrice = $programPriceData['priceReduce'];
+                break;
+            default:
+                $simplePrice = 3; // TODO: This is a very hot fix for tomorrow
+                break;
+        }
+
+        return $simplePrice;
+    }
 }

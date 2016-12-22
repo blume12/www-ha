@@ -7,15 +7,6 @@
 
     {% if shoppingCartData %}
         <form action="{{ formAction }}" method="post">
-            <div class="shopSelection">
-                <input type="radio" name="mode" value="booking" id="modeBooking"/>
-                <label for="modeBooking">Buchung</label>
-            </div>
-            <div class="shopSelection secondSelection">
-                <input type="radio" name="mode" value="reservation" id="modeReservation"/>
-                <label for="modeReservation">Reservierung</label>
-            </div>
-            <div class="clear"></div>
             <div class="shopInfo">
                 <ul>
                     <li class="header">
@@ -28,10 +19,10 @@
 
                     {% for shoppingCart in shoppingCartData.list %}
                         <li>
-                    <span class="count">
-                        <label for="count_1">Anzahl: </label>
-                        <input name="count_1" id="count_1" type="text" value="{{ shoppingCart.count }}" size="3"/>
-                    </span>
+                            <span class="count">
+                                <label for="count_1">Anzahl: </label>
+                                <input name="count_1" id="count_1" type="text" value="{{ shoppingCart.count }}"/>
+                            </span>
                             <span class="title">{{ shoppingCart.title }} </span>
                             <span class="price">{{ shoppingCart.price }}</span>
                             <span class="priceTotal">{{ shoppingCart.priceTotal }}</span>
@@ -44,6 +35,18 @@
                     <span class="price">Gesamtpreis: {{ shoppingCartData.priceTotal }}</span>
                 </div>
             </div>
+            <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
+            <input id="firstname" type="text" size="20" name="firstname" value="{{ formData.firstname }}"
+                   class="width65{% if errorData.firstname %} error{% endif %}"/>
+
+            <label for="lastname" {% if errorData.lastname %} class="error"{% endif %}>Nachname: </label>
+            <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
+                   class="width65{% if errorData.lastname %} error{% endif %}"/>
+
+            <label for="email" {% if errorData.emmail %} class="error"{% endif %}>E-Mail: </label>
+            <input id="email" type="text" size="20" name="email" value="{{ formData.email }}"
+                   class="width65{% if errorData.email %} error{% endif %}"/>
+
             <div class="grayBackground">
                 <input class="longButton" type="submit" value="Jetzt verbindlich buchen"/>
             </div>
