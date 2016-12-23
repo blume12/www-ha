@@ -25,6 +25,31 @@ class ShoppingCartController extends FrontendController
         $shoppingCart = new ShoppingCart($this->getConfig());
 
         $shoppingCartData = $shoppingCart->loadShoppingCartData();
+
+        foreach ($shoppingCartData['list'] as $key => $value) {
+            $shoppingCartData['list'][$key]['deleteLink'] = $this->getRoutePath('shoppingCartDelete',
+                ['id' => $value['pid'], 'priceMode' => $value['priceMode']]);
+        }
+        return $this->getResponse([
+            'shoppingCartData' => $shoppingCartData
+        ]);
+    }
+
+    public function deleteAction()
+    {
+        $this->setTemplateName('shopping-cart-list');
+        $this->setPageTitle('Warenkorb löschen');
+
+        //TODO: delete the position.
+
+        $shoppingCart = new ShoppingCart($this->getConfig());
+
+        $shoppingCartData = $shoppingCart->loadShoppingCartData();
+
+        foreach ($shoppingCartData['list'] as $key => $value) {
+            $shoppingCartData['list'][$key]['deleteLink'] = $this->getRoutePath('shoppingCartDelete',
+                ['id' => $value['pid'], 'priceMode' => $value['priceMode']]);
+        }
         return $this->getResponse([
             'shoppingCartData' => $shoppingCartData
         ]);

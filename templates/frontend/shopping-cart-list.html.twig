@@ -26,7 +26,7 @@
                             <span class="title">{{ shoppingCart.title }} </span>
                             <span class="price">{{ shoppingCart.price }}</span>
                             <span class="priceTotal">{{ shoppingCart.priceTotal }}</span>
-                            <span class="delete"><a href="">Löschen</a></span>
+                            <span class="delete"><a href="{{ shoppingCart.deleteLink }}">Löschen</a></span>
                         </li>
                     {% endfor %}
 

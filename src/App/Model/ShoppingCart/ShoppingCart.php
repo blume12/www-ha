@@ -75,8 +75,10 @@ class ShoppingCart extends DbBasis
                 $programData = $program->loadSpecificEntry($programId);
 
 
+                $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
                 $shoppingCartData['list'][$i]['count'] = $count;
                 $shoppingCartData['list'][$i]['title'] = $programData['title'];
+                $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
 
                 $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
 
