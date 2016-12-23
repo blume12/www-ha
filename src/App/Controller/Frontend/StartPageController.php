@@ -23,6 +23,6 @@ class StartPageController extends FrontendController
         $this->setTemplateName('start-page');
         $this->setPageTitle('Tickets');
 
-        return $this->getResponse();
+        return $this->getResponse(['programLink' => $this->getRoutePath('programs')]);
     }
 }
