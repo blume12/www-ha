@@ -25,10 +25,11 @@ class ShoppingCartController extends FrontendController
         $shoppingCart = new ShoppingCart($this->getConfig());
 
         $shoppingCartData = $shoppingCart->loadShoppingCartData();
-
-        foreach ($shoppingCartData['list'] as $key => $value) {
-            $shoppingCartData['list'][$key]['deleteLink'] = $this->getRoutePath('shoppingCartDelete',
-                ['id' => $value['pid'], 'priceMode' => $value['priceMode']]);
+        if (isset($shoppingCartData['list'])) {
+            foreach ($shoppingCartData['list'] as $key => $value) {
+                $shoppingCartData['list'][$key]['deleteLink'] = $this->getRoutePath('shoppingCartDelete',
+                    ['id' => $value['pid'], 'priceMode' => $value['priceMode']]);
+            }
         }
         return $this->getResponse([
             'shoppingCartData' => $shoppingCartData

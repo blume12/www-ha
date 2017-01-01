@@ -67,32 +67,34 @@ class ShoppingCart extends DbBasis
         $program = new Program($this->getConfig());
         $programPrice = new ProgramPrice($this->getConfig());
         $i = 0;
-        foreach ($this->getSessionData() as $key => $count) {
-            if ($count > 0) {
-                $tmp = explode('_', $key);
-                $programId = $tmp[0];
-                $priceMode = $tmp[1];
-                $programData = $program->loadSpecificEntry($programId);
+        $sessionData = $this->getSessionData();
+        if ($sessionData) {
+            foreach ($sessionData as $key => $count) {
+                if ($count > 0) {
+                    $tmp = explode('_', $key);
+                    $programId = $tmp[0];
+                    $priceMode = $tmp[1];
+                    $programData = $program->loadSpecificEntry($programId);
 
 
-                $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
-                $shoppingCartData['list'][$i]['count'] = $count;
-                $shoppingCartData['list'][$i]['title'] = $programData['title'];
-                $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
+                    $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
+                    $shoppingCartData['list'][$i]['count'] = $count;
+                    $shoppingCartData['list'][$i]['title'] = $programData['title'];
+                    $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
 
-                $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
+                    $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
 
-                $simplePrice = str_replace(',', '.', $simplePrice);
+                    $simplePrice = str_replace(',', '.', $simplePrice);
 
-                $shoppingCartData['list'][$i]['price'] = Formatter::formatPrice($simplePrice);
-                $shoppingCartData['list'][$i]['priceTotal'] = Formatter::formatPrice($simplePrice * $count);
+                    $shoppingCartData['list'][$i]['price'] = Formatter::formatPrice($simplePrice);
+                    $shoppingCartData['list'][$i]['priceTotal'] = Formatter::formatPrice($simplePrice * $count);
 
-                $shoppingCartData['priceTotal'] += $simplePrice * $count;
-                $i++;
+                    $shoppingCartData['priceTotal'] += $simplePrice * $count;
+                    $i++;
+                }
             }
+            $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);
         }
-        $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);
-
         return $shoppingCartData;
     }
 }
