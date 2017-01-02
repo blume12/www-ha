@@ -58,7 +58,7 @@ $dbqObject->query($sql);
 $sql = "CREATE TABLE IF NOT EXISTS program_programPrice (id INTEGER PRIMARY KEY, PId INTEGER, PPId  INTEGER) ";
 $dbqObject->query($sql);
 
-$sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_programPrice_id_uindex ON program_programPrice(PPPId) ";
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_programPrice_id_uindex ON program_programPrice(id) ";
 $dbqObject->query($sql);
 
 // Text source:
@@ -76,8 +76,16 @@ $sql = "CREATE UNIQUE INDEX IF NOT EXISTS timescale_id_uindex ON timescale(TId) 
 $dbqObject->query($sql);
 
 // Reservation:
-$sql = "CREATE TABLE IF NOT EXISTS reservation (RId INTEGER PRIMARY KEY, reservationNumber VARCHAR(50), firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255)) ";
+$sql = "CREATE TABLE IF NOT EXISTS reservation (RId INTEGER PRIMARY KEY, reservationNumber VARCHAR(50), firstname VARCHAR(255),
+        lastname VARCHAR(255), email VARCHAR(255),  createDate VARCHAR(255)) ";
 $dbqObject->query($sql);
 
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS reservation_id_uindex ON reservation(RId) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE TABLE IF NOT EXISTS reservation_program (RPId INTEGER PRIMARY KEY,RId INTEGER, PId VARCHAR(50), priceMode VARCHAR(10), 
+        countTickets VARCHAR(255), price DECIMAL(4,2) ) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS reservation_program_id_uindex ON reservation_program(RPId) ";
 $dbqObject->query($sql);

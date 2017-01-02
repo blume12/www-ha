@@ -37,6 +37,10 @@ $routes->add('adminProgramList', new Route('/admin/programme', ['_controller' =>
 $routes->add('adminProgramNew', new Route('/admin/programm-anlegen', ['_controller' => 'App\Controller\Backend\ProgramController::newEntryAction']));
 $routes->add('adminProgramEdit', new Route('/admin/programm-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::editAction'], ['id' => '\d+']));
 $routes->add('adminProgramDelete', new Route('/admin/programm-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ProgramController::deleteAction'], ['id' => '\d+']));
+// reservation:
+$routes->add('adminReservationList', new Route('/admin/reservierungen', ['_controller' => 'App\Controller\Backend\ReservationController::searchAction']));
+$routes->add('adminReservationEdit', new Route('/admin/reservierung-bearbeiten/{id}', ['_controller' => 'App\Controller\Backend\ReservationController::editAction'], ['id' => '\d+']));
+$routes->add('adminReservationDelete', new Route('/admin/reservierung-loeschen/{id}', ['_controller' => 'App\Controller\Backend\ReservationController::deleteAction'], ['id' => '\d+']));
 // Programs prices:
 $routes->add('adminProgramPriceList', new Route('/admin/programm-preise', ['_controller' => 'App\Controller\Backend\ProgramPriceController::indexAction']));
 $routes->add('adminProgramPriceNew', new Route('/admin/programm-preis-anlegen', ['_controller' => 'App\Controller\Backend\ProgramPriceController::newEntryAction']));

@@ -70,7 +70,7 @@ class ShoppingCartController extends FrontendController
             if (!Validator::isAlpha($formData['lastname'], true)) {
                 $formError['lastname'] = 'Bitte geben Sie einen Nachnamen ein.';
             }
-
+            //TODO: check Email
             if (!Validator::isAlpha($formData['email'], true)) {
                 $formError['email'] = 'Bitte geben Sie einen E-Mail-Adresse ein.';
             }
@@ -85,6 +85,18 @@ class ShoppingCartController extends FrontendController
                 'lastname' => $formData['lastname'],
                 'email' => $formData['email']
             ];
+
+            foreach ($shoppingCartData['list'] as $key => $value) {
+                $data['program'][] = [
+                    'PId' => $value['pid'],
+                    'priceMode' => $value['priceMode'],
+                    'countTickets' => $formData['count_' . $value['pid'] . '_' . $value['priceMode']],
+                    'price' => $value['price']
+
+                ];
+            }
+
+
             $reservation->saveData($data);
         }
 

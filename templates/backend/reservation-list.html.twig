@@ -1,0 +1,40 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1>Reservierungen</h1>
+{% endblock %}
+
+{% block content %}
+
+    {% if reservationData %}
+
+        <ul class="backendList reservation">
+            <li class="head">
+                <span class="reservationNumber">ReservierungsNr</span>
+                <span class="name">Name</span>
+                <span class="email">Email</span>
+                <span class="priceTotal">Gesamtpreis</span>
+                <span class="reservationTime">Reserviert bis</span>
+                <span class="row options">Optionen</span>
+            </li>
+            {% for reservation in reservationData %}
+                <li class="{% if reservation.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
+                    <span class="reservationNumber">{{ reservation.reservationNumber }}</span>
+                    <span class="name">
+                        <strong>{{ reservation.firstname }} {{ reservation.lastname }}</strong>
+                    </span>
+                    <span class="email">{{ reservation.email }}</span>
+                    <span class="priceTotal">€ 23, 00</span>
+                    <span class="reservationTime">{{ reservation.reservationUntil }}</span>
+                    <span class="row options">
+                    <a href="{{ reservation.editRoute }}">bearbeiten</a>&nbsp;
+                    <a href="{{ reservation.deleteRoute }}">löschen</a>
+                </span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>
+            Es liegen keine Reservierungen vor.
+        </p>
+    {% endif %}
+{% endblock %}

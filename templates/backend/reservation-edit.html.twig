@@ -1,0 +1,55 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1>Reservierung {% if  newEntry %}anlegen {% else %}bearbeiten{% endif %}</h1>
+{% endblock %}
+
+{% block content %}
+
+    {% include "error-message.html.twig" %}
+
+    <p class="infoList">
+        <span>Vorname:</span> {{ formData.firstname }}<br/>
+        <span>Nachname:</span> {{ formData.lastname }}<br/>
+        <span>E-Mail:</span> {{ formData.email }}<br/>
+        <span>Reservierungsnummer:</span> {{ formData.reservationNumber }}<br/>
+        <span>reserviert bis:</span> {{ formData.reservationUntil }}<br/>
+    </p>
+    <form action="{{ formAction }}" method="post" name="formComment">
+
+
+        <input id="type_paid" type="radio" size="20" name="type" value="paid"
+               class="width65{% if errorData.type %} error{% endif %}"/>
+        <label for="type_paid" class="radio{% if errorData.type %} error{% endif %}">bezahlt & abgeholt</label>
+
+        <div class="clear"></div>
+        <input id="type_reservation" type="radio" size="20" name="type" value="reservation"
+               class="width65{% if errorData.type %} error{% endif %}"/>
+        <label for="type_reservation" class="radio{% if errorData.type %} error{% endif %}">reserviert</label>
+
+        <div class="clear"></div>
+        <label for="text" class="{% if errorData.text %}error{% endif %}">Textvorlage:</label>
+        <textarea id="text" name="text" rows="10"
+                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+
+        <ul>
+            {% for program in programData.list %}
+                <li>
+                    <span class="type">{% if program.priceMode == 2 %} ermäßigter Preis{% else %}normaler Preis{% endif %}</span>
+                    <span class="count">
+                                <label for="count_{{ program.pid }}_{{ program.priceMode }}">Anzahl: </label>
+                                <input name="count_{{ program.pid }}_{{ program.priceMode }}"
+                                       id="count_{{ program.pid }}_{{ program.priceMode }}" type="text"
+                                       value="{{ program.count }}"
+                                       class="count {% if program.error %} error{% endif %}"/>
+                            </span>
+                    <span class="title">{{ program.title }} </span>
+                    <span class="price">{{ program.price }}</span>
+                    <span class="priceTotal">{{ program.priceTotal }}</span>
+                    <span class="delete"><a href="{{ program.deleteLink }}">Löschen</a></span>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="clear"></div>
+        <input name="send" type="submit" value="Speichern">
+    </form>
+{% endblock %}

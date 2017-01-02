@@ -2,6 +2,19 @@
   vertical-align: top;
   width: 100%;
 }
+.infoList span {
+  width: 150px;
+  display: inline-block;
+}
+input[type=radio] {
+  width: auto;
+  display: inline;
+  float: left;
+}
+label.radio {
+  width: auto;
+  float: left;
+}
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   .width50 {
@@ -17,9 +30,36 @@
   .right {
     float: right;
   }
+  div.content {
+    margin: auto ;
+    max-width: 100%;
+  }
+  .backendList.reservation span {
+    display: inline-block;
+  }
+  .backendList.reservation span.name {
+    width: 20%;
+  }
+  .backendList.reservation span.email {
+    width: 25%;
+  }
+  .backendList.reservation span.reservationNumber {
+    width: 15%;
+  }
+  .backendList.reservation span.priceTotal {
+    width: 10%;
+  }
+  .backendList.reservation span.row.options {
+    float: right;
+    width: 15%;
+  }
 }
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+  div.content,
+  nav ul.menu {
+    max-width: 1024px;
+  }
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */

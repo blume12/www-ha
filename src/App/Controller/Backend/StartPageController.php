@@ -39,26 +39,25 @@ class StartPageController extends BackendController
         $programData = $program->loadData();
 
         $programPrice = new ProgramPrice($this->getConfig());
-        $programPriceData = $programPrice->loadData();
 
         // TODO: load really values for the statistics
 
         $countsPrices = [];
-        foreach ($programPriceData as $key => $data) {
-            $countsPrices['booking'][$key]['count'] = 123;
-            $countsPrices['booking'][$key]['name'] = $data['name'];
-            $countsPrices['reservation'][$key]['count'] = 124;
-            $countsPrices['reservation'][$key]['name'] = $data['name'];
-        }
+            $countsPrices['reservation'][1]['count'] = 124;
+            $countsPrices['reservation'][1]['name'] = 'normalem Preis';
+
+        $countsPrices['reservation'][2]['count'] = 2;
+        $countsPrices['reservation'][2]['name'] = 'reduziertem Preis';
 
         return $this->getResponse([
             'user' => $userData,
-            'countProgram' => count($programData),
-            'countMaxPlaces' => count($programData) * 54,
+            'countProgram' => $program->getCountOfPrograms(),
+            'countMaxPlaces' => $program->getCountOfAllPlaces(),
             'countFreePlaces' => 1233,
             'countReservation' => 123,
             'countBooking' => 6,
-            'countsPrices' => $countsPrices
+            'countsPrices' => $countsPrices,
+            'reservationSearchAction' => $this->getRoutePath('adminReservationList')
         ]);
     }
 }

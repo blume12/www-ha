@@ -18,6 +18,9 @@ class Program extends DbBasis
      */
     private $fileUpload = null;
 
+    private static $placesPerProgram = 95;
+    private $currentData = [];
+
     /**
      * The path to the image folder for the programs.
      * @var string
@@ -81,6 +84,7 @@ class Program extends DbBasis
             $data[$i]['image'] = $this->getImageForOutput($row['PId'] . '_program');
             $i++;
         }
+        $this->currentData = $data;
 
         return $data;
     }
@@ -221,5 +225,15 @@ class Program extends DbBasis
             $formError['fileToUpload'] = 'Bitte geben Sie eine Datei an.';
         }
         return $formError;
+    }
+
+    public function getCountOfPrograms()
+    {
+        return count($this->currentData);
+    }
+
+    public function getCountOfAllPlaces()
+    {
+        return count($this->currentData) * self::$placesPerProgram;
     }
 }

@@ -1,7 +1,29 @@
+
+@maxWidthContent:1024px;
 .width50 {
   vertical-align: top;
   width: 100%;
 }
+
+.infoList {
+  span {
+    width: 150px;
+    display: inline-block;
+  }
+}
+
+input[type=radio] {
+  width: auto;
+  display: inline;
+
+  float: left;
+}
+label.radio {
+  width: auto;
+  float: left;
+}
+
+
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
 
@@ -20,10 +42,43 @@
   .right {
     float: right;
   }
+  div.content {
+    margin: auto ;
+    max-width:100%;
+  }
+
+  .backendList.reservation {
+    span {
+      display: inline-block;
+    }
+    span.name {
+      width: 20%;
+    }
+
+    span.email {
+      width: 25%;
+    }
+
+    span.reservationNumber {
+      width: 15%;
+    }
+    span.priceTotal {
+      width: 10%;
+    }
+
+    span.row.options {
+      float:right;
+      width: 15%;
+    }
+  }
+
 }
 
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
+  div.content, nav ul.menu  {
+    max-width:@maxWidthContent;
+  }
 
 }
 
