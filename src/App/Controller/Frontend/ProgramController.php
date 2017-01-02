@@ -12,6 +12,7 @@ use App\Helper\Helper;
 use App\Helper\Session;
 use App\Helper\StandardStock;
 use App\Model\Program\Program;
+use App\Model\ShoppingCart\ShoppingCart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -60,8 +61,6 @@ class ProgramController extends FrontendController
 
         $countOfTickets = StandardStock::getCountOfTickets();
 
-        //TODO: give the session an own class ;)
-        $session = new Session();
         $formError = [];
         $formSuccess = [];
         $formData = [];
@@ -76,18 +75,9 @@ class ProgramController extends FrontendController
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
-
-            $shoppingCartData = $session->getSessionByKey('shoppingCart');
-            if (!$shoppingCartData) {
-                $shoppingCartData = [$programId . "_1" => $formData['countTickets'], $programId . "_2" => $formData['countSaleTickets']];
-            } else {
-                // TODO: Use real Price id
-                $shoppingCartData[$programId . "_1"] = $formData['countTickets'];
-                $shoppingCartData[$programId . "_2"] = $formData['countSaleTickets'];
-            }
-            $session->setSession('shoppingCart', $shoppingCartData);
+            $shoppingCart = new ShoppingCart($this->getConfig());
+            $shoppingCart->setShoppingCartData($programId, $formData['countTickets'], $formData['countSaleTickets']);
             $formSuccess[] = 'Das Programm wurde erfolgreich dem Warenkorb hinzugefügt.';
-            //return new RedirectResponse($this->getRoutePath('adminProgramList'));
         }
 
         return $this->getResponse([

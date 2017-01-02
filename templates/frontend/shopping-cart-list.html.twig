@@ -6,6 +6,9 @@
 {% block content %}
 
     {% if shoppingCartData %}
+
+        {% include "success-message.html.twig" %}
+        {% include "error-message.html.twig" %}
         <form action="{{ formAction }}" method="post">
             <div class="shopInfo">
                 <ul>
@@ -15,7 +18,7 @@
                         <span class="title">Blocktitel</span>
                         <span class="price">Einzelpreis</span>
                         <span class="priceTotal">Gesamtpreis</span>
-                        <span class="delete">Entfernen</span>
+                        <span class="delete">Löschen</span>
                     </li>
 
                     {% for shoppingCart in shoppingCartData.list %}
@@ -25,7 +28,8 @@
                                 <label for="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}">Anzahl: </label>
                                 <input name="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}"
                                        id="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}" type="text"
-                                       value="{{ shoppingCart.count }}" class="count"/>
+                                       value="{{ shoppingCart.count }}"
+                                       class="count {% if shoppingCart.error %} error{% endif %}"/>
                             </span>
                             <span class="title">{{ shoppingCart.title }} </span>
                             <span class="price">{{ shoppingCart.price }}</span>
@@ -38,6 +42,8 @@
                 <div class="endPriceBlock">
                     <span class="endPrice">Gesamtpreis:&nbsp;&nbsp;<strong>{{ shoppingCartData.priceTotal }}</strong></span>
                 </div>
+
+
                 <div class="clear"></div>
                 <div class="contactInfo">
                     <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
@@ -48,7 +54,7 @@
                     <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
                            class="width65{% if errorData.lastname %} error{% endif %}"/>
 
-                    <label for="email" {% if errorData.emmail %} class="error"{% endif %}>E-Mail: </label>
+                    <label for="email" {% if errorData.email %} class="error"{% endif %}>E-Mail: </label>
                     <input id="email" type="text" size="20" name="email" value="{{ formData.email }}"
                            class="width65{% if errorData.email %} error{% endif %}"/>
 

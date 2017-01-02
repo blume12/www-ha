@@ -74,3 +74,10 @@ $dbqObject->query($sql);
 
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS timescale_id_uindex ON timescale(TId) ";
 $dbqObject->query($sql);
+
+// Reservation:
+$sql = "CREATE TABLE IF NOT EXISTS reservation (RId INTEGER PRIMARY KEY, reservationNumber VARCHAR(50), firstname VARCHAR(255), lastname VARCHAR(255), email VARCHAR(255)) ";
+$dbqObject->query($sql);
+
+$sql = "CREATE UNIQUE INDEX IF NOT EXISTS reservation_id_uindex ON reservation(RId) ";
+$dbqObject->query($sql);

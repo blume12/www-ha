@@ -55,6 +55,54 @@ class ShoppingCart extends DbBasis
         return $this->shoppingCartSession->getSessionByKey(self::$sessionName);
     }
 
+
+    /**
+     * @param $programId
+     * @param $priceMode
+     */
+    public function deleteShoppingCartItem($programId, $priceMode)
+    {
+        $this->shoppingCartSession->removeSessionByKeyItem(self::$sessionName, $programId . '_' . $priceMode);
+
+    }
+
+    /**
+     * @param $programId
+     * @param $countTickets
+     * @param $countSaleTickets
+     */
+    public function setShoppingCartData($programId, $countTickets, $countSaleTickets)
+    {
+        $shoppingCartData = $this->shoppingCartSession->getSessionByKey('shoppingCart');
+        if (!$shoppingCartData) {
+            $shoppingCartData = [$programId . "_1" => $countTickets, $programId . "_2" => $countSaleTickets];
+        } else {
+            $shoppingCartData[$programId . "_1"] = $countTickets;
+            $shoppingCartData[$programId . "_2"] = $countSaleTickets;
+        }
+
+        $this->shoppingCartSession->setSession('shoppingCart', $shoppingCartData);
+
+    }
+
+    /**
+     * @param $programId
+     * @param $priceMode
+     * @param $count
+     */
+    public function setShoppingCartDataItem($programId, $priceMode, $count)
+    {
+        $shoppingCartData = $this->shoppingCartSession->getSessionByKey('shoppingCart');
+        if (!$shoppingCartData) {
+            $shoppingCartData = [$programId . "_" . $priceMode => $count];
+        } else {
+            $shoppingCartData[$programId . "_" . $priceMode] = $count;
+        }
+
+        $this->shoppingCartSession->setSession('shoppingCart', $shoppingCartData);
+
+    }
+
     /**
      * Load the shopping cart data for the output.
      *
