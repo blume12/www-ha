@@ -13,6 +13,9 @@
                     {{ program.title }}
                 </h2>
                 <p>
+                    {% if program.image %}
+                        <img src="{{ program.image }}" alt="{{ program.title }}"/>
+                    {% endif %}
                     {{ program.text }}
                 </p>
                 <a href="{{ program.detailLink }}">Details & Reservierung</a>

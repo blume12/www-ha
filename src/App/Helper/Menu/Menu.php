@@ -21,14 +21,17 @@ class Menu
      * @param $name
      * @param $route
      * @param bool $showAlways
+     * @param array $config
      */
-    public function addMenu($name, $route, $showAlways = true)
+    public function addMenu($name, $route, $showAlways = true, $config = [])
     {
         $this->menuArray[] = array(
             'route' => $route,
             'name' => $name,
             'showAlways' => $showAlways
         );
+        $lastIndex = count($this->menuArray) - 1;
+        $this->menuArray[$lastIndex] = array_merge($this->menuArray[$lastIndex], $config);
     }
 
     /**

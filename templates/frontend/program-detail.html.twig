@@ -4,14 +4,18 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        {{ programData.intro }}
-    </p>
-    <p>
-        {{ programData.text }}
-    </p>
+    <div class="veranstaltung">
+        <p>
+            {% if programData.image %}
+                <img src="{{ programData.image }}" alt="{{ programData.title }}"/>
+            {% endif %}
+            {{ programData.text }}
+        </p>
+    </div>
+
 
     {% include "success-message.html.twig" %}
+    {% include "error-message.html.twig" %}
     <form action="{{ formAction }}" method="post">
         <label for="countTickets">Anzahl der Tickets:</label>
         <select name="countTickets" id="countTickets">
@@ -21,7 +25,7 @@
                 </option>
             {% endfor %}
         </select>
-        <label for="countSaleTickets">Davon ermäßigt*:</label>
+        <label for="countSaleTickets">Anzahl der ermäßigten Tickets*:</label>
         <select name="countSaleTickets" id="countSaleTickets">
             {% for key, value in countsSale %}
                 <option value="{{ key }}" {% if formData.countSaleTickets == key %} selected="selected" {% endif %}>
@@ -31,5 +35,5 @@
         </select>
         <input class="longButton" type="submit" value="In den Warenkorb"/>
     </form>
-    <small>*Ermäßigungen gibt es für Studenten und Kinder.</small>
+    <small>*Ermäßigungen gibt es für Studenten und Kinder und wird bei der Bezahlung überprüft.</small>
 {% endblock %}

@@ -76,6 +76,7 @@ div.content p{
 
 h1 {
   color: @textBlack;
+  font-size: 1.8em;
 }
 
 h2{
@@ -179,6 +180,9 @@ nav ul.menu li {
   text-align: center;
   margin: 0;
 }
+nav ul.menu li.right{
+  float:right;
+}
 
 nav ul.menu li a {
   color: #fff;
@@ -231,7 +235,11 @@ nav:hover {
 
 /* Veranstaltungs Block*/
 .veranstaltung {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+  img{
+    width: 100%;
+    margin-bottom: 15px;
+  }
 }
 
 .veranstaltung h2{
@@ -279,6 +287,7 @@ input[type=submit]:hover {
 input[type=submit].longButton{
   width: 220px;
   display: block;
+  padding: 10px 20px;
 }
 
 /* Warenkorb */
@@ -300,6 +309,14 @@ input[type=submit].longButton{
   width: 100%;
   background: @white;
   padding: 10px 0;
+
+  .endPriceBlock {
+
+    span {
+      border-top: 1px solid @grayLight;
+      padding-top: 10px;
+    }
+  }
   ul{
     list-style-type: none;
 
@@ -314,8 +331,14 @@ input[type=submit].longButton{
       display: none;
     }
   }
-  input {
+  input.count {
     width: 40px;
+  }
+  .contactInfo {
+    padding: 20px;
+  }
+  input.longButton {
+    margin: 0 20px;
   }
 }
 
@@ -492,42 +515,11 @@ ul.backendList li:hover {
     background: @debugMedia2;
   }
 
-  /* Shopping Cart */
-
-  .shopInfo {
-    ul {
-
-      padding: 0 10px;
-      li {
-
-        padding: 10px;
-        span{
-          width: auto;
-        }
-        span.count {
-          width: 12%;
-          label {
-            display: none;
-          }
-        }
-        span.title {
-          width: 23%;
-        }
-        span.price, span.priceTotal {
-          width: 22%
-        }
-
-        span.delete {
-          width: 12%;
-        }
-
-      }
-
-      li.header {
-        display: block;
-        background-color: @blue;
-        color: @white;
-      }
+  .veranstaltung {
+    img{
+      width: 200px;
+      float:left;
+      padding-right: 15px;
     }
   }
 
@@ -593,6 +585,10 @@ ul.backendList li:hover {
   .veranstaltung{
     margin-left: 10px;
     float: left;
+
+    img {
+      width: 250px;
+    }
   }
 
   /* Table */
@@ -612,6 +608,70 @@ ul.backendList li:hover {
   nav {
     background: @debugMedia3;
   }
+
+  /* Shopping Cart */
+
+  .shopInfo {
+
+    .endPrice {
+      float:right;
+      padding-right:90px;
+      margin-right: 15px;
+    }
+
+    .contactInfo{
+      text-align: center;
+    }
+    input.longButton {
+      margin: auto;
+    }
+    ul {
+
+      padding: 0 10px;
+      li {
+
+        padding: 10px;
+        span{
+          width: auto;
+          vertical-align: bottom;
+        }
+        input {
+          vertical-align: bottom;
+          margin-bottom: 0;
+        }
+        span.count {
+          width: 8%;
+          label {
+            display: none;
+          }
+        }
+        span.title {
+          width: 33%;
+        }
+        span.price, span.priceTotal {
+          width: 15%;
+          text-align: right;
+        }
+        span.type {
+          width: 13%;
+          text-align: center;
+        }
+
+        span.delete {
+          width: 12%;
+          text-align: right;
+        }
+
+      }
+
+      li.header {
+        display: block;
+        background-color: @blue;
+        color: @white;
+      }
+    }
+  }
+
 }
 
 @media (min-width: 961px) {

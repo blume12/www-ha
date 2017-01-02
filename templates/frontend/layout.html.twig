@@ -17,12 +17,17 @@
         <ul class="menu">
             {% for menu in menuData %}
                 {% if loggedIn or menu.showAlways %}
-                    <li><a href="{{ menu.route }}">{{ menu.name }}</a></li>
+                    <li {% if menu.className %} class="{{ menu.className }}"{% endif %}>
+                        <a href="{{ menu.route }}" {% if menu.className %} class="{{ menu.className }}"{% endif %}>
+                            {% if menu.image %}
+                                <img src="{{ menu.image }}" alt="Warenkorb" title="Warenkorb ansehen" width="30"/>
+                            {% endif %}
+                            {{ menu.name }}
+                        </a>
+                    </li>
                 {% endif %}
             {% endfor %}
         </ul>
-        {# TODO: So bad, but it's a hack for tomorrow #}
-        <a href="/warenkorb">Warenkorb</a>
     </nav>
 
     <div class="filmStripeTop">

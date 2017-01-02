@@ -96,7 +96,8 @@ class ProgramController extends FrontendController
             'countsNormal' => $countOfTickets,
             'countsSale' => $countOfTickets,
             'formData' => $formData,
-            'successData' => $formSuccess
+            'successData' => $formSuccess,
+            'errorData' => $formError
         ]);
     }
 

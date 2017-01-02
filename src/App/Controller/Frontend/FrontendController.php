@@ -31,6 +31,8 @@ abstract class FrontendController extends Controller
         $menu = new Menu();
         $menu->addMenu('Startseite', $this->getRoutePath('startPage'));
         $menu->addMenu('Programme', $this->getRoutePath('programs'));
+        //TODO: Add shopping cart number
+        $menu->addMenu('', $this->getRoutePath('shoppingCartList'), true, ['className' => 'right', 'image' => '/images/shopping-cart.png']);
         $this->menuArray = $menu->getMenuArray();
     }
 }

@@ -10,6 +10,7 @@
             <div class="shopInfo">
                 <ul>
                     <li class="header">
+                        <span class="type">Type</span>
                         <span class="count">Anzahl</span>
                         <span class="title">Blocktitel</span>
                         <span class="price">Einzelpreis</span>
@@ -19,9 +20,12 @@
 
                     {% for shoppingCart in shoppingCartData.list %}
                         <li>
+                            <span class="type">{% if shoppingCart.priceMode == 2 %} ermäßigter Preis{% else %}normaler Preis{% endif %}</span>
                             <span class="count">
-                                <label for="count_1">Anzahl: </label>
-                                <input name="count_1" id="count_1" type="text" value="{{ shoppingCart.count }}"/>
+                                <label for="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}">Anzahl: </label>
+                                <input name="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}"
+                                       id="count_{{ shoppingCart.pid }}_{{ shoppingCart.priceMode }}" type="text"
+                                       value="{{ shoppingCart.count }}" class="count"/>
                             </span>
                             <span class="title">{{ shoppingCart.title }} </span>
                             <span class="price">{{ shoppingCart.price }}</span>
@@ -31,25 +35,27 @@
                     {% endfor %}
 
                 </ul>
-                <div>
-                    <span class="price">Gesamtpreis: {{ shoppingCartData.priceTotal }}</span>
+                <div class="endPriceBlock">
+                    <span class="endPrice">Gesamtpreis:&nbsp;&nbsp;<strong>{{ shoppingCartData.priceTotal }}</strong></span>
                 </div>
-            </div>
-            <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
-            <input id="firstname" type="text" size="20" name="firstname" value="{{ formData.firstname }}"
-                   class="width65{% if errorData.firstname %} error{% endif %}"/>
+                <div class="clear"></div>
+                <div class="contactInfo">
+                    <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
+                    <input id="firstname" type="text" size="20" name="firstname" value="{{ formData.firstname }}"
+                           class="width65{% if errorData.firstname %} error{% endif %}"/>
 
-            <label for="lastname" {% if errorData.lastname %} class="error"{% endif %}>Nachname: </label>
-            <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
-                   class="width65{% if errorData.lastname %} error{% endif %}"/>
+                    <label for="lastname" {% if errorData.lastname %} class="error"{% endif %}>Nachname: </label>
+                    <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
+                           class="width65{% if errorData.lastname %} error{% endif %}"/>
 
-            <label for="email" {% if errorData.emmail %} class="error"{% endif %}>E-Mail: </label>
-            <input id="email" type="text" size="20" name="email" value="{{ formData.email }}"
-                   class="width65{% if errorData.email %} error{% endif %}"/>
+                    <label for="email" {% if errorData.emmail %} class="error"{% endif %}>E-Mail: </label>
+                    <input id="email" type="text" size="20" name="email" value="{{ formData.email }}"
+                           class="width65{% if errorData.email %} error{% endif %}"/>
 
-            <div class="grayBackground">
+                </div>
                 <input class="longButton" type="submit" value="Jetzt verbindlich buchen"/>
             </div>
+
         </form>
     {% else %}
         <p>Es ist nichts im Warenkorb vorhanden.</p>

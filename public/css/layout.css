@@ -29,6 +29,7 @@ div.content p {
 /* Headlines */
 h1 {
   color: #2c2c2c;
+  font-size: 1.8em;
 }
 h2 {
   color: #0aa1d2;
@@ -113,6 +114,9 @@ nav ul.menu li {
   text-align: center;
   margin: 0;
 }
+nav ul.menu li.right {
+  float: right;
+}
 nav ul.menu li a {
   color: #fff;
   text-decoration: none;
@@ -154,7 +158,11 @@ nav:hover {
 }
 /* Veranstaltungs Block*/
 .veranstaltung {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+}
+.veranstaltung img {
+  width: 100%;
+  margin-bottom: 15px;
 }
 .veranstaltung h2 {
   border-bottom: 2px solid rgba(104, 109, 115, 0.3);
@@ -195,6 +203,7 @@ input[type=submit]:hover {
 input[type=submit].longButton {
   width: 220px;
   display: block;
+  padding: 10px 20px;
 }
 /* Warenkorb */
 .shopSelection {
@@ -215,6 +224,10 @@ input[type=submit].longButton {
   background: #feffff;
   padding: 10px 0;
 }
+.shopInfo .endPriceBlock span {
+  border-top: 1px solid #686d73;
+  padding-top: 10px;
+}
 .shopInfo ul {
   list-style-type: none;
 }
@@ -225,8 +238,14 @@ input[type=submit].longButton {
 .shopInfo ul li.header {
   display: none;
 }
-.shopInfo input {
+.shopInfo input.count {
   width: 40px;
+}
+.shopInfo .contactInfo {
+  padding: 20px;
+}
+.shopInfo input.longButton {
+  margin: 0 20px;
 }
 .shopInfo .price {
   padding-left: 10px;
@@ -366,36 +385,10 @@ ul.backendList li:hover {
   nav {
     background: #35f90b;
   }
-  /* Shopping Cart */
-  .shopInfo ul {
-    padding: 0 10px;
-  }
-  .shopInfo ul li {
-    padding: 10px;
-  }
-  .shopInfo ul li span {
-    width: auto;
-  }
-  .shopInfo ul li span.count {
-    width: 12%;
-  }
-  .shopInfo ul li span.count label {
-    display: none;
-  }
-  .shopInfo ul li span.title {
-    width: 23%;
-  }
-  .shopInfo ul li span.price,
-  .shopInfo ul li span.priceTotal {
-    width: 22%;
-  }
-  .shopInfo ul li span.delete {
-    width: 12%;
-  }
-  .shopInfo ul li.header {
-    display: block;
-    background-color: #0aa1d2;
-    color: #feffff;
+  .veranstaltung img {
+    width: 200px;
+    float: left;
+    padding-right: 15px;
   }
 }
 @media (min-width: 680px) {
@@ -447,6 +440,9 @@ ul.backendList li:hover {
     margin-left: 10px;
     float: left;
   }
+  .veranstaltung img {
+    width: 250px;
+  }
   /* Table */
   ul.backendList li {
     height: 20px;
@@ -460,6 +456,59 @@ ul.backendList li:hover {
   /* debugging Media Queries */
   nav {
     background: #f91221;
+  }
+  /* Shopping Cart */
+  .shopInfo .endPrice {
+    float: right;
+    padding-right: 90px;
+    margin-right: 15px;
+  }
+  .shopInfo .contactInfo {
+    text-align: center;
+  }
+  .shopInfo input.longButton {
+    margin: auto;
+  }
+  .shopInfo ul {
+    padding: 0 10px;
+  }
+  .shopInfo ul li {
+    padding: 10px;
+  }
+  .shopInfo ul li span {
+    width: auto;
+    vertical-align: bottom;
+  }
+  .shopInfo ul li input {
+    vertical-align: bottom;
+    margin-bottom: 0;
+  }
+  .shopInfo ul li span.count {
+    width: 8%;
+  }
+  .shopInfo ul li span.count label {
+    display: none;
+  }
+  .shopInfo ul li span.title {
+    width: 33%;
+  }
+  .shopInfo ul li span.price,
+  .shopInfo ul li span.priceTotal {
+    width: 15%;
+    text-align: right;
+  }
+  .shopInfo ul li span.type {
+    width: 13%;
+    text-align: center;
+  }
+  .shopInfo ul li span.delete {
+    width: 12%;
+    text-align: right;
+  }
+  .shopInfo ul li.header {
+    display: block;
+    background-color: #0aa1d2;
+    color: #feffff;
   }
 }
 @media (min-width: 961px) {

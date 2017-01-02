@@ -151,7 +151,12 @@ class Program extends DbBasis
      */
     public function getImageForOutput($fileName)
     {
-        return '/data/' . $this->imagePath . '/' . $fileName . '.jpg';
+        $file = '/data/' . $this->imagePath . '/' . $fileName . '.jpg';
+        if (file_exists(realpath(dirname(__FILE__) . '/../../../../public' . $file))) {
+            return $file;
+        }
+
+        return false;
     }
 
     /**
