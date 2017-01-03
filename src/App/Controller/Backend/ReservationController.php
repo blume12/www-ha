@@ -39,20 +39,22 @@ class ReservationController extends BackendController
         $this->setTemplateName('reservation-list');
         $this->setPageTitle('Reservierungen');
 
+        $searchValue = $this->getRequest()->request->get('reservationName');
+
         $reservation = new Reservation($this->getConfig());
-        $reservationData = $reservation->searchData($this->getRequest()->request->get('reservationName'));
+        $reservationData = $reservation->searchData($searchValue);
+
+        if (count($reservationData) == 1) {
+            return new RedirectResponse($this->getRoutePath('adminReservationEdit', ['id' => $reservationData[0]['RId']]));
+        }
 
         foreach ($reservationData as $key => $data) {
             $reservationData[$key]['editRoute'] = $this->getRoutePath('adminReservationEdit', ['id' => $data['RId']]);
             $reservationData[$key]['deleteRoute'] = $this->getRoutePath('adminReservationDelete', ['id' => $data['RId']]);
         }
-        //$reservationData = $reservation->loadData();
-        // $reservation->saveData($formData);
-        //return new RedirectResponse($this->getRoutePath('adminProgramList'));
-
-
         return $this->getResponse([
-            'reservationData' => $reservationData
+            'reservationData' => $reservationData,
+            'reservationName' => $searchValue
         ]);
     }
 

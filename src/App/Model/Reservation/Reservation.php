@@ -62,13 +62,12 @@ class Reservation extends DbBasis
                     FROM reservation 
                     LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                     LEFT JOIN program ON program.PId = reservation_program.PId
-                    WHERE reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :email 
+                    WHERE reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value 
                     GROUP BY reservation.RId";
             $dbqObject->query($sql, ['value' => "%" . $value . "%"]);
 
             $i = 0;
             while ($row = $dbqObject->nextRow()) {
-                var_dump($row);
                 $data[$i] = $row;
                 $data[$i]['index'] = $i;
                 $data[$i]['reservationUntil'] = date('d.m.Y H:i', $data[$i]['createDate'] + 60 * 60 * self::$hoursLater);

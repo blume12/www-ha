@@ -5,6 +5,13 @@
 
 {% block content %}
 
+    <h2>Reservierungen suchen</h2>
+    <form action="{{ reservationSearchAction }}" method="post">
+        <label for="reservationName">Reservierungsnummer / Name / E-Mail:</label>
+        <input type="text" name="reservationName" class="width50" id="reservationName" value="{{ reservationName }}"/>&nbsp;
+        <input type="submit" value="Suchen"/>
+    </form>
+
     {% if reservationData %}
 
         <ul class="backendList reservation">
