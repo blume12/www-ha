@@ -23,12 +23,12 @@
                         <strong>{{ reservation.firstname }} {{ reservation.lastname }}</strong>
                     </span>
                     <span class="email">{{ reservation.email }}</span>
-                    <span class="priceTotal">€ 23, 00</span>
+                    <span class="priceTotal">{{ reservation.priceTotal }}</span>
                     <span class="reservationTime">{{ reservation.reservationUntil }}</span>
                     <span class="row options">
-                    <a href="{{ reservation.editRoute }}">bearbeiten</a>&nbsp;
-                    <a href="{{ reservation.deleteRoute }}">löschen</a>
-                </span>
+                        <a href="{{ reservation.editRoute }}">bearbeiten</a>&nbsp;
+                        <a href="{{ reservation.deleteRoute }}">löschen</a>
+                    </span>
                 </li>
             {% endfor %}
         </ul>

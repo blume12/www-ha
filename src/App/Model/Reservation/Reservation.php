@@ -7,6 +7,7 @@
  */
 namespace App\Model\Reservation;
 
+use App\Helper\Formatter;
 use App\Model\Database\DbBasis;
 
 class Reservation extends DbBasis
@@ -24,13 +25,20 @@ class Reservation extends DbBasis
         $dbqObject = $this->getDbqObject();
 
         $data = [];
-        $sql = "SELECT RId, firstname, lastname, reservationNumber,email, createDate FROM reservation ";
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                SUM(countTickets * price) AS priceTotal, price
+                FROM reservation 
+                LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                LEFT JOIN program ON program.PId = reservation_program.PId
+                GROUP BY reservation.RId";
         $dbqObject->query($sql);
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;
             $data[$i]['index'] = $i;
             $data[$i]['reservationUntil'] = date('d.m.Y H:i', $data[$i]['createDate'] + 60 * 60 * self::$hoursLater);
+            $data[$i]['priceTotal'] = Formatter::formatPrice($data[$i]['priceTotal']);
             $i++;
         }
 
@@ -48,15 +56,23 @@ class Reservation extends DbBasis
         if ($value != '') {
             $dbqObject = $this->getDbqObject();
 
-            $sql = "SELECT RId, firstname, lastname, reservationNumber, email, createDate FROM reservation 
-                WHERE reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :email  ";
+            $sql = "SELECT 
+                    reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                    SUM(countTickets * price) AS priceTotal, price
+                    FROM reservation 
+                    LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                    LEFT JOIN program ON program.PId = reservation_program.PId
+                    WHERE reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :email 
+                    GROUP BY reservation.RId";
             $dbqObject->query($sql, ['value' => "%" . $value . "%"]);
 
             $i = 0;
             while ($row = $dbqObject->nextRow()) {
+                var_dump($row);
                 $data[$i] = $row;
                 $data[$i]['index'] = $i;
                 $data[$i]['reservationUntil'] = date('d.m.Y H:i', $data[$i]['createDate'] + 60 * 60 * self::$hoursLater);
+                $data[$i]['priceTotal'] = Formatter::formatPrice($data[$i]['priceTotal']);
                 $i++;
             }
         } else {
@@ -75,7 +91,14 @@ class Reservation extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT RId, firstname, lastname, reservationNumber, email, createDate FROM reservation WHERE RId = :RId LIMIT 1 ";
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                countTickets, price
+                FROM reservation 
+                LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                LEFT JOIN program ON program.PId = reservation_program.PId
+                WHERE reservation.RId = :RId 
+                LIMIT 1 ";
         $dbqObject->query($sql, ['RId' => $id]);
 
         $data = $dbqObject->nextRow();
