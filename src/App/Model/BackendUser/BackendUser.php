@@ -20,7 +20,7 @@ class BackendUser extends DbBasis
      */
     private static $privilegeValues = [
         'admin' => 'Adminnutzer (Alle Rechte)',
-        'user' => 'Normaler Nutzer'
+        'user' => 'Kassenpersonal'
     ];
 
     /**

@@ -27,6 +27,10 @@ class BackendUserController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setTemplateName('backend-user-list');
         $this->setPageTitle('Nutzer');
 
@@ -56,6 +60,10 @@ class BackendUserController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -109,6 +117,10 @@ class BackendUserController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -157,6 +169,10 @@ class BackendUserController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 

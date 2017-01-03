@@ -35,6 +35,7 @@ class StartPageController extends BackendController
         $this->setPageTitle('Übersicht');
 
         $program = new Program($this->getConfig());
+        $program->loadData(true);
 
         // TODO: load really values for the statistics
 
@@ -51,7 +52,6 @@ class StartPageController extends BackendController
             'countMaxPlaces' => $program->getCountOfAllPlaces(),
             'countFreePlaces' => 1233,
             'countReservation' => 123,
-            'countBooking' => 6,
             'countsPrices' => $countsPrices,
             'reservationSearchAction' => $this->getRoutePath('adminReservationList'),
             'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms()

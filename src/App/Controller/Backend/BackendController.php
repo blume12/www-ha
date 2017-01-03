@@ -12,6 +12,7 @@ use App\Controller\Controller;
 use App\Helper\Session;
 use App\Model\BackendUser\BackendUser;
 use App\Helper\Menu\Menu;
+use App\Model\BackendUser\BackendUserPrivilege;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 abstract class BackendController extends Controller
@@ -29,6 +30,11 @@ abstract class BackendController extends Controller
     protected $notFoundRoute = 'adminNotFound';
 
     /**
+     * @var BackendUserPrivilege|null
+     */
+    private $backendUserPrivilege = null;
+
+    /**
      * BackendController constructor.
      * @param $config
      */
@@ -36,15 +42,30 @@ abstract class BackendController extends Controller
     {
         $config['frontend'] = false;
         parent::__construct($config);
+        $this->backendUserPrivilege = new BackendUserPrivilege($this->getConfig());
+
         $menu = new Menu();
         $menu->addMenu('Startseite', $this->getRoutePath('adminStart'));
         $menu->addMenu('Programme', $this->getRoutePath('adminProgramList'), false);
-        $menu->addMenu('Preise', $this->getRoutePath('adminProgramPriceList'), false);
-        $menu->addMenu('Zeiträume', $this->getRoutePath('adminTimescaleList'), false);
-        $menu->addMenu('Textvorlagen', $this->getRoutePath('adminTextSourceList'), false);
-        $menu->addMenu('Nutzer', $this->getRoutePath('adminBackendUserList'), false);
+
+        if ($this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+
+            $menu->addMenu('Preise', $this->getRoutePath('adminProgramPriceList'), false);
+            $menu->addMenu('Zeiträume', $this->getRoutePath('adminTimescaleList'), false);
+            $menu->addMenu('Textvorlagen', $this->getRoutePath('adminTextSourceList'), false);
+            $menu->addMenu('Nutzer', $this->getRoutePath('adminBackendUserList'), false);
+        }
         $menu->addMenu('Logout', $this->getRoutePath('adminLogout'), false);
         $this->menuArray = $menu->getMenuArray();
+    }
+
+    /**
+     * @return BackendUserPrivilege|null
+     */
+    protected function getBackendUserPrivilege()
+    {
+        return $this->backendUserPrivilege;
+
     }
 
     /**

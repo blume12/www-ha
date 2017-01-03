@@ -74,16 +74,17 @@ class Program extends DbBasis
     /**
      * Return the data array of all programs.
      *
+     * @param $forFrontend
      * @return array
      */
-    public function loadData()
+    public function loadData($forFrontend = true)
     {
         $dbqObject = $this->getDbqObject();
 
         $data = [];
         $sql = "SELECT program.PId, uuid, author, date, title, intro, text, PPId ";
         $sql .= "FROM program ";
-        if (!$this->isFrontend()) {
+        if (!$this->isFrontend() && !$forFrontend) {
             $sql .= "LEFT ";
         }
         $sql .= "JOIN program_programPrice ON program.PId = program_programPrice.PId ";

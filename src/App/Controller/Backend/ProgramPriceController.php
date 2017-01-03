@@ -9,7 +9,6 @@ namespace App\Controller\Backend;
 
 use App\Helper\Helper;
 use App\Model\Program\ProgramPrice;
-use App\Model\Timescale\Timescale;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +33,9 @@ class ProgramPriceController extends BackendController
         $login = $this->checkLogin();
         if ($login instanceof RedirectResponse) {
             return $login;
+        }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
         }
 
         $this->setTemplateName(self::$mainTemplateName . '-list');
@@ -65,6 +67,11 @@ class ProgramPriceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -115,6 +122,10 @@ class ProgramPriceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -161,6 +172,10 @@ class ProgramPriceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 

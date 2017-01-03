@@ -35,6 +35,10 @@ class TimescaleController extends BackendController
             return $login;
         }
 
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setTemplateName(self::$mainTemplateName . '-list');
         $this->setPageTitle('Zeiträume');
 
@@ -64,6 +68,10 @@ class TimescaleController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -114,6 +122,10 @@ class TimescaleController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -159,6 +171,10 @@ class TimescaleController extends BackendController
         $login = $this->checkLogin();
         if ($login instanceof RedirectResponse) {
             return $login;
+        }
+
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
         }
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');

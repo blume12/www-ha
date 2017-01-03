@@ -33,6 +33,10 @@ class TextSourceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
 
         $this->setTemplateName(self::$mainTemplateName . '-list');
         $this->setPageTitle(self::$mainPageTitle . 'n');
@@ -63,6 +67,10 @@ class TextSourceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -113,6 +121,10 @@ class TextSourceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
@@ -159,6 +171,10 @@ class TextSourceController extends BackendController
         if ($login instanceof RedirectResponse) {
             return $login;
         }
+        if (!$this->getBackendUserPrivilege()->onlyAdminAllowed()) {
+            return new RedirectResponse($this->getRoutePath('adminNotFound'));
+        }
+
         $this->setRequest($request);
         $id = $this->getRequest()->attributes->get('id');
 
