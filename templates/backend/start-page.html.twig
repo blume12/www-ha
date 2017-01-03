@@ -25,6 +25,9 @@
         <p>
             Offene Buchungen: 3
         </p>
+        <p {% if countNotVisiblePrograms > 0 %}class="error"{% endif %}>
+            Anzahl der Programme, die nicht online sind: <span>{{ countNotVisiblePrograms }}</span>
+        </p>
     </div>
     <div>
         <h2>Statistiken</h2>

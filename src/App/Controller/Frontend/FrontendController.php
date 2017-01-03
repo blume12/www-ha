@@ -26,6 +26,7 @@ abstract class FrontendController extends Controller
      */
     public function __construct($config)
     {
+        $config['frontend'] = true;
         parent::__construct($config);
 
         $menu = new Menu();

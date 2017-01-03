@@ -68,4 +68,15 @@ class DbQuery
     {
         return $this->sqlStatement->fetch(\PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Return the number of the database query.
+     *
+     * @return int
+     */
+    public function numberOfRows()
+    {
+        return count($this->sqlStatement->fetchAll(\PDO::FETCH_ASSOC));
+    }
+
 }

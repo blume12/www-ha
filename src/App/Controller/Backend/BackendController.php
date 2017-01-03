@@ -34,6 +34,7 @@ abstract class BackendController extends Controller
      */
     public function __construct($config)
     {
+        $config['frontend'] = false;
         parent::__construct($config);
         $menu = new Menu();
         $menu->addMenu('Startseite', $this->getRoutePath('adminStart'));

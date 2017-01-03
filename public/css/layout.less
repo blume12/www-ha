@@ -1,52 +1,6 @@
 /* TODO: this should be less :) */
 
-/* debugging Media Queries Colors*/
-@debugMedia0: #c41af9;
-@debugMedia1: #2311f9;
-@debugMedia2: #35f90b;
-@debugMedia3: #f91221;
-@debugMedia4: #0cf9cb;
-@debugMedia5: #e8f913;
-@debugMedia6: #f900a1;
-
-/* Colors */
-@textWhite: #feffff;
-@textBlack: #2c2c2c;
-
-@orange: #e58523;
-@blue: #0aa1d2;
-
-@blueLighter: #eff2f9;
-@grayLight: #686d73;
-@white: #feffff;
-@backgroundContent: #fafcf1;
-
-@aNormal: #dd6527;
-@aHover: #68390f;
-
-/* Color Textarea, Button*/
-@button: #0aa1d2;
-@buttonHover: #1a75d2;
-
-@textAreaBorder: #686d73;
-@textArea: #feffff;
-
-/* Percent Items */
-
-@content: 20%;
-@contentSmallScreen: 5%;
-@contentMiddleScreen: 15%;
-
-/* Filmstripe */
-@heightSmall: 50px;
-@heightMiddle: 65px;
-@heightNormal: 80px;
-
-/* Space */
-@contentSmallSpace: 10px;
-@footerHeight: 2em;
-
-@maxWidthContent: 700px;
+@import "variables.less";
 
 body, html {
   margin: 0;
@@ -378,22 +332,22 @@ input[type=submit].longButton{
 /* Fehlermeldungen */
 
 .errorBox {
-  border: 3px solid #a10d08;
+  border: 3px solid @colorError;
   padding: 10px;
   margin-top: 10px;
-  color: #a10d08;
+  color: @colorError;
   font-weight: bold;
-  background-color: #ffe7e5;
+  background-color:@colorErrorLight;
 }
 
 input.error, textarea.error, select.error {
-  border: 2px solid #a10d08;
-  color: #a10d08;
-  background-color: #ffe7e5;
+  border: 2px solid @colorError;
+  color: @colorError;
+  background-color: @colorErrorLight;
 }
 
 label.error {
-  color: #a10d08;
+  color: @colorError;
   font-weight: bold;
 }
 
@@ -457,43 +411,6 @@ label.error {
 
 .noResult {
   padding: 30px 0;
-}
-
-ul.backendList {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul.backendList li {
-  padding: 5px 2px;
-  height: 40px;
-}
-
-ul.backendList li .row.options {
-  width: 30%;
-  float: right;
-}
-
-ul.backendList li .titleText {
-  width: 65%;
-  float: left;
-}
-
-ul.backendList li.head {
-  background-color: @blue;
-  color: #fff;
-}
-
-ul.backendList li.firstLine {
-  background-color: @textArea;
-}
-
-ul.backendList li.secondLine {
-  background-color: #d5d3c8;
-}
-
-ul.backendList li:hover {
-  background-color: #64a7d6;
 }
 
 /* Media Queries */
@@ -589,19 +506,6 @@ ul.backendList li:hover {
     img {
       width: 250px;
     }
-  }
-
-  /* Table */
-  ul.backendList li {
-    height: 20px;
-  }
-
-  ul.backendList li .row.options {
-    width: 20%;
-  }
-
-  ul.backendList li .titleText {
-    width: 75%;
   }
 
   /* debugging Media Queries */

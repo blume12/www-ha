@@ -16,7 +16,9 @@
         <ul class="backendList">
             <li class="head">Titel<span class="row options">Optionen</span></li>
             {% for program in programData %}
-                <li class="{% if program.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
+                <li class="{% if program.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}
+                            {% if program.PPId  == '' %} error{% endif %}">
+                    {% if program.PPId  == '' %}<img src="/images/backend/warning.png" alt="Warnung"/> {% endif %}
                     <span class="titleText">
                         {{ program.title }}
                     </span>

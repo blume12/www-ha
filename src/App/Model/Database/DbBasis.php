@@ -52,4 +52,14 @@ abstract class DbBasis
         return $this->config;
     }
 
+    /**
+     * Return if it is frontend.
+     *
+     * @return bool
+     */
+    protected function isFrontend()
+    {
+        return $this->getConfig()['frontend'];
+    }
+
 }

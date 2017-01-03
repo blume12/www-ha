@@ -18,7 +18,13 @@ class Program extends DbBasis
      */
     private $fileUpload = null;
 
+    /**
+     * @var int
+     */
     private static $placesPerProgram = 95;
+    /**
+     * @var array
+     */
     private $currentData = [];
 
     /**
@@ -75,7 +81,14 @@ class Program extends DbBasis
         $dbqObject = $this->getDbqObject();
 
         $data = [];
-        $sql = "SELECT PId, uuid, author, date, title, intro, text FROM program ";
+        $sql = "SELECT program.PId, uuid, author, date, title, intro, text, PPId ";
+        $sql .= "FROM program ";
+        if (!$this->isFrontend()) {
+            $sql .= "LEFT ";
+        }
+        $sql .= "JOIN program_programPrice ON program.PId = program_programPrice.PId ";
+        $sql .= 'GROUP BY program.PId ';
+
         $dbqObject->query($sql);
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
@@ -87,6 +100,19 @@ class Program extends DbBasis
         $this->currentData = $data;
 
         return $data;
+    }
+
+    public function getCountOfNotVisiblePrograms()
+    {
+        $dbqObject = $this->getDbqObject();
+
+        $sql = "SELECT program.PId, uuid, author, date, title, intro, text FROM program 
+                LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
+                WHERE PPId IS NULL
+                GROUP BY program.PId ";
+        $dbqObject->query($sql);
+
+        return $dbqObject->numberOfRows();
     }
 
     /**
@@ -227,11 +253,21 @@ class Program extends DbBasis
         return $formError;
     }
 
+    /**
+     * Return all programs.
+     *
+     * @return int
+     */
     public function getCountOfPrograms()
     {
         return count($this->currentData);
     }
 
+    /**
+     * Return the number of all Places of the shop.
+     *
+     * @return int
+     */
     public function getCountOfAllPlaces()
     {
         return count($this->currentData) * self::$placesPerProgram;

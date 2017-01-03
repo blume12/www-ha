@@ -342,35 +342,6 @@ label.error {
 .noResult {
   padding: 30px 0;
 }
-ul.backendList {
-  list-style-type: none;
-  padding: 0;
-}
-ul.backendList li {
-  padding: 5px 2px;
-  height: 40px;
-}
-ul.backendList li .row.options {
-  width: 30%;
-  float: right;
-}
-ul.backendList li .titleText {
-  width: 65%;
-  float: left;
-}
-ul.backendList li.head {
-  background-color: #0aa1d2;
-  color: #fff;
-}
-ul.backendList li.firstLine {
-  background-color: #feffff;
-}
-ul.backendList li.secondLine {
-  background-color: #d5d3c8;
-}
-ul.backendList li:hover {
-  background-color: #64a7d6;
-}
 /* Media Queries */
 @media (min-width: 320px) {
   /* smartphones, iPhone, portrait 480x320 phones */
@@ -442,16 +413,6 @@ ul.backendList li:hover {
   }
   .veranstaltung img {
     width: 250px;
-  }
-  /* Table */
-  ul.backendList li {
-    height: 20px;
-  }
-  ul.backendList li .row.options {
-    width: 20%;
-  }
-  ul.backendList li .titleText {
-    width: 75%;
   }
   /* debugging Media Queries */
   nav {

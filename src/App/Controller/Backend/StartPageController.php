@@ -10,7 +10,6 @@ namespace App\Controller\Backend;
 use App\Helper\StandardStock;
 use App\Model\BackendUser\BackendUser;
 use App\Model\Program\Program;
-use App\Model\Program\ProgramPrice;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,15 +35,12 @@ class StartPageController extends BackendController
         $this->setPageTitle('Übersicht');
 
         $program = new Program($this->getConfig());
-        $programData = $program->loadData();
-
-        $programPrice = new ProgramPrice($this->getConfig());
 
         // TODO: load really values for the statistics
 
         $countsPrices = [];
-            $countsPrices['reservation'][1]['count'] = 124;
-            $countsPrices['reservation'][1]['name'] = 'normalem Preis';
+        $countsPrices['reservation'][1]['count'] = 124;
+        $countsPrices['reservation'][1]['name'] = 'normalem Preis';
 
         $countsPrices['reservation'][2]['count'] = 2;
         $countsPrices['reservation'][2]['name'] = 'reduziertem Preis';
@@ -57,7 +53,8 @@ class StartPageController extends BackendController
             'countReservation' => 123,
             'countBooking' => 6,
             'countsPrices' => $countsPrices,
-            'reservationSearchAction' => $this->getRoutePath('adminReservationList')
+            'reservationSearchAction' => $this->getRoutePath('adminReservationList'),
+            'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms()
         ]);
     }
 }

@@ -1,3 +1,9 @@
+/* debugging Media Queries Colors*/
+/* Colors */
+/* Color Textarea, Button*/
+/* Percent Items */
+/* Filmstripe */
+/* Space */
 .width50 {
   vertical-align: top;
   width: 100%;
@@ -5,6 +11,12 @@
 .infoList span {
   width: 150px;
   display: inline-block;
+}
+p.error {
+  color: #a10d08;
+}
+p.error span {
+  font-weight: bold;
 }
 input[type=radio] {
   width: auto;
@@ -14,6 +26,43 @@ input[type=radio] {
 label.radio {
   width: auto;
   float: left;
+}
+ul.backendList {
+  list-style-type: none;
+  padding: 0;
+}
+ul.backendList li {
+  padding: 5px 2px;
+  height: 40px;
+}
+ul.backendList li .row.options {
+  width: 30%;
+  float: right;
+}
+ul.backendList li .titleText {
+  width: 65%;
+  float: left;
+}
+ul.backendList li img {
+  float: left;
+  padding-right: 10px;
+  width: 20px;
+}
+ul.backendList li.head {
+  background-color: #0aa1d2;
+  color: #fff;
+}
+ul.backendList li.firstLine {
+  background-color: #feffff;
+}
+ul.backendList li.secondLine {
+  background-color: #d5d3c8;
+}
+ul.backendList li.error {
+  background-color: #ffe7e5;
+}
+ul.backendList li:hover {
+  background-color: #64a7d6;
 }
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
@@ -31,8 +80,18 @@ label.radio {
     float: right;
   }
   div.content {
-    margin: auto ;
+    margin: auto;
     max-width: 100%;
+  }
+  /* Table */
+  ul.backendList li {
+    height: 20px;
+  }
+  ul.backendList li .row.options {
+    width: 20%;
+  }
+  ul.backendList li .titleText {
+    width: 75%;
   }
   .backendList.reservation span {
     display: inline-block;
