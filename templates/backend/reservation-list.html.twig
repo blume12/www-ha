@@ -16,6 +16,7 @@
 
         <ul class="backendList reservation">
             <li class="head">
+                <span class="status">Status</span>
                 <span class="reservationNumber">ReservierungsNr</span>
                 <span class="name">Name</span>
                 <span class="email">Email</span>
@@ -25,6 +26,9 @@
             </li>
             {% for reservation in reservationData %}
                 <li class="{% if reservation.index is divisible by(2) %}firstLine{% else %}secondLine{% endif %}">
+                    <span class="status">
+                        <img src="/images/backend/status-{{ reservation.status }}.png" alt="Status"/>
+                    </span>
                     <span class="reservationNumber">{{ reservation.reservationNumber }}</span>
                     <span class="name">
                         <strong>{{ reservation.firstname }} {{ reservation.lastname }}</strong>

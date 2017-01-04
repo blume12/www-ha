@@ -10,6 +10,7 @@ namespace App\Controller\Backend;
 use App\Helper\StandardStock;
 use App\Model\BackendUser\BackendUser;
 use App\Model\Program\Program;
+use App\Model\Reservation\Reservation;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -46,6 +47,8 @@ class StartPageController extends BackendController
         $countsPrices['reservation'][2]['count'] = 2;
         $countsPrices['reservation'][2]['name'] = 'reduziertem Preis';
 
+        $reservation = new Reservation($this->getConfig());
+
         return $this->getResponse([
             'user' => $userData,
             'countProgram' => $program->getCountOfPrograms(),
@@ -54,7 +57,11 @@ class StartPageController extends BackendController
             'countReservation' => 123,
             'countsPrices' => $countsPrices,
             'reservationSearchAction' => $this->getRoutePath('adminReservationList'),
-            'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms()
+            'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms(),
+            'countReservationAll' => $reservation->getCountReservationByStatus('all'),
+            'countReservationOpen' => $reservation->getCountReservationByStatus('open'),
+            'countReservationPaid' => $reservation->getCountReservationByStatus('paid'),
+            'countReservationExpired' => $reservation->getCountReservationByStatus('expired'),
         ]);
     }
 }

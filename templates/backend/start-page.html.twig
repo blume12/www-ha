@@ -18,16 +18,25 @@
         </form>
     </div>
     <div class="width50 right">
-        <h2>Offene Reservierungen/Buchungen</h2>
-        <p>
-            Offene Reservierungen: 10
-        </p>
-        <p>
-            Offene Buchungen: 3
-        </p>
+        <h2>Programminformationen</h2>
         <p {% if countNotVisiblePrograms > 0 %}class="error"{% endif %}>
-            Anzahl der Programme, die nicht online sind: <span>{{ countNotVisiblePrograms }}</span>
+            Anzahl der Programme, die nicht online sind:
+            <a href="{{ linkProgram }}"><span>{{ countNotVisiblePrograms }}</span></a>
         </p>
+        <h2>Anzahl der Reservierungen</h2>
+        <p>
+            Anzahl <strong>aller</strong> Reservierungen: {{ countReservationAll }}
+        </p>
+        <p>
+            Anzahl <strong>offene</strong> Reservierungen: {{ countReservationOpen }}
+        </p>
+        <p>
+            Anzahl <strong>bezahlte</strong> Reservierungen: {{ countReservationPaid }}
+        </p>
+        <p>
+            Anzahl <strong>abgelaufener</strong> Reservierungen: {{ countReservationExpired }}
+        </p>
+
     </div>
     <div>
         <h2>Statistiken</h2>

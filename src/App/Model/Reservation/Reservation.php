@@ -59,7 +59,7 @@ class Reservation extends DbBasis
         $data = [];
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                SUM(countTickets * price) AS priceTotal, price
+                SUM(countTickets * price) AS priceTotal, price, status
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -92,7 +92,7 @@ class Reservation extends DbBasis
 
             $sql = "SELECT 
                     reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                    SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets
+                    SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets, status
                     FROM reservation 
                     LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                     LEFT JOIN program ON program.PId = reservation_program.PId ";
@@ -325,6 +325,33 @@ class Reservation extends DbBasis
         $dataSql['reservationNumber'] = $reservationNumber;
         $dataSql['status'] = $status;
         $dbqObject->query($sql, $dataSql);
+    }
+
+    /**
+     * Return the count of reservation by the given status.
+     *
+     * @param $status
+     * @return int
+     */
+    public function getCountReservationByStatus($status)
+    {
+        $dbqObject = $this->getDbqObject();
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                SUM(countTickets * price) AS priceTotal, price
+                FROM reservation 
+                LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                LEFT JOIN program ON program.PId = reservation_program.PId
+                WHERE status != 'delete' ";
+        $sqlData = [];
+        if ($status != 'all') {
+            $sql .= "AND status = :status ";
+            $sqlData = ['status' => $status];
+        }
+        $sql .= "GROUP BY reservation.RId";
+        $dbqObject->query($sql, $sqlData);
+        return $dbqObject->numberOfRows();
+
     }
 
 }

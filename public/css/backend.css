@@ -103,10 +103,17 @@ ul.backendList li:hover {
     width: 20%;
   }
   .backendList.reservation span.email {
-    width: 25%;
+    width: 20%;
   }
   .backendList.reservation span.reservationNumber {
     width: 15%;
+  }
+  .backendList.reservation span.status {
+    width: 5%;
+    text-align: center;
+  }
+  .backendList.reservation span.status img {
+    padding-left: 10px;
   }
   .backendList.reservation span.priceTotal {
     width: 10%;
