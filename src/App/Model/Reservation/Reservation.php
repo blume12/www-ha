@@ -21,12 +21,31 @@ class Reservation extends DbBasis
     private static $hoursLater = 72;
 
     /**
+     * @var array
+     */
+    private static $statusArray = [
+        'open' => 'offen',
+        'expired' => 'Reservierung abgelaufen',
+        'confirm' => 'Reservierung bestätigt',
+        'paid' => 'bezahlt & abgeholt'
+    ];
+
+    /**
      * @return int
      */
     public static function getHoursLater()
     {
         return self::$hoursLater;
     }
+
+    /**
+     * @return array
+     */
+    public static function getStatusArray()
+    {
+        return self::$statusArray;
+    }
+
 
     /**
      * Return the data array of all reservation.
@@ -79,11 +98,10 @@ class Reservation extends DbBasis
                     LEFT JOIN program ON program.PId = reservation_program.PId ";
             if (!$groupBy) {
                 $sql .= "WHERE reservation.RId = :value AND status != 'delete' ";
+                $sql .= "GROUP BY RPId ";
             } else {
                 $sql .= "WHERE (reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value ) 
                     AND status != 'delete' ";
-            }
-            if ($groupBy) {
                 $sql .= "GROUP BY reservation.RId";
             }
             $sqlData = ['value' => "%" . $value . "%"];
@@ -118,7 +136,7 @@ class Reservation extends DbBasis
 
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                countTickets, price, program.PId, priceMode, countTickets, status
+                countTickets, price, program.PId, priceMode, countTickets, status, reservation.text
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -148,13 +166,14 @@ class Reservation extends DbBasis
         if ($entry == false || count($entry) <= 0) {
             $sql = "INSERT INTO reservation (reservationNumber, firstname,lastname, email, createDate, status) 
                     VALUES (:reservationNumber, :firstname, :lastname, :email, :createDate, :status)";
+
+            $dataSql['createDate'] = time();
         } else {
             $sql = "UPDATE reservation  SET 
                     'reservationNumber' = :reservationNumber,
                     'firstname' = :firstname, 
                     'lastname' = :lastname, 
                     'email' = :email,
-                    'createDate' = :createDate,
                     'status' = :status
                      WHERE RId = :RId ";
             $dataSql['RId'] = intval($data['id'], 10);
@@ -163,7 +182,6 @@ class Reservation extends DbBasis
         $dataSql['reservationNumber'] = uniqid();
         $dataSql['lastname'] = trim($data['lastname']);
         $dataSql['email'] = trim($data['email']);
-        $dataSql['createDate'] = time();
         $dataSql['status'] = 'open';
         $dbqObject->query($sql, $dataSql);
 
@@ -187,6 +205,27 @@ class Reservation extends DbBasis
             $dbqObject->query($sql, $dataSql);
         }
         $this->sendMail(trim($data['email']), $emailData);
+    }
+
+    /**
+     * Save data in the backend.
+     *
+     * @param $data
+     */
+    public function saveDataInBackend($data)
+    {
+        $dbqObject = $this->getDbqObject();
+        $dataSql = [];
+        $sql = "UPDATE reservation SET 
+                'status' = :status,
+                'text' = :text
+                 WHERE RId = :RId ";
+
+        $dataSql['RId'] = intval($data['id'], 10);
+
+        $dataSql['status'] = $data['status'];
+        $dataSql['text'] = trim($data['text']);
+        $dbqObject->query($sql, $dataSql);
     }
 
     /**
@@ -226,20 +265,6 @@ class Reservation extends DbBasis
         $dataSql['RId'] = $id;
         $dbqObject->query($sql, $dataSql);
     }
-
-    /**
-     * Check Errors for the form data of a reservation.
-     *
-     * @param $formData
-     * @return array
-     */
-    public function checkErrors($formData)
-    {
-        // TODO: check all the data of a program
-        $formError = [];
-        return $formError;
-    }
-
 
     /**
      * Return the reservation data by the reservation number.

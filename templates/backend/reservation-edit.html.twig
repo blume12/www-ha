@@ -15,30 +15,26 @@
         <span>reserviert bis:</span> {{ formData.reservationUntil }}<br/>
     </p>
     <form action="{{ formAction }}" method="post" name="formComment">
-        <p>Status:</p>
-        <input id="status_open" type="radio" size="20" name="status" value="open"
-               {% if formData.status == 'open' %}checked="checked"{% endif %}
-               class="width65{% if errorData.status %} error{% endif %}"/>
-        <label for="status_open" class="radio{% if errorData.status %} error{% endif %}">offen</label>
-        <div class="clear"></div>
-        <input id="status_expired" type="radio" size="20" name="status" value="expired"
-               {% if formData.status == 'expired' %}checked="checked"{% endif %}
-               class="width65{% if errorData.status %} error{% endif %}"/>
-        <label for="status_expired" class="radio{% if errorData.status %} error{% endif %}">Reservierung
-            abgelaufen</label>
-        <div class="clear"></div>
-        <input id="status_confirm" type="radio" size="20" name="status" value="confirm"
-               {% if formData.status == 'confirm' %}checked="checked"{% endif %}
-               class="width65{% if errorData.status %} error{% endif %}"/>
-        <label for="status_confirm" class="radio{% if errorData.status %} error{% endif %}">Reservierung
-            bestätigt</label>
-        <div class="clear"></div>
-        <input id="status_paid" type="radio" size="20" name="status" value="paid"
-               {% if formData.status == 'paid' %}checked="checked"{% endif %}
-               class="width65{% if errorData.status %} error{% endif %}"/>
-        <label for="status_paid" class="radio{% if errorData.status %} error{% endif %}">bezahlt & abgeholt</label>
-        <div class="clear"></div>
 
+        <div class="width50">
+            <p>Status:</p>
+            {% for key, status in statusData %}
+
+                <input id="status_{{ key }}" type="radio" size="20" name="status" value="{{ key }}"
+                       {% if formData.status == key %}checked="checked"{% endif %}
+                       class="width65{% if errorData.status %} error{% endif %}"/>
+                <label for="status_{{ key }}"
+                       class="radio{% if errorData.status %} error{% endif %}">{{ status }}</label>
+                <div class="clear"></div>
+            {% endfor %}
+        </div>
+        <div class="width50 bottom">
+            <label for="text" class="{% if errorData.text %}error{% endif %}">Bemerkungen:</label>
+            <textarea id="text" name="text" rows="4"
+                      class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
+
+            <div class="clear"></div>
+        </div>
         <div class="shopInfo">
             <ul>
                 <li class="header">
@@ -47,22 +43,24 @@
                     <span class="title">Blocktitel</span>
                     <span class="price">Einzelpreis</span>
                     <span class="priceTotal">Gesamtpreis</span>
-                    <span class="delete">Löschen</span>
+                    {#<span class="delete">Löschen</span>#}
                 </li>
                 {% for program in programData.list %}
                     <li>
                         <span class="type">{% if program.priceMode == 2 %} ermäßigter Preis{% else %}normaler Preis{% endif %}</span>
                         <span class="count">
-                            <label for="count_{{ program.pid }}_{{ program.priceMode }}">Anzahl: </label>
+                           {#  <label for="count_{{ program.pid }}_{{ program.priceMode }}">Anzahl: </label>
                             <input name="count_{{ program.pid }}_{{ program.priceMode }}"
                                    id="count_{{ program.pid }}_{{ program.priceMode }}" type="text"
                                    value="{{ program.count }}"
                                    class="count {% if program.error %} error{% endif %}"/>
+                                   #}
+                            {{ program.count }}
                         </span>
                         <span class="title">{{ program.title }} </span>
                         <span class="price">{{ program.price }}</span>
                         <span class="priceTotal">{{ program.priceTotal }}</span>
-                        <span class="delete"><a href="{{ program.deleteLink }}">Löschen</a></span>
+                        {#<span class="delete"><a href="{{ program.deleteLink }}">Löschen</a></span>#}
                     </li>
                 {% endfor %}
             </ul>
@@ -70,11 +68,6 @@
                 <span class="endPrice">Gesamtpreis:&nbsp;&nbsp;<strong>{{ programData.priceTotal }}</strong></span>
             </div>
         </div>
-        <div class="clear"></div>
-        <label for="text" class="{% if errorData.text %}error{% endif %}">Bemerkungen:</label>
-        <textarea id="text" name="text" rows="10"
-                  class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
-
         <div class="clear"></div>
         <input name="send" type="submit" value="Speichern">
     </form>

@@ -83,24 +83,22 @@ class ReservationController extends BackendController
         $programData = $shoppingCart->loadShoppingCartDataFromDB($id);
 
 
+        $formData = $reservation->loadSpecificEntry($id);
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
-            $formData = $reservation->loadSpecificEntry($id);
             if ($formData == null) {
-
                 return new RedirectResponse($this->getRoutePath('adminNotFound'));
             }
         } else {
             /* Check for errors */
-            $formData = $this->getRequest()->request->all();
-            $formError = $reservation->checkErrors($formData);
+            $formData = array_merge($formData, $this->getRequest()->request->all());
         }
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
             $formData['id'] = $id;
-            $reservation->saveData($formData);
+            $reservation->saveDataInBackend($formData);
 
             return new RedirectResponse($this->getRoutePath(self::$routeNameList));
         }
@@ -111,6 +109,7 @@ class ReservationController extends BackendController
             'formData' => $formData,
             'errorData' => $formError,
             'programData' => $programData,
+            'statusData' => Reservation::getStatusArray()
         ]);
     }
 
