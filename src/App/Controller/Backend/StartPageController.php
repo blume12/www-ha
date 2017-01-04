@@ -62,6 +62,7 @@ class StartPageController extends BackendController
             'countReservationOpen' => $reservation->getCountReservationByStatus('open'),
             'countReservationPaid' => $reservation->getCountReservationByStatus('paid'),
             'countReservationExpired' => $reservation->getCountReservationByStatus('expired'),
+            'linkProgram' => $this->getRoutePath('adminProgramList')
         ]);
     }
 }
