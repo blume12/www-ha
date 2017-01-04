@@ -1,0 +1,15 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1>Karten bestellt</h1>
+{% endblock %}
+
+{% block content %}
+    <p>
+        Vielen Dank für die Bestellung der Karten für die Flensburger Kurzfilmtage. Sie erhalten von uns eine E-Mail
+        in der ein Link zur Bestätigung der Bestellung zu finden ist.
+    </p>
+
+    <p>
+        Die Reservierung verfäält innerhalb von {{ hoursReservation }} Stunden.
+    </p>
+{% endblock %}

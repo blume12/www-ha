@@ -21,6 +21,14 @@ class Reservation extends DbBasis
     private static $hoursLater = 72;
 
     /**
+     * @return int
+     */
+    public static function getHoursLater()
+    {
+        return self::$hoursLater;
+    }
+
+    /**
      * Return the data array of all reservation.
      *
      * @return array
@@ -180,13 +188,14 @@ class Reservation extends DbBasis
     {
         $textSource = new TextSource($this->getConfig());
         // TODO: not only use the first text source.
-        $textSourceData = $textSource->loadData()[0];
-
-        $mail = new Mail();
-        $mail->setSubject($textSourceData['title']);
-        $mail->setEmail($email);
-        $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
-        $mail->sendMail();
+        if ($textSource->loadData()) {
+            $textSourceData = $textSource->loadData()[0];
+            $mail = new Mail();
+            $mail->setSubject($textSourceData['title']);
+            $mail->setEmail($email);
+            $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
+            $mail->sendMail();
+        }
     }
 
 

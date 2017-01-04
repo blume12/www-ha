@@ -25,6 +25,7 @@ $routes->add('siteNotice', new Route('/impressum', ['_controller' => 'App\Contro
 $routes->add('contact', new Route('/kontakt', ['_controller' => 'App\Controller\Frontend\ContactController::indexAction']));
 $routes->add('shoppingCartList', new Route('/warenkorb', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::overviewAction']));
 $routes->add('shoppingCartDelete', new Route('/warenkorb-loeschen/{id}-{priceMode}', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::deleteAction'], ['id' => '\d+', 'priceMode' => '\d+']));
+$routes->add('shoppingCartConfirm', new Route('/warenkorb-bestellt', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::confirmAction']));
 $routes->add('reservationConfirm', new Route('/reservierung-bestaetigen/{reservationNumber}', ['_controller' => 'App\Controller\Frontend\ReservationController::confirmAction'], ['reservationNumber' => '\w+\d+']));
 $routes->add('reservationExpired', new Route('/reservierung-abgelaufen', ['_controller' => 'App\Controller\Frontend\ReservationController::expiredAction']));
 $routes->add('notFound', new Route('/not-found', ['_controller' => 'App\Controller\Frontend\NotFoundController::notFoundAction']));

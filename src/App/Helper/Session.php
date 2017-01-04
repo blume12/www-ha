@@ -47,6 +47,21 @@ class Session
     }
 
     /**
+     * Remove session by key.
+     *
+     * @param $key
+     * @return bool
+     */
+    public static function removeSessionByKey($key)
+    {
+        if (!isset($_SESSION[$key])) {
+            return false;
+        }
+        $_SESSION[$key] = null;
+        return true;
+    }
+
+    /**
      * Set a session.
      *
      * @param $key

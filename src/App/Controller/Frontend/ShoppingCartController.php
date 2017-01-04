@@ -98,6 +98,8 @@ class ShoppingCartController extends FrontendController
 
 
             $reservation->saveData($data);
+            $shoppingCart->deleteAllShoppingCartData();
+            return new RedirectResponse($this->getRoutePath('shoppingCartConfirm'));
         }
 
         return $this->getResponse([
@@ -135,5 +137,18 @@ class ShoppingCartController extends FrontendController
         }
 
         return new RedirectResponse($this->getRoutePath('shoppingCartList'));
+    }
+
+    /**
+     * Loads the action for the confirm action.
+     *
+     * @return Response
+     */
+    public function confirmAction()
+    {
+        $this->setTemplateName('shopping-cart-confirm');
+        $this->setPageTitle('Warenkorb bestellt');
+
+        return $this->getResponse(['hoursReservation' => Reservation::getHoursLater()]);
     }
 }

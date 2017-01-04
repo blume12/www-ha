@@ -67,6 +67,15 @@ class ShoppingCart extends DbBasis
     }
 
     /**
+     * Delete all shopping cart data from the session.
+     */
+    public function deleteAllShoppingCartData()
+    {
+        $this->shoppingCartSession->removeSessionByKey(self::$sessionName);
+
+    }
+
+    /**
      * @param $programId
      * @param $countTickets
      * @param $countSaleTickets
