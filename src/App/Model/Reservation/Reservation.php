@@ -61,9 +61,10 @@ class Reservation extends DbBasis
 
     /**
      * @param $value
+     * @param bool $groupBy
      * @return array
      */
-    public function searchData($value)
+    public function searchData($value, $groupBy = true)
     {
 
         $data = [];
@@ -72,14 +73,24 @@ class Reservation extends DbBasis
 
             $sql = "SELECT 
                     reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                    SUM(countTickets * price) AS priceTotal, price
+                    SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets
                     FROM reservation 
                     LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
-                    LEFT JOIN program ON program.PId = reservation_program.PId
-                    WHERE (reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value ) 
-                    AND status != 'delete'
-                    GROUP BY reservation.RId";
-            $dbqObject->query($sql, ['value' => "%" . $value . "%"]);
+                    LEFT JOIN program ON program.PId = reservation_program.PId ";
+            if (!$groupBy) {
+                $sql .= "WHERE reservation.RId = :value AND status != 'delete' ";
+            } else {
+                $sql .= "WHERE (reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value ) 
+                    AND status != 'delete' ";
+            }
+            if ($groupBy) {
+                $sql .= "GROUP BY reservation.RId";
+            }
+            $sqlData = ['value' => "%" . $value . "%"];
+            if (!$groupBy) {
+                $sqlData = ['value' => $value];
+            }
+            $dbqObject->query($sql, $sqlData);
 
             $i = 0;
             while ($row = $dbqObject->nextRow()) {
@@ -107,7 +118,7 @@ class Reservation extends DbBasis
 
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                countTickets, price
+                countTickets, price, program.PId, priceMode, countTickets, status
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -188,14 +199,14 @@ class Reservation extends DbBasis
     {
         $textSource = new TextSource($this->getConfig());
         // TODO: not only use the first text source.
-        if ($textSource->loadData()) {
-            $textSourceData = $textSource->loadData()[0];
-            $mail = new Mail();
-            $mail->setSubject($textSourceData['title']);
-            $mail->setEmail($email);
-            $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
-            $mail->sendMail();
-        }
+        //  if ($textSource->loadData() != false) {
+        $textSourceData = $textSource->loadData()[0];
+        $mail = new Mail();
+        $mail->setSubject($textSourceData['title']);
+        $mail->setEmail($email);
+        $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
+        $mail->sendMail();
+        //  }
     }
 
 

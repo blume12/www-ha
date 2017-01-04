@@ -12,6 +12,7 @@ use App\Helper\Session;
 use App\Model\Database\DbBasis;
 use App\Model\Program\Program;
 use App\Model\Program\ProgramPrice;
+use App\Model\Reservation\Reservation;
 
 class ShoppingCart extends DbBasis
 {
@@ -150,6 +151,46 @@ class ShoppingCart extends DbBasis
                         $i++;
                     }
                 }
+            }
+            $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);
+        }
+        return $shoppingCartData;
+    }
+
+    // TODO: Refactor the method!!!
+    public function loadShoppingCartDataFromDB($id)
+    {
+        $shoppingCartData = [];
+        $shoppingCartData['priceTotal'] = 0;
+        $program = new Program($this->getConfig());
+        $programPrice = new ProgramPrice($this->getConfig());
+        $i = 0;
+        $reservation = new Reservation($this->getConfig());
+        $reservationData = $reservation->searchData($id, false);
+        if ($reservationData) {
+            $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);
+            foreach ($reservationData as $key => $data) {
+                $programId = $data['PId'];
+                $priceMode = $data['priceMode'];
+                $programData = $program->loadSpecificEntry($programId);
+                if ($programData) {
+                    $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
+                    $shoppingCartData['list'][$i]['count'] = $data['countTickets'];
+                    $shoppingCartData['list'][$i]['title'] = $programData['title'];
+                    $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
+
+                    $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
+
+                    $simplePrice = str_replace(',', '.', $simplePrice);
+
+                    $shoppingCartData['list'][$i]['price'] = Formatter::formatPrice($simplePrice);
+                    $shoppingCartData['list'][$i]['priceTotal'] = Formatter::formatPrice($simplePrice * $data['countTickets']);
+
+                    $shoppingCartData['priceTotal'] += $simplePrice * $data['countTickets'];
+
+                    $i++;
+                }
+
             }
             $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);
         }

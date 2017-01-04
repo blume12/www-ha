@@ -10,6 +10,7 @@ namespace App\Controller\Backend;
 
 use App\Helper\Helper;
 use App\Model\Reservation\Reservation;
+use App\Model\ShoppingCart\ShoppingCart;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -78,6 +79,8 @@ class ReservationController extends BackendController
         $this->setPageTitle('Reservierung bearbeiten');
 
         $reservation = new Reservation($this->getConfig());
+        $shoppingCart = new ShoppingCart($this->getConfig());
+        $programData = $shoppingCart->loadShoppingCartDataFromDB($id);
 
 
         $formError = [];
@@ -107,6 +110,7 @@ class ReservationController extends BackendController
             'formAction' => $this->getRoutePath(self::$routeNameEdit, ['id' => $id]),
             'formData' => $formData,
             'errorData' => $formError,
+            'programData' => $programData,
         ]);
     }
 
