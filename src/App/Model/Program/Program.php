@@ -77,7 +77,7 @@ class Program extends DbBasis
      * @param $forFrontend
      * @return array
      */
-    public function loadData($forFrontend = true)
+    public function loadData($forFrontend = false)
     {
         $dbqObject = $this->getDbqObject();
 
@@ -103,6 +103,11 @@ class Program extends DbBasis
         return $data;
     }
 
+    /**
+     * Get the number of all not visible programs.
+     *
+     * @return int
+     */
     public function getCountOfNotVisiblePrograms()
     {
         $dbqObject = $this->getDbqObject();
@@ -132,7 +137,9 @@ class Program extends DbBasis
         $dbqObject->query($sql, ['PId' => $id]);
 
         $row = $dbqObject->nextRow();
-        $row['image'] = $this->getImageForOutput($row['PId'] . '_program');
+        if ($dbqObject->numberOfRows() > 0) {
+            $row['image'] = $this->getImageForOutput($row['PId'] . '_program');
+        }
         return $row;
     }
 

@@ -8,11 +8,16 @@
 namespace App\Model\Reservation;
 
 use App\Helper\Formatter;
+use App\Helper\Mail\Mail;
 use App\Model\Database\DbBasis;
+use App\Model\TextSource\TextSource;
 
 class Reservation extends DbBasis
 {
 
+    /**
+     * @var int
+     */
     private static $hoursLater = 72;
 
     /**
@@ -31,6 +36,7 @@ class Reservation extends DbBasis
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
+                WHERE status != 'delete'
                 GROUP BY reservation.RId";
         $dbqObject->query($sql);
         $i = 0;
@@ -62,7 +68,8 @@ class Reservation extends DbBasis
                     FROM reservation 
                     LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                     LEFT JOIN program ON program.PId = reservation_program.PId
-                    WHERE reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value 
+                    WHERE (reservationNumber LIKE :value OR firstname LIKE :value OR lastname LIKE :value OR email LIKE :value ) 
+                    AND status != 'delete'
                     GROUP BY reservation.RId";
             $dbqObject->query($sql, ['value' => "%" . $value . "%"]);
 
@@ -97,6 +104,7 @@ class Reservation extends DbBasis
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
                 WHERE reservation.RId = :RId 
+                AND  status != 'delete'
                 LIMIT 1 ";
         $dbqObject->query($sql, ['RId' => $id]);
 
@@ -119,15 +127,16 @@ class Reservation extends DbBasis
             $entry = $this->loadSpecificEntry($data['id']);
         }
         if ($entry == false || count($entry) <= 0) {
-            $sql = "INSERT INTO reservation (reservationNumber, firstname,lastname, email, createDate) 
-                    VALUES (:reservationNumber, :firstname, :lastname, :email, :createDate)";
+            $sql = "INSERT INTO reservation (reservationNumber, firstname,lastname, email, createDate, status) 
+                    VALUES (:reservationNumber, :firstname, :lastname, :email, :createDate, :status)";
         } else {
             $sql = "UPDATE reservation  SET 
                     'reservationNumber' = :reservationNumber,
                     'firstname' = :firstname, 
                     'lastname' = :lastname, 
                     'email' = :email,
-                    'createDate' = :createDate
+                    'createDate' = :createDate,
+                    'status' = :status
                      WHERE RId = :RId ";
             $dataSql['RId'] = intval($data['id'], 10);
         }
@@ -136,6 +145,7 @@ class Reservation extends DbBasis
         $dataSql['lastname'] = trim($data['lastname']);
         $dataSql['email'] = trim($data['email']);
         $dataSql['createDate'] = time();
+        $dataSql['status'] = 'open';
         $dbqObject->query($sql, $dataSql);
 
         if (!isset($dataSql['RId']) || $dataSql['RId'] == '') {
@@ -143,6 +153,7 @@ class Reservation extends DbBasis
             $dbqObject->query($sql);
             $dataSql['RId'] = $dbqObject->nextRow()['last_insert_rowid()'];
         }
+        $emailData = $dataSql;
         $rid = $dataSql['RId'];
 
         foreach ($data['program'] as $programData) {
@@ -156,7 +167,28 @@ class Reservation extends DbBasis
             $dataSql['price'] = trim($programData['price']);
             $dbqObject->query($sql, $dataSql);
         }
+        $this->sendMail(trim($data['email']), $emailData);
     }
+
+    /**
+     * Send The mail for the reservation.
+     *
+     * @param $email
+     * @param $data
+     */
+    private function sendMail($email, $data)
+    {
+        $textSource = new TextSource($this->getConfig());
+        // TODO: not only use the first text source.
+        $textSourceData = $textSource->loadData()[0];
+
+        $mail = new Mail();
+        $mail->setSubject($textSourceData['title']);
+        $mail->setEmail($email);
+        $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
+        $mail->sendMail();
+    }
+
 
     /**
      * Delete a data by the id
@@ -168,7 +200,8 @@ class Reservation extends DbBasis
         $dbqObject = $this->getDbqObject();
         $dataSql = [];
 
-        $sql = "DELETE FROM reservation WHERE RId=:RId ";
+        //$sql = "DELETE FROM reservation WHERE RId=:RId ";
+        $sql = "UPDATE reservation SET status = 'delete' WHERE RId=:RId ";
 
         $dataSql['RId'] = $id;
         $dbqObject->query($sql, $dataSql);
@@ -185,6 +218,68 @@ class Reservation extends DbBasis
         // TODO: check all the data of a program
         $formError = [];
         return $formError;
+    }
+
+
+    /**
+     * Return the reservation data by the reservation number.
+     *
+     * @param $reservationNumber
+     * @return mixed
+     */
+    public function loadSpecificEntryByReservationNumber($reservationNumber)
+    {
+        $dbqObject = $this->getDbqObject();
+
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate
+                FROM reservation 
+                WHERE reservation.reservationNumber = :reservationNumber AND status IS NOT 'delete'
+                LIMIT 1 ";
+        $dbqObject->query($sql, ['reservationNumber' => $reservationNumber]);
+
+        $data = $dbqObject->nextRow();
+        $data['reservationUntil'] = date('d.m.Y H:i', $data['createDate'] + 60 * 60 * self::$hoursLater);
+        $data['reservationExpired'] = $data['createDate'] + 60 * 60 * self::$hoursLater < time();
+        return $data;
+    }
+
+    /**
+     * Save the reservation as confirm.
+     *
+     * @param $reservationNumber
+     */
+    public function saveAsConfirm($reservationNumber)
+    {
+        $this->saveStatus($reservationNumber, 'confirm');
+    }
+
+    /**
+     * Save the reservation as expired.
+     *
+     * @param $reservationNumber
+     */
+    public function saveAsExpired($reservationNumber)
+    {
+        $this->saveStatus($reservationNumber, 'expired');
+    }
+
+    /**
+     * Save the status of a reservation by the reservation number.
+     *
+     * @param $reservationNumber
+     * @param $status
+     */
+    private function saveStatus($reservationNumber, $status)
+    {
+        $dbqObject = $this->getDbqObject();
+        $dataSql = [];
+
+        $sql = "UPDATE reservation SET status = :status WHERE reservationNumber=:reservationNumber AND status = 'open'";
+
+        $dataSql['reservationNumber'] = $reservationNumber;
+        $dataSql['status'] = $status;
+        $dbqObject->query($sql, $dataSql);
     }
 
 }

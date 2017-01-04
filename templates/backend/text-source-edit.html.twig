@@ -13,6 +13,17 @@
         <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
                class="width65{% if errorData.title %} error{% endif %}"/>
 
+        <p>
+            In der Texvorlage können Variablen eingesetzt werden, damit der Text für die Reservierungsmail
+            benutzerdifiniert versendet werden kann. Folgende Variablen können eingesetzt werden:
+
+        </p>
+        <ul>
+            <li><strong>(% vorname %)</strong>: Vorname des Käufers</li>
+            <li><strong>(% nachname %)</strong>: Nachname des Käufers</li>
+            <li><strong>(% link %)</strong>: Link zu Reservierungsbestätigung</li>
+        </ul>
+
         <label for="text" class="{% if errorData.text %}error{% endif %}">Textvorlage:</label>
         <textarea id="text" name="text" rows="10"
                   class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>

@@ -123,22 +123,23 @@ class ShoppingCart extends DbBasis
                     $programId = $tmp[0];
                     $priceMode = $tmp[1];
                     $programData = $program->loadSpecificEntry($programId);
+                    if ($programData) {
+                        $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
+                        $shoppingCartData['list'][$i]['count'] = $count;
+                        $shoppingCartData['list'][$i]['title'] = $programData['title'];
+                        $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
 
+                        $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
 
-                    $shoppingCartData['list'][$i]['pid'] = $programData['PId'];
-                    $shoppingCartData['list'][$i]['count'] = $count;
-                    $shoppingCartData['list'][$i]['title'] = $programData['title'];
-                    $shoppingCartData['list'][$i]['priceMode'] = $priceMode;
+                        $simplePrice = str_replace(',', '.', $simplePrice);
 
-                    $simplePrice = $programPrice->getPriceByMode($priceMode, $programData['price']);
+                        $shoppingCartData['list'][$i]['price'] = Formatter::formatPrice($simplePrice);
+                        $shoppingCartData['list'][$i]['priceTotal'] = Formatter::formatPrice($simplePrice * $count);
 
-                    $simplePrice = str_replace(',', '.', $simplePrice);
+                        $shoppingCartData['priceTotal'] += $simplePrice * $count;
 
-                    $shoppingCartData['list'][$i]['price'] = Formatter::formatPrice($simplePrice);
-                    $shoppingCartData['list'][$i]['priceTotal'] = Formatter::formatPrice($simplePrice * $count);
-
-                    $shoppingCartData['priceTotal'] += $simplePrice * $count;
-                    $i++;
+                        $i++;
+                    }
                 }
             }
             $shoppingCartData['priceTotal'] = Formatter::formatPrice($shoppingCartData['priceTotal']);

@@ -107,4 +107,20 @@ class TextSource extends DbBasis
         }
         return $formError;
     }
+
+    /**
+     * Convert a text with the specific values.
+     *
+     * @param $text
+     * @param $data
+     * @return mixed
+     */
+    public static function getConvertedText($text, $data)
+    {
+        $text = preg_replace('/\(% vorname %\)/', $data['firstname'], $text);
+        $text = preg_replace('/\(% nachname %\)/', $data['lastname'], $text);
+        $link = 'http://localhost:1235/reservierung-bestaetigen/' . $data['reservationNumber'];
+        $text = preg_replace('/\(% link %\)/', $link, $text);
+        return $text;
+    }
 }

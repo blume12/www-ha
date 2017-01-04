@@ -77,7 +77,7 @@ $dbqObject->query($sql);
 
 // Reservation:
 $sql = "CREATE TABLE IF NOT EXISTS reservation (RId INTEGER PRIMARY KEY, reservationNumber VARCHAR(50), firstname VARCHAR(255),
-        lastname VARCHAR(255), email VARCHAR(255),  createDate VARCHAR(255)) ";
+        lastname VARCHAR(255), email VARCHAR(255), createDate VARCHAR(255), status VARCHAR(10)) ";
 $dbqObject->query($sql);
 
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS reservation_id_uindex ON reservation(RId) ";
