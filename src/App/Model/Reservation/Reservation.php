@@ -243,7 +243,7 @@ class Reservation extends DbBasis
         $mail = new Mail();
         $mail->setSubject($textSourceData['title']);
         $mail->setEmail($email);
-        $mail->setMessage(TextSource::getConvertedText($textSourceData['text'], $data));
+        $mail->setMessage($textSource->getConvertedText($textSourceData['text'], $data));
         $mail->sendMail();
         //  }
     }

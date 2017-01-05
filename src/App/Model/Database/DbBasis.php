@@ -62,4 +62,14 @@ abstract class DbBasis
         return $this->getConfig()['frontend'];
     }
 
+    /**
+     * Get main url from config data array.
+     *
+     * @return mixed
+     */
+    protected function getMainUrl()
+    {
+        return $this->getConfig()['url'];
+    }
+
 }

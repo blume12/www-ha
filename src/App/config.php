@@ -72,3 +72,4 @@ $routes->add('documentation', new Route('/dokumentation', ['_controller' => 'App
 
 $config['routes'] = $routes;
 $config['post'] = $_POST;
+$config['url'] = "http://" . $_SERVER['HTTP_HOST'] . '/';

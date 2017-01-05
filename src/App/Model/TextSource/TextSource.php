@@ -115,11 +115,12 @@ class TextSource extends DbBasis
      * @param $data
      * @return mixed
      */
-    public static function getConvertedText($text, $data)
+    public function getConvertedText($text, $data)
     {
         $text = preg_replace('/\(% vorname %\)/', $data['firstname'], $text);
         $text = preg_replace('/\(% nachname %\)/', $data['lastname'], $text);
-        $link = 'http://localhost:1235/reservierung-bestaetigen/' . $data['reservationNumber'];
+        //TODO: Use getRoutePath ;)
+        $link = $this->getMainUrl() . 'reservierung-bestaetigen/' . $data['reservationNumber'];
         $text = preg_replace('/\(% link %\)/', $link, $text);
         return $text;
     }
