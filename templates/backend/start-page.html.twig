@@ -38,14 +38,14 @@
         </p>
 
     </div>
-    <div>
+    <div id="statisticList">
         <h2>Statistiken</h2>
         <ul>
             <li>Programme online: {{ countProgram }}</li>
-            <li>Plätze insgesamt: {{ countMaxPlaces }}</li>
+            <li>Plätze insgesamt: <span id="countMaxPlaces">{{ countMaxPlaces }}</span></li>
             <li>Frei verfügbare Plätze: {{ countFreePlaces }}</li>
             <li>
-                Plätze reserviert: {{ countReservation }}
+                Plätze reserviert: <span id="countReservation">{{ countReservation }}</span>
 
                 <ul>
                     {% for mode in countsPrices.reservation %}
@@ -63,5 +63,39 @@
              #}
         </ul>
 
+    </div>
+    <div class="jsStatistic">
+        <h3>Reservierungen/Freie Plätze</h3>
+        <canvas id="statisticCanvas" width="300" height="300"></canvas>
+        <script type="application/javascript">
+            var maxPlaces = document.getElementById('countMaxPlaces').innerHTML;
+            var maxRadius = 360;
+
+            var reservePlaces = document.getElementById('countReservation').innerHTML;
+            var openPlaces = maxPlaces - reservePlaces;
+            var first = 100 / maxPlaces * reservePlaces;
+            first = maxRadius / 100 * first;
+
+            var second = 100 / maxPlaces * openPlaces;
+            second = maxRadius / 100 * second;
+
+
+            var circleData = {
+                0: {
+                    "value": first,
+                    "label": "reserviert: " + reservePlaces,
+                    "color": "#a1231c"
+                },
+                1: {
+                    "value": second,
+                    "label": "frei: " + openPlaces,
+                    "color": "#1da127"
+                }
+            };
+
+            var statistic = new Statistic();
+            statistic.drawCircle(circleData);
+
+        </script>
     </div>
 {% endblock %}

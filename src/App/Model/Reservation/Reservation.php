@@ -391,7 +391,7 @@ class Reservation extends DbBasis
      * @param $pid
      * @return int
      */
-    public function getCountReservationByProgram($pid)
+    public function getCountReservationByProgram($pid = null)
     {
         $dbqObject = $this->getDbqObject();
         $sql = "SELECT 
@@ -400,9 +400,14 @@ class Reservation extends DbBasis
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
-                WHERE status != 'delete' AND status != 'expired' AND program.PId = :PId ";
+                WHERE status != 'delete' AND status != 'expired' ";
+        $dataSql = [];
+        if($pid != null) {
+            $dataSql = ['PId' => intval($pid, 10)];
+            $sql .= " AND program.PId = :PId ";
+        }
         $sql .= "GROUP BY reservation.RId";
-        $dbqObject->query($sql, ['PId' => intval($pid, 10)]);
+        $dbqObject->query($sql, $dataSql);
         $count = 0;
         while ($row = $dbqObject->nextRow()) {
             $count += $row['countTickets'];

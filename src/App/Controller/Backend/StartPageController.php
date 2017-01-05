@@ -28,6 +28,8 @@ class StartPageController extends BackendController
             return $login;
         }
 
+        $jsFiles = ['/js/backend/statistic.js'];
+
         $user = new BackendUser($this->getConfig());
         $userData = $user->getUserById($this->getUserId());
         $userData['appellation'] = StandardStock::getAppellation($userData['appellation']);
@@ -49,12 +51,15 @@ class StartPageController extends BackendController
 
         $reservation = new Reservation($this->getConfig());
 
+        $countMaxPlaces = $program->getCountOfAllPlaces();
+        $countReservation = $reservation->getCountReservationByProgram();
+
         return $this->getResponse([
             'user' => $userData,
             'countProgram' => $program->getCountOfPrograms(),
-            'countMaxPlaces' => $program->getCountOfAllPlaces(),
-            'countFreePlaces' => 1233,
-            'countReservation' => 123,
+            'countMaxPlaces' => $countMaxPlaces,
+            'countFreePlaces' => $countMaxPlaces - $countReservation,
+            'countReservation' => $countReservation,
             'countsPrices' => $countsPrices,
             'reservationSearchAction' => $this->getRoutePath('adminReservationList'),
             'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms(),
@@ -62,7 +67,8 @@ class StartPageController extends BackendController
             'countReservationOpen' => $reservation->getCountReservationByStatus('open'),
             'countReservationPaid' => $reservation->getCountReservationByStatus('paid'),
             'countReservationExpired' => $reservation->getCountReservationByStatus('expired'),
-            'linkProgram' => $this->getRoutePath('adminProgramList')
+            'linkProgram' => $this->getRoutePath('adminProgramList'),
+            'javascriptFiles' => $jsFiles
         ]);
     }
 }
