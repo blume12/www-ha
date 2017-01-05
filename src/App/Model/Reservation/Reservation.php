@@ -151,6 +151,38 @@ class Reservation extends DbBasis
     }
 
     /**
+     * Return a specific reservation data entry per Program.
+     *
+     * @param $pid
+     * @return mixed
+     */
+    public function loadSpecificEntryPerProgram($pid)
+    {
+        $dbqObject = $this->getDbqObject();
+
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                countTickets, SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets, status, reservation.text
+                FROM reservation 
+                LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                LEFT JOIN program ON program.PId = reservation_program.PId
+                WHERE program.PId = :PId 
+                AND  status != 'delete' 
+                GROUP BY reservation.RId ";
+        $dbqObject->query($sql, ['PId' => $pid]);
+        $data = [];
+        $i = 0;
+        while ($row = $dbqObject->nextRow()) {
+            $data[$i] = $row;
+            $data[$i]['index'] = $i;
+            $data[$i]['reservationUntil'] = date('d.m.Y H:i', $data[$i]['createDate'] + 60 * 60 * self::$hoursLater);
+            $data[$i]['priceTotal'] = Formatter::formatPrice($data[$i]['priceTotal']);
+            $i++;
+        }
+        return $data;
+    }
+
+    /**
      * Save a reservation data. It decide if it will do a update or a insert.
      *
      * @param $data

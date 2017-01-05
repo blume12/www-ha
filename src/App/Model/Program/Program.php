@@ -21,7 +21,7 @@ class Program extends DbBasis
     /**
      * @var int
      */
-    private static $placesPerProgram = 95;
+    private static $placesPerProgram = 20;
     /**
      * @var array
      */

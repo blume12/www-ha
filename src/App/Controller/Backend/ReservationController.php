@@ -55,7 +55,37 @@ class ReservationController extends BackendController
         }
         return $this->getResponse([
             'reservationData' => $reservationData,
-            'reservationName' => $searchValue
+            'reservationName' => $searchValue,
+            'showSearchInput' => true
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return bool|RedirectResponse|Response
+     */
+    public function listPerProgramAction(Request $request)
+    {
+        $login = $this->checkLogin();
+        if ($login instanceof RedirectResponse) {
+            return $login;
+        }
+        $this->setRequest($request);
+        $this->setTemplateName('reservation-list');
+        $this->setPageTitle('Reservierungen pro Program');
+
+        $pid = $this->getRequest()->attributes->get('id');
+        $reservation = new Reservation($this->getConfig());
+        $reservationData = $reservation->loadSpecificEntryPerProgram($pid);
+
+
+        foreach ($reservationData as $key => $data) {
+            $reservationData[$key]['editRoute'] = $this->getRoutePath('adminReservationEdit', ['id' => $data['RId']]);
+            $reservationData[$key]['deleteRoute'] = $this->getRoutePath('adminReservationDelete', ['id' => $data['RId']]);
+        }
+        return $this->getResponse([
+            'reservationData' => $reservationData,
+            'showSearchInput' => false
         ]);
     }
 

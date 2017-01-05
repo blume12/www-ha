@@ -36,6 +36,7 @@ class ProgramController extends BackendController
         foreach ($programData as $key => $data) {
             $programData[$key]['editRoute'] = $this->getRoutePath('adminProgramEdit', ['id' => $data['PId']]);
             $programData[$key]['deleteRoute'] = $this->getRoutePath('adminProgramDelete', ['id' => $data['PId']]);
+            $programData[$key]['programListRoute'] = $this->getRoutePath('adminReservationListPerProgram', ['id' => $data['PId']]);
         }
 
         return $this->getResponse([
