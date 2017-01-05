@@ -114,6 +114,19 @@ class ShoppingCart extends DbBasis
     }
 
     /**
+     * @param $programId
+     * @param $priceMode
+     * @return bool|mixed
+     */
+    public function loadShoppingCartDataPerProgram($programId, $priceMode)
+    {
+        if (isset($this->getSessionData()[$programId . '_' . $priceMode])) {
+            return $this->getSessionData()[$programId . '_' . $priceMode];
+        }
+        return false;
+    }
+
+    /**
      * Load the shopping cart data for the output.
      *
      * @return array

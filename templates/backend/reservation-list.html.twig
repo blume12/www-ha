@@ -14,6 +14,14 @@
             <input type="submit" value="Suchen"/>
         </form>
     {% endif %}
+    {% if countReservation %}
+        <p>
+            <span>Maximale Plätze: {{ countMax }}</span>
+        </p>
+        <p>
+            <span>Anzahl der Reservierngen: {{ countReservation }}</span>
+        </p>
+    {% endif %}
     {% if reservationData %}
 
         <ul class="backendList reservation">

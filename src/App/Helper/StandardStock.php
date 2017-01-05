@@ -32,10 +32,18 @@ class StandardStock
         return self::$appellation[$appellation];
     }
 
-    public static function getCountOfTickets()
+    /**
+     * @param $maxReservation
+     * @return array
+     */
+    public static function getCountOfTickets($maxReservation)
     {
         $countOfTickets = [];
-        for ($i = 0; $i <= 10; $i++) {
+        $count = 10;
+        if ($maxReservation < $count) {
+            $count = $maxReservation;
+        }
+        for ($i = 0; $i <= $count; $i++) {
             $countOfTickets[$i] = $i;
         }
         return $countOfTickets;

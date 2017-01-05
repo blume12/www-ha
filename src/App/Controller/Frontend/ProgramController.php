@@ -9,9 +9,9 @@ namespace App\Controller\Frontend;
 
 
 use App\Helper\Helper;
-use App\Helper\Session;
 use App\Helper\StandardStock;
 use App\Model\Program\Program;
+use App\Model\Reservation\Reservation;
 use App\Model\ShoppingCart\ShoppingCart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,24 +58,33 @@ class ProgramController extends FrontendController
 
         $program = new Program($this->getConfig());
         $programData = $program->loadSpecificEntry($programId);
-
-        $countOfTickets = StandardStock::getCountOfTickets();
-
+        $reservation = new Reservation($this->getConfig());
+        $countOfTickets = StandardStock::getCountOfTickets($reservation->getCountToReserveActually($programId));
+        $shoppingCart = new ShoppingCart($this->getConfig());
         $formError = [];
         $formSuccess = [];
         $formData = [];
+
+        $maxReservation = $reservation->getCountToReserveActually($programId);
+
         if ($request->getMethod() !== 'POST') {
             // Set default values
-
+            $formData['countTickets'] = $shoppingCart->loadShoppingCartDataPerProgram($programId, 1);
+            $formData['countSaleTickets'] = $shoppingCart->loadShoppingCartDataPerProgram($programId, 2);
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
+            $countNormal = $formData['countTickets'];
+            $countSale = $formData['countSaleTickets'];
+            if ($countNormal + $countSale > $maxReservation) {
+                $formError['count_' . $programId] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+            }
         }
+        $ticketsForSale = $maxReservation > 0;
 
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
-            $shoppingCart = new ShoppingCart($this->getConfig());
             $shoppingCart->setShoppingCartData($programId, $formData['countTickets'], $formData['countSaleTickets']);
             $formSuccess[] = 'Das Programm wurde erfolgreich dem Warenkorb hinzugefügt.';
         }
@@ -87,7 +96,8 @@ class ProgramController extends FrontendController
             'countsSale' => $countOfTickets,
             'formData' => $formData,
             'successData' => $formSuccess,
-            'errorData' => $formError
+            'errorData' => $formError,
+            'ticketsForSale' => $ticketsForSale
         ]);
     }
 

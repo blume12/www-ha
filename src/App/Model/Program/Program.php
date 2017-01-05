@@ -21,7 +21,7 @@ class Program extends DbBasis
     /**
      * @var int
      */
-    private static $placesPerProgram = 20;
+    private static $placesPerProgram = 60;
     /**
      * @var array
      */
@@ -279,5 +279,13 @@ class Program extends DbBasis
     public function getCountOfAllPlaces()
     {
         return count($this->currentData) * self::$placesPerProgram;
+    }
+
+    /**
+     * @return int
+     */
+    public static function getMaxReservationPerProgram()
+    {
+        return self::$placesPerProgram;
     }
 }

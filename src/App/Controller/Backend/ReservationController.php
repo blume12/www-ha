@@ -9,6 +9,7 @@ namespace App\Controller\Backend;
 
 
 use App\Helper\Helper;
+use App\Model\Program\Program;
 use App\Model\Reservation\Reservation;
 use App\Model\ShoppingCart\ShoppingCart;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -85,7 +86,9 @@ class ReservationController extends BackendController
         }
         return $this->getResponse([
             'reservationData' => $reservationData,
-            'showSearchInput' => false
+            'showSearchInput' => false,
+            'countReservation' => $reservation->getCountReservationByProgram($pid),
+            'countMax' => Program::getMaxReservationPerProgram()
         ]);
     }
 

@@ -41,6 +41,7 @@ class ShoppingCartController extends FrontendController
         $formError = [];
         $formData = [];
 
+        $reservation = new Reservation($this->getConfig());
         if ($request->getMethod() !== 'POST') {
             // Set default values
 
@@ -50,6 +51,13 @@ class ShoppingCartController extends FrontendController
             $formData = $this->getRequest()->request->all();
 
             foreach ($shoppingCartData['list'] as $key => $value) {
+                $maxReservation = $reservation->getCountToReserveActually($value['pid']);
+                $countNormal = $formData['count_' . $value['pid'] . '_1'];
+                $countSale = $formData['count_' . $value['pid'] . '_2'];
+                if ($countNormal + $countSale > $maxReservation) {
+                    $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                }
+
                 if ($formData['count_' . $value['pid'] . '_' . $value['priceMode']] <= 0) {
                     $formError['count_' . $value['pid'] . '_' . $value['priceMode']] = 'Bitte geben Sie eine Anzahl für "' . $shoppingCartData['list'][$key]['title'] . '" (';
                     $formError['count_' . $value['pid'] . '_' . $value['priceMode']] .= ($shoppingCartData['list'][$key]['priceMode'] == 2 ? 'ermäßigter Preis' : 'normaler Preis') . ') ein.';
@@ -63,6 +71,7 @@ class ShoppingCartController extends FrontendController
 
             $shoppingCartData = $shoppingCart->loadShoppingCartData();
 
+
             if (!Validator::isAlpha($formData['firstname'], true)) {
                 $formError['firstname'] = 'Bitte geben Sie einen Vornamen ein.';
             }
@@ -74,12 +83,12 @@ class ShoppingCartController extends FrontendController
             if (!Validator::isAlpha($formData['email'], true)) {
                 $formError['email'] = 'Bitte geben Sie einen E-Mail-Adresse ein.';
             }
+
         }
 
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
-            $reservation = new Reservation($this->getConfig());
             $data = [
                 'firstname' => $formData['firstname'],
                 'lastname' => $formData['lastname'],
