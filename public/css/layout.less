@@ -183,9 +183,7 @@ nav ul.menu li {
   text-align: center;
   margin: 0;
 }
-nav ul.menu li.right{
-  float:right;
-}
+
 
 nav ul.menu li a {
   color: #fff;
@@ -200,6 +198,13 @@ nav:hover ul.menu li {
 nav ul.menu li:hover {
   background-color: fade(@white, 20%);
   cursor: pointer;
+}
+
+nav ul.menu li.right{
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 60px;
 }
 
 nav:hover {
@@ -529,6 +534,13 @@ label.error {
   nav:hover {
     background-color: @orange;
     cursor: auto;
+  }
+
+  nav ul.menu li.right{
+    float:right;
+    padding: 5px;
+    position: relative;
+    right: auto;
   }
 
   /* Filmstripe */

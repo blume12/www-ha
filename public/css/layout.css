@@ -113,9 +113,6 @@ nav ul.menu li {
   text-align: center;
   margin: 0;
 }
-nav ul.menu li.right {
-  float: right;
-}
 nav ul.menu li a {
   color: #fff;
   text-decoration: none;
@@ -127,6 +124,12 @@ nav:hover ul.menu li {
 nav ul.menu li:hover {
   background-color: rgba(254, 255, 255, 0.2);
   cursor: pointer;
+}
+nav ul.menu li.right {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 60px;
 }
 nav:hover {
   background-color: #dd6527;
@@ -390,6 +393,12 @@ label.error {
   nav:hover {
     background-color: #e58523;
     cursor: auto;
+  }
+  nav ul.menu li.right {
+    float: right;
+    padding: 5px;
+    position: relative;
+    right: auto;
   }
   /* Filmstripe */
   .filmStripeTop img {
