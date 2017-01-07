@@ -1,5 +1,4 @@
 /* TODO: this should be less :) */
-/* debugging Media Queries Colors*/
 /* Colors */
 /* Color Textarea, Button*/
 /* Percent Items */
@@ -138,7 +137,6 @@ nav:hover {
   position: absolute;
   width: 100%;
   height: 50px;
-  display: block;
 }
 .headline {
   margin-bottom: 2em;
@@ -153,8 +151,10 @@ nav:hover {
   position: absolute;
   width: 100%;
   height: 50px;
-  display: block;
   bottom: 2em;
+}
+.imgLarge {
+  display: none;
 }
 /* Veranstaltungs Block*/
 .veranstaltung {
@@ -395,6 +395,12 @@ label.error {
   .filmStripeTop img {
     height: 80px;
   }
+  .imgLarge {
+    display: block;
+  }
+  .imgSmall {
+    display: none;
+  }
   /* Filmstripe Down */
   .filmStripeDown img {
     width: 100%;
@@ -404,7 +410,7 @@ label.error {
     max-width: 700px;
   }
   .headline h1 {
-    padding-top: 20px;
+    padding-top: 23px;
   }
   /* Veranstaltungs Block*/
   .veranstaltung {
@@ -504,6 +510,6 @@ label.error {
   }
   /* debugging Media Queries */
   nav {
-    background: #f900a1;
+    background: #f900a3;
   }
 }

@@ -1,6 +1,55 @@
 /* TODO: this should be less :) */
 
-@import "variables.less";
+@debugMedia0: #c41af9;
+@debugMedia1: #2311f9;
+@debugMedia2: #35f90b;
+@debugMedia3: #f91221;
+@debugMedia4: #0cf9cb;
+@debugMedia5: #e8f913;
+@debugMedia6: #f900a3;
+
+/* Colors */
+@textWhite: #feffff;
+@textBlack: #2c2c2c;
+
+@orange: #e58523;
+@blue: #0aa1d2;
+
+@blueLighter: #eff2f9;
+@grayLight: #686d73;
+@white: #feffff;
+@backgroundContent: #fafcf1;
+
+@colorError: #a10d08;
+@colorErrorLight: #ffe7e5;
+@colorErrorLighter: #fff3f3;
+
+@aNormal: #dd6527;
+@aHover: #68390f;
+
+/* Color Textarea, Button*/
+@button: #0aa1d2;
+@buttonHover: #1a75d2;
+
+@textAreaBorder: #686d73;
+@textArea: #feffff;
+
+/* Percent Items */
+
+@content: 20%;
+@contentSmallScreen: 5%;
+@contentMiddleScreen: 15%;
+
+/* Filmstripe */
+@heightSmall: 50px;
+@heightMiddle: 65px;
+@heightNormal: 80px;
+
+/* Space */
+@contentSmallSpace: 10px;
+@footerHeight: 2em;
+
+@maxWidthContent: 700px;
 
 body, html {
   margin: 0;
@@ -164,8 +213,8 @@ nav:hover {
   position: absolute;
   width: 100%;
   height: @heightSmall;
-  display: block;
 }
+
 
 .headline{
   margin-bottom: 2em;
@@ -183,8 +232,11 @@ nav:hover {
   position: absolute;
   width: 100%;
   height: @heightSmall;
-  display: block;
   bottom: @footerHeight;
+}
+
+.imgLarge{
+  display: none;
 }
 
 /* Veranstaltungs Block*/
@@ -484,6 +536,14 @@ label.error {
     height: @heightNormal;
   }
 
+  .imgLarge{
+    display: block;
+  }
+
+  .imgSmall{
+    display: none;
+  }
+
   /* Filmstripe Down */
   .filmStripeDown img{
     width: 100%;
@@ -495,7 +555,7 @@ label.error {
   }
 
   .headline h1{
-    padding-top: 20px;
+    padding-top: 23px;
   }
 
   /* Veranstaltungs Block*/
