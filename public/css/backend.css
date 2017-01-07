@@ -34,13 +34,22 @@ ul.backendList li {
   padding: 5px 2px;
   height: 40px;
 }
+ul.backendList li.large {
+  height: 60px;
+}
 ul.backendList li .row.options {
   width: 30%;
   float: right;
 }
+ul.backendList li .row.options.large {
+  width: 40%;
+}
 ul.backendList li .titleText {
   width: 65%;
   float: left;
+}
+ul.backendList li .titleText.small {
+  width: 55%;
 }
 ul.backendList li img {
   float: left;
@@ -74,6 +83,9 @@ ul.backendList li:hover {
   .width50 {
     width: 80%;
   }
+  ul.backendList li.large {
+    height: 40px;
+  }
 }
 @media (min-width: 680px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
@@ -90,6 +102,9 @@ ul.backendList li:hover {
   }
   /* Table */
   ul.backendList li {
+    height: 20px;
+  }
+  ul.backendList li.large {
     height: 20px;
   }
   ul.backendList li .row.options {
