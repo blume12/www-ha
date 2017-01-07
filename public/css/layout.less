@@ -260,7 +260,7 @@ nav:hover {
 
 /* Kontaktformular */
 form {
-  padding: 10px 0;
+  padding:  0;
 }
 
 label {
@@ -306,21 +306,10 @@ input[type=submit].longButton{
   margin-bottom: 10px;
 }
 
-.shopSelection input{
-  display: inline-block;
-  margin: 2px;
-  width: 5%;
-}
-.shopSelection label{
-  display: inline-block;
-  padding: 5px 0;
-  margin-left: 5px;
-}
 .shopInfo{
   width: 100%;
+  padding: 0;
   background: @white;
-  padding: 10px 0;
-
   .endPriceBlock {
 
     span {
@@ -330,26 +319,54 @@ input[type=submit].longButton{
   }
   ul{
     list-style-type: none;
-
+    padding: 0;
     li {
-      span {
-        width: 100%;
+      padding: 10px 5px;
+      span{
         display: inline-block;
+      }
+
+      span.title {
+        width: 40%;
+        text-align: right;
+      }
+
+      span.type {
+        width: 35%;
+      }
+      span.count{
+        width: 20%;
+      }
+
+      span.price{
+        width: 35%;
+        padding: 0;
+      }
+      span.priceTotal{
+        width: 35%;
+      }
+      a{
+        text-align: right;
       }
     }
 
     li.header{
-      display: none;
+      background-color: @blue;
+      color: @white;
+
+      span.delete {
+        display: none;
+      }
     }
   }
   input.count {
     width: 40px;
   }
   .contactInfo {
-    padding: 20px;
+    padding-top: 20px;
   }
   input.longButton {
-    margin: 0 20px;
+    margin: 0;
   }
 }
 
@@ -496,6 +513,70 @@ label.error {
       padding-right: 15px;
     }
   }
+  /* Shopping Cart */
+
+  .shopInfo {
+
+
+    padding-top: 0;
+    padding-bottom: 15px;
+    .endPrice {
+      float:right;
+      padding-right:90px;
+      margin-right: 15px;
+    }
+
+    .contactInfo {
+      padding-left: 10px;
+    }
+
+    input.longButton {
+      margin-left: 65%;
+    }
+    ul {
+
+      padding: 0;
+      li {
+
+        padding: 10px;
+        span{
+          width: auto;
+          vertical-align: bottom;
+        }
+        input {
+          vertical-align: bottom;
+          margin-bottom: 0;
+        }
+        span.count {
+          width: 11%;
+          label {
+            display: none;
+          }
+        }
+        span.title {
+          width: 28%;
+          text-align: left;
+        }
+        span.price, span.priceTotal {
+          width: 15%;
+          text-align: right;
+        }
+        span.type {
+          width: 15%;
+          text-align: center;
+        }
+
+        span.delete {
+          width: 12%;
+          text-align: right;
+        }
+      }
+
+      li.header {
+        display: block;
+      }
+    }
+  }
 
 }
 
@@ -584,70 +665,6 @@ label.error {
   nav {
     background: @debugMedia3;
   }
-
-  /* Shopping Cart */
-
-  .shopInfo {
-
-    .endPrice {
-      float:right;
-      padding-right:90px;
-      margin-right: 15px;
-    }
-
-    .contactInfo{
-      text-align: center;
-    }
-    input.longButton {
-      margin: auto;
-    }
-    ul {
-
-      padding: 0 10px;
-      li {
-
-        padding: 10px;
-        span{
-          width: auto;
-          vertical-align: bottom;
-        }
-        input {
-          vertical-align: bottom;
-          margin-bottom: 0;
-        }
-        span.count {
-          width: 8%;
-          label {
-            display: none;
-          }
-        }
-        span.title {
-          width: 33%;
-        }
-        span.price, span.priceTotal {
-          width: 15%;
-          text-align: right;
-        }
-        span.type {
-          width: 13%;
-          text-align: center;
-        }
-
-        span.delete {
-          width: 12%;
-          text-align: right;
-        }
-
-      }
-
-      li.header {
-        display: block;
-        background-color: @blue;
-        color: @white;
-      }
-    }
-  }
-
 }
 
 @media (min-width: 961px) {

@@ -172,7 +172,7 @@ nav:hover {
 }
 /* Kontaktformular */
 form {
-  padding: 10px 0;
+  padding: 0;
 }
 label {
   display: block;
@@ -212,20 +212,10 @@ input[type=submit].longButton {
 .shopSelection {
   margin-bottom: 10px;
 }
-.shopSelection input {
-  display: inline-block;
-  margin: 2px;
-  width: 5%;
-}
-.shopSelection label {
-  display: inline-block;
-  padding: 5px 0;
-  margin-left: 5px;
-}
 .shopInfo {
   width: 100%;
+  padding: 0;
   background: #feffff;
-  padding: 10px 0;
 }
 .shopInfo .endPriceBlock span {
   border-top: 1px solid #686d73;
@@ -233,22 +223,49 @@ input[type=submit].longButton {
 }
 .shopInfo ul {
   list-style-type: none;
+  padding: 0;
+}
+.shopInfo ul li {
+  padding: 10px 5px;
 }
 .shopInfo ul li span {
-  width: 100%;
   display: inline-block;
 }
+.shopInfo ul li span.title {
+  width: 40%;
+  text-align: right;
+}
+.shopInfo ul li span.type {
+  width: 35%;
+}
+.shopInfo ul li span.count {
+  width: 20%;
+}
+.shopInfo ul li span.price {
+  width: 35%;
+  padding: 0;
+}
+.shopInfo ul li span.priceTotal {
+  width: 35%;
+}
+.shopInfo ul li a {
+  text-align: right;
+}
 .shopInfo ul li.header {
+  background-color: #0aa1d2;
+  color: #feffff;
+}
+.shopInfo ul li.header span.delete {
   display: none;
 }
 .shopInfo input.count {
   width: 40px;
 }
 .shopInfo .contactInfo {
-  padding: 20px;
+  padding-top: 20px;
 }
 .shopInfo input.longButton {
-  margin: 0 20px;
+  margin: 0;
 }
 .shopInfo .price {
   padding-left: 10px;
@@ -364,6 +381,62 @@ label.error {
     float: left;
     padding-right: 15px;
   }
+  /* Shopping Cart */
+  .shopInfo {
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+  .shopInfo .endPrice {
+    float: right;
+    padding-right: 90px;
+    margin-right: 15px;
+  }
+  .shopInfo .contactInfo {
+    padding-left: 10px;
+  }
+  .shopInfo input.longButton {
+    margin-left: 65%;
+  }
+  .shopInfo ul {
+    padding: 0;
+  }
+  .shopInfo ul li {
+    padding: 10px;
+  }
+  .shopInfo ul li span {
+    width: auto;
+    vertical-align: bottom;
+  }
+  .shopInfo ul li input {
+    vertical-align: bottom;
+    margin-bottom: 0;
+  }
+  .shopInfo ul li span.count {
+    width: 11%;
+  }
+  .shopInfo ul li span.count label {
+    display: none;
+  }
+  .shopInfo ul li span.title {
+    width: 28%;
+    text-align: left;
+  }
+  .shopInfo ul li span.price,
+  .shopInfo ul li span.priceTotal {
+    width: 15%;
+    text-align: right;
+  }
+  .shopInfo ul li span.type {
+    width: 15%;
+    text-align: center;
+  }
+  .shopInfo ul li span.delete {
+    width: 12%;
+    text-align: right;
+  }
+  .shopInfo ul li.header {
+    display: block;
+  }
 }
 @media (min-width: 680px) {
   /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
@@ -432,59 +505,6 @@ label.error {
   /* debugging Media Queries */
   nav {
     background: #f91221;
-  }
-  /* Shopping Cart */
-  .shopInfo .endPrice {
-    float: right;
-    padding-right: 90px;
-    margin-right: 15px;
-  }
-  .shopInfo .contactInfo {
-    text-align: center;
-  }
-  .shopInfo input.longButton {
-    margin: auto;
-  }
-  .shopInfo ul {
-    padding: 0 10px;
-  }
-  .shopInfo ul li {
-    padding: 10px;
-  }
-  .shopInfo ul li span {
-    width: auto;
-    vertical-align: bottom;
-  }
-  .shopInfo ul li input {
-    vertical-align: bottom;
-    margin-bottom: 0;
-  }
-  .shopInfo ul li span.count {
-    width: 8%;
-  }
-  .shopInfo ul li span.count label {
-    display: none;
-  }
-  .shopInfo ul li span.title {
-    width: 33%;
-  }
-  .shopInfo ul li span.price,
-  .shopInfo ul li span.priceTotal {
-    width: 15%;
-    text-align: right;
-  }
-  .shopInfo ul li span.type {
-    width: 13%;
-    text-align: center;
-  }
-  .shopInfo ul li span.delete {
-    width: 12%;
-    text-align: right;
-  }
-  .shopInfo ul li.header {
-    display: block;
-    background-color: #0aa1d2;
-    color: #feffff;
   }
 }
 @media (min-width: 961px) {
