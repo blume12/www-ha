@@ -10,9 +10,24 @@
     </p>
     <h2>Ziel und Funktionsumfang der Anwendung</h2>
     <p>
-        Das Ziel der Anwendung soll sein, dass ein Besucher eine bzw. mehrere Karten reservieren und/oder buchen kann.
+        Das Ziel der Anwendung soll sein, dass ein Besucher eine bzw. mehrere Karten reservieren kann.
         Zudem soll das Personal der Flensburger Kurzfilmtage die Tickets verwalten können. Dafür ist ein Adminbereich
         vorgesehen, bei dem verschiedene Nutzerrechte eingestellt werden können.
+    </p>
+    <h3>Frontend</h3>
+    <p>
+        Im Frontend können die Programme angesehen werden. Auf der Detailseite können die Anzahl der Tickets für ein
+        Programm ausgewählt und zum Warenkorb hinzugefügt werden.
+    </p>
+    <h3>Adminbereich</h3>
+    <p>
+        Das Kassenpersonal nur die Programme und die Reservierungen bearbeiten.
+    </p>
+    <p>
+        Ein Administrator kann alles im Adminbereich verwalten. Dazu gehören die Programme, die Reservierungen, die
+        Preise, die Zeiträume, die Textvorlagen für die E-Mails. Außerdem kann der Administrator neue Benutzer anlegen
+        und
+        auch bearbeiten.
     </p>
     <h2>Aufbau der Anwendung</h2>
     <p>
@@ -123,6 +138,20 @@
     <h3>Nutzung von JS im Frontend</h3>
     <h3>Überlegungen zum Progressive Enhancement</h3>
     <h2>Besonderheiten</h2>
+    <h3>Statistiken im Adminbereich</h3>
+
+    <p>
+        Es werden die Daten aus der Datenbank in einer Statistik im Adminbereich ausgewertet. Dazu gehören die
+        Anzahl aller sichtbaren Programme im Frontend. Außerdem wird angezeigt, wie viele Reservierungen gemacht
+        worden sind. Diese werden dann aufgelistet in den Bereichen, welche bezahlt worden oder abgelaufen bzw.
+        noch offen sind.
+    </p>
+
+    <h3>Statistik wird mit JS als Chart dargestellt</h3>
+    <p>
+        Ist JavaScript vorhanden, wird die Statistik zusätzlich als Chart ausgegeben. Dieses wird mittels einem
+        Canvas-Element und JavaScript umgesetzt.
+    </p>
     <h2>Aufgetretene Probleme und deren Lösungen</h2>
     <h3>Routing mittles Namen anstatt den direkten Routen</h3>
     <p>
