@@ -79,7 +79,7 @@ a.button {
 }
 /* Menu */
 nav {
-  background: #c41af9;
+  background: #e58523;
   padding-top: 5px;
 }
 nav ul.menu {
@@ -367,14 +367,14 @@ label.error {
   /* smartphones, iPhone, portrait 480x320 phones */
   /* debugging Media Queries */
   nav {
-    background: #2311f9;
+    background: #e58523;
   }
 }
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   /* debugging Media Queries */
   nav {
-    background: #35f90b;
+    background: #e58523;
   }
   .veranstaltung img {
     width: 200px;
@@ -504,21 +504,21 @@ label.error {
   }
   /* debugging Media Queries */
   nav {
-    background: #f91221;
+    background: #e58523;
   }
 }
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   /* debugging Media Queries */
   nav {
-    background: #0cf9cb;
+    background: #e58523;
   }
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
   /* debugging Media Queries */
   nav {
-    background: #e8f913;
+    background: #e58523;
   }
 }
 @media (min-width: 1281px) {
@@ -539,6 +539,6 @@ label.error {
   }
   /* debugging Media Queries */
   nav {
-    background: #f900a3;
+    background: #e58523;
   }
 }
