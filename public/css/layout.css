@@ -34,6 +34,10 @@ h2 {
   color: #0aa1d2;
   font-size: 1.4em;
 }
+h3 {
+  color: #d24543;
+  font-size: 1.1em;
+}
 /* Links */
 a {
   color: #dd6527;
@@ -160,14 +164,14 @@ nav:hover {
   display: none;
 }
 /* Veranstaltungs Block*/
-.veranstaltung {
+.events {
   margin-bottom: 50px;
 }
-.veranstaltung img {
+.events img {
   width: 100%;
   margin-bottom: 15px;
 }
-.veranstaltung h2 {
+.events h2 {
   border-bottom: 2px solid rgba(104, 109, 115, 0.3);
 }
 /* Kontaktformular */
@@ -358,6 +362,13 @@ label.error {
   font-size: 1.2em;
   margin: 3px auto;
 }
+/* Documentation */
+.dokumentation img {
+  width: 100%;
+}
+.dokumentation h2 {
+  border-bottom: 2px solid rgba(104, 109, 115, 0.3);
+}
 /*** no resilt */
 .noResult {
   padding: 30px 0;
@@ -376,7 +387,7 @@ label.error {
   nav {
     background: #e58523;
   }
-  .veranstaltung img {
+  .events img {
     width: 200px;
     float: left;
     padding-right: 15px;
@@ -495,12 +506,18 @@ label.error {
     padding-top: 23px;
   }
   /* Veranstaltungs Block*/
-  .veranstaltung {
+  .events {
     margin-left: 10px;
     float: left;
   }
-  .veranstaltung img {
+  .events img {
     width: 250px;
+  }
+  /* Documentation */
+  .dokumentation img {
+    width: 60%;
+    float: left;
+    padding: 0 10px 5px 0;
   }
   /* debugging Media Queries */
   nav {
@@ -532,7 +549,7 @@ label.error {
     height: 65px;
   }
   /* Veranstaltungs Block*/
-  .veranstaltung {
+  .events {
     width: 97%;
     margin-left: 10px;
     float: left;

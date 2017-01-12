@@ -4,174 +4,218 @@
 {% endblock %}
 
 {% block content %}
-    <p>
-        Marten Jensen, Matr.-Nr.: 570944, maje6868<br/>
-        Jasmin Stern, Matr.-Nr.: 571107, stja7017
-    </p>
-    <h2>Ziel und Funktionsumfang der Anwendung</h2>
-    <p>
-        Das Ziel der Anwendung soll sein, dass ein Besucher eine bzw. mehrere Karten reservieren kann.
-        Zudem soll das Personal der Flensburger Kurzfilmtage die Tickets verwalten können. Dafür ist ein Adminbereich
-        vorgesehen, bei dem verschiedene Nutzerrechte eingestellt werden können.
-    </p>
-    <h3>Frontend</h3>
-    <p>
-        Im Frontend können die Programme angesehen werden. Auf der Detailseite können die Anzahl der Tickets für ein
-        Programm ausgewählt und zum Warenkorb hinzugefügt werden.
-    </p>
-    <h3>Adminbereich</h3>
-    <p>
-        Das Kassenpersonal nur die Programme und die Reservierungen bearbeiten.
-    </p>
-    <p>
-        Ein Administrator kann alles im Adminbereich verwalten. Dazu gehören die Programme, die Reservierungen, die
-        Preise, die Zeiträume, die Textvorlagen für die E-Mails. Außerdem kann der Administrator neue Benutzer anlegen
-        und
-        auch bearbeiten.
-    </p>
-    <h2>Aufbau der Anwendung</h2>
-    <p>
-        Die Anwendung ist grundlegend in zwei Bereiche eingeteilt:
-    </p>
-    <ol>
-        <li>Frontend</li>
-        <li>Backend</li>
-    </ol>
-    <h3>Ordnerstruktur</h3>
-    <p>
-        In der Hauptebene finden sich folgende Ordner:
-    </p>
-    <ul>
-        <li>data</li>
-        <li>public</li>
-        <li>src</li>
-        <li>templates</li>
-        <li>vendor</li>
-    </ul>
-    <h4>Ordner data</h4>
-    <p>
-        Im Ordner data befinden sich alle Daten, die vom Anwender generiert werden. Das hat den Vorteil, dass die
-        Anwendung ohne weitere Probleme von neu aufgesetzt werden kann. So befindet sich auch die Datenbank in diesem
-        Ordner. Zwar wird die Grundstrukur auch beim Neuaufsetzen der Anwenung benötigt und müsste dementsprechend fest
-        in der Anwendung drin sein. Allerdings wird dafür dann ein Skript ausgeführt, welches die Datenbank dann
-        initalisiert.
-    </p>
-    <h4>Ordner public</h4>
-    <p>
-        Im Ordner public befinden sich alle Dateien, die von der Webseite direkt aufgerufen werden müssen.
-        Dementsprechend ist dort das CSS und die Bilder der Webseite zu finden. Auch die index.php-Datei liegt in diesem
-        Ordner
-    </p>
-    <h4>Ordner src</h4>
-    <p>
-        Der src-Ordner ist das Herz-Stück der Anwendung. Dort finden sich alle Klassen, Config-Dateien,
-        Initalisierungs-Skripte und Cronjobs-Dateien der Anwendung wieder.
-    </p>
-    <p>
-        Im darunter liegenden Verzeichnis App sind alle Klassen der Anwedung zu finden. Diese sind unterteilt in
-        Controller, Model und Helper.
-    </p>
-    <p>
-        Im Controller-Verzeichnis sind alle Controller für die Anwendung zu finden. Diese sind widerrum unterteilt in
-        Backend, Frontend und Dokumentation. Das hat den Vorteil, dass die Controller je Bereich besser gefunden werden
-        können. Außerdem haben die Klassen somit auch den Namespace des jeweiligen Bereichs. So können gleiche
-        Controllernamen für unterschiedliche Bereiche genutzt werden.
-    </p>
-    <p>
-        Damit in den einzelnen Controllern nicht die gemeinsamen Dinge reingeschrieben werden müssen, wordern eine
-        abstrakte Controller-Klasse geschrieben. Zudem worden auch für die Bereiche Frontend und Backend ein eigener
-        abstrakter Controller geschrieben. Dort werden die Unterschiede der einzelnen Bereiche festgelegt. So haben zum
-        einen die beiden Bereiche unterschiedliche Menüs. Zum anderen hat muss der Backendbereich einen Passwortschutz
-        besitzen. Dieser wird im abstrakten Backend-Controller gehandelt.
-    </p>
-    <p>
-        Im Model-Verzeichnis ...
-    </p>
+    <div class="dokumentation">
+        <p>
+            Marten Jensen, Matr.-Nr.: 570944, maje6868<br/>
+            Jasmin Stern, Matr.-Nr.: 571107, stja7017
+        </p>
+        <div class="dokuBlock">
+            <h2>Ziel und Funktionsumfang der Anwendung</h2>
+            <p>
+                Das Ziel der Anwendung soll sein, dass ein Besucher eine bzw. mehrere Karten reservieren kann.
+                Zudem soll das Personal der Flensburger Kurzfilmtage die Tickets verwalten können. Dafür ist ein
+                Adminbereich
+                vorgesehen, bei dem verschiedene Nutzerrechte eingestellt werden können.
+            </p>
+        </div>
+        <h3>Frontend</h3>
+        <p>
+            Im Frontend können die Programme angesehen werden. Auf der Detailseite können die Anzahl der Tickets für ein
+            Programm ausgewählt und zum Warenkorb hinzugefügt werden.
+        </p>
+        <h3>Adminbereich</h3>
+        <p>
+            Das Kassenpersonal nur die Programme und die Reservierungen bearbeiten.
+        </p>
+        <p>
+            Ein Administrator kann alles im Adminbereich verwalten. Dazu gehören die Programme, die Reservierungen, die
+            Preise, die Zeiträume, die Textvorlagen für die E-Mails. Außerdem kann der Administrator neue Benutzer
+            anlegen
+            und
+            auch bearbeiten.
+        </p>
+        <h2>Aufbau der Anwendung</h2>
+        <p>
+            Die Anwendung ist grundlegend in zwei Bereiche eingeteilt:
+        </p>
+        <ol>
+            <li>Frontend</li>
+            <li>Backend</li>
+        </ol>
+        <h3>Ordnerstruktur</h3>
+        <p>
+            In der Hauptebene finden sich folgende Ordner:
+        </p>
+        <ul>
+            <li>data</li>
+            <li>public</li>
+            <li>src</li>
+            <li>templates</li>
+            <li>vendor</li>
+        </ul>
+        <h4>Ordner data</h4>
+        <p>
+            Im Ordner data befinden sich alle Daten, die vom Anwender generiert werden. Das hat den Vorteil, dass die
+            Anwendung ohne weitere Probleme von neu aufgesetzt werden kann. So befindet sich auch die Datenbank in
+            diesem
+            Ordner. Zwar wird die Grundstrukur auch beim Neuaufsetzen der Anwenung benötigt und müsste dementsprechend
+            fest
+            in der Anwendung drin sein. Allerdings wird dafür dann ein Skript ausgeführt, welches die Datenbank dann
+            initalisiert.
+        </p>
+        <h4>Ordner public</h4>
+        <p>
+            Im Ordner public befinden sich alle Dateien, die von der Webseite direkt aufgerufen werden müssen.
+            Dementsprechend ist dort das CSS und die Bilder der Webseite zu finden. Auch die index.php-Datei liegt in
+            diesem
+            Ordner
+        </p>
+        <h4>Ordner src</h4>
+        <p>
+            Der src-Ordner ist das Herz-Stück der Anwendung. Dort finden sich alle Klassen, Config-Dateien,
+            Initalisierungs-Skripte und Cronjobs-Dateien der Anwendung wieder.
+        </p>
+        <p>
+            Im darunter liegenden Verzeichnis App sind alle Klassen der Anwedung zu finden. Diese sind unterteilt in
+            Controller, Model und Helper.
+        </p>
+        <p>
+            Im Controller-Verzeichnis sind alle Controller für die Anwendung zu finden. Diese sind widerrum unterteilt
+            in
+            Backend, Frontend und Dokumentation. Das hat den Vorteil, dass die Controller je Bereich besser gefunden
+            werden
+            können. Außerdem haben die Klassen somit auch den Namespace des jeweiligen Bereichs. So können gleiche
+            Controllernamen für unterschiedliche Bereiche genutzt werden.
+        </p>
+        <p>
+            Damit in den einzelnen Controllern nicht die gemeinsamen Dinge reingeschrieben werden müssen, wordern eine
+            abstrakte Controller-Klasse geschrieben. Zudem worden auch für die Bereiche Frontend und Backend ein eigener
+            abstrakter Controller geschrieben. Dort werden die Unterschiede der einzelnen Bereiche festgelegt. So haben
+            zum
+            einen die beiden Bereiche unterschiedliche Menüs. Zum anderen hat muss der Backendbereich einen
+            Passwortschutz
+            besitzen. Dieser wird im abstrakten Backend-Controller gehandelt.
+        </p>
+        <p>
+            Im Model-Verzeichnis ...
+        </p>
 
-    <p>
-        Das Helper-Verzeichnis ...
-    </p>
+        <p>
+            Das Helper-Verzeichnis ...
+        </p>
 
-    <p>
-        Die Config-Datei ...
-    </p>
-    <p>
-        Cornjobs ...
-    </p>
+        <p>
+            Die Config-Datei ...
+        </p>
+        <p>
+            Cornjobs ...
+        </p>
 
-    <p>
-        initDB ...
-    </p>
+        <p>
+            initDB ...
+        </p>
 
-    <h4>Ordner templates</h4>
-    <p>
+        <h4>Ordner templates</h4>
+        <p>
 
-    </p>
+        </p>
 
-    <h4>Ordner vendor</h4>
-    <p>
-        Das vendor-Verzeichnis wird durch composer erstellt. Es hält dort alle externen PHP-Skripte zur Verfügung.
-    </p>
+        <h4>Ordner vendor</h4>
+        <p>
+            Das vendor-Verzeichnis wird durch composer erstellt. Es hält dort alle externen PHP-Skripte zur Verfügung.
+        </p>
 
-    <h3>Überlegungen zu den URIs</h3>
-    <p>
-        Die URIs im Frontend sind SEO-optimiert angelegt worden. Es wurde von uns festgelegt, unter welchen Begriffen
-        das
-        Ticketsystem gefunden werden soll. Da wir keine genauen Analysen kennen, mit welchen Begriffen gesucht werden,
-        haben wir zunächst die naheliegensten genommen:
-    </p>
-    <ul>
-        <li>Flensburger Kurzfilmtage Tickets</li>
-        <li>Flensburger Kurzfilmtage Tickets reservieren</li>
-        <li>Flensburger Kurzfilmtage Tickets buchen</li>
-        <li>Flensburger Kurzfilmtage Programm</li>
-    </ul>
-    <p>
-        Für SEO-optimierte Seiten ist es wichtig, dass eine spezielle Seite mit einem Keyword-Paar versehen wird. Es
-        sollten somit nicht alle Begriffe auf allen Seiten zu finden sein. Dementsprechend haben wir für die URIs jewels
-        nur die spezielle Abwandlung in die URI gepackt. So werden die URIs auch nicht zu lang. Nachfolgend ist die
-        Sitemap der Seite mit den URIs zu sehen.
-    </p>
-    <h3>Aufgabenteilung: Welcher Teil übernimmt welche Aufgaben?</h3>
-    <h4>Warum wurde diese Aufteilung gewählt?</h4>
-    <h3>Aufbau der Datenbank</h3>
-    <h3>Nutzung von JS im Frontend</h3>
-    <h3>Überlegungen zum Progressive Enhancement</h3>
-    <h2>Besonderheiten</h2>
-    <h3>Statistiken im Adminbereich</h3>
+        <h3>Überlegungen zu den URIs</h3>
+        <p>
+            Die URIs im Frontend sind SEO-optimiert angelegt worden. Es wurde von uns festgelegt, unter welchen
+            Begriffen
+            das
+            Ticketsystem gefunden werden soll. Da wir keine genauen Analysen kennen, mit welchen Begriffen gesucht
+            werden,
+            haben wir zunächst die naheliegensten genommen:
+        </p>
+        <ul>
+            <li>Flensburger Kurzfilmtage Tickets</li>
+            <li>Flensburger Kurzfilmtage Tickets reservieren</li>
+            <li>Flensburger Kurzfilmtage Tickets buchen</li>
+            <li>Flensburger Kurzfilmtage Programm</li>
+        </ul>
+        <p>
+            Für SEO-optimierte Seiten ist es wichtig, dass eine spezielle Seite mit einem Keyword-Paar versehen wird. Es
+            sollten somit nicht alle Begriffe auf allen Seiten zu finden sein. Dementsprechend haben wir für die URIs
+            jewels
+            nur die spezielle Abwandlung in die URI gepackt. So werden die URIs auch nicht zu lang. Nachfolgend ist die
+            Sitemap der Seite mit den URIs zu sehen.
+        </p>
+        <h3>Aufgabenteilung: Welcher Teil übernimmt welche Aufgaben?</h3>
+        <h4>Warum wurde diese Aufteilung gewählt?</h4>
+        <h3>Aufbau der Datenbank</h3>
+        <h3>Nutzung von JS im Frontend</h3>
+        <h3>Überlegungen zum Progressive Enhancement</h3>
+        <h2>Besonderheiten</h2>
+        <h3>Statistiken im Adminbereich</h3>
 
-    <p>
-        Es werden die Daten aus der Datenbank in einer Statistik im Adminbereich ausgewertet. Dazu gehören die
-        Anzahl aller sichtbaren Programme im Frontend. Außerdem wird angezeigt, wie viele Reservierungen gemacht
-        worden sind. Diese werden dann aufgelistet in den Bereichen, welche bezahlt worden oder abgelaufen bzw.
-        noch offen sind.
-    </p>
+        <p>
+            Es werden die Daten aus der Datenbank in einer Statistik im Adminbereich ausgewertet. Dazu gehören die
+            Anzahl aller sichtbaren Programme im Frontend. Außerdem wird angezeigt, wie viele Reservierungen gemacht
+            worden sind. Diese werden dann aufgelistet in den Bereichen, welche bezahlt worden oder abgelaufen bzw.
+            noch offen sind.
+        </p>
 
-    <h3>Statistik wird mit JS als Chart dargestellt</h3>
-    <p>
-        Ist JavaScript vorhanden, wird die Statistik zusätzlich als Chart ausgegeben. Dieses wird mittels einem
-        Canvas-Element und JavaScript umgesetzt.
-    </p>
-    <h2>Aufgetretene Probleme und deren Lösungen</h2>
-    <h3>Routing mittles Namen anstatt den direkten Routen</h3>
-    <p>
-        Um die URIs jederzeit anpassen zu können, haben wir uns entschlossen, nur die Namen der Routen zu verwenden und
-        nicht die direkte Route. Dabei kam es zu dem Problem, dass ohne das komplette Symfony-Framework keine Methode
-        zur Verfügung steht, die einem die Parameter der momentanen Anfrage mitliefert.
-    </p>
-    <p>
-        Um dieses Problem zu behebn, haben wir eine eigene Methode geschrieben, die die Validierung übernimmt. Dabei
-        wird die Routendetails überprüft: Es werden dabei die einzelnen Parameter der Route durchlaufen und überprüft,
-        ob es einen GET-Parameter mit dem Namen vorhanden ist. Außerdem wird mittels des angegeben Regex-Ausdrucks
-        geprüft, ob der angegebene GET-Parameter erlaubt ist. Die GET-Parameter werden in der Config-Datei mit
-        übergeben.
-    </p>
-    <h2>Wer hat was umgesetzt?</h2>
-    <h2>Welche externen Komponenten, Scripte, CSS etc werden verwendet?</h2>
-    <h3>Warum werden sie verwendet?</h3>
-    <h3>Welchen vorhandenen Lösungen haben Sie als Vorlage oder Inspiration genutzt?</h3>
-    <h2>Ggf. eine Erklärung, dass sie über die nötigen Rechte für externe Inhalte, Bilder und Komponenten verfügen, ggf.
-        mit URIs. Keine Ausdrucke der AGBs beifügen!</h2>
+        <h3>Statistik wird mit JS als Chart dargestellt</h3>
+        <p>
+            Ist JavaScript vorhanden, wird die Statistik zusätzlich als Chart ausgegeben. Dieses wird mittels einem
+            Canvas-Element und JavaScript umgesetzt.
+        </p>
+        <h2>Aufgetretene Probleme und deren Lösungen</h2>
+        <h3>Routing mittles Namen anstatt den direkten Routen</h3>
+        <p>
+            Um die URIs jederzeit anpassen zu können, haben wir uns entschlossen, nur die Namen der Routen zu verwenden
+            und
+            nicht die direkte Route. Dabei kam es zu dem Problem, dass ohne das komplette Symfony-Framework keine
+            Methode
+            zur Verfügung steht, die einem die Parameter der momentanen Anfrage mitliefert.
+        </p>
+        <p>
+            Um dieses Problem zu behebn, haben wir eine eigene Methode geschrieben, die die Validierung übernimmt. Dabei
+            wird die Routendetails überprüft: Es werden dabei die einzelnen Parameter der Route durchlaufen und
+            überprüft,
+            ob es einen GET-Parameter mit dem Namen vorhanden ist. Außerdem wird mittels des angegeben Regex-Ausdrucks
+            geprüft, ob der angegebene GET-Parameter erlaubt ist. Die GET-Parameter werden in der Config-Datei mit
+            übergeben.
+        </p>
+        <h2>Design</h2>
+        <img src="/images/documentation/StyleTileWWWProg.jpg" alt="Style Tile für die Webseite"/>
+        <p>
+            Für das Design der Seite wurde zuerst ein Style-Tile erstellt. Dieses soll als Richtlinie beim Gestalten der
+            Seite benutzt werden. Das ausgearbeitete Design, baut auf dem Logo der Flensburger Kurzfilmtage auf. Den
+            dieses
+            besteht auch aus Filmstreifen. Die Filmstreifen werden im Header und Footer benutzt und zeigen damit den
+            Anfang
+            und das Ende der Seite auf. Die Filmstreifen haben dieselbe Farbe wie der Header und Footer, um so einen
+            fließenden Übergang zu schaffen.Bei den Farben haben wir uns für helle und positive Farben entschieden, um
+            so
+            eine einladende und freundliche Seite zu schaffen.
+            Als Schriftart für die Überschriften wurde die Schrift „Lato“ genommen, welche eine Serifenlose Schrift ist.
+            Die
+            Schrift wirkt schlicht und modern, weil Sie keine geschwungenen Linien und Akzente hat. Für den Fließtext
+            wurde
+            die Schrift „PT Serif“ genommen. Diese ist eine Serifen Schrift, wodurch sie angenehm zu lesen ist für den
+            Nutzer. Des Weiteren unterscheidet Sie sich klar von der Überschrift und schafft damit eine bessere
+            Übersicht
+            zwischen Fließtext und Überschrift.
+            Der Content der Seite besitzt einen Leicht farblichen Hintergrund, damit eine klare Trennung zwischen
+            Content
+            und dem weißen Hintergrund besteht.
+        </p>
+        <h2>Wer hat was umgesetzt?</h2>
+        <h2>Welche externen Komponenten, Scripte, CSS etc werden verwendet?</h2>
+        <h3>Warum werden sie verwendet?</h3>
+        <h3>Welchen vorhandenen Lösungen haben Sie als Vorlage oder Inspiration genutzt?</h3>
+        <h2>Ggf. eine Erklärung, dass sie über die nötigen Rechte für externe Inhalte, Bilder und Komponenten verfügen,
+            ggf.
+            mit URIs. Keine Ausdrucke der AGBs beifügen!</h2>
+    </div>
 
 
 {% endblock %}
