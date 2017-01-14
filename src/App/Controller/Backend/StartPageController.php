@@ -11,6 +11,7 @@ use App\Helper\StandardStock;
 use App\Model\BackendUser\BackendUser;
 use App\Model\Program\Program;
 use App\Model\Reservation\Reservation;
+use App\Model\TextSource\TextSource;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -54,6 +55,21 @@ class StartPageController extends BackendController
         $countMaxPlaces = $program->getCountOfAllPlaces();
         $countReservation = $reservation->getCountReservationByProgram();
 
+        $textSource = new TextSource($this->getConfig());
+        $textSourceCount = count($textSource->loadData());
+
+
+        $errorData = [];
+        if ($textSourceCount <= 0) {
+            $erroroData['hasTextSource'] = 'Es ist keine Textvorlage vorhanden. Bitte legen Sie mindestens eine an.
+                                            <a href="' . $this->getRoutePath('adminTextSourceNew') . '">Textvorlage anlegen</a>';
+        } else {
+            $textSourceCountActive = count($textSource->loadData(true));
+            if ($textSourceCountActive <= 0) {
+                $errorData['hasTextSource'] = 'Es ist keine Textvorlage als "aktiviert" markiert. Bitte ändern Sie das.
+                                                <a href="' . $this->getRoutePath('adminTextSourceList') . '">Textvorlagen</a>';
+            }
+        }
         return $this->getResponse([
             'user' => $userData,
             'countProgram' => $program->getCountOfPrograms(),
@@ -68,7 +84,8 @@ class StartPageController extends BackendController
             'countReservationPaid' => $reservation->getCountReservationByStatus('paid'),
             'countReservationExpired' => $reservation->getCountReservationByStatus('expired'),
             'linkProgram' => $this->getRoutePath('adminProgramList'),
-            'javascriptFiles' => $jsFiles
+            'javascriptFiles' => $jsFiles,
+            'errorData' => $errorData
         ]);
     }
 }

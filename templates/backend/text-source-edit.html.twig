@@ -12,6 +12,16 @@
         <label for="title" {% if errorData.title %} class="error"{% endif %}>Titel: </label>
         <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
                class="width65{% if errorData.title %} error{% endif %}"/>
+        <p>Status:</p>
+        {% for key, status in statusData %}
+
+            <input id="status_{{ key }}" type="radio" size="20" name="status" value="{{ key }}"
+                   {% if formData.status == key %}checked="checked"{% endif %}
+                   class="width65{% if errorData.status %} error{% endif %}"/>
+            <label for="status_{{ key }}"
+                   class="radio{% if errorData.status %} error{% endif %}">{{ status }}</label>
+            <div class="clear"></div>
+        {% endfor %}
 
         <p>
             In der Texvorlage können Variablen eingesetzt werden, damit der Text für die Reservierungsmail
@@ -22,6 +32,7 @@
             <li><strong>(% vorname %)</strong>: Vorname des Käufers</li>
             <li><strong>(% nachname %)</strong>: Nachname des Käufers</li>
             <li><strong>(% link %)</strong>: Link zu Reservierungsbestätigung</li>
+            <li><strong>(% reservierungsnummer %)</strong>: Reservierungsnummer der Bestellung</li>
         </ul>
 
         <label for="text" class="{% if errorData.text %}error{% endif %}">Textvorlage:</label>

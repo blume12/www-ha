@@ -3,7 +3,7 @@
         <ul>
             {% for error in errorData %}
                 {% if error %}
-                    <li>{{ error }}</li>
+                    <li>{{ error | raw }}</li>
                 {% endif %}
             {% endfor %}
         </ul>

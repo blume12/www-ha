@@ -62,7 +62,7 @@ $sql = "CREATE UNIQUE INDEX IF NOT EXISTS program_programPrice_id_uindex ON prog
 $dbqObject->query($sql);
 
 // Text source:
-$sql = "CREATE TABLE IF NOT EXISTS textSource (TSId INTEGER PRIMARY KEY, title VARCHAR(255), text TEXT) ";
+$sql = "CREATE TABLE IF NOT EXISTS textSource (TSId INTEGER PRIMARY KEY, title VARCHAR(255), text TEXT, status VARCHAR(20)) ";
 $dbqObject->query($sql);
 
 $sql = "CREATE UNIQUE INDEX IF NOT EXISTS textSource_id_uindex ON textSource(TSId) ";

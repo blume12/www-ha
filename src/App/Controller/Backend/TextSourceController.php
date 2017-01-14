@@ -37,7 +37,6 @@ class TextSourceController extends BackendController
             return new RedirectResponse($this->getRoutePath('adminNotFound'));
         }
 
-
         $this->setTemplateName(self::$mainTemplateName . '-list');
         $this->setPageTitle(self::$mainPageTitle . 'n');
 
@@ -89,7 +88,7 @@ class TextSourceController extends BackendController
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
-            $formError = $textSource->checkErrors($formData);
+            $formError = $textSource->checkErrors($formData, false);
         }
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
@@ -105,6 +104,7 @@ class TextSourceController extends BackendController
             'formAction' => $this->getRoutePath(self::$routeNameEdit, ['id' => $id]),
             'formData' => $formData,
             'errorData' => $formError,
+            'statusData' => TextSource::getStatus()
         ]);
     }
 
@@ -140,7 +140,7 @@ class TextSourceController extends BackendController
         } else {
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
-            $formError = $textSource->checkErrors($formData);
+            $formError = $textSource->checkErrors($formData, true);
         }
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
@@ -155,7 +155,8 @@ class TextSourceController extends BackendController
             'formAction' => $this->getRoutePath(self::$routeNameNewEntry),
             'formData' => $formData,
             'errorData' => $formError,
-            'newEntry' => true
+            'newEntry' => true,
+            'statusData' => TextSource::getStatus()
         ]);
     }
 
