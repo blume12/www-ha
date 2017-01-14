@@ -130,7 +130,6 @@ class TextSource extends DbBasis
      */
     public function checkErrors($formData, $newEntry)
     {
-        // TODO: check all the data of a program
         $formError = [];
 
         if (!Validator::isAlpha($formData['title'], true)) {
