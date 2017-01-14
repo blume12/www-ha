@@ -95,4 +95,21 @@ class Validator
         }
         return $result;
     }
+
+    /**
+     * Return if it's correct email. If required is true, the value could not be empty.
+     *
+     * @param $email
+     * @param bool $required
+     * @return bool
+     */
+    public static function isEmail($email, $required = false)
+    {
+        $result = true;
+        if ($required && !filter_var($email, FILTER_VALIDATE_EMAIL)
+        ) {
+            $result = false;
+        }
+        return $result;
+    }
 }

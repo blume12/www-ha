@@ -50,29 +50,31 @@ class ShoppingCartController extends FrontendController
             /* Check for errors */
             $formData = $this->getRequest()->request->all();
 
-            foreach ($shoppingCartData['list'] as $key => $value) {
-                $maxReservation = $reservation->getCountToReserveActually($value['pid']);
-                $countNormal = 0;
-                if (isset($formData['count_' . $value['pid'] . '_1'])) {
-                    $countNormal = $formData['count_' . $value['pid'] . '_1'];
-                }
-                $countSale = 0;
-                if (isset($formData['count_' . $value['pid'] . '_2'])) {
-                    $countSale = $formData['count_' . $value['pid'] . '_2'];
-                }
+            if (isset($shoppingCartData['list'])) {
+                foreach ($shoppingCartData['list'] as $key => $value) {
+                    $maxReservation = $reservation->getCountToReserveActually($value['pid']);
+                    $countNormal = 0;
+                    if (isset($formData['count_' . $value['pid'] . '_1'])) {
+                        $countNormal = $formData['count_' . $value['pid'] . '_1'];
+                    }
+                    $countSale = 0;
+                    if (isset($formData['count_' . $value['pid'] . '_2'])) {
+                        $countSale = $formData['count_' . $value['pid'] . '_2'];
+                    }
 
-                if ($countNormal + $countSale > $maxReservation) {
-                    $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
-                }
+                    if ($countNormal + $countSale > $maxReservation) {
+                        $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                    }
 
-                if ($formData['count_' . $value['pid'] . '_' . $value['priceMode']] <= 0) {
-                    $formError['count_' . $value['pid'] . '_' . $value['priceMode']] = 'Bitte geben Sie eine Anzahl für "' . $shoppingCartData['list'][$key]['title'] . '" (';
-                    $formError['count_' . $value['pid'] . '_' . $value['priceMode']] .= ($shoppingCartData['list'][$key]['priceMode'] == 2 ? 'ermäßigter Preis' : 'normaler Preis') . ') ein.';
-                    $shoppingCartData['list'][$key]['error'] = true;
-                    $shoppingCartData['list'][$key]['count'] = $formData['count_' . $value['pid'] . '_' . $value['priceMode']];
+                    if ($formData['count_' . $value['pid'] . '_' . $value['priceMode']] <= 0) {
+                        $formError['count_' . $value['pid'] . '_' . $value['priceMode']] = 'Bitte geben Sie eine Anzahl für "' . $shoppingCartData['list'][$key]['title'] . '" (';
+                        $formError['count_' . $value['pid'] . '_' . $value['priceMode']] .= ($shoppingCartData['list'][$key]['priceMode'] == 2 ? 'ermäßigter Preis' : 'normaler Preis') . ') ein.';
+                        $shoppingCartData['list'][$key]['error'] = true;
+                        $shoppingCartData['list'][$key]['count'] = $formData['count_' . $value['pid'] . '_' . $value['priceMode']];
 
-                } else {
-                    $shoppingCart->setShoppingCartDataItem($value['pid'], $value['priceMode'], $formData['count_' . $value['pid'] . '_' . $value['priceMode']]);
+                    } else {
+                        $shoppingCart->setShoppingCartDataItem($value['pid'], $value['priceMode'], $formData['count_' . $value['pid'] . '_' . $value['priceMode']]);
+                    }
                 }
             }
 
@@ -86,8 +88,7 @@ class ShoppingCartController extends FrontendController
             if (!Validator::isAlpha($formData['lastname'], true)) {
                 $formError['lastname'] = 'Bitte geben Sie einen Nachnamen ein.';
             }
-            //TODO: check Email
-            if (!Validator::isAlpha($formData['email'], true)) {
+            if (!Validator::isEmail($formData['email'], true)) {
                 $formError['email'] = 'Bitte geben Sie einen E-Mail-Adresse ein.';
             }
 
@@ -120,7 +121,8 @@ class ShoppingCartController extends FrontendController
 
         return $this->getResponse([
             'shoppingCartData' => $shoppingCartData,
-            'errorData' => $formError
+            'errorData' => $formError,
+            'formData' => $formData
         ]);
     }
 
