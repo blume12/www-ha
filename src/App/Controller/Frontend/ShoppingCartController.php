@@ -52,8 +52,15 @@ class ShoppingCartController extends FrontendController
 
             foreach ($shoppingCartData['list'] as $key => $value) {
                 $maxReservation = $reservation->getCountToReserveActually($value['pid']);
-                $countNormal = $formData['count_' . $value['pid'] . '_1'];
-                $countSale = $formData['count_' . $value['pid'] . '_2'];
+                $countNormal = 0;
+                if (isset($formData['count_' . $value['pid'] . '_1'])) {
+                    $countNormal = $formData['count_' . $value['pid'] . '_1'];
+                }
+                $countSale = 0;
+                if (isset($formData['count_' . $value['pid'] . '_2'])) {
+                    $countSale = $formData['count_' . $value['pid'] . '_2'];
+                }
+
                 if ($countNormal + $countSale > $maxReservation) {
                     $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
                 }

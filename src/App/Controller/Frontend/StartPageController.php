@@ -25,6 +25,9 @@ class StartPageController extends FrontendController
         $this->setPageTitle('Tickets');
         $program = new Program($this->getConfig());
         $programData = $program->loadData(true, 6);
+        foreach ($programData as $key => $data) {
+            $programData[$key]['detailLink'] = $this->getRoutePath('programDetail', ['id' => $data['PId']]);
+        }
 
         return $this->getResponse([
             'programLink' => $this->getRoutePath('programs'),

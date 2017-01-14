@@ -10,6 +10,7 @@ namespace App\Controller\Frontend;
 
 use App\Controller\Controller;
 use App\Helper\Menu\Menu;
+use App\Model\ShoppingCart\ShoppingCart;
 
 abstract class FrontendController extends Controller
 {
@@ -32,8 +33,14 @@ abstract class FrontendController extends Controller
         $menu = new Menu();
         $menu->addMenu('Startseite', $this->getRoutePath('startPage'));
         $menu->addMenu('Programme', $this->getRoutePath('programs'));
-        //TODO: Add shopping cart number
-        $menu->addMenu('', $this->getRoutePath('shoppingCartList'), true, ['className' => 'right', 'image' => '/images/shopping-cart.png']);
+        $shoppingCart = new ShoppingCart($this->getConfig());
+
+        $count = 0;
+        $shoppingCartData = $shoppingCart->loadShoppingCartData();
+        if(isset($shoppingCartData['list'])) {
+            $count = count($shoppingCartData['list']);
+        }
+        $menu->addMenu($count, $this->getRoutePath('shoppingCartList'), true, ['className' => 'right', 'image' => '/images/shopping-cart.png']);
         $this->menuArray = $menu->getMenuArray();
     }
 }
