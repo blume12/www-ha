@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Helper\Menu\Menu;
 use App\Helper\Routing\Routing;
+use App\Model\Reservation\Reservation;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouteCollection;
 use Twig_Loader_Filesystem;
@@ -80,6 +81,9 @@ abstract class Controller
     {
         $this->config = $config;
         $this->initTwig();
+
+        $reservation = new Reservation($this->getConfig());
+        $reservation->checkAndSaveAsExpired();
 
         $menuFooter = new Menu();
         $menuFooter->addMenu('Impressum', $this->getRoutePath('siteNotice'));

@@ -117,6 +117,12 @@ class ReservationController extends BackendController
 
 
         $formData = $reservation->loadSpecificEntry($id);
+        $statusData = Reservation::getStatusArray();
+        if ($formData['status'] == 'expired') {
+            unset($statusData['open']);
+        }
+
+
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
@@ -142,7 +148,7 @@ class ReservationController extends BackendController
             'formData' => $formData,
             'errorData' => $formError,
             'programData' => $programData,
-            'statusData' => Reservation::getStatusArray()
+            'statusData' => $statusData
         ]);
     }
 

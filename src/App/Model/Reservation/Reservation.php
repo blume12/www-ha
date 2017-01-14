@@ -340,6 +340,16 @@ class Reservation extends DbBasis
     }
 
     /**
+     * Save all expired reservation as expired.
+     */
+    public function checkAndSaveAsExpired()
+    {
+        $dbqObject = $this->getDbqObject();
+        $sql = "UPDATE reservation SET status = 'expired' WHERE status = 'open' AND createDate <= :deleteDate ";
+        $dbqObject->query($sql, ['deleteDate' => time() - self::$hoursLater * 60 * 60]);
+    }
+
+    /**
      * Save the status of a reservation by the reservation number.
      *
      * @param $reservationNumber
