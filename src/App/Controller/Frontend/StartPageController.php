@@ -8,6 +8,7 @@
 namespace App\Controller\Frontend;
 
 
+use App\Model\Program\Program;
 use Symfony\Component\HttpFoundation\Response;
 
 class StartPageController extends FrontendController
@@ -22,7 +23,12 @@ class StartPageController extends FrontendController
     {
         $this->setTemplateName('start-page');
         $this->setPageTitle('Tickets');
+        $program = new Program($this->getConfig());
+        $programData = $program->loadData(true, 6);
 
-        return $this->getResponse(['programLink' => $this->getRoutePath('programs')]);
+        return $this->getResponse([
+            'programLink' => $this->getRoutePath('programs'),
+            'programData' => $programData
+        ]);
     }
 }

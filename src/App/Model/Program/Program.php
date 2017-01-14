@@ -74,14 +74,16 @@ class Program extends DbBasis
     /**
      * Return the data array of all programs.
      *
-     * @param $forFrontend
+     * @param bool $forFrontend
+     * @param bool $limit
      * @return array
      */
-    public function loadData($forFrontend = false)
+    public function loadData($forFrontend = false, $limit = false)
     {
         $dbqObject = $this->getDbqObject();
 
         $data = [];
+        $dataSql = [];
         $sql = "SELECT program.PId, uuid, author, date, title, intro, text, PPId ";
         $sql .= "FROM program ";
         if (!$this->isFrontend() && !$forFrontend) {
@@ -89,8 +91,13 @@ class Program extends DbBasis
         }
         $sql .= "JOIN program_programPrice ON program.PId = program_programPrice.PId ";
         $sql .= 'GROUP BY program.PId ';
+        if ($limit != false) {
+            $sql .= "ORDER BY program.PId DESC ";
+            $sql .= "LIMIT :limit";
+            $dataSql = ['limit' => intval($limit, 10)];
+        }
 
-        $dbqObject->query($sql);
+        $dbqObject->query($sql, $dataSql);
         $i = 0;
         while ($row = $dbqObject->nextRow()) {
             $data[$i] = $row;

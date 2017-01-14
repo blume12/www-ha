@@ -13,5 +13,29 @@
     </p>
 
     <h2>Bevorstehende Veranstaltungen</h2>
+    {% if programData %}
+        {% for program in programData %}
+            <div class="events">
+                <h3>
+                    {{ program.title }}
+                </h3>
+                <p>
+                    {% if program.image %}
+                        <img src="{{ program.image }}" alt="{{ program.title }}"/>
+                    {% endif %}
+                    {{ program.text }}
+                </p>
+                <a href="{{ program.detailLink }}">Details & Reservierung</a>
+            </div>
+
+        {% endfor %}
+
+        <div class="clear"></div>
+
+    {% else %}
+        <p>
+            Es liegen keine Programme vor.
+        </p>
+    {% endif %}
 
 {% endblock %}
