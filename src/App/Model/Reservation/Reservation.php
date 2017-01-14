@@ -270,15 +270,12 @@ class Reservation extends DbBasis
     private function sendMail($email, $data)
     {
         $textSource = new TextSource($this->getConfig());
-        // TODO: not only use the first text source.
-        //  if ($textSource->loadData() != false) {
-        $textSourceData = $textSource->loadData()[0];
+        $textSourceData = $textSource->loadData(true)[0];
         $mail = new Mail();
         $mail->setSubject($textSourceData['title']);
         $mail->setEmail($email);
         $mail->setMessage($textSource->getConvertedText($textSourceData['text'], $data));
         $mail->sendMail();
-        //  }
     }
 
 
@@ -402,7 +399,7 @@ class Reservation extends DbBasis
                 LEFT JOIN program ON program.PId = reservation_program.PId
                 WHERE status != 'delete' AND status != 'expired' ";
         $dataSql = [];
-        if($pid != null) {
+        if ($pid != null) {
             $dataSql = ['PId' => intval($pid, 10)];
             $sql .= " AND program.PId = :PId ";
         }

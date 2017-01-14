@@ -9,6 +9,8 @@
         Hallo {{ user.appellation }} {{ user.lastname }}!
     </p>
 
+    {% include "error-message.html.twig" %}
+
     <div class="width50">
         <h2>Reservierungen suchen</h2>
         <form action="{{ reservationSearchAction }}" method="post">
