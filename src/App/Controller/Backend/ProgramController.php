@@ -121,7 +121,7 @@ class ProgramController extends BackendController
 
         $program = new Program($this->getConfig());
         $programPrice = new ProgramPrice($this->getConfig());
-
+        $program->initImageUpload($this->getRequest()->files->get("fileToUpload"));
         $formError = [];
         if ($request->getMethod() !== 'POST') {
             // Set default values
