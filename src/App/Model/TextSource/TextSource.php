@@ -138,8 +138,11 @@ class TextSource extends DbBasis
         if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
         }
+        if (!isset($formData['status'])) {
+            $formError['status'] = 'Bitte wählen Sie einen Status aus.';
+        }
         $count = count($this->loadData());
-        if ((!$newEntry && $count <= 1) || ($newEntry && $count <= 0) && $formData['status'] != 'active') {
+        if ($newEntry && $count <= 0 && $formData['status'] != 'active') {
             $formError['status'] = 'Es gibt nur einen Eintrag. Dieser Eintrag muss den Status "aktiviert" sein.';
         }
         return $formError;
