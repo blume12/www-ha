@@ -91,7 +91,9 @@ class Program extends DbBasis
         }
         $sql .= "JOIN program_programPrice ON program.PId = program_programPrice.PId ";
         $sql .= 'GROUP BY program.PId ';
-        if ($limit != false) {
+        if (!$this->isFrontend() && !$forFrontend) {
+            $sql .= 'ORDER BY PPId DESC ';
+        } else if ($limit != false) {
             $sql .= "ORDER BY program.PId DESC ";
             $sql .= "LIMIT :limit";
             $dataSql = ['limit' => intval($limit, 10)];

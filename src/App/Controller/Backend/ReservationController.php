@@ -79,7 +79,8 @@ class ReservationController extends BackendController
         $reservation = new Reservation($this->getConfig());
         $reservationData = $reservation->loadSpecificEntryPerProgram($pid);
 
-
+        $program = new Program($this->getConfig());
+        $programData = $program->loadSpecificEntry($pid);
         foreach ($reservationData as $key => $data) {
             $reservationData[$key]['editRoute'] = $this->getRoutePath('adminReservationEdit', ['id' => $data['RId']]);
             $reservationData[$key]['deleteRoute'] = $this->getRoutePath('adminReservationDelete', ['id' => $data['RId']]);
@@ -88,7 +89,8 @@ class ReservationController extends BackendController
             'reservationData' => $reservationData,
             'showSearchInput' => false,
             'countReservation' => $reservation->getCountReservationByProgram($pid),
-            'countMax' => Program::getMaxReservationPerProgram()
+            'countMax' => Program::getMaxReservationPerProgram(),
+            'programData' => $programData
         ]);
     }
 
