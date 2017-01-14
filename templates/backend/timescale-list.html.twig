@@ -1,15 +1,13 @@
 {% extends "layout.html.twig" %}
 {% block headline %}
-    <h1>Zeiträume</h1>
+    <h1>Zeitraum</h1>
 {% endblock %}
 
 {% block content %}
 
     <p>
-        Hier können Sie die Zeiträume festlegen.
+        Hier können Sie den Zeitraum für die nächste Veranstaltungswoche festlegen.
     </p>
-
-    <a href="{{ newEntryRoute }}">Neuen Eintrag anlegen</a>
 
     {% if timescaleData %}
 
@@ -29,7 +27,11 @@
         </ul>
     {% else %}
         <p>
-            Es liegen keine Textvorlagen vor.
+            Es liegt kein Zeitraum vor. Legen Sie einen neuen Zeitraum an, damit im Frontend der Zeitraum angezeigt
+            wird.
+        </p>
+        <p>
+            <a href="{{ newEntryRoute }}">Neuen Eintrag anlegen</a>
         </p>
     {% endif %}
 

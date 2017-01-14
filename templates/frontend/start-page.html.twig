@@ -5,7 +5,12 @@
 
 {% block content %}
 
-    <h2>Flensburger Kurzfilmtage</h2>
+    <h2>Flensburger Kurzfilmtage {{ timeScaleData.year }}</h2>
+    {% if timeScaleData %}
+        <h3>
+            Vom {{ timeScaleData.fromDate }} bis {{ timeScaleData.untilDate }}
+        </h3>
+    {% endif %}
     <p>
         Über 100 Filme in 24 Veranstaltungen, 8 Wettbewerbsblöcke dazu Sonderprogramme von plattdeutschen
         Werbetrailern bis hin zu internationalen Animationsfilmen, mit vielen Gästen und Flensburger Festivalatmosphäre.

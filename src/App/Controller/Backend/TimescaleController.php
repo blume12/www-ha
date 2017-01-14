@@ -40,7 +40,7 @@ class TimescaleController extends BackendController
         }
 
         $this->setTemplateName(self::$mainTemplateName . '-list');
-        $this->setPageTitle('Zeiträume');
+        $this->setPageTitle('Zeitraum');
 
         $timescale = new Timescale($this->getConfig());
         $timescaleData = $timescale->loadData();

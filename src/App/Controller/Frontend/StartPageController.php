@@ -9,6 +9,7 @@ namespace App\Controller\Frontend;
 
 
 use App\Model\Program\Program;
+use App\Model\Timescale\Timescale;
 use Symfony\Component\HttpFoundation\Response;
 
 class StartPageController extends FrontendController
@@ -29,9 +30,16 @@ class StartPageController extends FrontendController
             $programData[$key]['detailLink'] = $this->getRoutePath('programDetail', ['id' => $data['PId']]);
         }
 
+        $timescale = new Timescale($this->getConfig());
+        $timeScaleData = $timescale->loadData();
+        if (count($timeScaleData) > 0) {
+            $timeScaleData = $timeScaleData[0];
+        }
+
         return $this->getResponse([
             'programLink' => $this->getRoutePath('programs'),
-            'programData' => $programData
+            'programData' => $programData,
+            'timeScaleData' => $timeScaleData
         ]);
     }
 }
