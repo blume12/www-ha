@@ -187,8 +187,9 @@ class Reservation extends DbBasis
      * Save a reservation data. It decide if it will do a update or a insert.
      *
      * @param $data
+     * @param bool $backend
      */
-    public function saveData($data)
+    public function saveData($data, $backend = false)
     {
         $dbqObject = $this->getDbqObject();
         $dataSql = [];
@@ -215,7 +216,11 @@ class Reservation extends DbBasis
         $dataSql['reservationNumber'] = uniqid();
         $dataSql['lastname'] = trim($data['lastname']);
         $dataSql['email'] = trim($data['email']);
-        $dataSql['status'] = 'open';
+        if ($backend) {
+            $dataSql['status'] = $data['status'];
+        } else {
+            $dataSql['status'] = 'open';
+        }
         $dbqObject->query($sql, $dataSql);
 
         if (!isset($dataSql['RId']) || $dataSql['RId'] == '') {

@@ -305,7 +305,7 @@ input[type=submit].longButton {
 .errorBox {
   border: 3px solid #a10d08;
   padding: 10px;
-  margin-top: 10px;
+  margin: 10px 0;
   color: #a10d08;
   font-weight: bold;
   background-color: #ffe7e5;

@@ -106,9 +106,12 @@ class Validator
     public static function isEmail($email, $required = false)
     {
         $result = true;
-        if ($required && !filter_var($email, FILTER_VALIDATE_EMAIL)
-        ) {
+        if ($required && $email == '') {
             $result = false;
+        } else {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL) && (!$required && $email != '') || ($required)) {
+                $result = false;
+            }
         }
         return $result;
     }

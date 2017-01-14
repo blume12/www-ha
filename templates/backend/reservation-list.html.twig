@@ -22,6 +22,9 @@
         <p>
             <span>Anzahl der Reservierngen: {{ countReservation }}</span>
         </p>
+        <p>
+            <a href="{{ newReservationRoute }}">Neue Reservierung anlegen</a>
+        </p>
     {% endif %}
     {% if reservationData %}
 
@@ -42,9 +45,20 @@
                     </span>
                     <span class="reservationNumber">{{ reservation.reservationNumber }}</span>
                     <span class="name">
-                        <strong>{{ reservation.firstname }} {{ reservation.lastname }}</strong>
+                        {% if reservation.firstname == '' and reservation.lastname == '' %}
+                            <i>- intern -</i>
+                            {% else %}
+
+                            <strong>{{ reservation.firstname }} {{ reservation.lastname }}</strong>
+                        {% endif %}
                     </span>
-                    <span class="email">{{ reservation.email }}</span>
+                    <span class="email">
+                        {% if reservation.email == '' %}
+                            <i>- intern -</i>
+                        {% else %}
+                            {{ reservation.email }}
+                        {% endif %}
+                    </span>
                     <span class="priceTotal">{{ reservation.priceTotal }}</span>
                     <span class="reservationTime">{{ reservation.reservationUntil }}</span>
                     <span class="row options">

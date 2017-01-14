@@ -1,0 +1,78 @@
+{% extends "layout.html.twig" %}
+{% block headline %}
+    <h1> {{ pageTitle }}</h1>
+{% endblock %}
+
+{% block content %}
+    <h2>{{ programData.title }}</h2>
+    <div class="events">
+        <p>
+            {% if programData.image %}
+                <img src="{{ programData.image }}" alt="{{ programData.title }}"/>
+            {% endif %}
+            {{ programData.text }}
+        </p>
+    </div>
+    <div class="clear"></div>
+    {% if ticketsForSale %}
+        {% include "error-message.html.twig" %}
+        <form action="{{ formAction }}" method="post">
+            <div class="width50">
+                <label for="countTickets" class="{% if errorData.countTickets %} error{% endif %}">Anzahl der
+                    Tickets:</label>
+                <select name="countTickets" id="countTickets" class="{% if errorData.countTickets %} error{% endif %}">
+                    {% for key, value in countsNormal %}
+                        <option value="{{ key }}" {% if formData.countTickets == key %} selected="selected" {% endif %}>
+                            {{ value }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <span> x {{ programPriceData.price }} €</span>
+                <label for="countSaleTickets" class="{% if errorData.countSaleTickets %} error{% endif %}">Anzahl der
+                    ermäßigten Tickets:</label>
+                <select name="countSaleTickets" id="countSaleTickets"
+                        class="{% if errorData.countSaleTickets %} error{% endif %}">
+                    {% for key, value in countsSale %}
+                        <option value="{{ key }}" {% if formData.countSaleTickets == key %} selected="selected" {% endif %}>
+                            {{ value }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <span> x {{ programPriceData.priceReduce }} €</span>
+            </div>
+            <div class="width50">
+                <p>Status:</p>
+                {% for key, status in statusData %}
+
+                    <input id="status_{{ key }}" type="radio" size="20" name="status" value="{{ key }}"
+                           {% if formData.status == key %}checked="checked"{% endif %}
+                           class="width65{% if errorData.status %} error{% endif %}"/>
+                    <label for="status_{{ key }}"
+                           class="radio{% if errorData.status %} error{% endif %}">{{ status }}</label>
+                    <div class="clear"></div>
+                {% endfor %}
+            </div>
+
+            <div class="clear"></div>
+            <div class="contactInfo">
+                <label for="firstname" {% if errorData.firstname %} class="error"{% endif %}>Vorname: </label>
+                <input id="firstname" type="text" size="20" name="firstname" value="{{ formData.firstname }}"
+                       class="width65{% if errorData.firstname %} error{% endif %}"/>
+
+                <label for="lastname" {% if errorData.lastname %} class="error"{% endif %}>Nachname: </label>
+                <input id="lastname" type="text" size="20" name="lastname" value="{{ formData.lastname }}"
+                       class="width65{% if errorData.lastname %} error{% endif %}"/>
+
+                <label for="email" {% if errorData.email %} class="error"{% endif %}>E-Mail: </label>
+                <input id="email" type="text" size="20" name="email" value="{{ formData.email }}"
+                       class="width65{% if errorData.email %} error{% endif %}"/>
+                <input class="longButton" type="submit" value="Reservieren"/>
+            </div>
+        </form>
+    {% else %}
+        <p>
+            Das Program ist leider schon ausverkauft.
+        </p>
+    {% endif %}
+{% endblock %}
