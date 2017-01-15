@@ -58,10 +58,9 @@ class StartPageController extends BackendController
         $textSource = new TextSource($this->getConfig());
         $textSourceCount = count($textSource->loadData());
 
-
         $errorData = [];
         if ($textSourceCount <= 0) {
-            $erroroData['hasTextSource'] = 'Es ist keine Textvorlage vorhanden. Bitte legen Sie mindestens eine an.
+            $errorData['hasTextSource'] = 'Es ist keine Textvorlage vorhanden. Bitte legen Sie mindestens eine an.
                                             <a href="' . $this->getRoutePath('adminTextSourceNew') . '">Textvorlage anlegen</a>';
         } else {
             $textSourceCountActive = count($textSource->loadData(true));
