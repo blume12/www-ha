@@ -7,7 +7,6 @@
 namespace App\Model\Program;
 
 use App\Helper\FileDirectory\FileUpload;
-use App\Helper\Session;
 use App\Helper\Validator;
 use App\Model\Database\DbBasis;
 
@@ -257,7 +256,6 @@ class Program extends DbBasis
      */
     public function checkErrors($formData)
     {
-        // TODO: check all the data of a program
         $formError = [];
 
         if (!Validator::isAlpha($formData['title'], true)) {

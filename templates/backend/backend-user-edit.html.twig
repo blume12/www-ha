@@ -4,11 +4,7 @@
 {% endblock %}
 
 {% block content %}
-
-
     {% include "error-message.html.twig" %}
-
-    {# TODO: complete the formular with correct data #}
     <form action="{{ formAction }}" method="post" name="formComment">
         <label for="appellation">Anrede:</label>
         <select id="appellation" name="appellation">

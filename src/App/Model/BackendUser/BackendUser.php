@@ -187,6 +187,7 @@ class BackendUser extends DbBasis
      * Save the backend user to a db.
      *
      * @param $data
+     * @return bool
      */
     public function saveData($data)
     {
@@ -234,6 +235,7 @@ class BackendUser extends DbBasis
         }
 
         $dbqObject->query($sql, $sqlData);
+        return true;
     }
 
     /**

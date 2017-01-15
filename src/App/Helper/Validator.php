@@ -70,7 +70,6 @@ class Validator
      */
     public static function isPrice($price, $required = false)
     {
-        // TODO: do it in english format
         $pattern = '/^\d+(?:\,\d{2})?$/';
 
         $result = true;

@@ -127,7 +127,7 @@ class ProgramPrice extends DbBasis
                 $simplePrice = $programPriceData['priceReduce'];
                 break;
             default:
-                $simplePrice = 3; // TODO: This is a very hot fix for tomorrow
+                $simplePrice = 0; // it has no price
                 break;
         }
 
