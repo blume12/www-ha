@@ -205,7 +205,15 @@ class BackendUser extends DbBasis
         ];
 
         $dbqObject = $this->getDbqObject();
-        $entry = $this->getUserById($data['id']);
+        $entry = false;
+        if (isset($data['id'])) {
+            $entry = $this->getUserById($data['id']);
+        } else {
+            // if its a new entry and the user name exits, cancel this save #
+            if ($this->getUserByName($data['username'])) {
+                return false;
+            }
+        }
         if ($entry == false || count($entry) <= 0) {
             $sql = "INSERT INTO backendUser ('appellation', 'firstname', 'lastname', 'username', 'password','createDate',
                     'changeDate','loginDate','privilege') 

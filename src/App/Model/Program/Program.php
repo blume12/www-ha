@@ -53,7 +53,6 @@ class Program extends DbBasis
                 'author' => null,
                 'date' => $value['datum'],
                 'title' => $value['titel'],
-                'intro' => null,
                 'text' => $value['einleitung']
             ];
             $this->saveData($data);
@@ -84,7 +83,7 @@ class Program extends DbBasis
 
         $data = [];
         $dataSql = [];
-        $sql = "SELECT program.PId, uuid, author, date, title, intro, text, PPId ";
+        $sql = "SELECT program.PId, uuid, author, date, title, text, PPId ";
         $sql .= "FROM program ";
         if (!$this->isFrontend() && !$forFrontend) {
             $sql .= "LEFT ";
@@ -121,7 +120,7 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT program.PId, uuid, author, date, title, intro, text FROM program 
+        $sql = "SELECT program.PId, uuid, author, date, title, text FROM program 
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
                 WHERE PPId IS NULL
                 GROUP BY program.PId ";
@@ -140,7 +139,7 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, intro, text FROM program 
+        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, text FROM program 
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
                 WHERE program.PId = :PId LIMIT 1 ";
         $dbqObject->query($sql, ['PId' => $id]);
@@ -164,11 +163,11 @@ class Program extends DbBasis
         $dataSql = [];
         $entry = $this->loadSpecificEntry($data['id']);
         if ($entry == false || count($entry) <= 0) {
-            $sql = "INSERT INTO program ( uuid,author,date,title,intro, text)
-                              VALUES (:uuid, :author, :date, :title, :intro, :text)";
+            $sql = "INSERT INTO program ( uuid,author,date,title, text)
+                              VALUES (:uuid, :author, :date, :title, :text)";
         } else {
             $sql = "UPDATE program  SET 'uuid' = :uuid, 'author' = :author, 'date' = :date, 'title' = :title,
-                    'intro' = :intro, 'text' = :text WHERE PId = :PId ";
+                    'text' = :text WHERE PId = :PId ";
             $dataSql['PId'] = intval($data['id'], 10);
         }
 
@@ -177,7 +176,6 @@ class Program extends DbBasis
         $dataSql['author'] = "123";//$data['author'];
         $dataSql['date'] = "123";//$data['date'];
         $dataSql['title'] = $data['title'];
-        $dataSql['intro'] = $data['intro'];
         $dataSql['text'] = $data['text'];
         $dbqObject->query($sql, $dataSql);
         if (!isset($dataSql['PId']) || $dataSql['PId'] == '') {
@@ -254,9 +252,6 @@ class Program extends DbBasis
 
         if (!Validator::isAlpha($formData['title'], true)) {
             $formError['title'] = 'Bitte geben Sie einen Titel an.';
-        }
-        if (!Validator::isAlpha($formData['intro'], true)) {
-            $formError['intro'] = 'Bitte geben Sie einen Intro an.';
         }
         if (!Validator::isCorrectSelectValue($formData['price'], true)) {
             $formError['price'] = 'Bitte geben Sie einen Preis an.';

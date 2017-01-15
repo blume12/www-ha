@@ -14,10 +14,6 @@
         <input id="title" type="text" size="20" name="title" value="{{ formData.title }}"
                class="width65{% if errorData.title %} error{% endif %}"/>
 
-        <label for="intro" class="{% if errorData.intro %}error{% endif %}">Intro:</label>
-        <input id="intro" type="text" size="20" name="intro" value="{{ formData.intro }}"
-               class="width65{% if errorData.intro %} error{% endif %}"/>
-
         <label for="price" class="{% if errorData.price %}error{% endif %}">Preis:</label>
         <select id="price" name="price" class="{% if errorData.price %}error{% endif %}">
             <option value="notset" {% if formData.price == "notset" %} selected="selected" {% endif %}>
