@@ -169,7 +169,7 @@ nav:hover {
 }
 /* Veranstaltungs Block*/
 .events {
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
 .events img {
   width: 100%;
@@ -322,7 +322,7 @@ label.error {
 .successBox {
   border: 3px solid #0aa1d2;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 20px;
   color: #0aa1d2;
   font-weight: bold;
   background-color: #eff2f9;

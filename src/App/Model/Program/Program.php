@@ -139,8 +139,11 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, text FROM program 
+        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, text, 
+                programPrice.price,  programPrice.priceReduce       
+                FROM program 
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
+                LEFT JOIN programPrice ON program_programPrice.PPId = programPrice.PPId 
                 WHERE program.PId = :PId LIMIT 1 ";
         $dbqObject->query($sql, ['PId' => $id]);
 

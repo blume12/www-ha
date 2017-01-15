@@ -19,6 +19,6 @@ class Formatter
      */
     public static function formatPrice($price)
     {
-        return number_format($price, 2, ',', '.') . ' €';
+        return number_format(intval($price, 10), 2, ',', '.') . ' €';
     }
 }
