@@ -142,6 +142,56 @@ ul.backendList li:hover {
   display: none;
 }
 
+.backendList.reservation {
+
+  li{
+    height: 70px;
+  }
+
+  .firstLine{
+    height: 90px;
+  }
+
+  .secondLine{
+    height: 90px;
+  }
+  span {
+    display: inline-block;
+  }
+  span.status {
+    width: 16%;
+    text-align: left;
+    img{
+      margin: 0 5px;
+    }
+  }
+  span.reservationNumber {
+    width: 43%;
+  }
+  span.name {
+    width: 35%;
+  }
+
+  span.email {
+    width: 60%;
+    margin-top: 5px;
+  }
+  span.priceTotal {
+    width: 35%;
+    margin-top: 5px;
+  }
+  span.reservationTime{
+    margin-top: 5px;
+    width: 50%;
+  }
+
+  span.row.options {
+    float: right;
+    margin-top: 5px;
+    width: 50%;
+  }
+}
+
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   .width50 {
@@ -149,6 +199,53 @@ ul.backendList li:hover {
   }
   ul.backendList li.large{
     height: 40px;
+  }
+  .backendList.reservation {
+
+    li{
+      height: 50px;
+    }
+
+    .firstLine{
+      height: 70px;
+    }
+
+    .secondLine{
+      height: 70px;
+    }
+
+    span.status {
+      width: 10%;
+      text-align: left;
+      img{
+        margin: 0 5px;
+      }
+    }
+    span.reservationNumber {
+      width: 30%;
+    }
+    span.name {
+      width: 20%;
+    }
+
+    span.email {
+      width: 30%;
+      margin: 0;
+    }
+    span.priceTotal {
+      width: 20%;
+      margin-top: 5px;
+    }
+    span.reservationTime{
+      margin-top: 5px;
+      width: 35%;
+    }
+
+    span.row.options {
+      float: right;
+      margin-top: 5px;
+      width: 38%;
+    }
   }
 }
 
@@ -187,11 +284,81 @@ ul.backendList li:hover {
   }
 
   .backendList.reservation {
+
+    li{
+      height: 50px;
+    }
+
+    .firstLine{
+      height: 50px;
+    }
+
+    .secondLine{
+      height: 50px;
+    }
+
+    span.status {
+      width: 8%;
+      text-align: left;
+      img{
+        margin: 0 5px;
+      }
+    }
+    span.reservationNumber {
+      width: 25%;
+    }
+    span.name {
+      width: 20%;
+    }
+
+    span.email {
+      width: 30%;
+    }
+    span.priceTotal {
+      width: 10%;
+      margin-top: 0px;
+    }
+    span.reservationTime{
+      margin-top: 5px;
+      width: 35%;
+    }
+
+    span.row.options {
+      float: right;
+      margin-top: 5px;
+      width: 38%;
+    }
+  }
+
+}
+
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  div.content, nav ul.menu {
+    max-width: @maxWidthContent;
+  }
+
+}
+
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .backendList.reservation {
+    li{
+      height: 20px;
+    }
+    .firstLine{
+      height: 20px;
+    }
+
+    .secondLine{
+      height: 20px;
+    }
+
     span {
       display: inline-block;
     }
     span.name {
-      width: 20%;
+      width: 18%;
     }
 
     span.email {
@@ -213,25 +380,17 @@ ul.backendList li:hover {
       width: 10%;
     }
 
+    span.reservationTime{
+      margin-top: 0px;
+      width: 13%;
+    }
+
     span.row.options {
       float: right;
       width: 15%;
+      margin-top: 0px;
     }
   }
-
-}
-
-@media (min-width: 961px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
-  div.content, nav ul.menu {
-    max-width: @maxWidthContent;
-  }
-
-}
-
-@media (min-width: 1025px) {
-  /* big landscape tablets, laptops, and desktops */
-
 }
 
 @media (min-width: 1281px) {

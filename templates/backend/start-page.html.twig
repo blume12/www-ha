@@ -41,30 +41,31 @@
 
     </div>
     <div id="statisticList">
-        <h2>Statistiken</h2>
-        <ul>
-            <li>Programme online: {{ countProgram }}</li>
-            <li>Plätze insgesamt: <span id="countMaxPlaces">{{ countMaxPlaces }}</span></li>
-            <li>Frei verfügbare Plätze: {{ countFreePlaces }}</li>
-            <li>
-                Plätze reserviert: <span id="countReservation">{{ countReservation }}</span>
+        <div class="width50">
+            <h2>Statistiken</h2>
+            <ul>
+                <li>Programme online: {{ countProgram }}</li>
+                <li>Plätze insgesamt: <span id="countMaxPlaces">{{ countMaxPlaces }}</span></li>
+                <li>Frei verfügbare Plätze: {{ countFreePlaces }}</li>
+                <li>
+                    Plätze reserviert: <span id="countReservation">{{ countReservation }}</span>
 
-                <ul>
-                    {% for mode in countsPrices.reservation %}
-                        <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
-                    {% endfor %}
-                </ul>
-            </li>
-            {#<li>Plätze verbindlich gebucht: {{ countBooking }}
-                 <ul>
-                     {% for mode in countsPrices.booking %}
-                         <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
-                     {% endfor %}
-                 </ul>
-             </li>
-             #}
-        </ul>
-
+                    <ul>
+                        {% for mode in countsPrices.reservation %}
+                            <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                {#<li>Plätze verbindlich gebucht: {{ countBooking }}
+                     <ul>
+                         {% for mode in countsPrices.booking %}
+                             <li>davon mit {{ mode.name }} reserviert: {{ mode.count }}</li>
+                         {% endfor %}
+                     </ul>
+                 </li>
+                 #}
+            </ul>
+        </div>
     </div>
     <div class="jsStatistic">
         <h3>Reservierungen/Freie Plätze</h3>

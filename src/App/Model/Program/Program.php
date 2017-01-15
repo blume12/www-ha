@@ -187,7 +187,7 @@ class Program extends DbBasis
         }
         $this->savePriceToProgram($dataSql['PId'], $data['price']);
 
-        $this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
+        //$this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
     }
 
     /**
@@ -264,9 +264,7 @@ class Program extends DbBasis
         if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
         }
-        if (!$this->fileUpload->checkUpload()) {
-            $formError['fileToUpload'] = 'Bitte geben Sie eine Datei an.';
-        }
+
         return $formError;
     }
 

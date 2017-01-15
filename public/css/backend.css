@@ -82,6 +82,48 @@ ul.backendList li:hover {
 .jsStatistic {
   display: none;
 }
+.backendList.reservation li {
+  height: 70px;
+}
+.backendList.reservation .firstLine {
+  height: 90px;
+}
+.backendList.reservation .secondLine {
+  height: 90px;
+}
+.backendList.reservation span {
+  display: inline-block;
+}
+.backendList.reservation span.status {
+  width: 16%;
+  text-align: left;
+}
+.backendList.reservation span.status img {
+  margin: 0 5px;
+}
+.backendList.reservation span.reservationNumber {
+  width: 43%;
+}
+.backendList.reservation span.name {
+  width: 35%;
+}
+.backendList.reservation span.email {
+  width: 60%;
+  margin-top: 5px;
+}
+.backendList.reservation span.priceTotal {
+  width: 35%;
+  margin-top: 5px;
+}
+.backendList.reservation span.reservationTime {
+  margin-top: 5px;
+  width: 50%;
+}
+.backendList.reservation span.row.options {
+  float: right;
+  margin-top: 5px;
+  width: 50%;
+}
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   .width50 {
@@ -89,6 +131,45 @@ ul.backendList li:hover {
   }
   ul.backendList li.large {
     height: 40px;
+  }
+  .backendList.reservation li {
+    height: 50px;
+  }
+  .backendList.reservation .firstLine {
+    height: 70px;
+  }
+  .backendList.reservation .secondLine {
+    height: 70px;
+  }
+  .backendList.reservation span.status {
+    width: 10%;
+    text-align: left;
+  }
+  .backendList.reservation span.status img {
+    margin: 0 5px;
+  }
+  .backendList.reservation span.reservationNumber {
+    width: 30%;
+  }
+  .backendList.reservation span.name {
+    width: 20%;
+  }
+  .backendList.reservation span.email {
+    width: 30%;
+    margin: 0;
+  }
+  .backendList.reservation span.priceTotal {
+    width: 20%;
+    margin-top: 5px;
+  }
+  .backendList.reservation span.reservationTime {
+    margin-top: 5px;
+    width: 35%;
+  }
+  .backendList.reservation span.row.options {
+    float: right;
+    margin-top: 5px;
+    width: 38%;
   }
 }
 @media (min-width: 680px) {
@@ -119,11 +200,68 @@ ul.backendList li:hover {
   ul.backendList li .titleText {
     width: 65%;
   }
+  .backendList.reservation li {
+    height: 50px;
+  }
+  .backendList.reservation .firstLine {
+    height: 50px;
+  }
+  .backendList.reservation .secondLine {
+    height: 50px;
+  }
+  .backendList.reservation span.status {
+    width: 8%;
+    text-align: left;
+  }
+  .backendList.reservation span.status img {
+    margin: 0 5px;
+  }
+  .backendList.reservation span.reservationNumber {
+    width: 25%;
+  }
+  .backendList.reservation span.name {
+    width: 20%;
+  }
+  .backendList.reservation span.email {
+    width: 30%;
+  }
+  .backendList.reservation span.priceTotal {
+    width: 10%;
+    margin-top: 0px;
+  }
+  .backendList.reservation span.reservationTime {
+    margin-top: 5px;
+    width: 35%;
+  }
+  .backendList.reservation span.row.options {
+    float: right;
+    margin-top: 5px;
+    width: 38%;
+  }
+}
+@media (min-width: 961px) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops */
+  div.content,
+  nav ul.menu {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1025px) {
+  /* big landscape tablets, laptops, and desktops */
+  .backendList.reservation li {
+    height: 20px;
+  }
+  .backendList.reservation .firstLine {
+    height: 20px;
+  }
+  .backendList.reservation .secondLine {
+    height: 20px;
+  }
   .backendList.reservation span {
     display: inline-block;
   }
   .backendList.reservation span.name {
-    width: 20%;
+    width: 18%;
   }
   .backendList.reservation span.email {
     width: 20%;
@@ -141,20 +279,15 @@ ul.backendList li:hover {
   .backendList.reservation span.priceTotal {
     width: 10%;
   }
+  .backendList.reservation span.reservationTime {
+    margin-top: 0px;
+    width: 13%;
+  }
   .backendList.reservation span.row.options {
     float: right;
     width: 15%;
+    margin-top: 0px;
   }
-}
-@media (min-width: 961px) {
-  /* tablet, landscape iPad, lo-res laptops ands desktops */
-  div.content,
-  nav ul.menu {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1025px) {
-  /* big landscape tablets, laptops, and desktops */
 }
 @media (min-width: 1281px) {
   /* hi-res laptops and desktops */

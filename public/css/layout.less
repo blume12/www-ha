@@ -1,9 +1,9 @@
-@debugMedia0: #e58523;
-@debugMedia1: #e58523;
-@debugMedia2: #e58523;
-@debugMedia3: #e58523;
-@debugMedia4: #e58523;
-@debugMedia5: #e58523;
+@debugMedia0: #e52414;
+@debugMedia1: #1fe509;
+@debugMedia2: #14b1e5;
+@debugMedia3: #0d24e5;
+@debugMedia4: #cf0be5;
+@debugMedia5: #e5c400;
 @debugMedia6: #e58523;
 
 /* Colors */
@@ -19,7 +19,7 @@
 @blueLighter: #eff2f9;
 @grayLight: #686d73;
 @white: #feffff;
-@backgroundContent: #fafcf1;
+@backgroundContent: #f8fcf1;
 
 @colorError: #a10d08;
 @colorErrorLight: #ffe7e5;
@@ -68,7 +68,6 @@ div.content {
   padding: 0 @contentSmallSpace 7em @contentSmallSpace;
   margin: 0;
   background: @backgroundContent;
-  min-height: 72%;
 }
 
 div.content p{
@@ -87,6 +86,7 @@ h2{
   color: @blue;
   font-size: 1.4em;
   margin-top: 35px;
+  border-bottom: 2px solid fade(@grayLight, 30%);
 }
 
 h3{
@@ -265,9 +265,7 @@ nav:hover {
   }
 }
 
-.events h2{
-  border-bottom: 2px solid fade(@grayLight, 30%);
-}
+
 
 
 /* Kontaktformular */
@@ -498,10 +496,6 @@ label.error {
   width: 100%;
 }
 
-.dokumentation h2{
-  border-bottom: 2px solid fade(@grayLight, 30%);
-}
-
 /*** no resilt */
 
 .noResult {
@@ -674,13 +668,15 @@ label.error {
 
   /* Veranstaltungs Block*/
   .events {
-    margin-left: 10px;
     float: left;
-
     img {
       width: 250px;
     }
   }
+  .events h3{
+    margin-top: 0;
+  }
+
   /* Documentation */
   .dokumentation img{
     width: 60%;

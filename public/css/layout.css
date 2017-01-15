@@ -17,8 +17,7 @@ div.container {
 div.content {
   padding: 0 10px 7em 10px;
   margin: 0;
-  background: #fafcf1;
-  min-height: 72%;
+  background: #f8fcf1;
 }
 div.content p {
   font-family: 'PT Serif', serif;
@@ -33,6 +32,7 @@ h2 {
   color: #0aa1d2;
   font-size: 1.4em;
   margin-top: 35px;
+  border-bottom: 2px solid rgba(104, 109, 115, 0.3);
 }
 h3 {
   color: #d24543;
@@ -87,7 +87,7 @@ a.button {
 }
 /* Menu */
 nav {
-  background: #e58523;
+  background: #e52414;
   padding-top: 5px;
 }
 nav ul.menu {
@@ -174,9 +174,6 @@ nav:hover {
 .events img {
   width: 100%;
   margin-bottom: 15px;
-}
-.events h2 {
-  border-bottom: 2px solid rgba(104, 109, 115, 0.3);
 }
 /* Kontaktformular */
 form {
@@ -370,9 +367,6 @@ label.error {
 .dokumentation img {
   width: 100%;
 }
-.dokumentation h2 {
-  border-bottom: 2px solid rgba(104, 109, 115, 0.3);
-}
 /*** no resilt */
 .noResult {
   padding: 30px 0;
@@ -382,14 +376,14 @@ label.error {
   /* smartphones, iPhone, portrait 480x320 phones */
   /* debugging Media Queries */
   nav {
-    background: #e58523;
+    background: #1fe509;
   }
 }
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   /* debugging Media Queries */
   nav {
-    background: #e58523;
+    background: #14b1e5;
   }
   .events img {
     width: 200px;
@@ -511,11 +505,13 @@ label.error {
   }
   /* Veranstaltungs Block*/
   .events {
-    margin-left: 10px;
     float: left;
   }
   .events img {
     width: 250px;
+  }
+  .events h3 {
+    margin-top: 0;
   }
   /* Documentation */
   .dokumentation img {
@@ -525,21 +521,21 @@ label.error {
   }
   /* debugging Media Queries */
   nav {
-    background: #e58523;
+    background: #0d24e5;
   }
 }
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   /* debugging Media Queries */
   nav {
-    background: #e58523;
+    background: #cf0be5;
   }
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
   /* debugging Media Queries */
   nav {
-    background: #e58523;
+    background: #e5c400;
   }
 }
 @media (min-width: 1281px) {
