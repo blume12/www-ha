@@ -60,7 +60,7 @@ class Reservation extends DbBasis
         $data = [];
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                SUM(countTickets * price) AS priceTotal, price, status
+                SUM(reservation_program.countTickets * price) AS priceTotal, price, status
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -93,7 +93,8 @@ class Reservation extends DbBasis
 
             $sql = "SELECT 
                     reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                    SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets, status
+                    SUM(reservation_program.countTickets * price) AS priceTotal, price, program.PId, priceMode, 
+                    reservation_program.countTickets, status
                     FROM reservation 
                     LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                     LEFT JOIN program ON program.PId = reservation_program.PId ";
@@ -137,7 +138,7 @@ class Reservation extends DbBasis
 
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                countTickets, price, program.PId, priceMode, countTickets, status, reservation.text
+                price, program.PId, priceMode, reservation_program.countTickets, status, reservation.text
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -163,7 +164,8 @@ class Reservation extends DbBasis
 
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                countTickets, SUM(countTickets * price) AS priceTotal, price, program.PId, priceMode, countTickets, status, reservation.text
+                reservation_program.countTickets, SUM(reservation_program.countTickets * price) AS priceTotal, price, 
+                program.PId, priceMode, reservation_program.countTickets, status, reservation.text
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -383,7 +385,7 @@ class Reservation extends DbBasis
         $dbqObject = $this->getDbqObject();
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                SUM(countTickets * price) AS priceTotal, price
+                SUM(reservation_program.countTickets * price) AS priceTotal, price
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
@@ -408,7 +410,7 @@ class Reservation extends DbBasis
         $dbqObject = $this->getDbqObject();
         $sql = "SELECT 
                 reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
-                SUM(countTickets * price) AS priceTotal, price, SUM(countTickets) AS countTickets
+                SUM(reservation_program.countTickets * price) AS priceTotal, price, SUM(reservation_program.countTickets) AS countTickets
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId

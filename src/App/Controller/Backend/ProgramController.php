@@ -87,6 +87,7 @@ class ProgramController extends BackendController
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
             $formData['id'] = $id;
+            $formData['userid'] = $this->getUserId();
             $program->saveData($formData);
 
             return new RedirectResponse($this->getRoutePath('adminProgramList'));
@@ -136,6 +137,8 @@ class ProgramController extends BackendController
         // Handle valid post
         if ($request->getMethod() == 'POST' && count($formError) <= 0) {
             /* Save data */
+
+            $formData['userid'] = $this->getUserId();
             $program->saveData($formData);
 
             return new RedirectResponse($this->getRoutePath('adminProgramList'));

@@ -27,6 +27,12 @@
             {% endfor %}
         </select>
 
+        <label for="countTickets" {% if errorData.countTickets %} class="error"{% endif %}>Anzahl der verfügbaren
+            Plätze: </label>
+        <input id="countTickets" type="text" size="20" name="countTickets" value="{{ formData.countTickets }}"
+               class="width10{% if errorData.countTickets %} error{% endif %}"/>
+
+
         <label for="text" class="{% if errorData.text %}error{% endif %}">Text: </label>
         <textarea id="text" name="text" rows="10"
                   class="{% if errorData.text %}error{% endif %}">{{ formData.text }}</textarea>
@@ -35,7 +41,13 @@
         <label for="fileToUpload">Bild:</label>
         <input type="file" name="fileToUpload" id="fileToUpload">
         <div class="clear"></div>
-        <img src="{{ formData.image }}" alt="Bild"/>
+        {% if formData.image %}
+            <img src="{{ formData.image }}" alt="Bild"/>
+        {% else %}
+            <p>
+                Kein Bild vorhanden.
+            </p>
+        {% endif %}
 
         <div class="clear"></div>
         <input name="send" type="submit" value="Speichern">

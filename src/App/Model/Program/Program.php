@@ -7,6 +7,7 @@
 namespace App\Model\Program;
 
 use App\Helper\FileDirectory\FileUpload;
+use App\Helper\Session;
 use App\Helper\Validator;
 use App\Model\Database\DbBasis;
 
@@ -49,8 +50,9 @@ class Program extends DbBasis
         foreach ($jsonContent as $key => $value) {
             $data = [
                 'id' => $value['nid'],
-                'uuid' => null,
+                'BUId' => null,
                 'author' => null,
+                'countTickets' => null,
                 'date' => $value['datum'],
                 'title' => $value['titel'],
                 'text' => $value['einleitung']
@@ -83,7 +85,7 @@ class Program extends DbBasis
 
         $data = [];
         $dataSql = [];
-        $sql = "SELECT program.PId, uuid, author, date, title, text, PPId ";
+        $sql = "SELECT program.PId, BUId, author, date, title, text, PPId, countTickets ";
         $sql .= "FROM program ";
         if (!$this->isFrontend() && !$forFrontend) {
             $sql .= "LEFT ";
@@ -120,7 +122,7 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT program.PId, uuid, author, date, title, text FROM program 
+        $sql = "SELECT program.PId, BUId, author, date, title, text, countTickets FROM program 
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
                 WHERE PPId IS NULL
                 GROUP BY program.PId ";
@@ -139,8 +141,8 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
 
-        $sql = "SELECT program.PId, program_programPrice.PPId AS price, uuid, author, date, title, text, 
-                programPrice.price,  programPrice.priceReduce       
+        $sql = "SELECT program.PId, program_programPrice.PPId AS price, BUId, author, date, title, text, countTickets,
+                programPrice.price AS priceNormal,  programPrice.priceReduce       
                 FROM program 
                 LEFT JOIN program_programPrice ON program.PId = program_programPrice.PId 
                 LEFT JOIN programPrice ON program_programPrice.PPId = programPrice.PPId 
@@ -148,7 +150,7 @@ class Program extends DbBasis
         $dbqObject->query($sql, ['PId' => $id]);
 
         $row = $dbqObject->nextRow();
-        if ($dbqObject->numberOfRows() > 0) {
+        if (count($row) > 0) {
             $row['image'] = $this->getImageForOutput($row['PId'] . '_program');
         }
         return $row;
@@ -164,22 +166,27 @@ class Program extends DbBasis
     {
         $dbqObject = $this->getDbqObject();
         $dataSql = [];
-        $entry = $this->loadSpecificEntry($data['id']);
+        $entry = false;
+        if (isset($data['id'])) {
+            $entry = $this->loadSpecificEntry($data['id']);
+        }
         if ($entry == false || count($entry) <= 0) {
-            $sql = "INSERT INTO program ( uuid,author,date,title, text)
-                              VALUES (:uuid, :author, :date, :title, :text)";
+            $sql = "INSERT INTO program ( BUId,author,date,title, text, countTickets)
+                              VALUES (:BUId, :author, :date, :title, :text, :countTickets)";
+
+            $dataSql['date'] = time();
         } else {
-            $sql = "UPDATE program  SET 'uuid' = :uuid, 'author' = :author, 'date' = :date, 'title' = :title,
-                    'text' = :text WHERE PId = :PId ";
+            $sql = "UPDATE program  SET 'BUId' = :BUId, 'author' = :author, 'title' = :title,
+                    'text' = :text, countTickets = :countTickets WHERE PId = :PId ";
             $dataSql['PId'] = intval($data['id'], 10);
         }
 
-        // TODO: fix the data uuid, author, date
-        $dataSql['uuid'] = "123";//$data['uuid'];
-        $dataSql['author'] = "123";//$data['author'];
-        $dataSql['date'] = "123";//$data['date'];
+        // TODO: fix the data author
+        $dataSql['BUId'] = $data['userid'];
+        $dataSql['author'] = null;
         $dataSql['title'] = $data['title'];
         $dataSql['text'] = $data['text'];
+        $dataSql['countTickets'] = $data['countTickets'];
         $dbqObject->query($sql, $dataSql);
         if (!isset($dataSql['PId']) || $dataSql['PId'] == '') {
             $sql = "SELECT last_insert_rowid()";
@@ -188,7 +195,7 @@ class Program extends DbBasis
         }
         $this->savePriceToProgram($dataSql['PId'], $data['price']);
 
-        //$this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
+        $this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
     }
 
     /**
@@ -259,6 +266,10 @@ class Program extends DbBasis
         if (!Validator::isCorrectSelectValue($formData['price'], true)) {
             $formError['price'] = 'Bitte geben Sie einen Preis an.';
         }
+        if (!Validator::isInteger($formData['countTickets'])) {
+            $formError['countTickets'] = 'Bitte geben Sie eine Anzahl der verfügbaren Plätze an.';
+        }
+
         if (!Validator::isAlpha($formData['text'], true)) {
             $formError['text'] = 'Bitte geben Sie einen Text an.';
         }

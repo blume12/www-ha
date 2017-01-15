@@ -13,7 +13,7 @@
         </p>
         <p>
         <h2>Preise</h2>
-        Preis für ein normales Ticket: {{ programData.price }} €<br/>
+        Preis für ein normales Ticket: {{ programData.priceNormal }} €<br/>
         Preis für ein ermäßigtes Ticket*: {{ programData.priceReduce }} €<br/>
         </p>
     </div>
@@ -31,7 +31,7 @@
                         </option>
                     {% endfor %}
                 </select>
-                <span> x {{ programData.price }} €</span>
+                <span> x {{ programData.priceNormal }} €</span>
                 <label for="countSaleTickets"><strong>Anzahl der ermäßigten Tickets*:</strong></label>
                 <select name="countSaleTickets" id="countSaleTickets">
                     {% for key, value in countsSale %}

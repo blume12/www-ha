@@ -115,4 +115,23 @@ class Validator
         }
         return $result;
     }
+
+    /**
+     * @param $value
+     * @param bool $required
+     * @return bool
+     */
+    public static function isInteger($value, $required = false)
+    {
+
+        $result = true;
+        if ($required && $value == '') {
+            $result = false;
+        } else {
+            if (!is_numeric($value) && (!$required && $value != '') || ($required)) {
+                $result = false;
+            }
+        }
+        return $result;
+    }
 }

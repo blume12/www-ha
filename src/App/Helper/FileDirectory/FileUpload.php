@@ -69,15 +69,17 @@ class FileUpload
     public function saveFile($path, $filename, $size = 600, $fileType = 'jpg')
     {
         //TODO: use size to copy the image in the right size
-        $tmpPath = explode('/', $path);
-        $newPath = $this->mainPath;
-        foreach ($tmpPath as $partOfPath) {
-            $newPath .= '/' . $partOfPath;
-            if (!is_dir($newPath)) {
-                mkdir($newPath);
+        if ($this->fileData != null) {
+            $tmpPath = explode('/', $path);
+            $newPath = $this->mainPath;
+            foreach ($tmpPath as $partOfPath) {
+                $newPath .= '/' . $partOfPath;
+                if (!is_dir($newPath)) {
+                    mkdir($newPath);
+                }
             }
+            copy($this->fileData->getRealPath(), $newPath . '/' . $filename . '.' . $fileType);
         }
-        copy($this->fileData->getRealPath(), $newPath . '/' . $filename . '.' . $fileType);
     }
 
 }
