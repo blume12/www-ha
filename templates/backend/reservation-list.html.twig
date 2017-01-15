@@ -14,13 +14,13 @@
             <input type="submit" value="Suchen"/>
         </form>
     {% endif %}
-    {% if countReservation %}
+    {% if showNewReservationLink %}
         <h2>{{ programData.title }}</h2>
         <p>
             <span>Maximale Plätze: {{ countMax }}</span>
         </p>
         <p>
-            <span>Anzahl der Reservierngen: {{ countReservation }}</span>
+            <span>Anzahl der Reservierungen: {{ countReservation }}</span>
         </p>
         <p>
             <a href="{{ newReservationRoute }}">Neue Reservierung anlegen</a>

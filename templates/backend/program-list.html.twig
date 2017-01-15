@@ -24,11 +24,13 @@
                     </span>
                     <span class="row options large">
                         {% if program.PPId  != '' %}
-                            <a href="{{ program.programListRoute }}">Reservierungen</a>&nbsp;
+                            <a href="{{ program.programListRoute }}">
+                                Reservierungen ({{ program.countReservation }})
+                            </a>&nbsp;
                         {% endif %}
                         <a href="{{ program.editRoute }}">bearbeiten</a>&nbsp;
-                    <a href="{{ program.deleteRoute }}">löschen</a>
-                </span>
+                        <a href="{{ program.deleteRoute }}">löschen</a>
+                    </span>
                 </li>
             {% endfor %}
         </ul>

@@ -89,6 +89,7 @@ class ReservationController extends BackendController
             $reservationData[$key]['deleteRoute'] = $this->getRoutePath('adminReservationDelete', ['id' => $data['RId']]);
         }
         return $this->getResponse([
+            'showNewReservationLink' => true,
             'reservationData' => $reservationData,
             'showSearchInput' => false,
             'countReservation' => $reservation->getCountReservationByProgram($pid),
@@ -182,12 +183,15 @@ class ReservationController extends BackendController
         $programPrice = new ProgramPrice($this->getConfig());
         $programPriceData = $programPrice->loadSpecificEntry($programData['price']);
         $reservation = new Reservation($this->getConfig());
-        $countOfTickets = StandardStock::getCountOfTickets($reservation->getCountToReserveActually($programId));
+
+
+        $maxReservation = $reservation->getCountToReserveActually($programId, $programData['countTickets']);
+
+        $countOfTickets = StandardStock::getCountOfTickets($maxReservation);
         $formError = [];
         $formSuccess = [];
         $formData = [];
 
-        $maxReservation = $reservation->getCountToReserveActually($programId);
 
         if ($request->getMethod() !== 'POST') {
             // Set default values
@@ -201,7 +205,9 @@ class ReservationController extends BackendController
                 $formError['countSaleTickets'] = 'Bitte geben Sie die Anzahl der Tickets ein.';
             }
             if ($countNormal + $countSale > $maxReservation) {
-                $formError['count_' . $programId] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                $formError['count_' . $programId] = "Es sind nicht mehr genügend Tickets online. Maximal ";
+                $formError['count_' . $programId] .= $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                $formError['count_' . $programId] .= " sind noch verfügbar.";
             }
             if (!isset($formData['status'])) {
                 $formError['status'] = 'Bitte geben Sie einen Status ein.';

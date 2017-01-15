@@ -9,6 +9,7 @@ namespace App\Controller\Backend;
 use App\Helper\Helper;
 use App\Model\Program\Program;
 use App\Model\Program\ProgramPrice;
+use App\Model\Reservation\Reservation;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,10 +34,12 @@ class ProgramController extends BackendController
 
         $program = new Program($this->getConfig());
         $programData = $program->loadData();
+        $reservation = new Reservation($this->getConfig());
         foreach ($programData as $key => $data) {
             $programData[$key]['editRoute'] = $this->getRoutePath('adminProgramEdit', ['id' => $data['PId']]);
             $programData[$key]['deleteRoute'] = $this->getRoutePath('adminProgramDelete', ['id' => $data['PId']]);
             $programData[$key]['programListRoute'] = $this->getRoutePath('adminReservationListPerProgram', ['id' => $data['PId']]);
+            $programData[$key]['countReservation'] = $reservation->getCountReservationByProgram($data['PId'], false);
         }
 
         return $this->getResponse([

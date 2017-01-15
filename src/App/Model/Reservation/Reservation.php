@@ -403,9 +403,10 @@ class Reservation extends DbBasis
 
     /**
      * @param $pid
+     * @param bool $countTickets
      * @return int
      */
-    public function getCountReservationByProgram($pid = null)
+    public function getCountReservationByProgram($pid = null, $countTickets = true)
     {
         $dbqObject = $this->getDbqObject();
         $sql = "SELECT 
@@ -423,9 +424,14 @@ class Reservation extends DbBasis
         $sql .= "GROUP BY reservation.RId";
         $dbqObject->query($sql, $dataSql);
         $count = 0;
-        while ($row = $dbqObject->nextRow()) {
-            $count += $row['countTickets'];
+        if ($countTickets) {
+            while ($row = $dbqObject->nextRow()) {
+                $count += $row['countTickets'];
+            }
+        } else {
+            $count = $dbqObject->numberOfRows();
         }
+
         return $count;
     }
 
@@ -433,9 +439,12 @@ class Reservation extends DbBasis
      * @param $pid
      * @return int
      */
-    public function getCountToReserveActually($pid)
+    public function getCountToReserveActually($pid, $spedificCounTickets)
     {
-        return Program::getMaxReservationPerProgram() - $this->getCountReservationByProgram($pid);
+        if ($spedificCounTickets == null) {
+            $spedificCounTickets = Program::getMaxReservationPerProgram();
+        }
+        return $spedificCounTickets - $this->getCountReservationByProgram($pid);
     }
 
 }

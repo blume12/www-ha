@@ -109,7 +109,8 @@ class Validator
         if ($required && $email == '') {
             $result = false;
         } else {
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL) && (!$required && $email != '') || ($required)) {
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if ((!$required && $email != '' && !$isEmail) || ($required && !$isEmail)) {
                 $result = false;
             }
         }

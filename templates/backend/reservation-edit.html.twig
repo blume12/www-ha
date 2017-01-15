@@ -38,7 +38,7 @@
         <div class="shopInfo">
             <ul>
                 <li class="header">
-                    <span class="type">Type</span>
+                    <span class="type">Typ</span>
                     <span class="count">Anzahl</span>
                     <span class="title">Blocktitel</span>
                     <span class="price">Einzelpreis</span>
@@ -49,18 +49,11 @@
                     <li>
                         <span class="type">{% if program.priceMode == 2 %} ermäßigter Preis{% else %}normaler Preis{% endif %}</span>
                         <span class="count">
-                           {#  <label for="count_{{ program.pid }}_{{ program.priceMode }}">Anzahl: </label>
-                            <input name="count_{{ program.pid }}_{{ program.priceMode }}"
-                                   id="count_{{ program.pid }}_{{ program.priceMode }}" type="text"
-                                   value="{{ program.count }}"
-                                   class="count {% if program.error %} error{% endif %}"/>
-                                   #}
                             {{ program.count }}
                         </span>
                         <span class="title">{{ program.title }} </span>
                         <span class="price">{{ program.price }}</span>
                         <span class="priceTotal">{{ program.priceTotal }}</span>
-                        {#<span class="delete"><a href="{{ program.deleteLink }}">Löschen</a></span>#}
                     </li>
                 {% endfor %}
             </ul>
@@ -68,9 +61,8 @@
                 <span class="endPrice">Gesamtpreis:&nbsp;&nbsp;<strong>{{ programData.priceTotal }}</strong></span>
             </div>
             <div class="clear"></div>
-
-            <input name="send" type="submit" value="Speichern">
         </div>
+        <input name="send" type="submit" value="Speichern">
         <div class="clear"></div>
     </form>
 {% endblock %}

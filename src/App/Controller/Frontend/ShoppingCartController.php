@@ -7,6 +7,7 @@
 namespace App\Controller\Frontend;
 
 use App\Helper\Validator;
+use App\Model\Program\Program;
 use App\Model\Reservation\Reservation;
 use App\Model\ShoppingCart\ShoppingCart;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -52,7 +53,9 @@ class ShoppingCartController extends FrontendController
 
             if (isset($shoppingCartData['list'])) {
                 foreach ($shoppingCartData['list'] as $key => $value) {
-                    $maxReservation = $reservation->getCountToReserveActually($value['pid']);
+                    $program = new Program($this->getConfig());
+                    $programData = $program->loadSpecificEntry($value['pid']);
+                    $maxReservation = $reservation->getCountToReserveActually($value['pid'], $programData['countTickets']);
                     $countNormal = 0;
                     if (isset($formData['count_' . $value['pid'] . '_1'])) {
                         $countNormal = $formData['count_' . $value['pid'] . '_1'];
@@ -63,7 +66,9 @@ class ShoppingCartController extends FrontendController
                     }
 
                     if ($countNormal + $countSale > $maxReservation) {
-                        $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                        $formError['count_' . $value['pid']] = "Es sind nicht mehr genügend Tickets online. Maximal ";
+                        $formError['count_' . $value['pid']] .= $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                        $formError['count_' . $value['pid']] .= " sind noch verfügbar.";
                     }
 
                     if ($formData['count_' . $value['pid'] . '_' . $value['priceMode']] <= 0) {

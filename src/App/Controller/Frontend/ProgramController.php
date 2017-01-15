@@ -59,13 +59,14 @@ class ProgramController extends FrontendController
         $program = new Program($this->getConfig());
         $programData = $program->loadSpecificEntry($programId);
         $reservation = new Reservation($this->getConfig());
-        $countOfTickets = StandardStock::getCountOfTickets($reservation->getCountToReserveActually($programId));
+
+        $maxReservation = $reservation->getCountToReserveActually($programId, $programData['countTickets']);
+        $countOfTickets = StandardStock::getCountOfTickets($maxReservation);
         $shoppingCart = new ShoppingCart($this->getConfig());
         $formError = [];
         $formSuccess = [];
         $formData = [];
 
-        $maxReservation = $reservation->getCountToReserveActually($programId);
 
         if ($request->getMethod() !== 'POST') {
             // Set default values
@@ -77,7 +78,9 @@ class ProgramController extends FrontendController
             $countNormal = $formData['countTickets'];
             $countSale = $formData['countSaleTickets'];
             if ($countNormal + $countSale > $maxReservation) {
-                $formError['count_' . $programId] = "Es sind nicht mehr genügend Tickets online. Maximal " . $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                $formError['count_' . $programId] = "Es sind nicht mehr genügend Tickets online. Maximal ";
+                $formError['count_' . $programId] .= $maxReservation . ' Ticket' . ($maxReservation == 1 ? '' : 's');
+                $formError['count_' . $programId] .= " sind noch verfügbar.";
             }
         }
         $ticketsForSale = $maxReservation > 0;
