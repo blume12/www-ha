@@ -5,7 +5,7 @@
 /* Space */
 .width50 {
   vertical-align: top;
-  width: 100%;
+  width: 95%;
 }
 .infoList span {
   width: 150px;
@@ -48,6 +48,10 @@ ul.backendList li .titleText {
   width: 65%;
   float: left;
 }
+ul.backendList li .userName {
+  width: 65%;
+  float: left;
+}
 ul.backendList li .titleText.small {
   width: 55%;
 }
@@ -81,6 +85,15 @@ ul.backendList li:hover {
 }
 .jsStatistic {
   display: none;
+}
+.backendList.text span.titleText {
+  width: 55%;
+}
+.spaceStatus {
+  margin-left: 30px;
+}
+.titleStatus {
+  margin-left: 30px;
 }
 .backendList.reservation li {
   height: 70px;
@@ -192,6 +205,12 @@ ul.backendList li:hover {
   ul.backendList li.large {
     height: 20px;
   }
+  ul.backendList li .row.options.large {
+    width: 45%;
+  }
+  ul.backendList li .titleText.small {
+    width: 50%;
+  }
   ul.backendList li .row.options {
     width: 30%;
     text-align: right;
@@ -244,6 +263,12 @@ ul.backendList li:hover {
   div.content,
   nav ul.menu {
     max-width: 1024px;
+  }
+  ul.backendList li .row.options.large {
+    width: 40%;
+  }
+  ul.backendList li .titleText.small {
+    width: 55%;
   }
 }
 @media (min-width: 1025px) {

@@ -4,7 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="events">
+    <div class="events details">
         <p>
             {% if programData.image %}
                 <img src="{{ programData.image }}" alt="{{ programData.title }}"/>
@@ -12,6 +12,7 @@
             {{ programData.text }}
         </p>
     </div>
+    <div class="clear"></div>
     <div class="events">
         <h2>Preise</h2>
         <p>

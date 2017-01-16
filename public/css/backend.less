@@ -43,7 +43,7 @@
 
 .width50 {
   vertical-align: top;
-  width: 100%;
+  width: 95%;
 }
 
 .infoList {
@@ -98,6 +98,12 @@ ul.backendList li .titleText {
   width: 65%;
   float: left;
 }
+
+ul.backendList li .userName {
+  width: 65%;
+  float: left;
+}
+
 ul.backendList li .titleText.small {
   width: 55%;
 }
@@ -141,6 +147,18 @@ ul.backendList li:hover {
 .jsStatistic {
   display: none;
 }
+.backendList.text{
+  span.titleText{
+    width: 55%;
+  }
+}
+.spaceStatus{
+  margin-left: 30px;
+}
+.titleStatus{
+  margin-left: 30px;
+}
+
 
 .backendList.reservation {
 
@@ -272,6 +290,12 @@ ul.backendList li:hover {
   ul.backendList li.large{
     height: 20px;
   }
+  ul.backendList li .row.options.large {
+    width: 45%;
+  }
+  ul.backendList li .titleText.small {
+    width: 50%;
+  }
 
   ul.backendList li .row.options {
     width: 30%;
@@ -282,6 +306,7 @@ ul.backendList li:hover {
   ul.backendList li .titleText {
     width: 65%;
   }
+
 
   .backendList.reservation {
 
@@ -336,6 +361,12 @@ ul.backendList li:hover {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   div.content, nav ul.menu {
     max-width: @maxWidthContent;
+  }
+  ul.backendList li .row.options.large {
+    width: 40%;
+  }
+  ul.backendList li .titleText.small {
+    width: 55%;
   }
 
 }
