@@ -286,7 +286,8 @@ class Program extends DbBasis
      */
     public function getCountOfPrograms()
     {
-        return count($this->currentData);
+        $programData = $this->loadData(true);
+        return count($programData);
     }
 
     /**
@@ -297,7 +298,7 @@ class Program extends DbBasis
     public function getCountOfAllPlaces()
     {
 
-        $programData = $this->loadData();
+        $programData = $this->loadData(true);
         $countTickets = 0;
         foreach ($programData as $key => $data) {
             if ($data['countTickets'] == null) {
