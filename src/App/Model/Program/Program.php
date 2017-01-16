@@ -292,7 +292,17 @@ class Program extends DbBasis
      */
     public function getCountOfAllPlaces()
     {
-        return count($this->currentData) * self::$placesPerProgram;
+
+        $programData = $this->loadData();
+        $countTickets = 0;
+        foreach ($programData as $key => $data) {
+            if ($data['countTickets'] == null) {
+                $countTickets += self::$placesPerProgram;
+            } else {
+                $countTickets += $data['countTickets'];
+            }
+        }
+        return $countTickets;
     }
 
     /**

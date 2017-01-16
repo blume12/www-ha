@@ -41,16 +41,14 @@ class StartPageController extends BackendController
         $program = new Program($this->getConfig());
         $program->loadData(true);
 
-        // TODO: load really values for the statistics
+        $reservation = new Reservation($this->getConfig());
 
         $countsPrices = [];
-        $countsPrices['reservation'][1]['count'] = 124;
+        $countsPrices['reservation'][1]['count'] = $reservation->getCountReservationByPriceMode(1);
         $countsPrices['reservation'][1]['name'] = 'normalem Preis';
 
-        $countsPrices['reservation'][2]['count'] = 2;
+        $countsPrices['reservation'][2]['count'] = $reservation->getCountReservationByPriceMode(2);
         $countsPrices['reservation'][2]['name'] = 'reduziertem Preis';
-
-        $reservation = new Reservation($this->getConfig());
 
         $countMaxPlaces = $program->getCountOfAllPlaces();
         $countReservation = $reservation->getCountReservationByProgram();
@@ -80,6 +78,7 @@ class StartPageController extends BackendController
             'countNotVisiblePrograms' => $program->getCountOfNotVisiblePrograms(),
             'countReservationAll' => $reservation->getCountReservationByStatus('all'),
             'countReservationOpen' => $reservation->getCountReservationByStatus('open'),
+            'countReservationConfirm' => $reservation->getCountReservationByStatus('confirm'),
             'countReservationPaid' => $reservation->getCountReservationByStatus('paid'),
             'countReservationExpired' => $reservation->getCountReservationByStatus('expired'),
             'linkProgram' => $this->getRoutePath('adminProgramList'),

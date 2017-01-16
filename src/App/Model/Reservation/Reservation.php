@@ -415,7 +415,10 @@ class Reservation extends DbBasis
                 FROM reservation 
                 LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
                 LEFT JOIN program ON program.PId = reservation_program.PId
-                WHERE status != 'delete' AND status != 'expired' ";
+                WHERE status != 'delete' ";
+        if ($countTickets) {
+            $sql .= " AND status != 'expired' ";
+        }
         $dataSql = [];
         if ($pid != null) {
             $dataSql = ['PId' => intval($pid, 10)];
@@ -445,6 +448,35 @@ class Reservation extends DbBasis
             $spedificCounTickets = Program::getMaxReservationPerProgram();
         }
         return $spedificCounTickets - $this->getCountReservationByProgram($pid);
+    }
+
+    /**
+     * Return the count for the reservation by the price mode.
+     *
+     * @param $priceMode
+     * @return int
+     */
+    public function getCountReservationByPriceMode($priceMode)
+    {
+        $dbqObject = $this->getDbqObject();
+        $sql = "SELECT 
+                reservation.RId, firstname, lastname, reservationNumber, email, createDate, 
+                SUM(reservation_program.countTickets * price) AS priceTotal, price, SUM(reservation_program.countTickets) AS countTickets
+                FROM reservation 
+                LEFT JOIN reservation_program ON reservation.RId = reservation_program.RId
+                LEFT JOIN program ON program.PId = reservation_program.PId
+                WHERE status != 'delete' AND status != 'expired' 
+                AND reservation_program.priceMode = :priceMode 
+                GROUP BY reservation.RId ";
+        $dataSql = ['priceMode' => intval($priceMode, 10)];
+
+        $dbqObject->query($sql, $dataSql);
+        $count = 0;
+        while ($row = $dbqObject->nextRow()) {
+            $count += $row['countTickets'];
+        }
+
+        return $count;
     }
 
 }
