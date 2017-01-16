@@ -25,7 +25,7 @@
         </p>
         <h3>Adminbereich</h3>
         <p>
-            Das Kassenpersonal nur die Programme und die Reservierungen bearbeiten.
+            Das Kassenpersonal kann nur die Programme und die Reservierungen bearbeiten.
         </p>
         <p>
             Ein Administrator kann alles im Adminbereich verwalten. Dazu gehören die Programme, die Reservierungen, die
@@ -55,31 +55,30 @@
         </ul>
         <h4>Ordner data</h4>
         <p>
-            Im Ordner data befinden sich alle Daten, die vom Anwender generiert werden. Das hat den Vorteil, dass die
-            Anwendung ohne weitere Probleme von neu aufgesetzt werden kann. So befindet sich auch die Datenbank in
-            diesem
-            Ordner. Zwar wird die Grundstrukur auch beim Neuaufsetzen der Anwenung benötigt und müsste dementsprechend
-            fest
-            in der Anwendung drin sein. Allerdings wird dafür dann ein Skript ausgeführt, welches die Datenbank dann
-            initalisiert.
-        </p>
+            Im Ordner data befindet sich die SQLite-Datenbank.
         <h4>Ordner public</h4>
         <p>
             Im Ordner public befinden sich alle Dateien, die von der Webseite direkt aufgerufen werden müssen.
-            Dementsprechend ist dort das CSS und die Bilder der Webseite zu finden. Auch die index.php-Datei liegt in
-            diesem
-            Ordner
+            Dementsprechend ist dort das CSS, JavaScript und die Bilder der Webseite zu finden. Auch die index.php-Datei
+            liegt in diesem Ordner.
+        </p>
+        <p>
+            Die index.php ist möglichst schlank gehalten. So sind beispielsweise die Routen in einer extra Datei
+            ausgelagert worden.
         </p>
         <h4>Ordner src</h4>
         <p>
             Der src-Ordner ist das Herz-Stück der Anwendung. Dort finden sich alle Klassen, Config-Dateien,
-            Initalisierungs-Skripte und Cronjobs-Dateien der Anwendung wieder.
+            Initalisierungs-Skripte und Cronjobs-Dateien der Anwendung wieder. Dadurch, dass das public-Verzeichnis als
+            root-Verzeichnis für die Anwendung genutzt wird, kann ein Browser-Nutzer nicht auf die src-Dateien
+            zugreifen.
         </p>
         <p>
             Im darunter liegenden Verzeichnis App sind alle Klassen der Anwedung zu finden. Diese sind unterteilt in
             Controller, Model und Helper.
         </p>
         <p>
+            <strong>Das Controller-Verzeichnis:</strong><br/>
             Im Controller-Verzeichnis sind alle Controller für die Anwendung zu finden. Diese sind widerrum unterteilt
             in
             Backend, Frontend und Dokumentation. Das hat den Vorteil, dass die Controller je Bereich besser gefunden
@@ -88,41 +87,77 @@
             Controllernamen für unterschiedliche Bereiche genutzt werden.
         </p>
         <p>
-            Damit in den einzelnen Controllern nicht die gemeinsamen Dinge reingeschrieben werden müssen, wordern eine
+            Damit in den einzelnen Controllern nicht die gemeinsamen Funktionen reingeschrieben werden müssen, worde
+            eine
             abstrakte Controller-Klasse geschrieben. Zudem worden auch für die Bereiche Frontend und Backend ein eigener
             abstrakter Controller geschrieben. Dort werden die Unterschiede der einzelnen Bereiche festgelegt. So haben
             zum
-            einen die beiden Bereiche unterschiedliche Menüs. Zum anderen hat muss der Backendbereich einen
+            einen die beiden Bereiche unterschiedliche Menüs. Zum anderen muss der Backendbereich einen
             Passwortschutz
             besitzen. Dieser wird im abstrakten Backend-Controller gehandelt.
         </p>
         <p>
-            Im Model-Verzeichnis ...
+            <strong>Das Model-Verzeichnis:</strong><br/>
+            Im Model-Verzeichnis werden alle Models zur Webseite verwaltet. Auch diese sind für die bessere Übersicht in
+            einzelne Ordner nochmal unterteilt. Die Models werden immer von der abstrakten DbBasis-Klasse abgeleitet.
+            Darin stehen die Methoden, die immer genutzt werden. Zum Beispiel ist dort die Verbindung für die Datenbank
+            hinterlegt.
         </p>
 
         <p>
-            Das Helper-Verzeichnis ...
+            <strong>Das Helper-Verzeichnis:</strong><br/>
+            Das Helper-Verzeichnis enthält Klassen, die zur Unterstützung genutzt werden. Es werden dort Klassen wie zum
+            Beispiel für die Validierung der Formulardaten bereit gestellt. Auch die Klasse für das Verschicken von
+            Mails ist dort hinterlegt.
         </p>
 
         <p>
-            Die Config-Datei ...
+            <strong>Die Config-Datei:</strong><br/>
+            In der Config-Datei werden alle Daten, die für das gesamte Projekt wichtig sind, festgelegt. Zum einen wird
+            dort die Datenbank-Verbindung initalisiert. Diese darf beim Aufruf einer Seite nur einmalig initalisiert
+            werden. Dementsprechend wird diese in der Config-Datei initalisiert und im config-Array gespeichert.
         </p>
         <p>
-            Cornjobs ...
+            Außerdem werden dort die Routen für die Webseite festgelegt. Diese sind sortiert nach Frontend und Backend
+            für die bessere Übersicht.
         </p>
+        <p>
+            <strong>Das Cronjob-Verzeichnis:</strong><br/>
+            Im Cronjob-Ordner befindet sich bisher nur ein Skript zum Laden von Programmen von der vorgegebenen API.
+            Wird das Skript aufgerufen, speichert es alle dort befindlichen Programme in die eigene Datenbank.
+        </p>
+        <p>Zur Ausführung muss folgendes Skript aufgerufen werden:</p>
+        <code>
+            php src/cronjobs/cronjob-load-program.php
+        </code>
 
         <p>
-            initDB ...
+            <strong>Die Datenbank-Initalisierung:</strong><br/>
+            In dieser Datei stehen alle Create-Statements der Datenbank-Tabellen, die beim ersten Start der Anwendung
+            benötigt werden.
+            Um diese zu initialisieren muss das folgende Skript im Terminal
+            ausgefühert werden:
         </p>
+        <code>
+            php src/initDb.php
+        </code>
+        <p>
+            Dabei werden nur die Datenbank-Tabellen angelegt, die noch nicht existieren.
+        </p>
+
 
         <h4>Ordner templates</h4>
         <p>
-
+            Im templates-Ordner liegen alle Twig-Dateien. Auch dieser Ordner ist nochmal unterteilt in backend, frontend
+            und documentation. Das hat auch hier den Vorteil, dass die Twig-Dateien zu einem Bereich zugeordnet werden
+            können.
         </p>
 
         <h4>Ordner vendor</h4>
         <p>
             Das vendor-Verzeichnis wird durch composer erstellt. Es hält dort alle externen PHP-Skripte zur Verfügung.
+            Diese Verzeichnis darf nur von composer verändert werden und wird dementsprechend bei der Programmierung
+            ignoriert.
         </p>
 
         <h3>Überlegungen zu den URIs</h3>
@@ -143,12 +178,19 @@
             Für SEO-optimierte Seiten ist es wichtig, dass eine spezielle Seite mit einem Keyword-Paar versehen wird. Es
             sollten somit nicht alle Begriffe auf allen Seiten zu finden sein. Dementsprechend haben wir für die URIs
             jewels
-            nur die spezielle Abwandlung in die URI gepackt. So werden die URIs auch nicht zu lang. Nachfolgend ist die
-            Sitemap der Seite mit den URIs zu sehen.
+            nur die spezielle Abwandlung in die URI gepackt. So werden die URIs auch nicht zu lang.
+        </p>
+        <p>
+            Des weiteren wurde das Frontend mit dem Backend gekapselt, indem die URIs für das Backend immer mit "admin"
+            beginnen. So kann das Kassenpersonal/Administrator sich auch mithilfe der URI zurecht finden und weiß, ob
+            er im Backend oder Frontend ist.
         </p>
         <h3>Aufgabenteilung: Welcher Teil übernimmt welche Aufgaben?</h3>
         <h4>Warum wurde diese Aufteilung gewählt?</h4>
         <h3>Aufbau der Datenbank</h3>
+        <p>
+
+        </p>
         <h3>Nutzung von JS im Frontend</h3>
         <h3>Überlegungen zum Progressive Enhancement</h3>
         <h2>Besonderheiten</h2>

@@ -14,10 +14,6 @@ use App\Model\Database\SQLiteConnection;
 use App\Model\Database\DbQuery;
 use App\Model\BackendUser\BackendUser;
 
-/* @var $dbConnection PDO */
-$db = new SQLiteConnection();
-$dbConnection = $db->connect();
-
 /* @var $config array */
 $dbqObject = new DbQuery($config);
 
