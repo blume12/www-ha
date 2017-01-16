@@ -87,7 +87,7 @@ a.button {
 }
 /* Menu */
 nav {
-  background: #e52414;
+  background: #e58523;
   padding-top: 5px;
 }
 nav ul.menu {
@@ -379,14 +379,14 @@ label.error {
   /* smartphones, iPhone, portrait 480x320 phones */
   /* debugging Media Queries */
   nav {
-    background: #1fe509;
+    background: #e58523;
   }
 }
 @media (min-width: 481px) {
   /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
   /* debugging Media Queries */
   nav {
-    background: #14b1e5;
+    background: #e58523;
   }
   .events img {
     width: 200px;
@@ -524,21 +524,21 @@ label.error {
   }
   /* debugging Media Queries */
   nav {
-    background: #0d24e5;
+    background: #e58523;
   }
 }
 @media (min-width: 961px) {
   /* tablet, landscape iPad, lo-res laptops ands desktops */
   /* debugging Media Queries */
   nav {
-    background: #cf0be5;
+    background: #e58523;
   }
 }
 @media (min-width: 1025px) {
   /* big landscape tablets, laptops, and desktops */
   /* debugging Media Queries */
   nav {
-    background: #e5c400;
+    background: #e58523;
   }
 }
 @media (min-width: 1281px) {
@@ -554,7 +554,6 @@ label.error {
   /* Veranstaltungs Block*/
   .events {
     width: 97%;
-    margin-left: 10px;
     float: left;
   }
   /* debugging Media Queries */
