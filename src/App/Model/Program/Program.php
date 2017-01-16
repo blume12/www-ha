@@ -48,8 +48,8 @@ class Program extends DbBasis
         $jsonContent = json_decode($content, true);
         foreach ($jsonContent as $key => $value) {
             $data = [
-                'id' => $value['nid'],
-                'BUId' => null,
+                'userid' => null,
+                'price' => null,
                 'author' => null,
                 'countTickets' => null,
                 'date' => $value['datum'],
@@ -192,9 +192,13 @@ class Program extends DbBasis
             $dbqObject->query($sql);
             $dataSql['PId'] = $dbqObject->nextRow()['last_insert_rowid()'];
         }
-        $this->savePriceToProgram($dataSql['PId'], $data['price']);
+        if ($data['price'] != null) {
+            $this->savePriceToProgram($dataSql['PId'], $data['price']);
 
-        $this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
+        }
+        if ($this->fileUpload != null) {
+            $this->fileUpload->saveFile('program', $dataSql['PId'] . '_program', 600, 'jpg');
+        }
     }
 
     /**

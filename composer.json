@@ -3,12 +3,6 @@
   "description": "description_text",
   "minimum-stability": "stable",
   "license": "proprietary",
-  "authors": [
-    {
-      "name": "Jasmin Stern",
-      "email": "jasmin-stern@gmx.de"
-    }
-  ],
   "config": {
     "preferred-install": "dist",
     "disable-tls": false,

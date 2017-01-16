@@ -88,12 +88,16 @@ class ReservationController extends BackendController
             $reservationData[$key]['editRoute'] = $this->getRoutePath('adminReservationEdit', ['id' => $data['RId']]);
             $reservationData[$key]['deleteRoute'] = $this->getRoutePath('adminReservationDelete', ['id' => $data['RId']]);
         }
+        $countMax = $programData['countTickets'];
+        if ($countMax == null) {
+            $countMax = Program::getMaxReservationPerProgram();
+        }
         return $this->getResponse([
             'showNewReservationLink' => true,
             'reservationData' => $reservationData,
             'showSearchInput' => false,
             'countReservation' => $reservation->getCountReservationByProgram($pid),
-            'countMax' => Program::getMaxReservationPerProgram(),
+            'countMax' => $countMax,
             'programData' => $programData,
             'newReservationRoute' => $this->getRoutePath('adminReservationNewByProgram', ['id' => $pid])
         ]);

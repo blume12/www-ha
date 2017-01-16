@@ -186,16 +186,113 @@
             er im Backend oder Frontend ist.
         </p>
         <h3>Aufgabenteilung: Welcher Teil übernimmt welche Aufgaben?</h3>
+        <p>
+            In dem Projekt wird das MVC-Pattern eingesetzt. Das bedeutet, dass es eine strikte Vergabe von Aufgaben im
+            Projekt gibt. So ist das Model dafür zuständig, dass die Daten aus der Datenbank geladen werden. Die View
+            wird mit den Twig-Templates dargestellt und kümmern sich ausschließlich um die Ausgabe der Daten. Das
+            Verbindungsstück sind dann die Controller. Die Laden sich die Daten, die sie benötigen und leiten diese dann
+            an die View weiter.
+        </p>
         <h4>Warum wurde diese Aufteilung gewählt?</h4>
+        <p>
+            Diese Aufteilung wurde gewählt, damit keine Programmlogik im HTML wieder zu finden ist. Durch die Verwendung
+            von Twig ist es ausgeschlossen, dass Datenabfragen in der View gemacht werden. Twig erwartet Variablen, die
+            dann im HTML verarbeitet werden können.
+        </p>
         <h3>Aufbau der Datenbank</h3>
         <p>
-
+            Für die Datenbank wurde eine SQLite-Datenbank angelegt. Diese hat folgende Tabellen:
         </p>
+        <ul>
+            <li>backendUser
+                <p>
+                    Dieser Tabelle speichert die Nutzer des Adminbereichs. Dabei wird u.a. die Rechte für den Nutzer
+                    angelegt. Es gibt drei verschiedene Nutzerrechte.
+                </p>
+                <ol>
+                    <li>admin
+                        <p>
+                            Administrator des Backends: Kann alles im Backend bearbeiten.
+                        </p>
+                    </li>
+                    <li>user
+                        <p>
+                            Kassenpersonal: Kann im Backend nur die Programme und Reservierungen bearbeiten.
+                        </p>
+                    </li>
+                    <li>superAdmin
+                        <p>
+                            Den superAdmin gibt es nur einmal: Er wird beim initalisieren des Projektes angelegt und
+                            kann alles verwalten. Dieser Nuzter ist als Debug-Nutzer für die Entwicklung gedacht.
+                        </p>
+                    </li>
+                </ol>
+            </li>
+            <li>program
+                <p>
+                    In dieser Tabelle werden alle Programme gespeichert. Dazu gehören Daten wie Text und Titel des
+                    Programms. Außerdem wird mitgespeichert, welcher Nutzer das Programm angelegt bzw. als letztes
+                    gespeichert hat.
+                </p>
+            </li>
+            <li>programPrice
+                <p>
+                    In dieser Tabelle werden die Preise gespeichert. Ein Preis besteht aus einem normalen Preis und
+                    einem ermäßigtem Preis. So eine Preis-Kombination kann dann beim Programm im Backend ausgewählt
+                    werden.
+                </p>
+            </li>
+
+            <li>program_programPrice
+                <p>
+                    Das ist die Verbindungstabelle zwischen den Programmen und den Preisen, da diese beiden Tabellen
+                    eine m:n-Beziehung haben.
+                </p>
+            </li>
+            <li>reservation
+                <p>
+                    In dieser Tabelle werden die Resverierungen gespeichert. Dazu wird mitgepeichert, wann die
+                    Reservierung erstellt worden ist. So kann überprüft werden, wann Reservierungen abgelaufen sind.
+                </p>
+            </li>
+            <li>reservation_program
+                <p>
+                    Das ist die Verbindungstabelle zwischen der Reservierung und dem Programm. Zusätzlich zu der ID des
+                    Programms werden die Preise und die Anzahl der Tickets gespeichert. Das wird deshalb gemacht, da
+                    sich die Preise in der Tabelle noch nachträglch geändert werden könnten und so ausgeschlossen wird,
+                    dass falsche Preise angezeigt werden.
+                </p>
+            </li>
+            <li>textSource
+                <p>
+                    In dieser Tabelle werden die E-Mail-Textvorlagen gespeichert. Dabei wird ein Status mit angegeben,
+                    um zu kennzeichnen, welche Textvorlage zur Zeit genutzt werden soll.
+                </p>
+            </li>
+            <li>timescale
+                <p>
+                    In dieser Tabelle werden die Daten für den Zeitraum der Veranstaltung angegeben. Es ist durch die
+                    Programmierung unterbunden worden, dass mehrere Zeilen angelegt werden können, da es immer nur ein
+                    Zeitraum gibt.
+                </p>
+            </li>
+        </ul>
         <h3>Nutzung von JS im Frontend</h3>
+        <p>
+            Im Frontend wird JavaScript nicht verwendet. Lediglich im Backend wird JavaScript verwendet. Dort wird es
+            genutzt, um die Statistik als Tortendiagramm darzustellen.
+        </p>
         <h3>Überlegungen zum Progressive Enhancement</h3>
+        <p>
+            Um es allen Nutzern möglich zu machen, diese Seite zu nutzen, wurde zunächst kein JavaScript eingebaut. So
+            kann die Seite von jedem Nutzer ohne Probleme verwendet werden.
+        </p>
+        <p>
+            Um den Nutzer es im Backend angenehmer zu machen, die Statistiken auszulesen, wurde mittels Javascrtipt ein
+            extra Tortendiagramm reingeladen. Das wird auch nur geladen, wenn JavaScript aktiviert ist.
+        </p>
         <h2>Besonderheiten</h2>
         <h3>Statistiken im Adminbereich</h3>
-
         <p>
             Es werden die Daten aus der Datenbank in einer Statistik im Adminbereich ausgewertet. Dazu gehören die
             Anzahl aller sichtbaren Programme im Frontend. Außerdem wird angezeigt, wie viele Reservierungen gemacht
@@ -207,6 +304,38 @@
         <p>
             Ist JavaScript vorhanden, wird die Statistik zusätzlich als Chart ausgegeben. Dieses wird mittels einem
             Canvas-Element und JavaScript umgesetzt.
+        </p>
+        <h3>Es können mehrere Tickets in einem Vorgang reserviert werden</h3>
+        <p>
+            Der Nutzer kann im Frontend mehrere Tickets von verschiedenen Programmen in einen Warenkorb speichern und zu
+            einem späteren Zeitpunkt reservieren. Dieses wird mittels Sessions gelöst.
+        </p>
+        <h3>Resevierungen verfallen nach 72 Stunden</h3>
+        <p>
+            Reservierungen, die nach 72 Stunden nicht bestätigt worden, verfallen und werden dann als abgelaufen
+            markiert. Dieses wird bei jedem Controller-Aufruf überprüft. Die Zahl der Stunden kann in der Klasse der
+            Reservierungen angegeben werden und wird dann mit berücksichtigt. Die abgelaufenden Reservierungen gelten
+            dann wieder als freie Tickets.
+        </p>
+        <h3>Bilder hochladen</h3>
+        <p>
+            Im Backend können bei den Programmen Bilder mit hochgeladen werden.
+        </p>
+        <h3>Nutzerverwaltung</h3>
+        <p>
+            Es können Nutzer angelegt und verwaltet werden. Dabei kann denen auch ein Nutzerrecht zugewiesen werden. So
+            kann das Kassenpersonal nur auf die Programme und Reservierungen zugreifen und ändern, nicht aber zum
+            Beispiel weitere Nutzer anlegen oder die Preise verwalten.
+        </p>
+        <h3>Textvorlagen können für E-Mails gespeichert werden</h3>
+        <p>
+            Im Backend können Textvorlagen für die Versendunng von E-Mails angelegt werden. Dabei können Platzhalter mit
+            angegeben werden, die dann durch den Text aus der Datenbank ausgetauscht werden. So können personalisierte
+            E-Mails versendet werden. Es kann bzw. muss immer eine Textvorlage als aktiv markiert sein.
+        </p>
+        <h3>Laden der Programmblöcke aus der bereitgestellten API</h3>
+        <p>
+            Die Programmblöcke können aus der bereitgestellten API geladen und in die Datenbank gespeichert werden.
         </p>
         <h2>Aufgetretene Probleme und deren Lösungen</h2>
         <h3>Routing mittles Namen anstatt den direkten Routen</h3>
@@ -271,12 +400,108 @@
             unterschiedlichen Dimensionen anpasst.
         </p>
         <h2>Wer hat was umgesetzt?</h2>
+        <h3>Umsetzungen von Marten Jensen</h3>
+
+        <ul>
+            <li>Layout</li>
+            <li>CSS/LESS</li>
+            <li>HTML/TWIG</li>
+            <li>Programmierung Frontend
+                <ul>
+                    <li>Ausgabe der Programme auf der Startseite</li>
+                    <li>Ausgabe der Programme als Liste</li>
+                    <li>Warenkorb-System</li>
+                </ul>
+            </li>
+        </ul>
+        <h3>Umsetzungen von Jasmin Stern</h3>
+        <ul>
+            <li>Programmierung Backend
+                <ul>
+                    <li>Verwalten von Programmen</li>
+                    <li>Auslesen von den Programmen aus der vorgegebenen API</li>
+                    <li>Verwalten von Programmpreisen</li>
+                    <li>Verwalten von Zeiträumen</li>
+                    <li>Verwalten von Textvorlagen mit Ersetzen von Platzhaltern in der E-Mail</li>
+                    <li>Verwalten von Nutzern</li>
+                    <li>Rechteverwaltung der Nutzer</li>
+                    <li>Verwalten von Reservierungen</li>
+                    <li>Ausgabe von Statistiken auf der Startseite des Backends</li>
+                    <li>Upload von Bildern</li>
+                </ul>
+            </li>
+            <li>Aufbau der Projektstruktur
+                <ul>
+                    <li>Kapselung der Datenbankabfrage in einer extra Klasse</li>
+                </ul>
+            </li>
+        </ul>
         <h2>Welche externen Komponenten, Scripte, CSS etc werden verwendet?</h2>
-        <h3>Warum werden sie verwendet?</h3>
+        <p>
+            Es werden folgende externe Kompontent verwendet:
+        </p>
+        <ul>
+            <li>symfony/http-foundation
+                <p>
+                    Das HttpFoundation von Symfony wird verwendet, um die globalen Variabeln zu vermeiden.
+                </p>
+            </li>
+            <li>twig/twig
+                <p>
+                    Twig wird zur Darstellung der HTML-Seiten verwendet. Das hat den Vorteil, dass die Ausgabe kodiert
+                    wird.
+                    Außerdem wird so vermieden, dass PHP-Logik mit in die Ausgabe geschrieben wird.
+                </p>
+            </li>
+            <li>symfony/routing
+                <p>
+                    Die Routing-Komponente von Symfony wird verwendet, um ein Routing-System aufzubauen.
+                </p>
+            </li>
+        </ul>
         <h3>Welchen vorhandenen Lösungen haben Sie als Vorlage oder Inspiration genutzt?</h3>
-        <h2>Ggf. eine Erklärung, dass sie über die nötigen Rechte für externe Inhalte, Bilder und Komponenten verfügen,
-            ggf.
-            mit URIs. Keine Ausdrucke der AGBs beifügen!</h2>
+        <ul>
+            <li><a href="http://www.php.net" target="_blank">PHP-Dokumentation</a></li>
+            <li><a href="http://www.w3schools.com/" target="_blank">W3schools</a></li>
+        </ul>
+        <h2>Verweise auf genutzte Bilder</h2>
+        <ul>
+            <li>
+                <a href="http://www.flaticon.com/free-icon/shopping-cart_60992#term=shopping%20cart&page=1&position=28"
+                   target="_blank">
+                    Warenkorb-Icon
+                </a>
+            </li>
+            <li>
+                <a href="http://www.flaticon.com/free-icon/danger_272289#term=warning&page=1&position=19"
+                   target="_blank">
+                    Warn-Zeichen für Programme, die nicht online sichtbar sind
+                </a>
+            </li>
+            <li>
+                <a href=" http://www.flaticon.com/free-icon/check-mark_1687#term=confirm&page=1&position=6"
+                   target="_blank">
+                    Zeichen für bestätigte Reservierungen
+                </a>
+            </li>
+            <li>
+                <a href="http://www.flaticon.com/free-icon/clock-circular-outline_59252#term=clock&page=1&position=33"
+                   target="_blank">
+                    Zeichen für abgelaufene Reservierungen
+                </a>
+            </li>
+            <li>
+                <a href="http://www.flaticon.com/free-icon/question_219393#term=question&page=1&position=34"
+                   target="_blank">
+                    Zeichen für abgelaufene Reservierungen
+                </a>
+            </li>
+            <li>
+                <a href="https://www.iconfinder.com/icons/322468/money_icon#size=128">
+                    Zeichen für bezahlte Reservierungen
+                </a>
+            </li>
+        </ul>
     </div>
 
 
