@@ -87,7 +87,6 @@ abstract class Controller
 
         $menuFooter = new Menu();
         $menuFooter->addMenu('Impressum', $this->getRoutePath('siteNotice'));
-        $menuFooter->addMenu('Kontakt', $this->getRoutePath('contact'));
         $menuFooter->addMenu('Dokumentation', $this->getRoutePath('documentation'));
         $menuFooter->addMenu('Login', $this->getRoutePath('adminLogin'));
         $this->menuFooterArray = $menuFooter->getMenuArray();

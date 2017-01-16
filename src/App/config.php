@@ -21,7 +21,6 @@ $routes->add('startPage', new Route('/', ['_controller' => 'App\Controller\Front
 $routes->add('programs', new Route('/programme', ['_controller' => 'App\Controller\Frontend\ProgramController::indexAction']));
 $routes->add('programDetail', new Route('/programm/{id}', ['_controller' => 'App\Controller\Frontend\ProgramController::detailAction'], ['id' => '\d+']));
 $routes->add('siteNotice', new Route('/impressum', ['_controller' => 'App\Controller\Frontend\SiteNoticeController::siteNoticeAction']));
-$routes->add('contact', new Route('/kontakt', ['_controller' => 'App\Controller\Frontend\ContactController::indexAction']));
 $routes->add('shoppingCartList', new Route('/warenkorb', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::overviewAction']));
 $routes->add('shoppingCartDelete', new Route('/warenkorb-loeschen/{id}-{priceMode}', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::deleteAction'], ['id' => '\d+', 'priceMode' => '\d+']));
 $routes->add('shoppingCartConfirm', new Route('/warenkorb-bestellt', ['_controller' => 'App\Controller\Frontend\ShoppingCartController::confirmAction']));
